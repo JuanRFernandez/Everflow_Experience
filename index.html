@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ever Flow — Boutique Ski School | Bavarian Alps</title>
+<meta name="description" content="EverFlow Experience is a boutique ski school in the Bavarian Alps. Handpicked, bespoke ski days grounded in expert coaching and authentic mountain culture.">
+<link rel="icon" href="https://everflowexperience.com/wp-content/uploads/2025/05/cropped-FAVICON-02-270x270.png">
+<!--
+  STATIC REPLICA of everflowexperience.com (WordPress/Elementor original by Glonthy)
+  DEPLOY NOTE: asset URLs still point to the live WordPress site. Before cancelling
+  IONOS hosting, download these files into ./assets/ and swap the URLs below:
+    - VIDEO: /wp-content/uploads/2025/11/a-drone-shooting-over-zugspitze-mountain-in-garmis-1080p-2025-08-28-21-34-22-utc.mov
+    - LOGO TITLE: /wp-content/uploads/2025/11/02-1024x1024.png  (and 2048 version)
+    - NAV LOGO: /wp-content/uploads/2025/05/cropped-FAVICON-03.png
+    - FAVICON: /wp-content/uploads/2025/05/cropped-FAVICON-02-270x270.png
+    - HEADSHOTS: juan_headshot-1.jpg, gregorio_headshot.jpg, jeremy_headshot.jpg, paolo_headshot.jpg, felipe_headshot.jpg (2026/07)
+    - CREDENTIAL: /wp-content/uploads/2025/12/Profi_Ski_weiss_blau_auf_silber_RGB-1-1024x589.jpg
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Public+Sans:wght@400;500;600;700&family=Poppins:wght@500;600&family=Oswald:wght@500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --ink:#1a1a1a; --text:#4a4a4a; --white:#ffffff;
+    --light:#f2f2f2; --light2:#f7f7f7;
+    --gold1:#bbac79; --gold2:#a89960;
+    --pf:"Playfair Display",Georgia,serif;
+    --ps:"Public Sans",system-ui,sans-serif;
+    --pp:"Poppins",sans-serif;
+    --mt:"Montserrat",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--ps);color:var(--text);background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  .wrap{width:min(1180px,92%);margin:0 auto}
+  h1,h2,h3{font-family:var(--pf);color:var(--ink);line-height:1.2}
+
+  /* ============ HEADER ============ */
+  header.site{position:absolute;inset:0 0 auto 0;z-index:50;padding:22px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .nav-left{display:flex;align-items:center;gap:18px}
+  .nav-left .logo img{height:42px;width:auto}
+  .nav-left a.social{display:flex;color:#fff;opacity:.92;transition:opacity .2s}
+  .nav-left a.social:hover{opacity:1}
+  .nav-left svg{width:21px;height:21px;fill:#fff}
+  .menu{display:flex;gap:34px;list-style:none;align-items:center}
+  .menu a{color:#fff;font-size:15px;font-weight:500;letter-spacing:.01em;transition:opacity .2s}
+  .menu a:hover{opacity:.75}
+  .burger{display:none;background:none;border:none;cursor:pointer;z-index:60}
+  .burger span{display:block;width:24px;height:2px;background:#fff;margin:6px 0;transition:.3s}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;min-height:100svh;background:#000;display:flex;align-items:center;overflow:hidden}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.36)}
+  .hero-content{position:relative;z-index:2;width:min(1180px,92%);margin:0 auto;padding:110px 0 70px}
+  .hero-title{width:min(620px,78vw);height:auto}
+  .hero-title-fallback{display:none;font-family:var(--pf);font-weight:900;color:#fff;font-size:clamp(3.6rem,9vw,7.5rem);line-height:.95;letter-spacing:.01em}
+  .hero-title-fallback small{display:block;font-family:var(--ps);font-weight:500;font-size:clamp(.9rem,1.6vw,1.3rem);letter-spacing:.55em;margin-top:18px}
+  .btn-gold{display:inline-block;background:linear-gradient(135deg,var(--gold1) 0%,var(--gold2) 100%);color:#fff;font-family:var(--mt);font-weight:600;font-size:15px;padding:13px 36px;border-radius:6px;border:none;cursor:pointer;letter-spacing:.02em;transition:filter .2s,transform .2s}
+  .btn-gold:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  .hero .btn-gold{margin-top:46px;margin-left:6px}
+
+  /* ============ SECTIONS ============ */
+  section{padding:92px 0}
+  .kicker{font-family:var(--pf);font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink)}
+  .about-inner{max-width:880px;margin:0 auto;text-align:center}
+  .about-inner .kicker{margin-bottom:28px}
+  .about-inner p{margin-bottom:20px;font-size:17px}
+  .about-inner p:first-of-type strong{color:var(--ink)}
+
+  /* team */
+  #meet{background:var(--white);padding-top:40px}
+  #meet h2.big{font-size:36px;text-align:center;margin-bottom:60px}
+  .member{display:grid;grid-template-columns:27% 1fr;gap:44px;align-items:start;margin-bottom:64px}
+  .member img{border-radius:10px;box-shadow:0 0 4px rgba(0,0,0,.5);width:100%}
+  .member .ph-fallback{aspect-ratio:1/1.1;border-radius:10px;background:linear-gradient(160deg,#e7e7e7,#cfcfcf);display:flex;align-items:center;justify-content:center;font-family:var(--pf);font-size:2.6rem;color:#8b8b8b}
+  .member h3{font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px}
+  .member .role{font-family:var(--pp);font-weight:500;font-size:14px;color:var(--gold2);letter-spacing:.04em;margin-bottom:16px}
+  .member p{margin-bottom:14px;font-size:15.5px}
+
+  /* reach / map */
+  #reach{background:var(--light);text-align:center}
+  #reach .kicker{margin-bottom:18px}
+  #reach .lead{max-width:640px;margin:0 auto 40px;font-size:17px}
+  #mapa-custom{height:520px;width:100%;border-radius:8px;z-index:1;background:#e8e8e8}
+  #reach .note{max-width:760px;margin:34px auto 0;font-size:14.5px;color:#6b6b6b}
+  .custom-div-icon{background:none;border:none}
+  .pin-wrapper{position:relative;width:40px;height:52px}
+  .label-container{font-family:"Oswald",sans-serif;font-weight:500;font-size:14px;letter-spacing:1px;color:#1a1a1a;white-space:nowrap;
+    text-shadow:2px 0 #f2f2f2,-2px 0 #f2f2f2,0 2px #f2f2f2,0 -2px #f2f2f2,1px 1px #f2f2f2,-1px -1px #f2f2f2,1px -1px #f2f2f2,-1px 1px #f2f2f2}
+  .text-munich{position:absolute;left:45px;top:10px}
+  .text-munich::before{content:'';position:absolute;left:-35px;top:50%;width:30px;height:1px;background:#444}
+  .text-garmisch{position:absolute;right:25px;top:0;text-align:right}
+  .text-stmoritz{position:absolute;left:-20px;top:55px}
+  .country-label{font-size:24px;color:#666;opacity:.4;font-family:"Oswald",sans-serif;letter-spacing:2px;pointer-events:none}
+  .leaflet-container{font-family:var(--ps)}
+
+  /* contact */
+  #contact{background:#fff}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:start;padding:20px 0}
+  .git{font-family:var(--pp);font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px}
+  .contact-left h3{font-size:32px;margin-bottom:26px}
+  .c-line{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:15.5px;color:var(--ink)}
+  .c-line svg{width:18px;height:18px;fill:var(--gold2);flex:none}
+  .btn-mail{margin-top:22px}
+  .wa-line{margin-top:18px;font-size:14.5px}
+  .wa-line a{color:var(--gold2);font-weight:600}
+  .form-h{font-size:36px;margin-bottom:26px}
+  .f-field{margin-bottom:16px}
+  .f-field label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .f-field input,.f-field textarea,.f-field select{width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:6px;background:#fff;font-family:var(--ps);font-size:15px;color:var(--ink)}
+  .f-field input:focus,.f-field textarea:focus,.f-field select:focus{outline:none;border-color:var(--gold1);box-shadow:0 0 0 3px rgba(187,172,121,.2)}
+  .f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .credential{display:flex;justify-content:center;padding:30px 0 0}
+  .credential img{height:84px;width:auto}
+
+  /* footer */
+  footer{background:var(--light2);border-top:1px solid #e5e5e5;padding:26px 0;text-align:center;font-size:14px;color:#6b6b6b}
+
+  /* ============ BOOK NOW MODAL ============ */
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff;border-radius:12px;max-width:540px;width:100%;padding:36px 38px;position:relative;max-height:92svh;overflow:auto}
+  .modal .x{position:absolute;top:12px;right:18px;font-size:26px;color:#999;background:none;border:none;cursor:pointer;line-height:1}
+  .steps-ind{display:flex;gap:14px;justify-content:center;margin-bottom:26px}
+  .steps-ind span{width:34px;height:34px;border-radius:50%;border:1.5px solid #ccc;display:flex;align-items:center;justify-content:center;font-family:var(--mt);font-size:14px;color:#999}
+  .steps-ind span.on{background:linear-gradient(135deg,var(--gold1),var(--gold2));border-color:transparent;color:#fff}
+  .step{display:none}
+  .step.on{display:block}
+  .step h2{font-size:22px;margin-bottom:20px;text-align:center}
+  .m-nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .m-nav .btn-gold{padding:11px 28px;font-size:14px}
+  .btn-grey{background:#e7e7e7;color:#555;font-family:var(--mt);font-weight:600;font-size:14px;padding:11px 28px;border-radius:6px;border:none;cursor:pointer}
+  .thanks{text-align:center;padding:16px 0}
+  .thanks h2{font-size:26px;margin-bottom:12px}
+  .modal .alt{display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#777}
+  .modal .alt a{color:var(--gold2);font-weight:600;cursor:pointer}
+
+  /* joinchat-style float */
+  .wa-float{position:fixed;right:20px;bottom:20px;z-index:150;width:60px;height:60px;border-radius:50%;background:#25d366;display:none;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s}
+  .wa-float.show{display:flex;animation:pop .4s ease}
+  .wa-float:hover{transform:scale(1.07)}
+  .wa-float svg{width:34px;height:34px;fill:#fff}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:880px){
+    .menu{position:fixed;inset:0;background:rgba(10,10,10,.96);flex-direction:column;justify-content:center;gap:36px;transform:translateX(100%);transition:transform .35s;z-index:55}
+    .menu.open{transform:none}
+    .menu a{font-size:1.35rem}
+    .burger{display:block}
+    .member{grid-template-columns:1fr;gap:22px}
+    .member img,.member .ph-fallback{max-width:320px}
+    .contact-grid{grid-template-columns:1fr;gap:48px}
+    #mapa-custom{height:420px}
+    section{padding:66px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap nav">
+    <div class="nav-left">
+      <a class="logo" href="#top"><img src="https://everflowexperience.com/wp-content/uploads/2025/05/cropped-FAVICON-03.png" alt="Ever Flow" onerror="this.style.display='none'"></a>
+      <a class="social" href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4C1.2 2.7.8 3.4.5 4.2.2 5 .1 5.9.1 7.2 0 8.4 0 8.8 0 12s0 3.6.1 4.8c0 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .5C8.3 24 8.7 24 12 24s3.6 0 4.8-.1c1.3 0 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.5-3 .1-1.2.1-1.6.1-4.8s0-3.6-.1-4.8c0-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.3 1.2 20.6.8 19.8.5c-.8-.3-1.7-.5-3-.5C15.6 0 15.2 0 12 0zm0 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM19.8 5.6a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg>
+      </a>
+      <a class="social" href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 3.9 1.5 4.8 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22.2c-1.6 0-3.4-.5-4.9-1.4l-.4-.2-4.2 1.3 1.3-4.1-.3-.4C6.2 18.9 5.6 17 5.6 15 5.6 9.3 10.3 4.6 16 4.6S26.4 9.3 26.4 15 21.7 25.2 16 25.2zm5.7-7.7c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6s0-.5 0-.6c-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2 .1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+      </a>
+    </div>
+    <ul class="menu" id="menu">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#meet">Meet Our Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="top">
+  <video autoplay muted loop playsinline id="bgvid" poster="">
+    <source src="https://everflowexperience.com/wp-content/uploads/2025/11/a-drone-shooting-over-zugspitze-mountain-in-garmis-1080p-2025-08-28-21-34-22-utc.mov">
+  </video>
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <img class="hero-title" src="https://everflowexperience.com/wp-content/uploads/2025/11/02-2048x2048.png" alt="EVER FLOW Experience"
+         onerror="this.style.display='none';document.getElementById('heroFallback').style.display='block'">
+    <div class="hero-title-fallback" id="heroFallback">EVER<br>FLOW<small>E X P E R I E N C E</small></div>
+    <button class="btn-gold" onclick="openModal()">Book Now</button>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap about-inner">
+    <h2 class="kicker">About Us</h2>
+    <p><strong>EverFlow Experience is a boutique ski school</strong> founded by Juan Rodrigo Fernandez — former Argentinian Ski Team racer, based in the Alps since 2022—together with his co-founder Gregorio Ubici, whose easygoing, people-first spirit turns every day on snow into a shared adventure.</p>
+    <p>After seasons teaching and riding across the U.S., Argentina, and the Alps, Juan built EverFlow to offer handpicked, bespoke ski days in the Bavarian Alps, grounded in expert coaching and authentic mountain culture.</p>
+    <p>Lessons are multilingual and fully tailored, blending Juan's race-honed technique with Gregorio's natural gift for connection and unforgettable hosting.</p>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section id="meet">
+  <div class="wrap">
+    <h2 class="big" style="font-size:36px;text-align:center;margin-bottom:60px">Meet Our Team</h2>
+
+    <div class="member">
+      <div><img src="https://everflowexperience.com/wp-content/uploads/2026/07/juan_headshot-1.jpg" alt="Juan Rodrigo Fernandez" onerror="this.outerHTML='<div class=ph-fallback>JF</div>'"></div>
+      <div>
+        <h3>Juan Rodrigo Fernandez</h3>
+        <div class="role">Founder / Managing Director</div>
+        <p>Juan is a former member of the Argentinian Ski Team with over 60 FIS starts and more than 15 seasons racing at a high competitive level. Based in the Alps since 2022, he combines elite performance coaching with an engineering career in the energy sector, focused on decarbonization and sustainability.</p>
+        <p>At EverFlow, Juan leads the on-snow vision: precise technique, smart progression, and unforgettable days in the mountains.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div><img src="https://everflowexperience.com/wp-content/uploads/2026/07/gregorio_headshot.jpg" alt="Gregorio Ubici" onerror="this.outerHTML='<div class=ph-fallback>GU</div>'"></div>
+      <div>
+        <h3>Gregorio Ubici</h3>
+        <div class="role">Co-Founder / Operations Manager</div>
+        <p>Gregorio is an engineer and certified ski instructor who has dedicated his life to the mountains. Fueled by genuine passion, he spends back-to-back seasons between South America, Europe and United States.</p>
+        <p>At EverFlow, he designs and leads personalized ski experiences in English, Spanish, and Portuguese, turning each day on snow into a story people want to tell.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div><img src="https://everflowexperience.com/wp-content/uploads/2026/07/jeremy_headshot.jpg" alt="Jeremy Rossegger" onerror="this.outerHTML='<div class=ph-fallback>JR</div>'"></div>
+      <div>
+        <h3>Jeremy Rossegger</h3>
+        <div class="role">Ski Instructor / Coach</div>
+        <p>Jeremy is a professional skier and certified Austrian Landeslehrer ski instructor with over four years of experience guiding and coaching skiers of all abilities. Raised in a family where skiing was a way of life, his passion for the mountains was inspired by his father, an experienced ski instructor who introduced him to the sport from an early age.</p>
+        <p>With Spanish roots and Australian, Argentinian, and Austrian heritage, Jeremy naturally connects with people from different cultures and creates a relaxed, welcoming atmosphere on and off the slopes. When winter ends, he follows his other lifelong passion for the sea, combining his work in skiing with the nautical world.</p>
+        <p>At EverFlow, Jeremy is known for his calm coaching style, strong technical foundation, and enthusiasm for helping every guest progress while enjoying every moment in the mountains.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div><img src="https://everflowexperience.com/wp-content/uploads/2026/07/paolo_headshot.jpg" alt="Paolo Schwarz" onerror="this.outerHTML='<div class=ph-fallback>PS</div>'"></div>
+      <div>
+        <h3>Paolo Schwarz</h3>
+        <div class="role">Ski Instructor / Technique Specialist</div>
+        <p>Born and raised in Mallorca, Paolo found his passion for the mountains far from the island's beaches, first inspired by his father and quickly turned into a life on snow. In just four seasons he has earned the Staatlich geprüfter Skilehrer state certification through both the German Ski Instructors Association (DSLV) and the Austrian Ski Federation (ÖSV), a rare double credential for someone so young.</p>
+        <p>Confident and sharp-eyed, he is known for a quality of technical analysis you seldom find at his age. At EverFlow, Paolo turns that clarity into fast, visible progress for every guest, on any slope.</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div><img src="https://everflowexperience.com/wp-content/uploads/2026/07/felipe_headshot.jpg" alt="Felipe De La Fuente" onerror="this.outerHTML='<div class=ph-fallback>FF</div>'"></div>
+      <div>
+        <h3>Felipe De La Fuente</h3>
+        <div class="role">Snowboard Instructor / Guide</div>
+        <p>Felipe has been sharing his passion for nature and mountain sports for over 20 years. As a fully certified snowboard instructor, he has worked across some of the world's most iconic mountain regions — from the East Coast, West Coast, and Rocky Mountains of the United States to Argentina and the European Alps.</p>
+        <p>His international experience, combined with a calm and intuitive teaching style, allows him to quickly understand each client's needs and help them progress with confidence. Whether working with beginners or advanced riders, Felipe focuses on creating a safe, enjoyable, and personalized learning environment.</p>
+        <p>Private, group, and family sessions are available, always tailored to each guest's level and expectations. More than just a lesson, Felipe creates complete mountain experiences — helping clients relax, explore, and fully enjoy the day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPERATIONAL REACH / MAP ============ -->
+<section id="reach">
+  <div class="wrap">
+    <h2 class="kicker">operational reach</h2>
+    <p class="lead">Headquartered in Bavaria, we operate throughout the Alpine region.</p>
+    <div id="mapa-custom"></div>
+    <p class="note">Our service includes hosting, planning, and experience coordination, working with licensed local instructors when necessary to deliver a consistent and compliant standard across all destinations.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-left">
+      <div class="git">Get In Touch</div>
+      <h3>Ready to hit the slopes with us?</h3>
+      <div class="c-line">
+        <svg viewBox="0 0 24 24"><path d="M12 0C7.6 0 4 3.6 4 8c0 5.5 8 16 8 16s8-10.5 8-16c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        Bavarian Alps, Germany
+      </div>
+      <div class="c-line">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4C1.2 2.7.8 3.4.5 4.2.2 5 .1 5.9.1 7.2 0 8.4 0 8.8 0 12s0 3.6.1 4.8c0 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .5C8.3 24 8.7 24 12 24s3.6 0 4.8-.1c1.3 0 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.5-3 .1-1.2.1-1.6.1-4.8s0-3.6-.1-4.8c0-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.3 1.2 20.6.8 19.8.5c-.8-.3-1.7-.5-3-.5C15.6 0 15.2 0 12 0zm0 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM19.8 5.6a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg>
+        <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener">@everflowexperience</a>
+      </div>
+      <a class="btn-gold btn-mail" href="mailto:info@everflowexperience.com">info@everflowexperience.com</a>
+      <div class="wa-line">WhatsApp: <a href="https://wa.me/491759505075" target="_blank" rel="noopener">+49 175 9505075</a> · <a href="https://wa.me/5492616940320" target="_blank" rel="noopener">+54 9 261 694-0320</a></div>
+    </div>
+    <div>
+      <h2 class="form-h">Tailor-Made Enquiry</h2>
+      <form id="tmForm" onsubmit="return false">
+        <div class="f-row">
+          <div class="f-field"><label>First Name *</label><input id="tmFn" required></div>
+          <div class="f-field"><label>Last Name *</label><input id="tmLn" required></div>
+        </div>
+        <div class="f-field"><label>Email *</label><input id="tmEm" type="email" required></div>
+        <div class="f-field"><label>Enquiry *</label><textarea id="tmEnq" rows="5" required></textarea></div>
+        <button class="btn-gold" onclick="sendTailor()">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+  <div class="credential">
+    <img src="https://everflowexperience.com/wp-content/uploads/2025/12/Profi_Ski_weiss_blau_auf_silber_RGB-1-1024x589.jpg" alt="Profi Ski credential" onerror="this.style.display='none'">
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>Copyright © <span id="yr">2026</span> Ever Flow | Powered by Glonthy</footer>
+
+<!-- ============ BOOK NOW MODAL (4 steps) ============ -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <button class="x" onclick="closeModal()">×</button>
+    <div class="steps-ind" id="stepsInd"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div>
+
+    <div class="step on" data-step="1">
+      <h2>Step 1</h2>
+      <div class="f-row">
+        <div class="f-field"><label>First Name *</label><input id="bkFn"></div>
+        <div class="f-field"><label>Last Name *</label><input id="bkLn"></div>
+      </div>
+      <div class="f-field"><label>Email *</label><input id="bkEm" type="email"></div>
+      <div class="m-nav"><span></span><button class="btn-gold" onclick="goStep(2)">Next</button></div>
+    </div>
+
+    <div class="step" data-step="2">
+      <h2>Step 2</h2>
+      <div class="f-field"><label>Type of service *</label>
+        <select id="bkSrv">
+          <option>Select...</option>
+          <option>Private Ski Lesson</option>
+          <option>Group Ski Lesson</option>
+          <option>Snowboard Lesson</option>
+          <option>Tailor-Made Mountain Experience</option>
+        </select>
+      </div>
+      <div class="m-nav"><button class="btn-grey" onclick="goStep(1)">Previous</button><button class="btn-gold" onclick="goStep(3)">Next</button></div>
+    </div>
+
+    <div class="step" data-step="3">
+      <h2>Step 3</h2>
+      <div class="f-row">
+        <div class="f-field"><label>Date From</label><input id="bkDf" type="date"></div>
+        <div class="f-field"><label>Date To</label><input id="bkDt" type="date"></div>
+      </div>
+      <div class="f-field"><label>Ski Level</label>
+        <select id="bkLv"><option>Select...</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+      </div>
+      <div class="m-nav"><button class="btn-grey" onclick="goStep(2)">Previous</button><button class="btn-gold" onclick="goStep(4)">Next</button></div>
+    </div>
+
+    <div class="step" data-step="4">
+      <h2>Step 4</h2>
+      <div class="f-field"><label>Notes</label><textarea id="bkNt" rows="4"></textarea></div>
+      <div class="m-nav"><button class="btn-grey" onclick="goStep(3)">Previous</button><button class="btn-gold" onclick="submitBooking('mail')">Submit</button></div>
+      <span class="alt">or <a onclick="submitBooking('wa')">send via WhatsApp</a></span>
+    </div>
+
+    <div class="step" data-step="5">
+      <div class="thanks">
+        <h2>Thank You!</h2>
+        <p>Your request has been received.<br>We'll contact you shortly!</p>
+        <button class="btn-gold" style="margin-top:22px" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- joinchat-style floating whatsapp -->
+<a class="wa-float" id="waFloat" href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp contact">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 3.9 1.5 4.8 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.7 17.5c-.3.8-1.5 1.4-2.1 1.5-.5.1-1.2.1-2-.1-.5-.2-1.1-.4-1.9-.7-3.3-1.4-5.4-4.7-5.6-4.9-.1-.2-1.3-1.7-1.3-3.3s.8-2.4 1.1-2.7c.3-.3.7-.4.9-.4h.6c.2 0 .4-.1.7.5.3.6.9 2.1 1 2.3 0 .1.1.4 0 .6-.1.2-.1.4-.3.6l-.5.6c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.2 1.3 2.5 1.5.3.1.5.1.7-.1.2-.2.8-.8 1-1.2.2-.4.4-.3.7-.2.3.1 1.8.8 2.1 1 .3.2.5.3.6.4.1.2.1.8-.2 1.5z"/></svg>
+</a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // video: start at second 2 like the original
+  const v = document.getElementById('bgvid');
+  v.addEventListener('loadedmetadata', () => { try { v.currentTime = 2; } catch(e){} });
+
+  // mobile menu
+  const menu = document.getElementById('menu');
+  document.getElementById('burger').addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  // floating whatsapp appears after 3s (like joinchat button_delay:3)
+  setTimeout(() => document.getElementById('waFloat').classList.add('show'), 3000);
+
+  // ===== Book Now modal =====
+  const modalBg = document.getElementById('modalBg');
+  function openModal(){ modalBg.classList.add('open'); goStep(1); document.body.style.overflow='hidden'; }
+  function closeModal(){ modalBg.classList.remove('open'); document.body.style.overflow=''; }
+  modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
+  function goStep(n){
+    if (n === 2) { // validate step 1
+      if (!document.getElementById('bkFn').value.trim() || !document.getElementById('bkEm').value.trim()) {
+        alert('Please fill in your name and email.'); return;
+      }
+    }
+    document.querySelectorAll('.step').forEach(s => s.classList.toggle('on', +s.dataset.step === n));
+    document.querySelectorAll('#stepsInd span').forEach((s,i) => s.classList.toggle('on', i < Math.min(n,4)+ (n>=4?0:0) && i <= n-1));
+  }
+  function submitBooking(via){
+    const g = id => document.getElementById(id).value.trim();
+    const msg = [
+      `Booking request — EverFlow Experience`,
+      `Name: ${g('bkFn')} ${g('bkLn')}`,
+      `Email: ${g('bkEm')}`,
+      `Service: ${g('bkSrv')}`,
+      (g('bkDf')||g('bkDt')) ? `Dates: ${g('bkDf')||'?'} to ${g('bkDt')||'?'}` : '',
+      g('bkLv') && g('bkLv')!=='Select...' ? `Ski level: ${g('bkLv')}` : '',
+      g('bkNt') ? `Notes: ${g('bkNt')}` : ''
+    ].filter(Boolean).join('\n');
+    if (via === 'wa') {
+      window.open(`https://wa.me/491759505075?text=${encodeURIComponent(msg)}`, '_blank');
+    } else {
+      location.href = `mailto:info@everflowexperience.com?subject=${encodeURIComponent('Booking request — ' + g('bkFn') + ' ' + g('bkLn'))}&body=${encodeURIComponent(msg)}`;
+    }
+    goStep(5);
+  }
+
+  // ===== Tailor-Made Enquiry =====
+  function sendTailor(){
+    const g = id => document.getElementById(id).value.trim();
+    if (!g('tmFn') || !g('tmEm') || !g('tmEnq')) { alert('Please fill in the required fields.'); return; }
+    const body = `Name: ${g('tmFn')} ${g('tmLn')}\nEmail: ${g('tmEm')}\n\n${g('tmEnq')}`;
+    location.href = `mailto:info@everflowexperience.com?subject=${encodeURIComponent('Tailor-Made Enquiry — ' + g('tmFn') + ' ' + g('tmLn'))}&body=${encodeURIComponent(body)}`;
+  }
+
+  // ===== Leaflet map (identical to original) =====
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof L === 'undefined') return;
+    var map = L.map('mapa-custom', { center: [47.3, 11.0], zoom: 8, zoomControl: false, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
+
+    function createCustomIcon(labelHtml, cssClass) {
+      return L.divIcon({
+        className: 'custom-div-icon',
+        html: `
+          <div class="pin-wrapper">
+            <svg class="pin-svg" width="40" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:0; left:0;">
+              <path d="M12 0C7.58 0 4 3.58 4 8C4 13.5 12 24 12 24C12 24 20 13.5 20 8C20 3.58 16.42 0 12 0ZM12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11Z" fill="#1a1a1a"/>
+              <circle cx="12" cy="8" r="2.5" fill="white"/>
+            </svg>
+            <div class="label-container ${cssClass}">${labelHtml}</div>
+          </div>`,
+        iconSize: [40, 52],
+        iconAnchor: [20, 52]
+      });
+    }
+
+    var iconMunich = createCustomIcon('MUNICH', 'text-munich');
+    L.marker([48.1351, 11.5820], {icon: iconMunich}).addTo(map).on('click', () => {
+      window.open('https://goo.gl/maps/place/Munich', '_blank');
+    });
+
+    var iconGarmisch = createCustomIcon('GARMISCH<br>PARTENKIRCHEN', 'text-garmisch');
+    L.marker([47.4917, 11.0955], {icon: iconGarmisch}).addTo(map).on('click', () => {
+      window.open('https://goo.gl/maps/place/Garmisch-Partenkirchen', '_blank');
+    });
+
+    var iconStMoritz = createCustomIcon('ST. MORITZ', 'text-stmoritz');
+    L.marker([46.4984, 9.8391], {icon: iconStMoritz}).addTo(map).on('click', () => {
+      window.open('https://goo.gl/maps/place/St.+Moritz', '_blank');
+    });
+
+    var germanyLabel = L.divIcon({ className: 'country-label', html: 'GERMANY', iconSize: [100, 40], iconAnchor: [50, 20] });
+    L.marker([47.8, 10.5], {icon: germanyLabel, interactive: false}).addTo(map);
+    var austriaLabel = L.divIcon({ className: 'country-label', html: 'AUSTRIA', iconSize: [100, 40], iconAnchor: [50, 20] });
+    L.marker([47.2, 11.8], {icon: austriaLabel, interactive: false}).addTo(map);
+  });
+</script>
+</body>
+</html>
