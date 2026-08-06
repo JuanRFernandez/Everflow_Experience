@@ -11,3 +11,7 @@ desktop.ini
 *.log
 *.tmp
 __pycache__/
+
+# raw/unoptimized media & transfer archives (keep only web-optimized assets in git)
+*.mov
+*.zip

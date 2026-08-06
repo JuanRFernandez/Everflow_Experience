@@ -12,8 +12,8 @@ Live at: https://juanrfernandez.github.io/Everflow_Experience/ (custom domain `e
 ├── assets/
 │   ├── css/styles.css    # all styling
 │   ├── js/main.js        # menu, Book-Now modal, forms, Leaflet map
-│   ├── img/              # images (see TODO below)
-│   └── video/            # hero background video (see TODO below)
+│   ├── img/              # images (headshots, logos, hero title, poster frame)
+│   └── video/            # hero background video (web-optimized mp4)
 └── README.md
 ```
 
@@ -30,24 +30,11 @@ Local preview: open `index.html` in a browser, or `python -m http.server` in the
 
 ## Deploying
 
-Push to `main` → GitHub Pages redeploys automatically (Settings → Pages → Deploy from branch `main`).
+Push to `master` → GitHub Pages redeploys automatically (Settings → Pages → Deploy from branch `master`, folder `/`).
 
-## TODO — localize assets
+## Assets
 
-Media files still load from the old WordPress site. Before that hosting is cancelled, download these and place them here, then swap the URLs in `index.html`:
-
-| WordPress file | Target path |
-|---|---|
-| `/wp-content/uploads/2025/11/a-drone-shooting-over-zugspitze...utc.mov` | `assets/video/zugspitze-drone.mp4` (convert `.mov` → `.mp4`) |
-| `/wp-content/uploads/2025/11/02-2048x2048.png` (EVER FLOW title) | `assets/img/everflow-title.png` |
-| `/wp-content/uploads/2025/05/cropped-FAVICON-03.png` (nav logo) | `assets/img/logo.png` |
-| `/wp-content/uploads/2025/05/cropped-FAVICON-02-270x270.png` (favicon) | `assets/img/favicon.png` |
-| `/wp-content/uploads/2026/07/juan_headshot-1.jpg` | `assets/img/juan.jpg` |
-| `/wp-content/uploads/2026/07/gregorio_headshot.jpg` | `assets/img/gregorio.jpg` |
-| `/wp-content/uploads/2026/07/jeremy_headshot.jpg` | `assets/img/jeremy.jpg` |
-| `/wp-content/uploads/2026/07/paolo_headshot.jpg` | `assets/img/paolo.jpg` |
-| `/wp-content/uploads/2026/07/felipe_headshot.jpg` | `assets/img/felipe.jpg` |
-| `/wp-content/uploads/2025/12/Profi_Ski_weiss_blau...1024x589.jpg` | `assets/img/profi-ski.jpg` |
+All media is local — zero dependencies on the old WordPress hosting. The hero video is a web-optimized mp4 (`assets/video/hero.mp4`, converted from the original 53 MB `.mov`; raw `.mov`/`.zip` files are gitignored). `assets/img/hero-poster.jpg` is the first video frame, shown while the video loads.
 
 ## Credits
 
