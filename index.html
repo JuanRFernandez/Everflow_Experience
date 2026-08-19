@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
+<title>EverFlow Experience — Tailor-Made Alpine Experiences</title>
+<meta name="description" content="Boutique alpine experience company in the Bavarian Alps: private ski coaching, lodging, dining, wellness and seamless transport — tailor-made journeys from Garmisch to Courchevel.">
+<link rel="icon" type="image/png" href="assets/img/FAVICON-03.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Public+Sans:wght@400;500;600;700&family=Poppins:wght@500;600&family=Oswald:wght@500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="./image-slot.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 <style>
 html{scroll-behavior:smooth}
 @keyframes destDrift{from{transform:scale(1)}to{transform:scale(1.08)}}
@@ -30,33 +28,52 @@ a:hover{color:#a89960}
 .country-label{font-size:24px;color:#666;opacity:.4;font-family:"Oswald",sans-serif;letter-spacing:2px;pointer-events:none}
 .leaflet-container{font-family:"Public Sans",system-ui,sans-serif}
 input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !important;box-shadow:0 0 0 3px rgba(187,172,121,.2)}
+/* hover states */
+.hv-o1:hover{opacity:1}
+.hv-o7:hover{opacity:.7}
+.hv-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.hv-wbg:hover{background:rgba(255,255,255,.12)}
+a.hv-white:hover{color:#fff}
+.hv-book:hover{background:#fff;color:#141517;border:1px solid #fff}
+.hv-scale:hover{transform:scale(1.07)}
+/* destinations gallery */
+.dest-layer{position:absolute;inset:0;transition:opacity .8s ease;transform-origin:50% 50%;animation:destDrift 26s ease-in-out infinite alternate;z-index:1;opacity:0;pointer-events:none}
+.dest-layer.active{z-index:2;opacity:1;pointer-events:auto}
+.dest-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;cursor:pointer;font-family:Poppins,sans-serif;font-weight:300;font-size:16.5px;letter-spacing:.02em;transition:color .3s ease;color:rgba(255,255,255,.58)}
+.dest-item.active{color:#fff}
+.dest-chev{font-size:22px;line-height:1;color:#c9bc8e;transition:opacity .3s,transform .3s;opacity:.3}
+.dest-item.active .dest-chev{opacity:1;transform:translateX(3px)}
+/* booking modal step dots */
+.bk-dot{width:34px;height:34px;border-radius:50%;border:1.5px solid #ccc;background:#fff;color:#999;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:14px}
+.bk-dot.on{border-color:transparent;background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff}
 </style>
-</helmet>
+</head>
+<body>
 
-<header data-screen-label="Header" style="position:absolute;left:0;right:0;top:0;z-index:50;padding:22px 0">
+<header style="position:absolute;left:0;right:0;top:0;z-index:50;padding:22px 0">
   <div style="width:min(1180px,92%);margin:0 auto;display:flex;align-items:center;justify-content:space-between">
     <div style="display:flex;align-items:center;gap:18px">
       <a href="#top" style="display:flex"><img src="assets/img/FAVICON-03.png" alt="Ever Flow" style="height:42px;width:auto;display:block"></a>
-      <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;opacity:.92" style-hover="opacity:1">
+      <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;opacity:.92" class="hv-o1">
         <svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:#fff"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4C1.2 2.7.8 3.4.5 4.2.2 5 .1 5.9.1 7.2 0 8.4 0 8.8 0 12s0 3.6.1 4.8c0 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .5C8.3 24 8.7 24 12 24s3.6 0 4.8-.1c1.3 0 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.5-3 .1-1.2.1-1.6.1-4.8s0-3.6-.1-4.8c0-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.3 1.2 20.6.8 19.8.5c-.8-.3-1.7-.5-3-.5C15.6 0 15.2 0 12 0zm0 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM19.8 5.6a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg>
       </a>
-      <a href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp" style="display:flex;opacity:.92" style-hover="opacity:1">
+      <a href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp" style="display:flex;opacity:.92" class="hv-o1">
         <svg viewBox="0 0 32 32" style="width:21px;height:21px;fill:#fff"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 3.9 1.5 4.8 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22.2c-1.6 0-3.4-.5-4.9-1.4l-.4-.2-4.2 1.3 1.3-4.1-.3-.4C6.2 18.9 5.6 17 5.6 15 5.6 9.3 10.3 4.6 16 4.6S26.4 9.3 26.4 15 21.7 25.2 16 25.2zm5.7-7.7c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6s0-.5 0-.6c-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2 .1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
       </a>
     </div>
     <nav style="display:flex;gap:30px;align-items:center">
-      <a href="#top" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">Home</a>
-      <a href="#experiences" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">Experiences</a>
-      <a href="#reach" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">Destinations</a>
-      <a href="#how" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">How It Works</a>
-      <a href="#meet" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">Team</a>
-      <a href="#contact" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" style-hover="opacity:.7">Contact</a>
+      <a href="#top" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">Home</a>
+      <a href="#experiences" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">Experiences</a>
+      <a href="#reach" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">Destinations</a>
+      <a href="#how" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">How It Works</a>
+      <a href="#meet" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">Team</a>
+      <a href="#contact" style="color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase" class="hv-o7">Contact</a>
     </nav>
   </div>
 </header>
 
-<div id="top" data-screen-label="Hero" style="position:relative;min-height:100svh;background:#000;display:flex;align-items:center;overflow:hidden">
-  <video id="hero-vid" src="./assets/video/hero.mp4" poster="assets/img/hero-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+<div id="top" style="position:relative;min-height:100svh;background:#000;display:flex;align-items:center;overflow:hidden">
+  <video id="hero-vid" src="./assets/video/hero.mp4" poster="assets/img/hero-poster.jpg" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
   <div style="position:absolute;inset:0;background:rgba(0,0,0,.38)"></div>
   <div style="position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(transparent,rgba(0,0,0,.4))"></div>
   <div style="position:relative;z-index:2;width:min(1180px,92%);margin:0 auto;padding:110px 0 70px">
@@ -64,13 +81,13 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
     <img src="assets/img/02-scaled.png" alt="EVER FLOW Experience" style="width:min(620px,78vw);height:auto;display:block">
     <p style="margin:34px 0 0 6px;max-width:560px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;font-size:24px;line-height:1.45;color:#fff">From first tracks to fireside: tailor-made alpine living.</p>
     <div style="display:flex;gap:16px;margin:40px 0 0 6px">
-      <button onClick="{{ openModal }}" style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.06em;text-transform:uppercase" style-hover="filter:brightness(1.07);transform:translateY(-1px)">Enquire</button>
-      <a href="#experiences" style="display:inline-block;color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:12px 34px;border:1px solid rgba(255,255,255,.7);border-radius:2px;letter-spacing:.06em;text-transform:uppercase" style-hover="background:rgba(255,255,255,.12)">Experiences</a>
+      <button data-open-modal style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.06em;text-transform:uppercase" class="hv-btn">Enquire</button>
+      <a href="#experiences" style="display:inline-block;color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:12px 34px;border:1px solid rgba(255,255,255,.7);border-radius:2px;letter-spacing:.06em;text-transform:uppercase" class="hv-wbg">Experiences</a>
     </div>
   </div>
 </div>
 
-<section id="about" data-screen-label="About" style="padding:110px 0 100px">
+<section id="about" style="padding:110px 0 100px">
   <div style="width:min(880px,92%);margin:0 auto;text-align:center">
     <div style="font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#9a8a5c;margin-bottom:16px">EverFlow — Est. 2022</div>
     <div style="width:44px;height:1px;background:#b3a273;margin:0 auto 30px"></div>
@@ -81,7 +98,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="experiences" data-screen-label="Experiences" style="padding:0;background:#141517">
+<section id="experiences" style="padding:0;background:#141517">
   <div style="width:min(1180px,92%);margin:0 auto;padding:96px 0 26px">
     <div style="font-family:Poppins,sans-serif;font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#b3a273">The EverFlow Collection</div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
@@ -92,7 +109,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
 
   <div style="width:min(1180px,92%);margin:0 auto;padding:50px 0 26px;display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center">
     <div style="position:relative;aspect-ratio:16/11;overflow:hidden">
-      <image-slot id="exp-ski" shape="rect" placeholder="drop: private coaching on snow" src="./assets/exp-ski.jpg"></image-slot>
+      <img src="./assets/exp-ski.jpg" alt="Private ski & snowboard coaching" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
     </div>
     <div>
       <div style="display:flex;align-items:center;gap:14px">
@@ -101,7 +118,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
       </div>
       <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:600;color:#fff;line-height:1.25;margin:16px 0 14px">Ski &amp; Snowboard Coaching</h3>
       <p style="margin:0 0 22px;font-size:15.5px;color:rgba(255,255,255,.75)">The heart of EverFlow since day one. Private, multilingual coaching in the Bavarian Alps — race-honed technique, smart progression, and days on snow shaped entirely around your level and pace.</p>
-      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" style-hover="color:#fff">Enquire</a>
+      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" class="hv-white">Enquire</a>
     </div>
   </div>
 
@@ -113,16 +130,16 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
       </div>
       <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:600;color:#fff;line-height:1.25;margin:16px 0 14px">Lodging &amp; Chalets</h3>
       <p style="margin:0 0 22px;font-size:15.5px;color:rgba(255,255,255,.75)">Handpicked hotels, chalets and mountain houses we know personally — matched to your group and booked as part of one seamless stay, from Garmisch to St. Moritz.</p>
-      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" style-hover="color:#fff">Enquire</a>
+      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" class="hv-white">Enquire</a>
     </div>
     <div style="position:relative;aspect-ratio:16/11;overflow:hidden">
-      <image-slot id="exp-lodging" shape="rect" placeholder="drop: chalet interior / exterior" src="./assets/exp-lodging.jpg"></image-slot>
+      <img src="./assets/exp-lodging.jpg" alt="Chalet lodging" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
     </div>
   </div>
 
   <div style="width:min(1180px,92%);margin:0 auto;padding:26px 0 60px;display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center">
     <div style="position:relative;aspect-ratio:16/11;overflow:hidden">
-      <image-slot id="exp-heli" shape="rect" placeholder="drop: heli / backcountry powder" src="./assets/exp-heli.jpg"></image-slot>
+      <img src="./assets/exp-heli.jpg" alt="Heli & backcountry skiing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
     </div>
     <div>
       <div style="display:flex;align-items:center;gap:14px">
@@ -131,48 +148,48 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
       </div>
       <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:600;color:#fff;line-height:1.25;margin:16px 0 14px">Heli &amp; Backcountry</h3>
       <p style="margin:0 0 22px;font-size:15.5px;color:rgba(255,255,255,.75)">Untracked terrain with certified local guides — heli days, touring and freeride coaching, planned around conditions and delivered with an uncompromising safety standard.</p>
-      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" style-hover="color:#fff">Enquire</a>
+      <a href="#contact" style="font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9bc8e;border-bottom:1px solid rgba(201,188,142,.5);padding-bottom:4px" class="hv-white">Enquire</a>
     </div>
   </div>
 
   <div style="width:min(1180px,92%);margin:0 auto;padding:0 0 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-guiding" shape="rect" placeholder="drop: alpine trail ride" src="./assets/exp-guiding.jpg"></image-slot>
+      <img src="./assets/exp-guiding.jpg" alt="Private guiding — hiking & biking" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">04 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Private Guiding — Hiking &amp; Biking</div>
       </div>
     </div>
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-culinary" shape="rect" placeholder="drop: mountain-hut dinner" src="./assets/exp-culinary.jpg"></image-slot>
+      <img src="./assets/exp-culinary.jpg" alt="Culinary & wine" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">05 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Culinary &amp; Wine</div>
       </div>
     </div>
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-wellness" shape="rect" placeholder="drop: spa with mountain view" src="./assets/exp-wellness.jpg"></image-slot>
+      <img src="./assets/exp-wellness.jpg" alt="Wellness & spa" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">06 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Wellness &amp; Spa</div>
       </div>
     </div>
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-transport" shape="rect" placeholder="drop: heli / private transfer" src="./assets/exp-transport.jpg"></image-slot>
+      <img src="./assets/exp-transport.jpg" alt="Private transport — jet & heli" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">07 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Private Transport — Jet &amp; Heli</div>
       </div>
     </div>
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-corporate" shape="rect" placeholder="drop: group on terrace" src="./assets/exp-corporate.jpg"></image-slot>
+      <img src="./assets/exp-corporate.jpg" alt="Corporate & group retreats" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">08 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Corporate &amp; Group Retreats</div>
       </div>
     </div>
     <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-      <image-slot id="exp-summer" shape="rect" placeholder="drop: summer alpine lake" src="./assets/exp-summer.jpg"></image-slot>
+      <img src="./assets/exp-summer.jpg" alt="Summer alpine experiences" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
       <div style="position:absolute;left:0;right:0;top:0;padding:18px 22px 44px;background:linear-gradient(rgba(0,0,0,.66),transparent);pointer-events:none">
         <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9bc8e">09 · By request</div>
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:600;color:#fff;margin-top:4px">Summer Alpine Experiences</div>
@@ -181,7 +198,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="how" data-screen-label="How It Works" style="background:#fff;padding:100px 0">
+<section id="how" style="background:#fff;padding:100px 0">
   <div style="width:min(1180px,92%);margin:0 auto">
     <div style="text-align:center;margin-bottom:64px">
       <div style="font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#9a8a5c;margin-bottom:16px">How It Works</div>
@@ -212,7 +229,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="meet" data-screen-label="Team" style="background:#f7f6f2;padding:92px 0">
+<section id="meet" style="background:#f7f6f2;padding:92px 0">
   <div style="width:min(1180px,92%);margin:0 auto">
     <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:36px;text-align:center;color:#1a1a1a;line-height:1.2;margin:0 0 60px">Meet Our Team</h2>
     <div style="display:grid;grid-template-columns:27% 1fr;gap:44px;align-items:start;margin-bottom:72px">
@@ -262,33 +279,85 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="reach" data-screen-label="Destinations" style="background:#141517;padding:92px 0 0">
+<section id="reach" style="background:#141517;padding:92px 0 0">
   <div style="width:min(1180px,92%);margin:0 auto;text-align:center">
     <div style="font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#b3a273;margin-bottom:16px">Destinations</div>
     <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:38px;font-weight:600;color:#fff;line-height:1.2;margin:0 0 18px">Where we host.</h2>
     <p style="max-width:640px;margin:0 auto 56px;font-size:17px;color:rgba(255,255,255,.72)">Headquartered in the Bavarian Alps, hosted across the region's finest addresses — from Garmisch to Courchevel.</p>
   </div>
   <div style="position:relative;height:min(86vh,820px);min-height:660px;overflow:hidden;background:#0c0d0f">
-    <sc-for list="{{ dests }}" as="d" hint-placeholder-count="1">
-      <div style="{{ d.layerStyle }}">
-        <image-slot id="{{ d.slotId }}" shape="rect" placeholder="{{ d.ph }}" src="{{ d.src }}" style="position:absolute;inset:0"></image-slot>
-      </div>
-    </sc-for>
+    <div class="dest-layer active" data-dest-layer="0">
+      <img src="./assets/dest-garmisch.jpg" alt="Garmisch-Partenkirchen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="1">
+      <img src="./assets/dest-munich.jpg" alt="Munich" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="2">
+      <img src="./assets/dest-innsbruck.jpg" alt="Innsbruck" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="3">
+      <img src="./assets/dest-kitzbuehel.jpg" alt="Kitzbühel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="4">
+      <img src="./assets/dest-stmoritz.jpg" alt="St. Moritz" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="5">
+      <img src="./assets/dest-gstaad.jpg" alt="Gstaad" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="6">
+      <img src="./assets/dest-zermatt.jpg" alt="Zermatt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="7">
+      <img src="./assets/dest-courchevel.jpg" alt="Courchevel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
+    <div class="dest-layer" data-dest-layer="8">
+      <img src="./assets/dest-cortina.jpg" alt="Cortina d&#39;Ampezzo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+    </div>
     <div style="position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(transparent,rgba(10,10,12,.6));z-index:3;pointer-events:none"></div>
     <div style="position:absolute;left:0;top:0;bottom:0;width:340px;z-index:4;background:linear-gradient(90deg,rgba(10,10,12,.87) 0%,rgba(10,10,12,.56) 62%,rgba(10,10,12,0) 100%);display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:36px 30px 30px 42px;box-sizing:border-box">
       <div style="display:flex;flex-direction:column">
-        <sc-for list="{{ dests }}" as="d" hint-placeholder-count="9">
-          <div onClick="{{ d.select }}" onMouseEnter="{{ d.select }}" style="{{ d.itemStyle }}">
-            <span>{{ d.name }}</span>
-            <span style="{{ d.chevStyle }}">›</span>
+          <div class="dest-item active" data-dest="0">
+            <span>Garmisch-Partenkirchen</span>
+            <span class="dest-chev">›</span>
           </div>
-        </sc-for>
+          <div class="dest-item" data-dest="1">
+            <span>Munich</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="2">
+            <span>Innsbruck</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="3">
+            <span>Kitzbühel</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="4">
+            <span>St. Moritz</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="5">
+            <span>Gstaad</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="6">
+            <span>Zermatt</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="7">
+            <span>Courchevel</span>
+            <span class="dest-chev">›</span>
+          </div>
+          <div class="dest-item" data-dest="8">
+            <span>Cortina d'Ampezzo</span>
+            <span class="dest-chev">›</span>
+          </div>
       </div>
-      <button onClick="{{ openModal }}" style="align-self:flex-start;background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:13px 26px;cursor:pointer;transition:background .3s,color .3s" style-hover="background:#fff;color:#141517;border:1px solid #fff">Book Now</button>
+      <button data-open-modal style="align-self:flex-start;background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:13px 26px;cursor:pointer;transition:background .3s,color .3s" class="hv-book">Book Now</button>
     </div>
     <div style="position:absolute;right:46px;bottom:40px;z-index:4;text-align:right;pointer-events:none">
-      <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#c9bc8e;margin-bottom:8px">{{ activeCountry }}</div>
-      <div style="font-family:'Playfair Display',Georgia,serif;font-size:46px;font-weight:600;color:#fff;line-height:1.05;text-shadow:0 2px 24px rgba(0,0,0,.35)">{{ activeName }}</div>
+      <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#c9bc8e;margin-bottom:8px" id="dest-country">Germany · Home base</div>
+      <div style="font-family:'Playfair Display',Georgia,serif;font-size:46px;font-weight:600;color:#fff;line-height:1.05;text-shadow:0 2px 24px rgba(0,0,0,.35)" id="dest-name">Garmisch-Partenkirchen</div>
     </div>
   </div>
   <div style="width:min(1180px,92%);margin:0 auto;text-align:center;padding:72px 0 92px">
@@ -298,7 +367,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="faq" data-screen-label="Good To Know" style="background:#fff;padding:96px 0">
+<section id="faq" style="background:#fff;padding:96px 0">
   <div style="width:min(1180px,92%);margin:0 auto">
     <div style="font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#9a8a5c;margin-bottom:16px">Good To Know</div>
     <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:34px;font-weight:600;color:#1a1a1a;line-height:1.2;margin:0 0 48px">Before we plan the first day.</h2>
@@ -323,7 +392,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<section id="contact" data-screen-label="Contact" style="background:#f7f6f2;padding:92px 0">
+<section id="contact" style="background:#f7f6f2;padding:92px 0">
   <div style="width:min(1180px,92%);margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:start;padding:20px 0">
     <div>
       <div style="font-family:Poppins,sans-serif;font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#9a8a5c;margin-bottom:12px">Get In Touch</div>
@@ -336,7 +405,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
         <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#9a8a5c;flex:none"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4C1.2 2.7.8 3.4.5 4.2.2 5 .1 5.9.1 7.2 0 8.4 0 8.8 0 12s0 3.6.1 4.8c0 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .5C8.3 24 8.7 24 12 24s3.6 0 4.8-.1c1.3 0 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.5-3 .1-1.2.1-1.6.1-4.8s0-3.6-.1-4.8c0-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.3 1.2 20.6.8 19.8.5c-.8-.3-1.7-.5-3-.5C15.6 0 15.2 0 12 0zm0 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM19.8 5.6a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg>
         <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener">@everflowexperience</a>
       </div>
-      <a href="mailto:info@everflowexperience.com" style="display:inline-block;background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;letter-spacing:.02em;margin-top:22px" style-hover="filter:brightness(1.07);transform:translateY(-1px)">info@everflowexperience.com</a>
+      <a href="mailto:info@everflowexperience.com" style="display:inline-block;background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;letter-spacing:.02em;margin-top:22px" class="hv-btn">info@everflowexperience.com</a>
       <div style="margin-top:18px;font-size:14.5px">WhatsApp: <a href="https://wa.me/491759505075" target="_blank" rel="noopener" style="font-weight:600">+49 175 9505075</a> · <a href="https://wa.me/5492616940320" target="_blank" rel="noopener" style="font-weight:600">+54 9 261 694-0320</a></div>
       <div style="margin-top:34px;padding-top:24px;border-top:1px solid #e5e0d3">
         <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#8a8a8a;margin-bottom:10px">Start with whatever you know</div>
@@ -355,7 +424,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
       </div>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Email *</label><input id="tmEm" type="email" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Enquiry *</label><textarea id="tmEnq" rows="5" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></textarea></div>
-      <button onClick="{{ sendTailor }}" style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.02em" style-hover="filter:brightness(1.07);transform:translateY(-1px)">Send Enquiry</button>
+      <button id="tm-send" style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.02em" class="hv-btn">Send Enquiry</button>
     </div>
   </div>
   <div style="display:flex;justify-content:center;padding:30px 0 0">
@@ -363,7 +432,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
   </div>
 </section>
 
-<footer data-screen-label="Footer" style="background:#141517;padding:70px 0 0">
+<footer style="background:#141517;padding:70px 0 0">
   <div style="width:min(1180px,92%);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;padding-bottom:56px">
     <div>
       <img src="assets/img/FAVICON-03.png" alt="Ever Flow" style="height:44px;width:auto;display:block;margin-bottom:18px">
@@ -372,54 +441,55 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
     <div>
       <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b3a273;margin-bottom:16px">Experiences</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
-        <a href="#experiences" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Ski &amp; Snowboard Coaching</a>
-        <a href="#experiences" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Lodging &amp; Chalets</a>
-        <a href="#experiences" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Heli &amp; Backcountry</a>
-        <a href="#experiences" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Culinary &amp; Wine</a>
-        <a href="#experiences" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Summer Experiences</a>
+        <a href="#experiences" style="color:rgba(255,255,255,.75)" class="hv-white">Ski &amp; Snowboard Coaching</a>
+        <a href="#experiences" style="color:rgba(255,255,255,.75)" class="hv-white">Lodging &amp; Chalets</a>
+        <a href="#experiences" style="color:rgba(255,255,255,.75)" class="hv-white">Heli &amp; Backcountry</a>
+        <a href="#experiences" style="color:rgba(255,255,255,.75)" class="hv-white">Culinary &amp; Wine</a>
+        <a href="#experiences" style="color:rgba(255,255,255,.75)" class="hv-white">Summer Experiences</a>
       </div>
     </div>
     <div>
       <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b3a273;margin-bottom:16px">Company</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
-        <a href="#about" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">About Us</a>
-        <a href="#how" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">How It Works</a>
-        <a href="#meet" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Meet Our Team</a>
-        <a href="#reach" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">Destinations</a>
+        <a href="#about" style="color:rgba(255,255,255,.75)" class="hv-white">About Us</a>
+        <a href="#how" style="color:rgba(255,255,255,.75)" class="hv-white">How It Works</a>
+        <a href="#meet" style="color:rgba(255,255,255,.75)" class="hv-white">Meet Our Team</a>
+        <a href="#reach" style="color:rgba(255,255,255,.75)" class="hv-white">Destinations</a>
       </div>
     </div>
     <div>
       <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b3a273;margin-bottom:16px">Contact</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
-        <a href="mailto:info@everflowexperience.com" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">info@everflowexperience.com</a>
-        <a href="https://wa.me/491759505075" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">WhatsApp +49 175 9505075</a>
-        <a href="https://wa.me/5492616940320" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">WhatsApp +54 9 261 694-0320</a>
-        <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" style-hover="color:#fff">@everflowexperience</a>
+        <a href="mailto:info@everflowexperience.com" style="color:rgba(255,255,255,.75)" class="hv-white">info@everflowexperience.com</a>
+        <a href="https://wa.me/491759505075" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" class="hv-white">WhatsApp +49 175 9505075</a>
+        <a href="https://wa.me/5492616940320" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" class="hv-white">WhatsApp +54 9 261 694-0320</a>
+        <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" class="hv-white">@everflowexperience</a>
       </div>
     </div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.12);padding:22px 0;text-align:center;font-size:13.5px;color:rgba(255,255,255,.45)">Copyright © {{ year }} Ever Flow | Powered by Glonthy</div>
+  <div style="border-top:1px solid rgba(255,255,255,.12);padding:22px 0;text-align:center;font-size:13.5px;color:rgba(255,255,255,.45)">Copyright © <span id="ft-year">2026</span> Ever Flow | Powered by Glonthy</div>
 </footer>
 
-<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
-<div onClick="{{ modalBgClick }}" data-modal-bg="1" style="position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px">
+<div id="bk-modal" style="display:none">
+<div data-modal-bg="1" style="position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px">
   <div style="background:#fff;border-radius:8px;max-width:540px;width:100%;padding:36px 38px;position:relative;max-height:92svh;overflow:auto">
-    <button onClick="{{ closeModal }}" style="position:absolute;top:12px;right:18px;font-size:26px;color:#999;background:none;border:none;cursor:pointer;line-height:1">×</button>
+    <button data-close-modal style="position:absolute;top:12px;right:18px;font-size:26px;color:#999;background:none;border:none;cursor:pointer;line-height:1">×</button>
     <div style="display:flex;gap:14px;justify-content:center;margin-bottom:26px">
-      <sc-for list="{{ stepDots }}" as="d" hint-placeholder-count="4">
-        <span style="width:34px;height:34px;border-radius:50%;border:1.5px solid {{ d.border }};background:{{ d.bg }};color:{{ d.color }};display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:14px">{{ d.n }}</span>
-      </sc-for>
+      <span class="bk-dot on">1</span>
+      <span class="bk-dot">2</span>
+      <span class="bk-dot">3</span>
+      <span class="bk-dot">4</span>
     </div>
-    <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+    <div id="bk-step-1">
       <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1a1a1a;margin:0 0 20px;text-align:center">Step 1</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
         <div><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">First Name *</label><input id="bkFn" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
         <div><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Last Name *</label><input id="bkLn" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
       </div>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Email *</label><input id="bkEm" type="email" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
-      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><span></span><button onClick="{{ toStep2 }}" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
-    </sc-if>
-    <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><span></span><button data-goto-step="2" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
+    </div>
+    <div id="bk-step-2" style="display:none">
       <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1a1a1a;margin:0 0 20px;text-align:center">Step 2</h2>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Type of experience *</label>
         <select id="bkSrv" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box">
@@ -438,9 +508,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
           <option>Fully Tailor-Made Experience</option>
         </select>
       </div>
-      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button onClick="{{ toStep1 }}" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button onClick="{{ toStep3 }}" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
-    </sc-if>
-    <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button data-goto-step="1" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button data-goto-step="3" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
+    </div>
+    <div id="bk-step-3" style="display:none">
       <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1a1a1a;margin:0 0 20px;text-align:center">Step 3</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
         <div><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Date From</label><input id="bkDf" type="date" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
@@ -449,151 +519,27 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !impor
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Ski Level (if on snow)</label>
         <select id="bkLv" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"><option>Select...</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
       </div>
-      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button onClick="{{ toStep2 }}" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button onClick="{{ toStep4 }}" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
-    </sc-if>
-    <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button data-goto-step="2" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button data-goto-step="4" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Next</button></div>
+    </div>
+    <div id="bk-step-4" style="display:none">
       <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1a1a1a;margin:0 0 20px;text-align:center">Step 4</h2>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Notes</label><textarea id="bkNt" rows="4" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></textarea></div>
-      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button onClick="{{ toStep3 }}" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button onClick="{{ submitMail }}" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Submit</button></div>
-      <span style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#777">or <a onClick="{{ submitWa }}" style="color:#9a8a5c;font-weight:600;cursor:pointer">send via WhatsApp</a></span>
-    </sc-if>
-    <sc-if value="{{ isStep5 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button data-goto-step="3" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button data-submit="mail" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Submit</button></div>
+      <span style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#777">or <a data-submit="wa" style="color:#9a8a5c;font-weight:600;cursor:pointer">send via WhatsApp</a></span>
+    </div>
+    <div id="bk-step-5" style="display:none">
       <div style="text-align:center;padding:16px 0">
         <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#1a1a1a;margin:0 0 12px">Thank You!</h2>
         <p style="margin:0">Your request has been received.<br>We'll contact you shortly!</p>
-        <button onClick="{{ closeModal }}" style="margin-top:22px;background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer">Close</button>
+        <button data-close-modal style="margin-top:22px;background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer">Close</button>
       </div>
-    </sc-if>
+    </div>
   </div>
 </div>
-</sc-if>
+</div>
 
-<sc-if value="{{ waShow }}" hint-placeholder-val="{{ false }}">
-<a href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp contact" style="position:fixed;right:20px;bottom:20px;z-index:150;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);animation:pop .4s ease" style-hover="transform:scale(1.07)">
+<a id="wa-float" href="https://wa.me/491759505075" target="_blank" rel="noopener" aria-label="WhatsApp contact" class="hv-scale" style="display:none;position:fixed;right:20px;bottom:20px;z-index:150;width:60px;height:60px;border-radius:50%;background:#25d366;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);animation:pop .4s ease">
   <svg viewBox="0 0 32 32" style="width:34px;height:34px;fill:#fff"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 3.9 1.5 4.8 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.7 17.5c-.3.8-1.5 1.4-2.1 1.5-.5.1-1.2.1-2-.1-.5-.2-1.1-.4-1.9-.7-3.3-1.4-5.4-4.7-5.6-4.9-.1-.2-1.3-1.7-1.3-3.3s.8-2.4 1.1-2.7c.3-.3.7-.4.9-.4h.6c.2 0 .4-.1.7.5.3.6.9 2.1 1 2.3 0 .1.1.4 0 .6-.1.2-.1.4-.3.6l-.5.6c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.2 1.3 2.5 1.5.3.1.5.1.7-.1.2-.2.8-.8 1-1.2.2-.4.4-.3.7-.2.3.1 1.8.8 2.1 1 .3.2.5.3.6.4.1.2.1.8-.2 1.5z"/></svg>
 </a>
-</sc-if>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappFloat&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}}">
-class Component extends DCLogic {
-  state = { modalOpen: false, step: 1, waShow: false, activeDest: 0 };
-  componentDidMount() {
-    this._waTimer = setTimeout(() => this.setState({ waShow: true }), 3000);
-    this._mapTry = 0;
-    this._initMap();
-    this._initHeroVideo();
-  }
-  _initHeroVideo() {
-    const v = document.getElementById('hero-vid');
-    if (!v || v.dataset.vinit) return;
-    v.dataset.vinit = '1';
-    v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
-    v.play().catch(() => {});
-  }
-  componentWillUnmount() { clearTimeout(this._waTimer); clearTimeout(this._mapTimer); }
-  componentDidUpdate() { this._mapTry = 0; this._initMap(); this._initHeroVideo(); }
-  _initMap() {
-    const el = document.getElementById('mapa-custom');
-    if (typeof L === 'undefined' || !el) {
-      if (this._mapTry++ < 40) this._mapTimer = setTimeout(() => this._initMap(), 250);
-      return;
-    }
-    if (el.dataset.mapV === '2') return;
-    if (this._map) { try { this._map.remove(); } catch (e) {} this._map = null; }
-    if (el._leaflet_id) { el._leaflet_id = undefined; el.innerHTML = ''; }
-    el.dataset.mapV = '2';
-    const map = L.map(el, { zoomControl: false, scrollWheelZoom: false });
-    this._map = map;
-    map.fitBounds([[45.15, 6.1], [48.4, 12.8]], { padding: [8, 8] });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
-    const icon = (labelHtml, cssClass) => L.divIcon({
-      className: 'custom-div-icon',
-      html: `<div class="pin-wrapper"><svg width="40" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;"><path d="M12 0C7.58 0 4 3.58 4 8C4 13.5 12 24 12 24C12 24 20 13.5 20 8C20 3.58 16.42 0 12 0ZM12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11Z" fill="#1a1a1a"/><circle cx="12" cy="8" r="2.5" fill="white"/></svg><div class="label-container ${cssClass}">${labelHtml}</div></div>`,
-      iconSize: [40, 52], iconAnchor: [20, 52]
-    });
-    const bases = [
-      [48.1351, 11.5820, 'MUNICH', 'text-r', 'Munich'],
-      [47.4917, 11.0955, 'GARMISCH<br>PARTENKIRCHEN', 'text-l', 'Garmisch-Partenkirchen'],
-      [47.2692, 11.4041, 'INNSBRUCK', 'text-b', 'Innsbruck'],
-      [47.4467, 12.3925, 'KITZB\u00dcHEL', 'text-r', 'Kitzb\u00fchel'],
-      [46.4984, 9.8391, 'ST. MORITZ', 'text-b', 'St.+Moritz'],
-      [46.4728, 7.2864, 'GSTAAD', 'text-l', 'Gstaad'],
-      [46.0207, 7.7491, 'ZERMATT', 'text-b', 'Zermatt'],
-      [45.4154, 6.6349, 'COURCHEVEL', 'text-r', 'Courchevel'],
-      [46.5405, 12.1357, "CORTINA<br>D'AMPEZZO", 'text-l', "Cortina+d'Ampezzo"]
-    ];
-    bases.forEach(([lat, lng, label, cls, q]) => {
-      L.marker([lat, lng], { icon: icon(label, cls) }).addTo(map).on('click', () => window.open('https://www.google.com/maps/search/' + q, '_blank'));
-    });
-    const countries = [[48.05, 10.55, 'GERMANY'], [47.35, 13.55, 'AUSTRIA'], [46.75, 8.35, 'SWITZERLAND'], [45.85, 10.9, 'ITALY'], [45.35, 5.7, 'FRANCE']];
-    countries.forEach(([lat, lng, name]) => {
-      L.marker([lat, lng], { icon: L.divIcon({ className: 'country-label', html: name, iconSize: [140, 40], iconAnchor: [70, 20] }), interactive: false }).addTo(map);
-    });
-  }
-  _g(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
-  _goStep(n) {
-    if (n === 2 && (!this._g('bkFn') || !this._g('bkEm'))) { alert('Please fill in your name and email.'); return; }
-    this.setState({ step: n });
-  }
-  _submit(via) {
-    const g = (id) => this._g(id);
-    const msg = [
-      'Booking request — EverFlow Experience',
-      `Name: ${g('bkFn')} ${g('bkLn')}`,
-      `Email: ${g('bkEm')}`,
-      `Experience: ${g('bkSrv')}`,
-      (g('bkDf') || g('bkDt')) ? `Dates: ${g('bkDf') || '?'} to ${g('bkDt') || '?'}` : '',
-      g('bkLv') && g('bkLv') !== 'Select...' ? `Ski level: ${g('bkLv')}` : '',
-      g('bkNt') ? `Notes: ${g('bkNt')}` : ''
-    ].filter(Boolean).join('\n');
-    if (via === 'wa') window.open(`https://wa.me/491759505075?text=${encodeURIComponent(msg)}`, '_blank');
-    else location.href = `mailto:info@everflowexperience.com?subject=${encodeURIComponent('Booking request — ' + g('bkFn') + ' ' + g('bkLn'))}&body=${encodeURIComponent(msg)}`;
-    this.setState({ step: 5 });
-  }
-  renderVals() {
-    const s = this.state.step;
-    const DESTS = [
-      ['Garmisch-Partenkirchen', 'Germany \u00b7 Home base', 'dest-garmisch', 'drop: Garmisch / Zugspitze'],
-      ['Munich', 'Germany', 'dest-munich', 'drop: Munich'],
-      ['Innsbruck', 'Austria', 'dest-innsbruck', 'drop: Innsbruck'],
-      ['Kitzb\u00fchel', 'Austria', 'dest-kitzbuehel', 'drop: Kitzb\u00fchel'],
-      ['St. Moritz', 'Switzerland', 'dest-stmoritz', 'drop: St. Moritz'],
-      ['Gstaad', 'Switzerland', 'dest-gstaad', 'drop: Gstaad'],
-      ['Zermatt', 'Switzerland', 'dest-zermatt', 'drop: Zermatt / Matterhorn'],
-      ['Courchevel', 'France', 'dest-courchevel', 'drop: Courchevel'],
-      ["Cortina d'Ampezzo", 'Italy', 'dest-cortina', 'drop: Cortina / Dolomites']
-    ];
-    const ai = this.state.activeDest ?? 0;
-    return {
-      year: new Date().getFullYear(),
-      dests: DESTS.map((dd, i) => ({
-        name: dd[0], slotId: dd[2], ph: dd[3], src: './assets/' + dd[2] + '.jpg',
-        layerStyle: 'position:absolute;inset:0;transition:opacity .8s ease;transform-origin:50% 50%;animation:destDrift 26s ease-in-out infinite alternate;z-index:' + (i === ai ? 2 : 1) + ';opacity:' + (i === ai ? 1 : 0) + ';pointer-events:' + (i === ai ? 'auto' : 'none'),
-        itemStyle: 'display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;cursor:pointer;font-family:Poppins,sans-serif;font-weight:300;font-size:16.5px;letter-spacing:.02em;transition:color .3s ease;color:' + (i === ai ? '#fff' : 'rgba(255,255,255,.58)'),
-        chevStyle: 'font-size:22px;line-height:1;color:#c9bc8e;transition:opacity .3s,transform .3s;opacity:' + (i === ai ? '1' : '.3') + ';transform:translateX(' + (i === ai ? '3px' : '0') + ')',
-        select: () => this.setState({ activeDest: i })
-      })),
-      activeName: DESTS[ai][0],
-      activeCountry: DESTS[ai][1],
-      modalOpen: this.state.modalOpen,
-      waShow: this.state.waShow && (this.props.whatsappFloat ?? true),
-      isStep1: s === 1, isStep2: s === 2, isStep3: s === 3, isStep4: s === 4, isStep5: s === 5,
-      stepDots: [1, 2, 3, 4].map(n => n <= Math.min(s, 4)
-        ? { n, border: 'transparent', bg: 'linear-gradient(135deg,#b3a273,#9a8c60)', color: '#fff' }
-        : { n, border: '#ccc', bg: '#fff', color: '#999' }),
-      openModal: () => { this.setState({ modalOpen: true, step: 1 }); document.body.style.overflow = 'hidden'; },
-      closeModal: () => { this.setState({ modalOpen: false }); document.body.style.overflow = ''; },
-      modalBgClick: (e) => { if (e.target.dataset && e.target.dataset.modalBg) { this.setState({ modalOpen: false }); document.body.style.overflow = ''; } },
-      toStep1: () => this._goStep(1), toStep2: () => this._goStep(2), toStep3: () => this._goStep(3), toStep4: () => this._goStep(4),
-      submitMail: () => this._submit('mail'), submitWa: () => this._submit('wa'),
-      sendTailor: () => {
-        if (!this._g('tmFn') || !this._g('tmEm') || !this._g('tmEnq')) { alert('Please fill in the required fields.'); return; }
-        const body = `Name: ${this._g('tmFn')} ${this._g('tmLn')}\nEmail: ${this._g('tmEm')}\n\n${this._g('tmEnq')}`;
-        location.href = `mailto:info@everflowexperience.com?subject=${encodeURIComponent('Tailor-Made Enquiry — ' + this._g('tmFn') + ' ' + this._g('tmLn'))}&body=${encodeURIComponent(body)}`;
-      }
-    };
-  }
-}
-</script>
 </body>
 </html>
