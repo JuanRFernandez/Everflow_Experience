@@ -96,19 +96,30 @@
     });
   }
 
-  /* ---------- Leaflet map ---------- */
-  var mapTry = 0;
+  /* ---------- Leaflet map (privacy: built only after the visitor clicks "Show map") ---------- */
+  var mapTry = 0, mapBuilt = false;
   function initMap() {
+    var btn = $('map-load');
+    if (!btn) return;
+    btn.addEventListener('click', buildMap);
+  }
+  function buildMap() {
     var el = $('mapa-custom');
-    if (!el) return;
+    if (!el || mapBuilt) return;
     if (typeof L === 'undefined') { // Leaflet not loaded yet — retry briefly
-      if (mapTry++ < 40) setTimeout(initMap, 250);
+      if (mapTry++ < 40) setTimeout(buildMap, 250);
       return;
     }
+    mapBuilt = true;
+    var consent = $('map-consent');
+    if (consent) consent.parentNode.removeChild(consent);
     var map = L.map(el, { zoomControl: false, scrollWheelZoom: false });
     map.fitBounds([[45.15, 6.1], [48.4, 12.8]], { padding: [8, 8] });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      { attribution: '', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
+    // Attribution to OpenStreetMap and CARTO is required by their terms.
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
     var icon = function (labelHtml, cssClass) {
       return L.divIcon({
         className: 'custom-div-icon',
