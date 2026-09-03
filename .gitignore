@@ -15,3 +15,7 @@ __pycache__/
 # raw/unoptimized media & transfer archives (keep only web-optimized assets in git)
 *.mov
 *.zip
+*.bundle
+
+# internal hotel documents (rate sheets, room overviews - no publication permission): never commit
+assets/Hotels/

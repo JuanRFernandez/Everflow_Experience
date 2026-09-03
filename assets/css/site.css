@@ -1,0 +1,45 @@
+/* EverFlow Experience — home page
+   Extracted from the former inline <style> blocks; rules copied verbatim, rendering unchanged. */
+html{scroll-behavior:smooth}
+@keyframes destDrift{from{transform:scale(1)}to{transform:scale(1.08)}}
+body{margin:0;padding:0;font-family:"Public Sans",system-ui,sans-serif;color:#4a4a4a;background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:#8e7f56}
+a:hover{color:#a89960}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.custom-div-icon{background:none;border:none}
+.pin-wrapper{position:relative;width:40px;height:52px}
+.label-container{font-family:"Oswald",sans-serif;font-weight:500;font-size:12px;letter-spacing:1.2px;color:#1a1a1a;white-space:nowrap;text-shadow:2px 0 #f2f2f2,-2px 0 #f2f2f2,0 2px #f2f2f2,0 -2px #f2f2f2,1px 1px #f2f2f2,-1px -1px #f2f2f2,1px -1px #f2f2f2,-1px 1px #f2f2f2}
+.text-r{position:absolute;left:44px;top:12px}
+.text-l{position:absolute;right:24px;top:12px;text-align:right}
+.text-b{position:absolute;left:50%;top:52px;transform:translateX(-50%)}
+.country-label{font-size:24px;color:#666;opacity:.4;font-family:"Oswald",sans-serif;letter-spacing:2px;pointer-events:none}
+.leaflet-container{font-family:"Public Sans",system-ui,sans-serif}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#bbac79 !important;box-shadow:0 0 0 3px rgba(187,172,121,.2)}
+/* hover states */
+.hv-o1:hover{opacity:1}
+.hv-o7:hover{opacity:.7}
+.hv-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.hv-wbg:hover{background:rgba(255,255,255,.12)}
+a.hv-white:hover{color:#fff}
+.hv-book:hover{background:#fff;color:#141517;border:1px solid #fff}
+.hv-scale:hover{transform:scale(1.07)}
+/* destinations gallery */
+.dest-layer{position:absolute;inset:0;transition:opacity .8s ease;transform-origin:50% 50%;animation:destDrift 26s ease-in-out infinite alternate;z-index:1;opacity:0;pointer-events:none}
+.dest-layer.active{z-index:2;opacity:1;pointer-events:auto}
+.dest-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;cursor:pointer;font-family:Poppins,sans-serif;font-weight:300;font-size:16.5px;letter-spacing:.02em;transition:color .3s ease;color:rgba(255,255,255,.58)}
+.dest-item.active{color:#fff}
+.dest-chev{font-size:22px;line-height:1;color:#c9bc8e;transition:opacity .3s,transform .3s;opacity:.3}
+.dest-item.active .dest-chev{opacity:1;transform:translateX(3px)}
+/* booking modal step dots */
+.bk-dot{width:34px;height:34px;border-radius:50%;border:1.5px solid #ccc;background:#fff;color:#999;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:14px}
+.bk-dot.on{border-color:transparent;background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff}
+/* --- mobile responsive fixes --- */
+html,body{overflow-x:hidden;max-width:100%}
+.ef-burger{display:none;background:none;border:0;cursor:pointer;padding:6px;margin:-6px;line-height:0}
+.ef-burger span{display:block;width:26px;height:2px;background:#fff;margin:6px 0;border-radius:2px}
+#efMobileMenu{display:none;position:fixed;inset:0 0 auto 0;background:rgba(15,20,23,.97);z-index:80;padding:86px 26px 30px;flex-direction:column}
+#efMobileMenu.open{display:flex}
+#efMobileMenu a{color:#fff;font-size:15px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:16px 2px;border-bottom:1px solid rgba(255,255,255,.09)}
+#efMobileClose{position:absolute;top:22px;right:24px;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.tm-last{grid-column:1/-1;width:calc(50% - 24px);justify-self:center}
+@media(max-width:860px){.tm-last{width:100%}.ef-desktop-nav{display:none!important}.ef-burger{display:block!important}[style*="grid-template-columns"]{grid-template-columns:1fr!important}[style*="grid-template-columns"]>*{min-width:0}[style*="width:min("]{width:92%!important}}
