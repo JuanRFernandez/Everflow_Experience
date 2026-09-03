@@ -30,7 +30,7 @@ Served with **GitHub Pages** from the `master` branch. No build step, no framewo
 │   │   ├── experiences/       # experience section images
 │   │   └── ui/                # interface graphics (map placeholder)
 │   ├── video/                 # hero background video (web-optimized mp4) + its poster frame
-│   └── stays/                 # per-hotel material published with the hotel's written permission (see below)
+│   └── stays/                 # (created when needed) per-hotel material published with the hotel's written permission
 ├── scripts/check.py           # site checks (also run in CI)
 └── .github/workflows/check.yml
 ```

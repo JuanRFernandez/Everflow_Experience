@@ -16,3 +16,6 @@ __pycache__/
 *.mov
 *.zip
 *.bundle
+
+# internal hotel documents (rate sheets, room overviews - no publication permission): never commit
+assets/Hotels/
