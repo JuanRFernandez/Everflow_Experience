@@ -16,7 +16,9 @@ Served with **GitHub Pages** from the `master` branch. No build step, no framewo
 ├── assets/
 │   ├── css/
 │   │   ├── site.css           # home page styles
-│   │   └── legal.css          # Impressum + Datenschutz styles
+│   │   ├── legal.css          # rules shared by Impressum + Datenschutz
+│   │   ├── impressum.css      # Impressum-only rules (loaded after legal.css)
+│   │   └── datenschutz.css    # Datenschutz-only rules (loaded after legal.css)
 │   ├── js/main.js             # destinations gallery, booking modal, forms, Leaflet map (click-to-load)
 │   ├── fonts/                 # self-hosted web fonts (woff2 + fonts.css, SIL OFL) — no Google Fonts request
 │   ├── vendor/leaflet/        # self-hosted Leaflet 1.9.4 (BSD-2) — no CDN request
@@ -42,7 +44,7 @@ Served with **GitHub Pages** from the `master` branch. No build step, no framewo
 
 ## Editing
 
-- Texts, team bios, contact details → the HTML pages. Home-page styling → `assets/css/site.css`; legal pages → `assets/css/legal.css`.
+- Texts, team bios, contact details → the HTML pages. Home-page styling → `assets/css/site.css`; legal pages → `assets/css/legal.css` plus the page's own file.
 - Destinations list, booking form steps, WhatsApp numbers, map pins → `assets/js/main.js`.
 - Team photos: 1000×1000 JPG in `assets/img/team/`, same crop and alpine background as the existing headshots.
 - Line endings are LF everywhere (`.gitattributes`); editors pick up `.editorconfig`.
