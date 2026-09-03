@@ -6,11 +6,10 @@
 <title>EverFlow Experience — Tailor-Made Alpine Experiences</title>
 <meta name="description" content="Boutique alpine experience company in the Bavarian Alps: private ski coaching, lodging, dining, wellness and seamless transport — tailor-made journeys from Garmisch to Courchevel.">
 <link rel="icon" type="image/png" href="assets/img/FAVICON-03.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Public+Sans:wght@400;500;600;700&family=Poppins:wght@500;600&family=Oswald:wght@500&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<!-- Fonts and the map library are self-hosted (assets/fonts, assets/vendor) — no third-party request on page load. -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<script src="assets/vendor/leaflet/leaflet.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <style>
 html{scroll-behavior:smooth}
@@ -54,7 +53,8 @@ html,body{overflow-x:hidden;max-width:100%}
 #efMobileMenu.open{display:flex}
 #efMobileMenu a{color:#fff;font-size:15px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:16px 2px;border-bottom:1px solid rgba(255,255,255,.09)}
 #efMobileClose{position:absolute;top:22px;right:24px;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer}
-@media(max-width:860px){.ef-desktop-nav{display:none!important}.ef-burger{display:block!important}[style*="grid-template-columns"]{grid-template-columns:1fr!important}[style*="grid-template-columns"]>*{min-width:0}[style*="width:min("]{width:92%!important}}
+.tm-last{grid-column:1/-1;width:calc(50% - 24px);justify-self:center}
+@media(max-width:860px){.tm-last{width:100%}.ef-desktop-nav{display:none!important}.ef-burger{display:block!important}[style*="grid-template-columns"]{grid-template-columns:1fr!important}[style*="grid-template-columns"]>*{min-width:0}[style*="width:min("]{width:92%!important}}
 </style>
 </head>
 <body>
@@ -261,7 +261,7 @@ html,body{overflow-x:hidden;max-width:100%}
         <p style="margin:0;font-size:15.5px">At EverFlow, Juan leads the vision: precise technique on snow, smart progression, and complete alpine experiences — from lodging to logistics — crafted around each guest.</p>
       </div>
     </div>
-    <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;text-align:center;color:#1a1a1a;line-height:1.2;margin:0 0 40px">Our Guides &amp; Instructors</h3>
+    <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;text-align:center;color:#1a1a1a;line-height:1.2;margin:0 0 40px">Our Team, Guides &amp; Instructors</h3>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px 48px">
       <div style="display:flex;gap:24px;align-items:flex-start">
         <img src="assets/img/gregorio_headshot.jpg" alt="Gregorio Ubici" style="width:120px;border-radius:10px;box-shadow:0 0 4px rgba(0,0,0,.5);display:block;flex:none">
@@ -269,6 +269,14 @@ html,body{overflow-x:hidden;max-width:100%}
           <h4 style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:#1a1a1a;line-height:1.2;margin:0 0 3px">Gregorio Ubici</h4>
           <div style="font-family:Poppins,sans-serif;font-weight:500;font-size:13px;color:#9a8a5c;letter-spacing:.04em;margin-bottom:10px">Commercial Director / Ski School Operator</div>
           <p style="margin:0;font-size:14.5px">Gregorio is an engineer and certified ski instructor who has dedicated his life to the mountains, spending back-to-back seasons between South America, Europe and the United States. He runs the commercial side of the ski school and leads personalized experiences in English, Spanish, and Portuguese.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:24px;align-items:flex-start">
+        <img src="assets/img/ashley_headshot.jpg" alt="Ashley Quirk" style="width:120px;border-radius:10px;box-shadow:0 0 4px rgba(0,0,0,.5);display:block;flex:none">
+        <div>
+          <h4 style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:#1a1a1a;line-height:1.2;margin:0 0 3px">Ashley Quirk</h4>
+          <div style="font-family:Poppins,sans-serif;font-weight:500;font-size:13px;color:#9a8a5c;letter-spacing:.04em;margin-bottom:10px">Business Development Lead</div>
+          <p style="margin:0;font-size:14.5px">A devoted ski enthusiast from New England, Ashley grew up ski racing in the US Ski &amp; Snowboard VARA (Vermont) racing circuit. At 18 she decided to study her bachelor's in Munich, and has stayed close to the Alps ever since. She joined EverFlow to support growth and share her passion for the slopes.</p>
         </div>
       </div>
       <div style="display:flex;gap:24px;align-items:flex-start">
@@ -287,7 +295,7 @@ html,body{overflow-x:hidden;max-width:100%}
           <p style="margin:0;font-size:14.5px">Born in Mallorca, Paolo holds the Staatlich geprüfter Skilehrer state certification through both the DSLV and ÖSV — a rare double credential. He turns sharp technical analysis into fast, visible progress for every guest, on any slope.</p>
         </div>
       </div>
-      <div style="display:flex;gap:24px;align-items:flex-start">
+      <div class="tm-last" style="display:flex;gap:24px;align-items:flex-start">
         <img src="assets/img/felipe_headshot.jpg" alt="Felipe De La Fuente" style="width:120px;border-radius:10px;box-shadow:0 0 4px rgba(0,0,0,.5);display:block;flex:none">
         <div>
           <h4 style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:#1a1a1a;line-height:1.2;margin:0 0 3px">Felipe De La Fuente</h4>
@@ -382,7 +390,16 @@ html,body{overflow-x:hidden;max-width:100%}
   </div>
   <div style="width:min(1180px,92%);margin:0 auto;text-align:center;padding:72px 0 92px">
     <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px">Our Operational Reach</div>
-    <div id="mapa-custom" style="height:520px;width:100%;border-radius:8px;z-index:1;background:#e8e8e8"></div>
+    <div id="mapa-custom" style="height:520px;width:100%;border-radius:8px;z-index:1;background:#e8e8e8;position:relative;overflow:hidden">
+      <!-- Privacy: the interactive map is only loaded after the visitor clicks (map tiles come from CARTO / OpenStreetMap, see Privacy Policy). -->
+      <div id="map-consent" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;box-sizing:border-box;background:#e8e8e8 url('assets/img/map-placeholder.svg') center/cover no-repeat;text-align:center">
+        <div style="background:rgba(255,255,255,.94);padding:26px 30px;border-radius:6px;max-width:440px;box-shadow:0 8px 30px rgba(0,0,0,.12)">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#1a1a1a;margin-bottom:8px">Interactive map</div>
+          <p style="margin:0 0 18px;font-size:14px;color:#4a4a4a;line-height:1.55">The map is loaded from CARTO / OpenStreetMap only when you click below. Your IP address is then transmitted to the map provider. Details in our <a href="datenschutz.html#map" style="font-weight:600">Privacy Policy</a>.</p>
+          <button id="map-load" type="button" style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;padding:12px 30px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.08em;text-transform:uppercase" class="hv-btn">Show map</button>
+        </div>
+      </div>
+    </div>
     <p style="max-width:760px;margin:34px auto 0;font-size:14.5px;color:rgba(255,255,255,.55)">Our service includes hosting, planning, and experience coordination, working with licensed local instructors and trusted partners when necessary to deliver a consistent and compliant standard across all destinations.</p>
   </div>
 </section>
@@ -445,6 +462,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Email *</label><input id="tmEm" type="email" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></div>
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Enquiry *</label><textarea id="tmEnq" rows="5" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;background:#fff;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></textarea></div>
       <button id="tm-send" style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:15px;padding:13px 36px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.02em" class="hv-btn">Send Enquiry</button>
+      <p style="margin:14px 0 0;font-size:12.5px;color:#8a8a8a;line-height:1.55">"Send Enquiry" opens your own email app with the text above — nothing is stored on this website. We use your details only to answer your enquiry. See our <a href="datenschutz.html" style="font-weight:600">Privacy Policy</a>.</p>
     </div>
   </div>
   <div style="display:flex;justify-content:center;padding:30px 0 0">
@@ -453,7 +471,7 @@ html,body{overflow-x:hidden;max-width:100%}
 </section>
 
 <footer style="background:#141517;padding:70px 0 0">
-  <div style="width:min(1180px,92%);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;padding-bottom:56px">
+  <div style="width:min(1180px,92%);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr .9fr;gap:40px;padding-bottom:56px">
     <div>
       <img src="assets/img/FAVICON-03.png" alt="Ever Flow" style="height:44px;width:auto;display:block;margin-bottom:18px">
       <p style="margin:0;font-size:14px;color:rgba(255,255,255,.6);max-width:280px">Tailor-made alpine experiences, hosted from the Bavarian Alps.</p>
@@ -486,8 +504,15 @@ html,body{overflow-x:hidden;max-width:100%}
         <a href="https://www.instagram.com/everflowexperience" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75)" class="hv-white">@everflowexperience</a>
       </div>
     </div>
+    <div>
+      <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#b3a273;margin-bottom:16px">Legal</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
+        <a href="impressum.html" style="color:rgba(255,255,255,.75)" class="hv-white">Impressum / Imprint</a>
+        <a href="datenschutz.html" style="color:rgba(255,255,255,.75)" class="hv-white">Datenschutz / Privacy Policy</a>
+      </div>
+    </div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.12);padding:22px 0;text-align:center;font-size:13.5px;color:rgba(255,255,255,.45)">Copyright © <span id="ft-year">2026</span> Ever Flow | Powered by Glonthy</div>
+  <div style="border-top:1px solid rgba(255,255,255,.12);padding:22px 0;text-align:center;font-size:13.5px;color:rgba(255,255,255,.45)">Copyright © <span id="ft-year">2026</span> EverFlow Experience · Juan Rodrigo Fernandez, München &nbsp;·&nbsp; <a href="impressum.html" style="color:rgba(255,255,255,.6)" class="hv-white">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html" style="color:rgba(255,255,255,.6)" class="hv-white">Datenschutz</a></div>
 </footer>
 
 <div id="bk-modal" style="display:none">
@@ -546,6 +571,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <div style="margin-bottom:16px"><label style="display:block;font-size:13.5px;font-weight:600;color:#1a1a1a;margin-bottom:6px">Notes</label><textarea id="bkNt" rows="4" style="width:100%;padding:12px 14px;border:1px solid #c9c9c9;border-radius:2px;font-family:'Public Sans',sans-serif;font-size:15px;color:#1a1a1a;box-sizing:border-box"></textarea></div>
       <div style="display:flex;justify-content:space-between;gap:12px;margin-top:26px"><button data-goto-step="3" style="background:#e7e7e7;color:#555;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Previous</button><button data-submit="mail" style="background:linear-gradient(135deg,#b3a273,#9a8c60);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:2px;border:none;cursor:pointer">Submit</button></div>
       <span style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#777">or <a data-submit="wa" style="color:#9a8a5c;font-weight:600;cursor:pointer">send via WhatsApp</a></span>
+      <p style="margin:14px 0 0;text-align:center;font-size:12px;color:#8a8a8a;line-height:1.5">Your request is sent from your own email or WhatsApp app; nothing is stored on this website. <a href="datenschutz.html" target="_blank" style="font-weight:600">Privacy Policy</a></p>
     </div>
     <div id="bk-step-5" style="display:none">
       <div style="text-align:center;padding:16px 0">
