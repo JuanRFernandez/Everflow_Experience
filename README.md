@@ -1,38 +1,58 @@
 # EverFlow Experience — Website
 
 Static website for [everflowexperience.com](https://everflowexperience.com) — a boutique alpine experience company in the Bavarian Alps.
-Served for free with **GitHub Pages**. No build step, no framework, no server: plain HTML/CSS/JS.
+Served with **GitHub Pages** from the `master` branch. No build step, no framework, no server: plain HTML, CSS and JavaScript.
+
+`master` is the live site. Change it only through a pull request; the checks below run on every PR.
 
 ## Structure
 
 ```
-├── index.html            # all content, markup & styling (single page, inline CSS)
-├── impressum.html        # Impressum / imprint (§ 5 DDG) — legally required, linked in the footer
-├── datenschutz.html      # Datenschutzerklärung / privacy policy (GDPR) — EN + DE, linked in footer + forms
-├── CNAME                 # custom domain for GitHub Pages
-├── .nojekyll             # serve files as-is (skip Jekyll)
+├── index.html                 # home page (single page)
+├── impressum.html             # Impressum / imprint (§ 5 DDG), linked in the footer of every page
+├── datenschutz.html           # Datenschutzerklärung / privacy policy (GDPR), EN + DE, linked in footer + forms
+├── CNAME                      # custom domain for GitHub Pages
+├── .nojekyll                  # serve files as-is (skip Jekyll)
 ├── assets/
-│   ├── js/main.js        # destinations gallery, booking modal, forms, Leaflet map (click-to-load)
-│   ├── fonts/            # self-hosted web fonts (woff2 + fonts.css, SIL OFL) — no Google Fonts request
-│   ├── vendor/leaflet/   # self-hosted Leaflet 1.9.4 (BSD-2) — no CDN request
-│   ├── dest-*.jpg        # destination gallery images
-│   ├── exp-*.jpg         # experience section images
-│   ├── img/              # headshots, logos, hero title, poster frame, favicon
-│   └── video/            # hero background video (web-optimized mp4)
-└── README.md
+│   ├── css/
+│   │   ├── site.css           # home page styles
+│   │   └── legal.css          # Impressum + Datenschutz styles
+│   ├── js/main.js             # destinations gallery, booking modal, forms, Leaflet map (click-to-load)
+│   ├── fonts/                 # self-hosted web fonts (woff2 + fonts.css, SIL OFL) — no Google Fonts request
+│   ├── vendor/leaflet/        # self-hosted Leaflet 1.9.4 (BSD-2) — no CDN request
+│   ├── img/
+│   │   ├── brand/             # EverFlow mark (favicon + logo) and wordmark (hero title)
+│   │   ├── badges/            # credentials shown on the site (Profi Ski)
+│   │   ├── team/              # headshots, one file per person
+│   │   ├── destinations/      # destination gallery images
+│   │   ├── experiences/       # experience section images
+│   │   └── ui/                # interface graphics (map placeholder)
+│   ├── video/                 # hero background video (web-optimized mp4) + its poster frame
+│   └── stays/                 # per-hotel material published with the hotel's written permission (see below)
+├── scripts/check.py           # site checks (also run in CI)
+└── .github/workflows/check.yml
 ```
 
-No CDN dependencies: fonts (Playfair Display, Public Sans, Poppins, Oswald, Montserrat) and [Leaflet 1.9.4](https://leafletjs.com) are served from this repo. The only third-party request is the map tiles (CARTO / OpenStreetMap), and only after the visitor clicks "Show map" — this keeps the site free of cookie banners and of the Google-Fonts/CDN privacy problem (LG München, 3 O 17493/20).
+## Rules the site follows
 
-## Legal pages
-
-`impressum.html` and `datenschutz.html` are required by German law (§ 5 DDG, GDPR). Keep them linked from the footer of every page and from the forms. When something changes — address, VAT ID, a new tool (analytics, newsletter, booking widget), a new hosting or email provider, the map provider — update both pages **and** the "Last updated" date. Partner-hotel photos need a photo credit where they appear (see Impressum → Urheberrecht und Bildnachweise).
+- **Zero third-party requests on page load.** Fonts and Leaflet are served from this repo; the only external request is the map tiles (CARTO / OpenStreetMap), and only after the visitor clicks "Show map". This keeps the site free of cookie banners and of the Google-Fonts/CDN privacy problem (LG München I, 3 O 17493/20). `scripts/check.py` fails if a `<link>` or `<script>` points to another host.
+- **Legal pages stay linked and current.** When something changes — address, VAT ID, a new tool (analytics, newsletter, booking widget), a hosting or email provider, the map provider — update `impressum.html` and `datenschutz.html` **and** their "Last updated" date.
+- **Hotel material only with written permission.** Photos of hotels we book for guests go under `assets/img/` with the hotel's exact credit line in the caption and an entry in the Impressum (Urheberrecht und Bildnachweise). Brochures go under `assets/stays/<hotel>/`, unmodified, only after the hotel has confirmed in writing that we may host them. Room overviews, rate sheets and other internal hotel documents never go into this repository (`assets/Hotels/` is git-ignored for that reason).
+- **No prices, no booking or payment on the site.** Forms open the visitor's email or WhatsApp app with a pre-written message.
 
 ## Editing
 
-- Texts, team bios, contact details, styling → edit `index.html` directly (CSS is in the `<style>` block at the top).
-- Destinations list / booking form steps / WhatsApp numbers → `assets/js/main.js`.
-- Team photos: 1000×1000 JPG in `assets/img/`, same crop and alpine background as the existing headshots.
-- Forms have **no backend**: they open the visitor's WhatsApp or email app with a pre-written message.
+- Texts, team bios, contact details → the HTML pages. Home-page styling → `assets/css/site.css`; legal pages → `assets/css/legal.css`.
+- Destinations list, booking form steps, WhatsApp numbers, map pins → `assets/js/main.js`.
+- Team photos: 1000×1000 JPG in `assets/img/team/`, same crop and alpine background as the existing headshots.
+- Line endings are LF everywhere (`.gitattributes`); editors pick up `.editorconfig`.
 
-Local preview: open `index.html` in a browser, or `python -m http.server` in the repo folder.
+## Checks
+
+```
+python scripts/check.py
+```
+
+Verifies that every local link and asset resolves, that no page loads anything from a third-party host, that HTML tags are balanced, and lists unreferenced assets. The same script runs in GitHub Actions on every pull request and on every push to `master`.
+
+Local preview: open `index.html` in a browser, or run `python -m http.server` in the repo folder.
