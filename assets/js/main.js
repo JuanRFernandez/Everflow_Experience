@@ -136,7 +136,8 @@
       [46.4728, 7.2864, 'GSTAAD', 'text-l', 'Gstaad'],
       [46.0207, 7.7491, 'ZERMATT', 'text-b', 'Zermatt'],
       [45.4154, 6.6349, 'COURCHEVEL', 'text-r', 'Courchevel'],
-      [46.5405, 12.1357, "CORTINA<br>D'AMPEZZO", 'text-l', "Cortina+d'Ampezzo"]
+      [46.5405, 12.1357, "CORTINA<br>D'AMPEZZO", 'text-l', "Cortina+d'Ampezzo"],
+      [47.6309, 12.9878, 'BERCHTESGADEN', 'text-b', 'Berchtesgaden']
     ];
     bases.forEach(function (b) {
       L.marker([b[0], b[1]], { icon: icon(b[2], b[3]) }).addTo(map)
