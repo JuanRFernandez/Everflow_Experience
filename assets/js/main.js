@@ -115,10 +115,10 @@
     if (consent) consent.parentNode.removeChild(consent);
     var map = L.map(el, { zoomControl: false, scrollWheelZoom: false });
     map.fitBounds([[45.15, 6.1], [48.4, 12.8]], { padding: [8, 8] });
-    // Attribution to OpenStreetMap and CARTO is required by their terms.
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
+    // Tiles from the OpenStreetMap Foundation (no API key). Attribution is required by the OSM tile usage policy.
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+      maxZoom: 19
     }).addTo(map);
     var icon = function (labelHtml, cssClass) {
       return L.divIcon({

@@ -43,3 +43,5 @@ html,body{overflow-x:hidden;max-width:100%}
 #efMobileClose{position:absolute;top:22px;right:24px;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer}
 .tm-last{grid-column:1/-1;width:calc(50% - 24px);justify-self:center}
 @media(max-width:860px){.tm-last{width:100%}.ef-desktop-nav{display:none!important}.ef-burger{display:block!important}[style*="grid-template-columns"]{grid-template-columns:1fr!important}[style*="grid-template-columns"]>*{min-width:0}[style*="width:min("]{width:92%!important}}
+/* map tiles: muted, light look to match the dark section and the black pins */
+.leaflet-tile-pane{filter:grayscale(1) brightness(1.06)}
