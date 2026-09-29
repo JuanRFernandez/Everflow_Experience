@@ -28,9 +28,12 @@ Served with **GitHub Pages** from the `master` branch. No build step, no framewo
 │   │   ├── team/              # headshots, one file per person
 │   │   ├── destinations/      # destination gallery images
 │   │   ├── experiences/       # experience section images
+│   │   ├── stays/             # hotel photos, one folder per hotel, shown with the hotel's written permission
 │   │   └── ui/                # interface graphics (map placeholder)
 │   ├── video/                 # hero background video (web-optimized mp4) + its poster frame
-│   └── stays/                 # (created when needed) per-hotel material published with the hotel's written permission
+│   └── stays/                 # hotel brochures, one folder per hotel, unmodified
+├── docs/HOTEL_MATERIAL.md     # which hotel material is published, under which permission and credit line
+├── CLAUDE.md                  # rules for Claude sessions in this repo
 ├── scripts/check.py           # site checks (also run in CI)
 └── .github/workflows/check.yml
 ```
@@ -39,7 +42,7 @@ Served with **GitHub Pages** from the `master` branch. No build step, no framewo
 
 - **Zero third-party requests on page load.** Fonts and Leaflet are served from this repo; the only external request is the map tiles (OpenStreetMap), and only after the visitor clicks "Show map". This keeps the site free of cookie banners and of the Google-Fonts/CDN privacy problem (LG München I, 3 O 17493/20). `scripts/check.py` fails if a `<link>` or `<script>` points to another host.
 - **Legal pages stay linked and current.** When something changes — address, VAT ID, a new tool (analytics, newsletter, booking widget), a hosting or email provider, the map provider — update `impressum.html` and `datenschutz.html` **and** their "Last updated" date.
-- **Hotel material only with written permission.** Photos of hotels we book for guests go under `assets/img/` with the hotel's exact credit line in the caption and an entry in the Impressum (Urheberrecht und Bildnachweise). Brochures go under `assets/stays/<hotel>/`, unmodified, only after the hotel has confirmed in writing that we may host them. Room overviews, rate sheets and other internal hotel documents never go into this repository (`assets/Hotels/` is git-ignored for that reason).
+- **Hotel material only with written permission.** Photos of hotels we book for guests go under `assets/img/stays/<hotel>/` with the hotel's exact credit line in the caption and an entry in the Impressum (Urheberrecht und Bildnachweise). `docs/HOTEL_MATERIAL.md` lists what is published and the steps for the next hotel. Brochures go under `assets/stays/<hotel>/`, unmodified, only after the hotel has confirmed in writing that we may host them. Room overviews, rate sheets and other internal hotel documents never go into this repository (`assets/Hotels/` is git-ignored for that reason).
 - **No prices, no booking or payment on the site.** Forms open the visitor's email or WhatsApp app with a pre-written message.
 
 ## Editing
