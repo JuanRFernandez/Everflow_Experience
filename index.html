@@ -352,33 +352,103 @@
       <p style="max-width:620px;margin:0 auto;font-size:15.5px;color:rgba(255,255,255,.65)">Addresses we have visited ourselves, matched to your group and your days on snow — one part of one seamless itinerary.</p>
     </div>
 
-    <div style="background:#f7f6f2;border-radius:6px;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch">
-      <div style="position:relative;min-height:380px">
-        <img src="assets/img/destinations/munich.jpg" alt="Munich" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
-        <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 16px;background:linear-gradient(transparent,rgba(0,0,0,.55));font-size:11px;color:rgba(255,255,255,.8);letter-spacing:.04em">Munich old town · photo: EverFlow Experience</div>
-      </div>
-      <div style="padding:44px 46px 40px">
-        <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#9a8a5c;margin-bottom:10px">Munich · Maximilianstraße</div>
-        <h4 style="font-family:'Playfair Display',Georgia,serif;font-size:27px;font-weight:600;color:#1a1a1a;line-height:1.2;margin:0 0 12px">Hotel Vier Jahreszeiten Kempinski München</h4>
-        <p style="margin:0 0 16px;font-size:15px">Munich's grand address since 1858, on Maximilianstraße between the Residenz and the English Garden. The natural first or last night of an alpine week — arrive, settle in, and let the city set the tone before the mountains.</p>
-        <ul style="margin:0 0 18px;padding-left:18px;font-size:14.5px;line-height:1.6">
-          <li>Rooms and suites up to presidential level, with two-bedroom options for families</li>
-          <li>The hotel's own <strong style="color:#1a1a1a">Munich Eras</strong> experience programme (below)</li>
-        </ul>
-        <div style="border-top:1px solid #e5e0d3;padding-top:16px;margin-bottom:18px">
-          <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#9a8a5c;margin-bottom:8px">The Munich Eras — curated by the hotel</div>
-          <p style="margin:0 0 8px;font-size:14px">Three Eras designed by the hotel's “Resident Curator” — <em>Royalty</em>, <em>Adventure</em> and <em>Handmade</em>. For example: a private helicopter morning over five royal castles with the first visit of the day to Hohenschwangau; a run through the English Garden with a Munich football legend; brewing your own beer at Munich's second-smallest brewery.</p>
-          <p style="margin:0 0 8px;font-size:13px;color:#8a8a8a">A programme of the hotel, delivered by the hotel and its “Local Insiders” — we weave it into your itinerary.
-          <a href="assets/stays/kempinski-muenchen/The-Munich-Eras_Hotel-Vier-Jahreszeiten-Kempinski-Muenchen_official-brochure.pdf" target="_blank" rel="noopener" style="font-weight:600">Official Experiences brochure of Hotel Vier Jahreszeiten Kempinski München (PDF, unmodified)</a> — published with the hotel’s permission · <a href="https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences" target="_blank" rel="noopener" style="font-weight:600">Programme page on kempinski.com</a></p>
-          <p style="margin:0;font-size:12.5px;color:#8a8a8a">The hotel stay is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH); the Munich Eras are the hotel's programme and are booked through the hotel. EverFlow arranges the booking; your contract is with the hotel.</p>
+    <!-- One card per hotel. With photos: .stay-media. Without photos yet: .stay-panel. -->
+    <div class="stay-card">
+      <div class="stay-media">
+        <div class="stay-photo">
+          <img src="assets/img/stays/kempinski-muenchen/lobby.jpg" alt="Lobby of Hotel Vier Jahreszeiten Kempinski München" loading="lazy">
         </div>
-        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-          <button data-open-modal style="background:linear-gradient(135deg,#b3a273 0%,#9a8c60 100%);color:#fff;font-family:Montserrat,sans-serif;font-weight:600;font-size:13px;padding:12px 28px;border-radius:2px;border:none;cursor:pointer;letter-spacing:.08em;text-transform:uppercase" class="hv-btn">Plan my stay</button>
-          <span style="font-size:12.5px;color:#8a8a8a">Tell us the trip — we turn it into one clear plan.<br>For hotel stays we arrange, we may receive a commission from the hotel.</span>
+        <div class="stay-photo-row">
+          <img src="assets/img/stays/kempinski-muenchen/grand-deluxe-room.jpg" alt="Grand Deluxe Room at Hotel Vier Jahreszeiten Kempinski München" loading="lazy">
+          <img src="assets/img/stays/kempinski-muenchen/jahreszeiten-bar.jpg" alt="Jahreszeiten Bar at Hotel Vier Jahreszeiten Kempinski München" loading="lazy">
+        </div>
+        <div class="stay-credit">Photos: Hotel Vier Jahreszeiten Kempinski München</div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-kicker">Munich · Maximilianstraße</div>
+        <h4 class="stay-name">Hotel Vier Jahreszeiten Kempinski München</h4>
+        <p class="stay-lead">Munich's grand address since 1858, on Maximilianstraße between the Residenz and the English Garden. The natural first or last night of an alpine week — arrive, settle in, and let the city set the tone before the mountains.</p>
+        <ul class="stay-facts">
+          <li>Rooms and suites up to presidential level, with two-bedroom options for families</li>
+          <li>The hotel's own <strong>Munich Eras</strong> experience programme (below)</li>
+        </ul>
+        <div class="stay-more">
+          <div class="stay-more-title">The Munich Eras — curated by the hotel</div>
+          <p>Three Eras designed by the hotel's “Resident Curator” — <em>Royalty</em>, <em>Adventure</em> and <em>Handmade</em>. For example: a private helicopter morning over five royal castles with the first visit of the day to Hohenschwangau; a run through the English Garden with a Munich football legend; brewing your own beer at Munich's second-smallest brewery.</p>
+          <p class="stay-small">A programme of the hotel, delivered by the hotel and its “Local Insiders” — we weave it into your itinerary.
+          <a href="assets/stays/kempinski-muenchen/The-Munich-Eras_Hotel-Vier-Jahreszeiten-Kempinski-Muenchen_official-brochure.pdf" target="_blank" rel="noopener">Official Experiences brochure of Hotel Vier Jahreszeiten Kempinski München (PDF, unmodified)</a> — published with the hotel’s permission · <a href="https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences" target="_blank" rel="noopener">Programme page on kempinski.com</a></p>
+          <p class="stay-legal">The hotel stay is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH); the Munich Eras are the hotel's programme and are booked through the hotel. EverFlow arranges the booking; your contract is with the hotel.</p>
+        </div>
+        <div class="stay-cta">
+          <button data-open-modal class="hv-btn">Plan my stay</button>
+          <span>Tell us the trip — we turn it into one clear plan.<br>For hotel stays we arrange, we may receive a commission from the hotel.</span>
         </div>
       </div>
     </div>
-    <p style="margin:18px 0 0;text-align:center;font-size:12.5px;color:rgba(255,255,255,.4)">Berchtesgaden · Kitzbühel · St. Moritz · Engelberg — more addresses to follow.</p>
+
+    <div class="stay-card">
+      <div class="stay-media">
+        <div class="stay-photo">
+          <img src="assets/img/stays/kempinski-berchtesgaden/exterior.jpg" alt="Kempinski Hotel Berchtesgaden seen from the garden" loading="lazy">
+        </div>
+        <div class="stay-photo-row">
+          <img src="assets/img/stays/kempinski-berchtesgaden/indoor-pool.jpg" alt="Indoor pool of Kempinski Hotel Berchtesgaden" loading="lazy">
+          <img src="assets/img/stays/kempinski-berchtesgaden/berchtesgaden-alps.jpg" alt="The Berchtesgaden Alps" loading="lazy">
+        </div>
+        <div class="stay-credit">Photos: Kempinski Hotel Berchtesgaden</div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-kicker">Germany · Berchtesgaden</div>
+        <h4 class="stay-name">Kempinski Hotel Berchtesgaden</h4>
+        <p class="stay-lead">A thousand metres up, looking out over the Berchtesgaden Alps. A hotel for families who want more from winter than downhill skiing: on the days off the slopes, the hotel's Activity Team arranges the outings.</p>
+        <ul class="stay-facts">
+          <li>The local winter sports school plans your lessons with you in the hotel lobby: skiing, snowboarding, cross-country and snowshoeing, with full days in the neighbouring Austrian ski areas</li>
+          <li>Cross-country trails a five-minute drive away, and the 2.3 km natural toboggan run at Hochschwarzeck, reached by chairlift</li>
+          <li>In summer: e-bike tours to Lake Königssee, golf, and walks to mountain huts</li>
+        </ul>
+        <div class="stay-more">
+          <p class="stay-small">The activities are run by the hotel and by the local providers it works with. <a href="https://www.kempinski.com/berchtesgaden" target="_blank" rel="noopener">Hotel page on kempinski.com</a></p>
+          <p class="stay-legal">The hotel stay is provided by Kempinski Hotel Berchtesgaden; activities are booked through the hotel. EverFlow arranges the booking; your contract is with the hotel.</p>
+        </div>
+        <div class="stay-cta">
+          <button data-open-modal class="hv-btn">Plan my stay</button>
+          <span>Tell us the trip — we turn it into one clear plan.<br>For hotel stays we arrange, we may receive a commission from the hotel.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-media">
+        <div class="stay-photo">
+          <img src="assets/img/stays/rote-wand/exterior-winter.jpg" alt="Rote Wand Gourmet Hotel in Zug on a winter evening" loading="lazy">
+        </div>
+        <div class="stay-photo-row">
+          <img src="assets/img/stays/rote-wand/room-mountain-view.jpg" alt="Room with mountain view at Rote Wand Gourmet Hotel" loading="lazy">
+          <img src="assets/img/stays/rote-wand/cuisine.jpg" alt="A dish at Rote Wand Gourmet Hotel" loading="lazy">
+        </div>
+        <div class="stay-credit">Photos: Rote Wand Gourmet Hotel</div>
+      </div>
+      <div class="stay-body">
+        <div class="stay-kicker">Austria · Lech am Arlberg</div>
+        <h4 class="stay-name">Rote Wand Gourmet Hotel</h4>
+        <p class="stay-lead">In Zug, the hamlet just outside Lech am Arlberg. A hotel known for its cooking, with the slopes within easy reach: the Zuger Bergbahn gondola takes you from Zug into the Lech Zürs ski area.</p>
+        <ul class="stay-facts">
+          <li>62 rooms and suites, including family suites</li>
+          <li>In the Michelin Guide 2026: two stars for Rote Wand Chef's Table and a Green Star for Rote Wand Stuben</li>
+          <li>Heated indoor and outdoor pool and a 1,500 m² spa</li>
+          <li>Ski rental, shop and servicing in the hotel</li>
+        </ul>
+        <div class="stay-more">
+          <p class="stay-small">The restaurants, spa and activities are run by the hotel. <a href="https://www.rotewand.com" target="_blank" rel="noopener">rotewand.com</a></p>
+          <p class="stay-legal">The hotel stay is provided by Rote Wand Gourmet Hotel. EverFlow arranges the booking; your contract is with the hotel.</p>
+        </div>
+        <div class="stay-cta">
+          <button data-open-modal class="hv-btn">Plan my stay</button>
+          <span>Tell us the trip — we turn it into one clear plan.<br>For hotel stays we arrange, we may receive a commission from the hotel.</span>
+        </div>
+      </div>
+    </div>
+    <p class="stay-next">Kitzbühel · St. Moritz · Engelberg — more addresses to follow.</p>
   </div>
 
   <div style="width:min(1180px,92%);margin:0 auto;text-align:center;padding:72px 0 92px">
