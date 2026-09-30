@@ -13,8 +13,8 @@ kept in Drive, next to the material.
 | Hotel | On the site | Permission | Credit line | Files |
 |---|---|---|---|---|
 | Hotel Vier Jahreszeiten Kempinski München | Card with three photos and the official brochure "The Munich Eras" | In writing from the hotel, 15.09.2026: photos may be shown, the brochure may be offered for download | `Hotel Vier Jahreszeiten Kempinski München` (one line for all photos) | `assets/img/stays/kempinski-muenchen/` · `assets/stays/kempinski-muenchen/` |
-| Kempinski Hotel Berchtesgaden | Card in our own words, no hotel material | In writing from the hotel, 04.09.2026: we may present the hotel's offers as the hotel's own | none: no photos are shown | none |
-| Rote Wand Gourmet Hotel | Card in our own words, no hotel material | In writing from the hotel, 25.09. and 29.09.2026: photos and marketing material, with the correct copyright | none yet: photos are shown once the hotel has sent them with its credit line | none |
+| Kempinski Hotel Berchtesgaden | Card with three of the hotel's own photos | In writing from the hotel, 04.09.2026: we may present the hotel's offers as the hotel's own. The photos are the hotel's official ones, shown on the owner's decision of 30.09.2026 | `Kempinski Hotel Berchtesgaden` (the hotel's name, until the hotel names another line) | `assets/img/stays/kempinski-berchtesgaden/` |
+| Rote Wand Gourmet Hotel | Card with three photos from the hotel's marketing material | In writing from the hotel, 25.09. and 29.09.2026: photos and marketing material, with the correct copyright | `Rote Wand Gourmet Hotel` (the hotel's name, until the hotel names the photographer) | `assets/img/stays/rote-wand/` |
 
 ## Adding a hotel
 
