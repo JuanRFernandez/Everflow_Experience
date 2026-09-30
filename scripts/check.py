@@ -9,11 +9,17 @@
 3. HTML tags are balanced in every page.
 4. Every file under assets/img, assets/video, assets/css, assets/js is referenced somewhere
    (orphans are reported as warnings, not failures).
+5. No page and no script of the site shows a price.
+6. This repository is public: nothing of the hotel library is in it (local configuration, extracted
+   text, facts files, the permission register, internal hotel documents), and no text file holds a
+   Drive path, a local path, a Drive link or an e-mail address other than the site's own.
 Exit code 1 on any failure.
 """
+import html
 import html.parser
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,6 +34,17 @@ EXTERNAL_TAG = re.compile(
     re.I | re.S)
 EXTERNAL_CSS = re.compile(r'@import\s+(?:url\()?\s*["\']?(?:https?:)?//|url\(\s*["\']?(?:https?:)?//', re.I)
 SKIP = ('http://', 'https://', '//', 'mailto:', 'tel:', 'data:', 'javascript:', '#')
+MONEY = r'(?:EUR|CHF|USD|GBP|euros?|dollars?|franken|francs?)'
+PRICE = re.compile(rf'(?:[€$£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[€$£]|{MONEY}\b)', re.I)
+PRICE_JS = re.compile(rf'(?:[€£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[€£]|{MONEY}\b)', re.I)  # "$1" is code
+CODE = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.I | re.S)
+PRIVATE = re.compile(
+    r'(^|/)(library\.local\.json|\.library/|assets/Hotels/|facts/)|(^|[/.])facts\.json$|permission[^/]*\.csv$', re.I)
+TEXT = ('.html', '.css', '.js', '.md', '.json', '.yml', '.yaml', '.txt', '.py', '.svg', '.xml')
+INTERNAL = re.compile(  # a Drive folder of the team, a drive-letter path, a Drive link
+    r'\b\d\d_[A-Z][A-Z0-9_&-]{2,}|[A-Za-z]:[\\/](?![\\/ ])|(?i:my[ ]drive|meine[ ]ablage|(?:drive|docs|sheets)\.google\.com)')
+MAIL = re.compile(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}')
+OWN_MAIL = {'info@everflowexperience.com'}  # an address meant to be public is added here, on purpose
 
 failures, warnings, referenced = [], [], set()
 
@@ -73,6 +90,8 @@ for page in PAGES:
     b.feed(text)
     if b.stack or b.errors:
         failures.append(f'{page}: unbalanced tags {b.stack[:5]} {b.errors[:5]}')
+    for m in PRICE.finditer(html.unescape(CODE.sub(' ', text))):  # attributes count: alt, title, meta
+        failures.append(f'{page}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
 
 for css in CSS:
     text = open(css, encoding='utf-8').read()
@@ -89,6 +108,31 @@ for folder in ('assets/img', 'assets/video', 'assets/css', 'assets/js'):
             p = os.path.join(dp, f).replace(os.sep, '/')
             if p not in referenced:
                 warnings.append(f'unreferenced asset: {p}')
+
+for dp, _, fs in os.walk('assets/js'):
+    for f in fs:
+        p = os.path.join(dp, f).replace(os.sep, '/')
+        for m in PRICE_JS.finditer(open(p, encoding='utf-8').read()):
+            failures.append(f'{p}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
+
+try:  # what is tracked, and what "git add -A" would take
+    listed = subprocess.run(['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'],
+                            capture_output=True, check=True).stdout
+    tracked = [p for p in listed.decode('utf-8', 'replace').split('\0') if p]
+except (OSError, subprocess.CalledProcessError):
+    tracked = []
+    (failures if os.environ.get('CI') else warnings).append(
+        'git is not available: could not check that nothing internal is in the repository')
+for path in tracked:
+    if PRIVATE.search(path):
+        failures.append(f'{path}: belongs outside this public repository')
+    if not path.lower().endswith(TEXT) or path.startswith('assets/vendor/') or not os.path.isfile(path):
+        continue
+    text = open(path, encoding='utf-8', errors='replace').read()
+    for m in INTERNAL.finditer(text):
+        failures.append(f'{path}: names an internal path or link ("{m.group(0)}"); this repository is public')
+    for address in sorted({m.group(0) for m in MAIL.finditer(text)} - OWN_MAIL):
+        failures.append(f'{path}: holds the e-mail address {address}; only the site\'s own address goes in')
 
 for w in warnings:
     print('WARN', w)

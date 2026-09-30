@@ -1,0 +1,6 @@
+{
+  "material_root": "<the folder that holds the material, outside this repository>",
+  "folders": ["<a folder under material_root>", "<another one>"],
+  "library": "<where the searchable text is written, outside this repository>",
+  "permissions": "<the permission register, a CSV outside this repository>"
+}

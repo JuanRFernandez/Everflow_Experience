@@ -19,3 +19,16 @@ __pycache__/
 
 # internal hotel documents (rate sheets, room overviews - no publication permission): never commit
 assets/Hotels/
+
+# the hotel library: local paths, extracted text, the permission register and facts files never enter this public repo
+library.local.json
+.library/
+*.facts.json
+facts.json
+facts/
+*[Pp]ermission*.csv
+
+# the hotels skill belongs to the repo, even where a global ignore hides .claude/
+!.claude/
+.claude/*
+!.claude/skills/
