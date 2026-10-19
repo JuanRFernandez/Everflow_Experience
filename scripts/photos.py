@@ -113,7 +113,9 @@ def save_webp(img, target, width, limit):
 def process(source, base, widths, aspect=None, focus=(0.5, 0.5)):
     img = crop(to_srgb(open_source(source)), aspect, focus)
     out = []
-    for width in widths:
+    for i, width in enumerate(widths):
+        if i and widths[i - 1] >= img.width:
+            break  # the original is no wider than the previous file: a larger one would be the same
         limit = MAX_BYTES if width > 800 else 110 * 1024
         target = os.path.join(ROOT, f'{base}-{width}.webp')
         size, nbytes = save_webp(img, target, width, limit)

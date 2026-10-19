@@ -157,6 +157,17 @@ def asset_url(rel):
 
 # ---------------------------------------------------------------- lookups
 
+def partner_credits(p):
+    """Every credit line shown with a partner's photos, in order of appearance."""
+    out = []
+    for ph in p.get('photos', []):
+        out.append(ph.get('credit', p.get('credit')))
+    for r in p.get('residences', []):
+        if r.get('photo'):
+            out.append(r['photo'].get('credit', p.get('credit')))
+    return [c for i, c in enumerate(out) if c and c not in out[:i]]
+
+
 def partners_in(place_slug):
     return [p for p in PARTNERS if p['place'] == place_slug]
 
@@ -325,7 +336,7 @@ def partner_card(p, level=3):
     if p.get('photos'):
         cover = p['photos'][0]
         media = (f'<figure>{img("assets/img/stays/" + p["slug"] + "/" + cover["name"], cover["alt"], "(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw", cls="card-img")}'
-                 f'<figcaption class="credit">{e(credit_text(p["credit"]))}</figcaption></figure>')
+                 f'<figcaption class="credit">{e(credit_text(cover.get("credit", p["credit"])))}</figcaption></figure>')
     else:
         media = (f'<div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(p["kind"])}</span>'
                  f'<span class="card-panel-coords">{e(p["location"])}</span></div>')
@@ -357,7 +368,7 @@ def grid(cards, cls='grid'):
 def gallery(base_folder, photos, credit, label):
     items = []
     for i, ph in enumerate(photos):
-        items.append(f'<li class="gallery-item">{figure(base_folder + ph["name"], ph["alt"], "(min-width: 64rem) 70vw, 92vw", credit, eager=(i == 0))}</li>')
+        items.append(f'<li class="gallery-item">{figure(base_folder + ph["name"], ph["alt"], "(min-width: 64rem) 70vw, 92vw", ph.get("credit", credit), eager=(i == 0))}</li>')
     return f'''<section class="gallery" data-gallery aria-label="{a(label)}">
   <ul class="gallery-track" tabindex="0">
     {(chr(10) + '    ').join(items)}
@@ -487,7 +498,7 @@ def home():
 <section class="section" id="stay">
   <div class="wrap">
     {section_head(h["stay_eyebrow"], h["stay_h2"], h["stay_lead"], more=("/stay/", "All hotels and chalets"))}
-    {grid([partner_card(p) for p in PARTNERS[:6]])}
+    {grid([partner_card(p) for p in [q for q in PARTNERS if q.get('photos')][:6]])}
   </div>
 </section>
 <section class="section section--alt" id="experiences">
@@ -592,7 +603,7 @@ def place_page(p):
 {cta_band(p["slug"])}'''
     return page(f'destinations/{p["slug"]}/index.html', f'{p["name"]} — EverFlow Experience',
                 f'{p["name"]}, {country["name"]}: {p["tagline"]}', body,
-                image=p['image']['src'] + '-1600.webp' if p.get('image') and os.path.isfile(os.path.join(ROOT, p['image']['src'] + '-1600.webp')) else 'assets/img/og/everflow.jpg')
+                image=variants(p['image']['src'])[-1][2] if p.get('image') else 'assets/img/og/everflow.jpg')
 
 
 def stay_index():
@@ -635,6 +646,28 @@ def partner_page(p):
       {brochure}
     </div>'''
     links = ''.join(f'<li><a href="{a(l["url"])}" rel="noopener">{e(l["label"])}</a></li>' for l in p.get('links', []))
+    res_html = ''
+    if p.get('residences'):
+        cards = []
+        for r in p['residences']:
+            ph = r.get('photo')
+            media = (figure(f'assets/img/stays/{p["slug"]}/{ph["name"]}', ph['alt'], '(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw', ph.get('credit', p['credit']))
+                     if ph else f'<div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(p["kind"])}</span><span class="card-panel-coords">{e(r.get("where", ""))}</span></div>')
+            cards.append(f'''<article class="card card--static">
+  <div class="card-media">{media}</div>
+  <div class="card-body">
+    <p class="card-kicker">{e(r.get("where", p["location"]))}</p>
+    <h3 class="card-title">{e(r["name"])}</h3>
+    <p>{t(r["line"])}</p>
+  </div>
+</article>''')
+        res = p.get('residences_head', ['The residences', 'Choose the house.'])
+        res_html = f'''<section class="section section--alt" id="residences">
+  <div class="wrap">
+    {section_head(res[0], res[1], p.get('residences_lead'))}
+    {grid(cards)}
+  </div>
+</section>'''
     siblings = [s for s in partners_in(p['place']) if s['slug'] != p['slug']]
     sib_html = ''
     if siblings:
@@ -671,9 +704,10 @@ def partner_page(p):
     </div>
   </div>
 </section>
+{res_html}
 {sib_html}
 {cta_band(p["place"], p["slug"])}'''
-    image = f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}-1600.webp' if p.get('photos') else 'assets/img/og/everflow.jpg'
+    image = variants(f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}')[-1][2] if p.get('photos') else 'assets/img/og/everflow.jpg'
     return page(f'stay/{p["slug"]}/index.html', f'{p["name"]} — EverFlow Experience',
                 f'{p["name"]}, {p["location"]}: {p["card"]}', body, image=image)
 
@@ -816,11 +850,12 @@ def legal(name):
     src = read(f'content/legal/{name}.html')
     credits_de, credits_en = [], []
     for p in PARTNERS:
-        if not p.get('photos'):
+        shown = partner_credits(p)
+        if not shown:
             continue
-        extra = p.get('credit_note_de', '')
-        credits_de.append(f'<li>{e(p.get("credit_label", p["name"]))}: {e(credit_text(p["credit"]))}{(". " + e(extra)) if extra else ""}</li>')
-        credits_en.append(f'<li>{e(p.get("credit_label", p["name"]))}: {e(credit_text(p["credit"]))}</li>')
+        line = '; '.join(e(credit_text(c)) for c in shown)
+        credits_de.append(f'<li>{e(p["name"])}: {line}</li>')
+        credits_en.append(f'<li>{e(p["name"])}: {line}</li>')
     for c in SITE['credits_de']:
         credits_de.append(f'<li>{e(c)}</li>')
     slots = {
@@ -865,8 +900,9 @@ def validate():
             problems.append(f'partner {p["slug"]}: unknown place {p["place"]}')
         if p.get('photos') and not p.get('credit'):
             problems.append(f'partner {p["slug"]}: photos without a credit line')
-        if 'everflow' in p.get('credit', '').lower():
-            problems.append(f'partner {p["slug"]}: the credit line names EverFlow; photos are credited to their owner')
+        for c in partner_credits(p):
+            if 'everflow' in c.lower():
+                problems.append(f'partner {p["slug"]}: a credit line names EverFlow; photos are credited to their owner')
     if problems:
         raise BuildError('\n'.join(problems))
 
