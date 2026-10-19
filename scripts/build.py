@@ -176,8 +176,8 @@ def partner_credits(p):
     for ph in p.get('photos', []):
         out.append(ph.get('credit', p.get('credit')))
     for r in p.get('residences', []):
-        if r.get('photo'):
-            out.append(r['photo'].get('credit', p.get('credit')))
+        for ph in r.get('photos', []):
+            out.append(ph.get('credit', p.get('credit')))
     return [c for i, c in enumerate(out) if c and c not in out[:i]]
 
 
@@ -647,7 +647,6 @@ def stay_index():
 </section>''')
     body = f'''{page_head("Where our guests stay", "Hotels and chalets we know.", PAGES["home"]["stay_lead"])}
 {chr(10).join(sections)}
-<div class="wrap"><p class="small">{e(SITE["commission_note"])}</p></div>
 {cta_band()}'''
     return page('stay/index.html', 'Where to stay — EverFlow Experience',
                 'The hotels and chalets where EverFlow guests stay across the Alps, each presented with the provider\'s own photos and credit.',
@@ -677,11 +676,27 @@ def partner_page(p):
     if p.get('residences'):
         cards = []
         for r in p['residences']:
-            ph = r.get('photo')
-            media = (figure(f'assets/img/stays/{p["slug"]}/{ph["name"]}', ph['alt'], '(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw', ph.get('credit', p['credit']))
-                     if ph else f'<div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(p["kind"])}</span><span class="card-panel-coords">{e(r.get("where", ""))}</span></div>')
+            phs = r.get('photos', [])
+            base = f'assets/img/stays/{p["slug"]}/'
+            sizes = '(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw'
+            if len(phs) > 1:  # a small gallery per house: swipe, or the buttons under it
+                items = ''.join(f'<li class="gallery-item">{figure(base + ph["name"], ph["alt"], sizes, ph.get("credit", p["credit"]))}</li>'
+                                for ph in phs)
+                media = f'''<div class="gallery gallery--mini" data-gallery role="group" aria-label="{a("Photos of " + r["name"])}">
+    <ul class="gallery-track" tabindex="0">{items}</ul>
+    <div class="gallery-controls" hidden>
+      <button type="button" class="gallery-button" data-prev aria-label="Previous photo of {a(r["name"])}">←</button>
+      <span class="gallery-count" aria-live="polite">01 / {num(len(phs))}</span>
+      <button type="button" class="gallery-button" data-next aria-label="Next photo of {a(r["name"])}">→</button>
+    </div>
+  </div>'''
+            elif phs:
+                media = f'<div class="card-media">{figure(base + phs[0]["name"], phs[0]["alt"], sizes, phs[0].get("credit", p["credit"]))}</div>'
+            else:
+                media = (f'<div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(p["kind"])}</span>'
+                         f'<span class="card-panel-coords">{e(r.get("where", ""))}</span></div></div>')
             cards.append(f'''<article class="card card--static">
-  <div class="card-media">{media}</div>
+  {media}
   <div class="card-body">
     <p class="card-kicker">{e(r.get("where", p["location"]))}</p>
     <h3 class="card-title">{e(r["name"])}</h3>
@@ -726,7 +741,6 @@ def partner_page(p):
     <div class="panel panel--plain">
       <h2>Good to know.</h2>
       <p class="small">{e(p["provider"])}</p>
-      <p class="small">{e(SITE["commission_note"])}</p>
       <ul class="link-list">{links}</ul>
     </div>
   </div>
