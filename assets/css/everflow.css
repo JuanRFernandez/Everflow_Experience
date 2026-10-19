@@ -11,7 +11,7 @@
 :root{
   --cream:#f4f0e8; --cream-2:#ebe5d9; --line:#d9d1c1; --white:#fffdf9;
   --ink:#17140f; --ink-2:#56514a; --ink-3:#2a261f;
-  --accent:#76663a; --accent-dark:#5c4f2a; --accent-on-ink:#c9bc8e;
+  --accent:#6f6036; --accent-dark:#5c4f2a; --accent-on-ink:#c9bc8e;
   --serif:"Playfair Display",Georgia,"Times New Roman",serif;
   --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --step--1:.8125rem; --step-0:1.0625rem; --step-1:1.25rem;
@@ -166,6 +166,7 @@ th{color:var(--ink);font-weight:600}
 .gallery-item{scroll-snap-align:start}
 .gallery-item figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .gallery-item .credit{margin-top:.5rem}
+.gallery--small .gallery-track{grid-auto-columns:min(100%,46.875rem)}
 .gallery--cards .gallery-track{grid-auto-columns:minmax(16rem,82%)}
 @media (min-width:40rem){.gallery--cards .gallery-track{grid-auto-columns:calc((100% - var(--gap)) / 2)}}
 @media (min-width:64rem){.gallery--cards .gallery-track{grid-auto-columns:calc((100% - 2 * var(--gap)) / 3)}}

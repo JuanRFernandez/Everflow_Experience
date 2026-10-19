@@ -54,7 +54,8 @@ missing, copy `library.example.json` and ask Juan for the four paths.
    `uv run --with pillow python scripts/photos.py stay <partner> <name> "<original under the material folder>"`
    (a photo inside a zip: `"<zip>::<member>"`). Four to eight photos: outside, a room, food or
    spa, the surroundings. The script refuses what the register does not allow and writes WebP
-   files without metadata into `assets/img/stays/<partner>/`; every photo is shown with
+   files without metadata, in up to three sizes, into `assets/img/stays/<partner>/` and logs the
+   original in the library folder; every photo is shown with
    "© <credit>". The Impressum lists the credit by itself: change `impressum_stand` in
    `content/site.json`.
 5. No downloads of partner documents unless the register says `brochure: yes`.

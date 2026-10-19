@@ -143,8 +143,21 @@ def credit_text(credit):
     return credit if credit.startswith('©') else f'© {credit}'
 
 
-def figure(base, alt, sizes, credit=None, cls='', eager=False):
-    cap = f'<figcaption class="credit">{e(credit_text(credit))}</figcaption>' if credit else ''
+def caption(credit, image=None, links=True):
+    """The credit under a photo: "© Owner", or for a freely licensed photo "© Author · Licence",
+    linked to the photo's source page and to the licence (not inside cards, which are one big link)."""
+    image = image or {}
+    if not image.get('license'):
+        return e(credit_text(credit))
+    if links:
+        author = f'© <a href="{a(image["source_url"])}" rel="noopener">{e(credit)}</a>'
+        lic = f'<a href="{a(image["license_url"])}" rel="noopener">{e(image["license"])}</a>'
+        return f'{author} · {lic}'
+    return f'{e(credit_text(credit))} · {e(image["license"])}'
+
+
+def figure(base, alt, sizes, credit=None, cls='', eager=False, image=None, links=True):
+    cap = f'<figcaption class="credit">{caption(credit, image, links)}</figcaption>' if credit else ''
     klass = f' class="{cls}"' if cls else ''
     return f'<figure{klass}>{img(base, alt, sizes, eager=eager)}{cap}</figure>'
 
@@ -258,9 +271,11 @@ def footer():
 </footer>'''
 
 
-def page(path, title, description, body, lang='en', index=True, image='assets/img/og/everflow.jpg'):
+def page(path, title, description, body, lang='en', index=True, image='assets/img/og/everflow.jpg', data=None):
     url = SITE['url'] + url_of(path)
     robots = '' if index else '\n<meta name="robots" content="noindex, follow">'
+    if data:  # a schema.org data block is not executed, so the Content-Security-Policy does not apply to it
+        robots += '\n<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + '</script>'
     return f'''<!DOCTYPE html>
 {MARK}
 <html lang="{lang}">
@@ -312,7 +327,7 @@ def section_head(eyebrow_text, h2, lead=None, level=2, more=None):
 def place_card(place, level=3):
     country = COUNTRY[place['country']]['name']
     media = (figure(place['image']['src'], place['image']['alt'], '(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw',
-                    place['image'].get('credit'), cls='card-figure')
+                    place['image'].get('credit'), cls='card-figure', image=place['image'], links=False)
              if place.get('image') else
              f'<div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(country)}</span>'
              f'<span class="card-panel-coords">{coords(place["lat"], place["lon"])}</span></div>')
@@ -369,7 +384,9 @@ def gallery(base_folder, photos, credit, label):
     items = []
     for i, ph in enumerate(photos):
         items.append(f'<li class="gallery-item">{figure(base_folder + ph["name"], ph["alt"], "(min-width: 64rem) 70vw, 92vw", ph.get("credit", credit), eager=(i == 0))}</li>')
-    return f'''<section class="gallery" data-gallery aria-label="{a(label)}">
+    widest = max(variants(base_folder + ph['name'])[-1][0] for ph in photos)
+    small = ' gallery--small' if widest < 1000 else ''  # small originals are shown at their size, not stretched
+    return f'''<section class="gallery{small}" data-gallery aria-label="{a(label)}">
   <ul class="gallery-track" tabindex="0">
     {(chr(10) + '    ').join(items)}
   </ul>
@@ -465,7 +482,7 @@ def home():
     exps = [x for x in EXPERIENCES if x.get('featured')]
     juan = TEAM[0]
     body = f'''<section class="hero">
-  <div class="hero-media" data-src="/assets/video/hero-720.mp4">
+  <div class="hero-media" data-src="/assets/video/hero-1080.mp4">
     {img("assets/img/home/zugspitze", "The summit station of the Zugspitze, Germany's highest mountain, above the clouds", "100vw", cls="hero-img", eager=True)}
   </div>
   <div class="wrap hero-content">
@@ -517,7 +534,17 @@ def home():
 </section>
 {faq_section(PAGES["faq"]["items"], PAGES["faq"]["eyebrow"], PAGES["faq"]["h2"])}
 {cta_band()}'''
-    return page('index.html', h['title'], SITE['description'], body)
+    return page('index.html', h['title'], SITE['description'], body, data=organisation())
+
+
+def organisation():
+    return {
+        '@context': 'https://schema.org', '@type': 'TravelAgency', 'name': SITE['name'], 'url': SITE['url'] + '/',
+        'logo': SITE['url'] + '/assets/img/brand/icon-180.png', 'image': SITE['url'] + '/assets/img/og/everflow.jpg',
+        'description': SITE['description'], 'email': SITE['email'], 'telephone': '+' + SITE['whatsapp'][0]['number'],
+        'foundingDate': '2022', 'address': {'@type': 'PostalAddress', 'addressLocality': 'München', 'addressCountry': 'DE'},
+        'areaServed': [c['name'] for c in COUNTRIES], 'sameAs': [f'https://www.instagram.com/{SITE["instagram"]}'],
+    }
 
 
 def destinations_index():
@@ -564,7 +591,7 @@ def place_page(p):
     stays = partners_in(p['slug'])
     hero_img = ''
     if p.get('image'):
-        hero_img = f'''<div class="wrap">{figure(p["image"]["src"], p["image"]["alt"], "(min-width: 75rem) 1180px, 100vw", p["image"].get("credit"), cls="hero-figure", eager=True)}</div>'''
+        hero_img = f'''<div class="wrap">{figure(p["image"]["src"], p["image"]["alt"], "(min-width: 75rem) 1180px, 100vw", p["image"].get("credit"), cls="hero-figure", eager=True, image=p["image"])}</div>'''
     facts = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in p['facts'])
     if stays:
         stay_html = grid([partner_card(s) for s in stays])
@@ -856,6 +883,16 @@ def legal(name):
         line = '; '.join(e(credit_text(c)) for c in shown)
         credits_de.append(f'<li>{e(p["name"])}: {line}</li>')
         credits_en.append(f'<li>{e(p["name"])}: {line}</li>')
+    for p in PLACES:
+        im = p.get('image') or {}
+        if not im.get('license'):
+            continue
+        src = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
+        lic = f'<a href="{a(im["license_url"])}" rel="noopener">{e(im["license"])}</a>'
+        same_de = '; die bearbeitete Fassung steht unter derselben Lizenz' if 'SA' in im['license'] else ''
+        same_en = '; the adapted version is available under the same licence' if 'SA' in im['license'] else ''
+        credits_de.append(f'<li>{e(p["name"])}: Foto von {e(im["credit"])}, {src}, Lizenz {lic}; Ausschnitt und Größe angepasst{same_de}.</li>')
+        credits_en.append(f'<li>{e(p["name"])}: photo by {e(im["credit"])}, {src}, licence {lic}; cropped and resized{same_en}.</li>')
     for c in SITE['credits_de']:
         credits_de.append(f'<li>{e(c)}</li>')
     slots = {
@@ -895,6 +932,9 @@ def validate():
     for p in PLACES:
         if p['country'] not in COUNTRY:
             problems.append(f'place {p["slug"]}: unknown country {p["country"]}')
+        im = p.get('image') or {}
+        if im.get('license') and not all(im.get(k) for k in ('credit', 'source_url', 'license_url')):
+            problems.append(f'place {p["slug"]}: a freely licensed photo needs credit (author), source_url and license_url')
     for p in PARTNERS:
         if p['place'] not in PLACE:
             problems.append(f'partner {p["slug"]}: unknown place {p["place"]}')

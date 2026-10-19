@@ -34,7 +34,7 @@ and JavaScript, generated from the content files by one small Python script.
 │   ├── img/                   # WebP files written by scripts/photos.py
 │   │   └── stays/<partner>/   # partner photos, each shown with the partner's "©" credit
 │   ├── stays/<partner>/       # partner brochures, unmodified, only with written permission
-│   └── video/hero-720.mp4     # home video (wide screens only)
+│   └── video/hero-1080.mp4    # home video, original quality (tablets and larger screens only)
 ├── brand/                     # source files of the logo (scripts/photos.py brand)
 ├── docs/HOTEL_MATERIAL.md     # which partners are shown, on which basis, with which credit
 ├── CLAUDE.md                  # rules for Claude sessions in this repo
@@ -51,6 +51,10 @@ and JavaScript, generated from the content files by one small Python script.
    (Links start with `/`, so opening the files directly does not work.)
 
 A new photo: `uv run --with pillow python scripts/photos.py site <original> assets/img/<folder>/<name>`.
+It writes up to three sizes (800, 1600, 2400 px, never larger than the original); the browser picks
+the one the screen needs, so phones stay fast and large screens get a sharp photo. Every photo is
+logged with its original in the library folder (outside the repo): `photos.py rebuild` redoes them
+all, for instance after a change of quality.
 A partner's photo: `uv run --with pillow python scripts/photos.py stay <partner> <name> <original>`;
 it refuses when the permission register does not allow photos of that partner.
 
@@ -77,6 +81,6 @@ it refuses when the permission register does not allow photos of that partner.
 
 `python scripts/check.py` (also in GitHub Actions on every pull request and push to `master`):
 the pages match the content, every link, image and anchor resolves, nothing loads from another
-host, every page has one `<h1>` and labelled form fields, images are under 250 KB without
+host, every page has one `<h1>` and labelled form fields, images are under 950 KB without
 metadata, partner photos are credited, the sitemap is complete, and nothing internal is in
 the repository.
