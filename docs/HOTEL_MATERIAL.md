@@ -21,7 +21,7 @@ the material.
 | Hotel & Chalet Aurelio | `/stay/aurelio-lech/`: eleven photos (hotel and Club Chalet) from the press material of its collection | Spoken permission; shown on Juan's decision of 19.10.2026. Written confirmation and credit line asked | `Hotel & Chalet Aurelio`, and `Hotel & Chalet Aurelio / Patrick Schwienbacher` where the file names the photographer | `assets/img/stays/aurelio-lech/` |
 | pepper-collection | `/stay/pepper-collection/`: photos of six houses (two to four each) from its media page | Media page sent by the partner, 18.09.2026, and spoken permission; shown on Juan's decision of 19.10.2026. Written confirmation and credit line asked | `pepper-collection / Patrick Schwienbacher`, `pepper-collection / Stefano Scata` (the photographer each file names) | `assets/img/stays/pepper-collection/` |
 | Schlosshotel Kitzbühel | `/stay/schlosshotel-kitzbuehel/`: text only, facts from the hotel's website | Shown on Juan's decision of 19.10.2026 | — | — |
-| Chalets in Megève | `/stay/chalets-megeve/`: 22 houses with four photos each | In writing from the partner, 29.09.2026 (its properties on our website), and Juan's decision of 19.10.2026: shown as EverFlow's chalets, without the partner's name | `Photos courtesy of the owner` | `assets/img/stays/chalets-megeve/` |
+| Chalets in Megève | `/stay/chalets-megeve/`: 22 houses with ten photos each (every photo of the house saved in Drive) | In writing from the partner, 29.09.2026 (its properties on our website), and Juan's decision of 19.10.2026: shown as EverFlow's chalets, without the partner's name | `Photos courtesy of the owner` | `assets/img/stays/chalets-megeve/` |
 
 ## Adding a partner
 

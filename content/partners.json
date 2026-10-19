@@ -274,7 +274,7 @@
       "The houses",
       "Chalets and apartments."
     ],
-    "residences_lead": "Every house is different. Tell us your dates and your group, and we suggest the right one.",
+    "residences_lead": "Every house is different. Swipe through its photos or tap one to see it full screen, then tell us your dates and your group, and we suggest the right one.",
     "residences": [
       {
         "name": "Chalet 141",
@@ -294,8 +294,32 @@
             "alt": "Chalet 141: the terrace, with a view of the village"
           },
           {
+            "name": "chalet-141-04",
+            "alt": "Chalet 141: the living room"
+          },
+          {
+            "name": "chalet-141-05",
+            "alt": "Chalet 141: the living room, with a view of the slopes"
+          },
+          {
+            "name": "chalet-141-06",
+            "alt": "Chalet 141: the fireplace, with the gallery above"
+          },
+          {
+            "name": "chalet-141-07",
+            "alt": "Chalet 141: the open living space"
+          },
+          {
+            "name": "chalet-141-08",
+            "alt": "Chalet 141: a seat by the window, with a view of the mountains"
+          },
+          {
             "name": "house-chalet-141-4",
             "alt": "Chalet 141: the dining table"
+          },
+          {
+            "name": "chalet-141-10",
+            "alt": "Chalet 141: the dining room"
           }
         ]
       },
@@ -313,12 +337,36 @@
             "alt": "Chalet Alexandra: the indoor pool"
           },
           {
+            "name": "chalet-alexandra-03",
+            "alt": "Chalet Alexandra: a lounge"
+          },
+          {
+            "name": "chalet-alexandra-04",
+            "alt": "Chalet Alexandra: the lounge with its fireplace"
+          },
+          {
+            "name": "chalet-alexandra-05",
+            "alt": "Chalet Alexandra: a sitting area with a chess board"
+          },
+          {
             "name": "house-chalet-alexandra-3",
             "alt": "Chalet Alexandra: the dining room"
           },
           {
+            "name": "chalet-alexandra-07",
+            "alt": "Chalet Alexandra: the kitchen and its breakfast bar"
+          },
+          {
             "name": "house-chalet-alexandra-4",
             "alt": "Chalet Alexandra: a bedroom"
+          },
+          {
+            "name": "chalet-alexandra-09",
+            "alt": "Chalet Alexandra: a bedroom"
+          },
+          {
+            "name": "chalet-alexandra-10",
+            "alt": "Chalet Alexandra: a bedroom with its bathroom"
           }
         ]
       },
@@ -332,16 +380,40 @@
             "alt": "Chalet Allobroges: the living room by the fireplace"
           },
           {
+            "name": "chalet-allobroges-02",
+            "alt": "Chalet Allobroges: the sauna"
+          },
+          {
+            "name": "chalet-allobroges-03",
+            "alt": "Chalet Allobroges: the hot tub and the gym"
+          },
+          {
             "name": "house-chalet-allobroges-2",
             "alt": "Chalet Allobroges: the living room"
+          },
+          {
+            "name": "chalet-allobroges-05",
+            "alt": "Chalet Allobroges: the kitchen and the living room under the roof beams"
           },
           {
             "name": "house-chalet-allobroges-3",
             "alt": "Chalet Allobroges: the dining room"
           },
           {
+            "name": "chalet-allobroges-07",
+            "alt": "Chalet Allobroges: the open living area"
+          },
+          {
+            "name": "chalet-allobroges-08",
+            "alt": "Chalet Allobroges: the dining table"
+          },
+          {
             "name": "house-chalet-allobroges-4",
             "alt": "Chalet Allobroges: a lounge"
+          },
+          {
+            "name": "chalet-allobroges-10",
+            "alt": "Chalet Allobroges: a corner with a bar cart"
           }
         ]
       },
@@ -359,12 +431,36 @@
             "alt": "Chalet Altai: the indoor pool"
           },
           {
+            "name": "chalet-altai-03",
+            "alt": "Chalet Altai: the dining table and the central fireplace"
+          },
+          {
             "name": "house-chalet-altai-3",
             "alt": "Chalet Altai: the living room with its fireplace"
           },
           {
+            "name": "chalet-altai-05",
+            "alt": "Chalet Altai: the fireplace and the kitchen"
+          },
+          {
+            "name": "chalet-altai-06",
+            "alt": "Chalet Altai: a sitting room with a balcony"
+          },
+          {
+            "name": "chalet-altai-07",
+            "alt": "Chalet Altai: a sitting room"
+          },
+          {
             "name": "house-chalet-altai-4",
             "alt": "Chalet Altai: the dining table"
+          },
+          {
+            "name": "chalet-altai-09",
+            "alt": "Chalet Altai: the dining table, set for dinner"
+          },
+          {
+            "name": "chalet-altai-10",
+            "alt": "Chalet Altai: the fireplace"
           }
         ]
       },
@@ -382,12 +478,36 @@
             "alt": "Chalet Apollo: the indoor pool"
           },
           {
+            "name": "chalet-apollo-03",
+            "alt": "Chalet Apollo: the living room and the staircase"
+          },
+          {
             "name": "house-chalet-apollo-3",
             "alt": "Chalet Apollo: the living room"
           },
           {
+            "name": "chalet-apollo-05",
+            "alt": "Chalet Apollo: the living room with its fireplace"
+          },
+          {
+            "name": "chalet-apollo-06",
+            "alt": "Chalet Apollo: the long living room"
+          },
+          {
+            "name": "chalet-apollo-07",
+            "alt": "Chalet Apollo: a sitting area"
+          },
+          {
             "name": "house-chalet-apollo-4",
             "alt": "Chalet Apollo: a lounge"
+          },
+          {
+            "name": "chalet-apollo-09",
+            "alt": "Chalet Apollo: a lounge with leather armchairs"
+          },
+          {
+            "name": "chalet-apollo-10",
+            "alt": "Chalet Apollo: the study corner under the gallery"
           }
         ]
       },
@@ -409,8 +529,32 @@
             "alt": "Chalet Ariana: the dining area"
           },
           {
+            "name": "chalet-ariana-04",
+            "alt": "Chalet Ariana: a lounge"
+          },
+          {
+            "name": "chalet-ariana-05",
+            "alt": "Chalet Ariana: the living room with its chandelier"
+          },
+          {
+            "name": "chalet-ariana-06",
+            "alt": "Chalet Ariana: the kitchen"
+          },
+          {
+            "name": "chalet-ariana-07",
+            "alt": "Chalet Ariana: a bedroom with a sitting area"
+          },
+          {
+            "name": "chalet-ariana-08",
+            "alt": "Chalet Ariana: the study"
+          },
+          {
             "name": "house-chalet-ariana-4",
             "alt": "Chalet Ariana: a bedroom"
+          },
+          {
+            "name": "chalet-ariana-10",
+            "alt": "Chalet Ariana: a lounge under the roof"
           }
         ]
       },
@@ -432,8 +576,32 @@
             "alt": "Chalet Des Soeurs: the indoor pool"
           },
           {
+            "name": "chalet-des-soeurs-04",
+            "alt": "Chalet Des Soeurs: the living room with its fireplace"
+          },
+          {
             "name": "house-chalet-des-soeurs-4",
             "alt": "Chalet Des Soeurs: the living room"
+          },
+          {
+            "name": "chalet-des-soeurs-06",
+            "alt": "Chalet Des Soeurs: the dining table"
+          },
+          {
+            "name": "chalet-des-soeurs-07",
+            "alt": "Chalet Des Soeurs: the lounge and the bar"
+          },
+          {
+            "name": "chalet-des-soeurs-08",
+            "alt": "Chalet Des Soeurs: the bar"
+          },
+          {
+            "name": "chalet-des-soeurs-09",
+            "alt": "Chalet Des Soeurs: the bar and the staircase"
+          },
+          {
+            "name": "chalet-des-soeurs-10",
+            "alt": "Chalet Des Soeurs: a sitting room with modern art"
           }
         ]
       },
@@ -451,8 +619,32 @@
             "alt": "Chalet Etoile du Nord: the living room"
           },
           {
+            "name": "chalet-etoile-du-nord-03",
+            "alt": "Chalet Etoile du Nord: the living and dining room under the roof"
+          },
+          {
             "name": "house-chalet-etoile-du-nord-3",
             "alt": "Chalet Etoile du Nord: the dining table"
+          },
+          {
+            "name": "chalet-etoile-du-nord-05",
+            "alt": "Chalet Etoile du Nord: a sitting area"
+          },
+          {
+            "name": "chalet-etoile-du-nord-06",
+            "alt": "Chalet Etoile du Nord: the living room, with a view"
+          },
+          {
+            "name": "chalet-etoile-du-nord-07",
+            "alt": "Chalet Etoile du Nord: the billiard table"
+          },
+          {
+            "name": "chalet-etoile-du-nord-08",
+            "alt": "Chalet Etoile du Nord: the billiard room under the roof beams"
+          },
+          {
+            "name": "chalet-etoile-du-nord-09",
+            "alt": "Chalet Etoile du Nord: the living room with its fireplace"
           },
           {
             "name": "house-chalet-etoile-du-nord-4",
@@ -474,12 +666,36 @@
             "alt": "Chalet Hermine: the living room"
           },
           {
+            "name": "chalet-hermine-03",
+            "alt": "Chalet Hermine: the sauna"
+          },
+          {
             "name": "house-chalet-hermine-3",
             "alt": "Chalet Hermine: the living room"
           },
           {
+            "name": "chalet-hermine-05",
+            "alt": "Chalet Hermine: the fireplace"
+          },
+          {
+            "name": "chalet-hermine-06",
+            "alt": "Chalet Hermine: the kitchen"
+          },
+          {
+            "name": "chalet-hermine-07",
+            "alt": "Chalet Hermine: the kitchen island"
+          },
+          {
+            "name": "chalet-hermine-08",
+            "alt": "Chalet Hermine: the terrace with its fire table"
+          },
+          {
             "name": "house-chalet-hermine-4",
             "alt": "Chalet Hermine: the indoor pool"
+          },
+          {
+            "name": "chalet-hermine-10",
+            "alt": "Chalet Hermine: a bedroom"
           }
         ]
       },
@@ -501,8 +717,32 @@
             "alt": "Chalet Le Lodge: the living room"
           },
           {
+            "name": "chalet-le-lodge-04",
+            "alt": "Chalet Le Lodge: a sitting area"
+          },
+          {
+            "name": "chalet-le-lodge-05",
+            "alt": "Chalet Le Lodge: the living room, with its tall windows"
+          },
+          {
+            "name": "chalet-le-lodge-06",
+            "alt": "Chalet Le Lodge: the kitchen island, with a view"
+          },
+          {
+            "name": "chalet-le-lodge-07",
+            "alt": "Chalet Le Lodge: the kitchen and the staircase"
+          },
+          {
             "name": "house-chalet-le-lodge-4",
             "alt": "Chalet Le Lodge: the dining room"
+          },
+          {
+            "name": "chalet-le-lodge-09",
+            "alt": "Chalet Le Lodge: the dining table"
+          },
+          {
+            "name": "chalet-le-lodge-10",
+            "alt": "Chalet Le Lodge: the dining room and the wine cellar"
           }
         ]
       },
@@ -520,11 +760,35 @@
             "alt": "Chalet Penelope: the living room"
           },
           {
+            "name": "chalet-penelope-02",
+            "alt": "Chalet Penelope: the living room, opening onto the garden"
+          },
+          {
+            "name": "chalet-penelope-04",
+            "alt": "Chalet Penelope: the fireplace and the dining area"
+          },
+          {
             "name": "house-chalet-penelope-3",
             "alt": "Chalet Penelope: the dining table"
           },
           {
+            "name": "chalet-penelope-06",
+            "alt": "Chalet Penelope: the kitchen island"
+          },
+          {
+            "name": "chalet-penelope-07",
+            "alt": "Chalet Penelope: the kitchen"
+          },
+          {
             "name": "house-chalet-penelope-4",
+            "alt": "Chalet Penelope: a bedroom"
+          },
+          {
+            "name": "chalet-penelope-09",
+            "alt": "Chalet Penelope: a bathroom"
+          },
+          {
+            "name": "chalet-penelope-10",
             "alt": "Chalet Penelope: a bedroom"
           }
         ]
@@ -547,8 +811,32 @@
             "alt": "Chalet Whymper: the living room"
           },
           {
+            "name": "chalet-whymper-04",
+            "alt": "Chalet Whymper: the staircase and the lift"
+          },
+          {
+            "name": "chalet-whymper-05",
+            "alt": "Chalet Whymper: the indoor pool and the sauna"
+          },
+          {
             "name": "house-chalet-whymper-4",
             "alt": "Chalet Whymper: the pool, with a view"
+          },
+          {
+            "name": "chalet-whymper-07",
+            "alt": "Chalet Whymper: the sauna with its salt wall"
+          },
+          {
+            "name": "chalet-whymper-08",
+            "alt": "Chalet Whymper: the sauna"
+          },
+          {
+            "name": "chalet-whymper-09",
+            "alt": "Chalet Whymper: the pool"
+          },
+          {
+            "name": "chalet-whymper-10",
+            "alt": "Chalet Whymper: the fitness room"
           }
         ]
       },
@@ -566,12 +854,36 @@
             "alt": "Lodge Elan: the living room"
           },
           {
+            "name": "lodge-elan-03",
+            "alt": "Lodge Elan: the living and dining room"
+          },
+          {
             "name": "house-lodge-elan-3",
             "alt": "Lodge Elan: the living room"
           },
           {
+            "name": "lodge-elan-05",
+            "alt": "Lodge Elan: the fireplace"
+          },
+          {
+            "name": "lodge-elan-06",
+            "alt": "Lodge Elan: the living room, with the dining table behind"
+          },
+          {
+            "name": "lodge-elan-07",
+            "alt": "Lodge Elan: a sitting area"
+          },
+          {
             "name": "house-lodge-elan-4",
             "alt": "Lodge Elan: the dining table"
+          },
+          {
+            "name": "lodge-elan-09",
+            "alt": "Lodge Elan: the dining table, with a view of the mountains"
+          },
+          {
+            "name": "lodge-elan-10",
+            "alt": "Lodge Elan: the kitchen"
           }
         ]
       },
@@ -585,12 +897,36 @@
             "alt": "Lodge Manou: the living room"
           },
           {
+            "name": "lodge-manou-02",
+            "alt": "Lodge Manou: the dining table and the living room"
+          },
+          {
             "name": "house-lodge-manou-2",
             "alt": "Lodge Manou: loungers in the spa"
           },
           {
+            "name": "lodge-manou-04",
+            "alt": "Lodge Manou: the living room with its fireplace"
+          },
+          {
+            "name": "lodge-manou-05",
+            "alt": "Lodge Manou: the fireplace corner"
+          },
+          {
+            "name": "lodge-manou-06",
+            "alt": "Lodge Manou: the long sofa in the living room"
+          },
+          {
             "name": "house-lodge-manou-3",
             "alt": "Lodge Manou: the living room"
+          },
+          {
+            "name": "lodge-manou-08",
+            "alt": "Lodge Manou: armchairs in the living room"
+          },
+          {
+            "name": "lodge-manou-09",
+            "alt": "Lodge Manou: a bathroom"
           },
           {
             "name": "house-lodge-manou-4",
@@ -612,12 +948,36 @@
             "alt": "Chalet Sun: the spa pool"
           },
           {
+            "name": "chalet-sun-03",
+            "alt": "Chalet Sun: the living room"
+          },
+          {
             "name": "house-chalet-sun-3",
             "alt": "Chalet Sun: the living room"
           },
           {
             "name": "house-chalet-sun-4",
             "alt": "Chalet Sun: a lounge"
+          },
+          {
+            "name": "chalet-sun-06",
+            "alt": "Chalet Sun: the round sofa under the chandelier"
+          },
+          {
+            "name": "chalet-sun-07",
+            "alt": "Chalet Sun: the dining table and the bar"
+          },
+          {
+            "name": "chalet-sun-08",
+            "alt": "Chalet Sun: the long living room"
+          },
+          {
+            "name": "chalet-sun-09",
+            "alt": "Chalet Sun: the dining table, with a view"
+          },
+          {
+            "name": "chalet-sun-10",
+            "alt": "Chalet Sun: the fireplace and the bar"
           }
         ]
       },
@@ -637,6 +997,30 @@
           {
             "name": "house-chalet-cham-louka-3",
             "alt": "Chalet Cham Lou'Ka: the cinema room"
+          },
+          {
+            "name": "chalet-cham-louka-04",
+            "alt": "Chalet Cham Lou'Ka: the sofas of the cinema room"
+          },
+          {
+            "name": "chalet-cham-louka-05",
+            "alt": "Chalet Cham Lou'Ka: the living room"
+          },
+          {
+            "name": "chalet-cham-louka-06",
+            "alt": "Chalet Cham Lou'Ka: the fireplace"
+          },
+          {
+            "name": "chalet-cham-louka-07",
+            "alt": "Chalet Cham Lou'Ka: the living room and the library"
+          },
+          {
+            "name": "chalet-cham-louka-08",
+            "alt": "Chalet Cham Lou'Ka: the living room"
+          },
+          {
+            "name": "chalet-cham-louka-09",
+            "alt": "Chalet Cham Lou'Ka: a sitting area"
           },
           {
             "name": "house-chalet-cham-louka-4",
@@ -662,8 +1046,32 @@
             "alt": "Chalet des Sens: the living room"
           },
           {
+            "name": "chalet-des-sens-04",
+            "alt": "Chalet des Sens: the living room with its grand piano"
+          },
+          {
+            "name": "chalet-des-sens-05",
+            "alt": "Chalet des Sens: the living room"
+          },
+          {
+            "name": "chalet-des-sens-06",
+            "alt": "Chalet des Sens: the dining table and the grand piano"
+          },
+          {
             "name": "house-chalet-des-sens-4",
             "alt": "Chalet des Sens: the dining room"
+          },
+          {
+            "name": "chalet-des-sens-08",
+            "alt": "Chalet des Sens: the hot tub in the spa"
+          },
+          {
+            "name": "chalet-des-sens-09",
+            "alt": "Chalet des Sens: a bathroom"
+          },
+          {
+            "name": "chalet-des-sens-10",
+            "alt": "Chalet des Sens: the kitchen"
           }
         ]
       },
@@ -681,12 +1089,36 @@
             "alt": "Chalet Divinity: the indoor pool"
           },
           {
+            "name": "chalet-divinity-03",
+            "alt": "Chalet Divinity: the hammam"
+          },
+          {
             "name": "house-chalet-divinity-3",
             "alt": "Chalet Divinity: the dining table"
           },
           {
+            "name": "chalet-divinity-05",
+            "alt": "Chalet Divinity: the dining table"
+          },
+          {
+            "name": "chalet-divinity-06",
+            "alt": "Chalet Divinity: the living room"
+          },
+          {
+            "name": "chalet-divinity-07",
+            "alt": "Chalet Divinity: the living room with its fireplace"
+          },
+          {
             "name": "house-chalet-divinity-4",
             "alt": "Chalet Divinity: the living room"
+          },
+          {
+            "name": "chalet-divinity-09",
+            "alt": "Chalet Divinity: the kitchen"
+          },
+          {
+            "name": "chalet-divinity-10",
+            "alt": "Chalet Divinity: the dining room"
           }
         ]
       },
@@ -708,8 +1140,32 @@
             "alt": "Chalet Mariva: the cinema room"
           },
           {
+            "name": "chalet-mariva-04",
+            "alt": "Chalet Mariva: the open living space with its central fireplace"
+          },
+          {
+            "name": "chalet-mariva-05",
+            "alt": "Chalet Mariva: the dining table, with a view"
+          },
+          {
             "name": "house-chalet-mariva-4",
             "alt": "Chalet Mariva: the living room"
+          },
+          {
+            "name": "chalet-mariva-07",
+            "alt": "Chalet Mariva: the living room"
+          },
+          {
+            "name": "chalet-mariva-08",
+            "alt": "Chalet Mariva: a sitting area"
+          },
+          {
+            "name": "chalet-mariva-09",
+            "alt": "Chalet Mariva: the central fireplace"
+          },
+          {
+            "name": "chalet-mariva-10",
+            "alt": "Chalet Mariva: the living room and the library"
           }
         ]
       },
@@ -731,8 +1187,32 @@
             "alt": "Chalet Olivier: the cinema room"
           },
           {
+            "name": "chalet-olivier-04",
+            "alt": "Chalet Olivier: the hall and the staircase"
+          },
+          {
+            "name": "chalet-olivier-05",
+            "alt": "Chalet Olivier: a sitting corner"
+          },
+          {
+            "name": "chalet-olivier-06",
+            "alt": "Chalet Olivier: the hall and a sitting room"
+          },
+          {
+            "name": "chalet-olivier-07",
+            "alt": "Chalet Olivier: the living room"
+          },
+          {
+            "name": "chalet-olivier-08",
+            "alt": "Chalet Olivier: a sitting room"
+          },
+          {
             "name": "house-chalet-olivier-4",
             "alt": "Chalet Olivier: the dining table"
+          },
+          {
+            "name": "chalet-olivier-10",
+            "alt": "Chalet Olivier: the dining room under the gallery"
           }
         ]
       },
@@ -750,12 +1230,36 @@
             "alt": "Chalet Black Lodge: the dining table, with a view"
           },
           {
+            "name": "chalet-black-lodge-02",
+            "alt": "Chalet Black Lodge: the sauna and the steam shower"
+          },
+          {
+            "name": "chalet-black-lodge-04",
+            "alt": "Chalet Black Lodge: the living room and the table football"
+          },
+          {
             "name": "house-chalet-black-lodge-3",
             "alt": "Chalet Black Lodge: the living room"
           },
           {
+            "name": "chalet-black-lodge-06",
+            "alt": "Chalet Black Lodge: the dining table"
+          },
+          {
             "name": "house-chalet-black-lodge-4",
             "alt": "Chalet Black Lodge: the kitchen"
+          },
+          {
+            "name": "chalet-black-lodge-08",
+            "alt": "Chalet Black Lodge: the kitchen"
+          },
+          {
+            "name": "chalet-black-lodge-09",
+            "alt": "Chalet Black Lodge: the kitchen and the living room"
+          },
+          {
+            "name": "chalet-black-lodge-10",
+            "alt": "Chalet Black Lodge: the dining room"
           }
         ]
       },
@@ -769,12 +1273,36 @@
             "alt": "Chalet Infinity: the chalet and its pool in summer"
           },
           {
+            "name": "house-chalet-infinity-3",
+            "alt": "Chalet Infinity: the dining area"
+          },
+          {
+            "name": "chalet-infinity-03",
+            "alt": "Chalet Infinity: the indoor pool, with a view of the mountains"
+          },
+          {
             "name": "house-chalet-infinity-2",
             "alt": "Chalet Infinity: the living room"
           },
           {
-            "name": "house-chalet-infinity-3",
-            "alt": "Chalet Infinity: the dining area"
+            "name": "chalet-infinity-05",
+            "alt": "Chalet Infinity: the dining table and the fireplace"
+          },
+          {
+            "name": "chalet-infinity-06",
+            "alt": "Chalet Infinity: the living room, with a view of the mountains"
+          },
+          {
+            "name": "chalet-infinity-07",
+            "alt": "Chalet Infinity: the living and dining room"
+          },
+          {
+            "name": "chalet-infinity-08",
+            "alt": "Chalet Infinity: the chalet in summer"
+          },
+          {
+            "name": "chalet-infinity-09",
+            "alt": "Chalet Infinity: the outdoor pool"
           },
           {
             "name": "house-chalet-infinity-4",
@@ -1071,7 +1599,8 @@
         "where": "Omesberg, Lech",
         "line": "A renovated apartment house in the Omesberg area, a few minutes' walk from the centre."
       }
-    ]
+    ],
+    "residences_lead": "Swipe through the photos of each house, or tap one to see it full screen."
   },
   {
     "slug": "interalpen-tyrol",
