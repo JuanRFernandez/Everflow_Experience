@@ -12,7 +12,7 @@
     a label; every <img> has alt, width and height.
  5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
     whose caption starts with "©" and names the partner's credit; every credit is in the Impressum.
- 6. Words: no price anywhere; no booking wording outside the legal pages; no regional brand line;
+ 6. Words: no price anywhere; no booking, commission or "racers" outside the legal pages; no regional brand line;
     German quotes close with “; names that must never appear on the site do not.
  7. This repository is public: nothing of the hotel library is in it (local configuration, extracted
     text, facts files, the permission register, internal hotel documents), and no text file holds a
@@ -60,6 +60,7 @@ PRICE_JS = re.compile(rf'(?:[€£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?
 CODE = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.I | re.S)
 TAGS = re.compile(r'<[^>]+>')
 BOOKING = re.compile(r'\bbook(?:s|ed|ing|ings)?\b|request has been received', re.I)
+NOT_SAID = re.compile(r'\bcommissions?\b|\bracers?\b', re.I)  # Juan, 19.10.2026: no commissions, no "racers"
 REGIONAL = re.compile('bavarian' + r'\s+' + 'alps', re.I)
 NEVER = [codecs.decode(w, 'rot13') for w in ('rqra yhkhel', 'rqrayhkhel', 'ubgry qnf gveby', 'enr cvafba')]
 DE_QUOTE = re.compile(r'„[^“"]{0,200}"')
@@ -243,6 +244,8 @@ for page in PAGES:
     if page not in LEGAL:
         for m in BOOKING.finditer(visible):
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings (say plan, arrange, enquire)')
+        for m in NOT_SAID.finditer(visible):
+            failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
     for m in DE_QUOTE.finditer(visible):
         failures.append(f'{page}: German quote closed with a straight quote: {m.group(0)[:40]}')
 
