@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Juan Rodrigo Fernandez",
+    "role": "Founder and Managing Director",
+    "photo": "assets/img/team/juan",
+    "bio": [
+      "Juan is a former member of the Argentinian Ski Team, with over 60 FIS starts and more than 15 seasons racing at a high competitive level. Based in the Alps since 2022, he combines elite performance coaching with an engineering career in the energy sector, focused on decarbonisation and sustainability.",
+      "At EverFlow, Juan leads the vision: precise technique on snow, smart progression, and complete alpine trips, from lodging to logistics, built around each guest."
+    ]
+  },
+  {
+    "name": "Gregorio Ubici",
+    "role": "Commercial Director and Ski School Operator",
+    "photo": "assets/img/team/gregorio",
+    "bio": ["Gregorio is an engineer and certified ski instructor who has dedicated his life to the mountains, spending back-to-back seasons between South America, Europe and the United States. He runs the commercial side of the ski school and leads personalised experiences in English, Spanish and Portuguese."]
+  },
+  {
+    "name": "Ashley Quirk",
+    "role": "Business Development Lead",
+    "photo": "assets/img/team/ashley",
+    "bio": ["A devoted skier from New England, Ashley grew up racing in the US Ski and Snowboard VARA (Vermont) circuit. At 18 she moved to Munich for her bachelor's degree and has stayed close to the Alps ever since. She joined EverFlow to support its growth and share her passion for the slopes."]
+  },
+  {
+    "name": "Jeremy Rossegger",
+    "role": "Ski Instructor and Coach",
+    "photo": "assets/img/team/jeremy",
+    "bio": ["A professional skier and certified Austrian Landeslehrer instructor with over four years guiding all abilities. Known for his calm coaching style and strong technical foundation, with Spanish roots and Australian, Argentinian and Austrian heritage."]
+  },
+  {
+    "name": "Paolo Schwarz",
+    "role": "Ski Instructor and Technique Specialist",
+    "photo": "assets/img/team/paolo",
+    "bio": ["Born in Mallorca, Paolo holds the Staatlich geprüfter Skilehrer certification through both the DSLV and the ÖSV, a rare double credential. He turns sharp technical analysis into fast, visible progress for every guest, on any slope."]
+  },
+  {
+    "name": "Felipe De La Fuente",
+    "role": "Snowboard Instructor and Guide",
+    "photo": "assets/img/team/felipe",
+    "bio": ["A fully certified snowboard instructor with over 20 years in some of the world's best-known mountain regions, from the US coasts and the Rockies to Argentina and the Alps. Calm, intuitive and focused on complete mountain experiences."]
+  }
+]

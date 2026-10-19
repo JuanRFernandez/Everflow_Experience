@@ -1,0 +1,222 @@
+/* EverFlow Experience: the one script of the site. No dependencies; Leaflet is loaded only
+   after the visitor clicks "Show map". Every page works without this script. */
+(function () {
+  'use strict';
+
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- old one-page links (/#experiences ...) lead to the new pages ---------- */
+  var LEGACY = {
+    '#experiences': '/experiences/', '#reach': '/destinations/', '#stay': '/stay/', '#meet': '/about/#team',
+    '#about': '/about/', '#contact': '/enquire/'
+  };
+  if ((location.pathname === '/' || location.pathname === '/index.html') && LEGACY[location.hash] &&
+      !document.getElementById(location.hash.slice(1))) {
+    location.replace(LEGACY[location.hash]);
+  }
+
+  /* ---------- mobile menu ---------- */
+  function initMenu() {
+    var header = $('.site-header');
+    var toggle = $('.menu-toggle');
+    if (!header || !toggle) return;
+    function set(open) {
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    toggle.addEventListener('click', function () { set(toggle.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && header.classList.contains('is-open')) { set(false); toggle.focus(); }
+    });
+    $$('#site-nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  }
+
+  /* ---------- galleries: counter "01 / 06" and previous / next ---------- */
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function initGallery(g) {
+    var track = $('.gallery-track', g);
+    var items = $$('.gallery-item', g);
+    var controls = $('.gallery-controls', g);
+    var count = $('.gallery-count', g);
+    var prev = $('[data-prev]', g);
+    var next = $('[data-next]', g);
+    if (!track || items.length < 2 || !controls) return;
+    controls.hidden = false;
+    var current = 0;
+    function update() {
+      var left = track.scrollLeft;
+      var best = 0;
+      items.forEach(function (it, i) {
+        if (Math.abs(it.offsetLeft - track.offsetLeft - left) < Math.abs(items[best].offsetLeft - track.offsetLeft - left)) best = i;
+      });
+      var atEnd = left + track.clientWidth >= track.scrollWidth - 4;
+      current = atEnd ? items.length - 1 : best;
+      count.textContent = pad(current + 1) + ' / ' + pad(items.length);
+      prev.disabled = left <= 4;
+      next.disabled = atEnd;
+    }
+    function go(i) {
+      i = Math.max(0, Math.min(items.length - 1, i));
+      track.scrollTo({ left: items[i].offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    prev.addEventListener('click', function () { go(current - 1); });
+    next.addEventListener('click', function () { go(current + 1); });
+    var ticking = false;
+    track.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { ticking = false; update(); });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  /* ---------- home video: only on wide screens, without reduced motion or data saving ---------- */
+  function initVideo() {
+    var media = $('.hero-media[data-src]');
+    var button = $('.video-toggle');
+    if (!media || !button || reduceMotion) return;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (saveData || !window.matchMedia('(min-width: 48rem)').matches) return;
+    var video = document.createElement('video');
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('aria-hidden', 'true');
+    video.preload = 'auto';
+    video.src = media.getAttribute('data-src');
+    video.addEventListener('canplay', function () {
+      var img = $('img', media);
+      media.insertBefore(video, img);
+      if (img) img.hidden = true;
+      button.hidden = false;
+    }, { once: true });
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {});
+    button.addEventListener('click', function () {
+      if (video.paused) { video.play(); button.textContent = 'Pause video'; button.setAttribute('aria-pressed', 'false'); }
+      else { video.pause(); button.textContent = 'Play video'; button.setAttribute('aria-pressed', 'true'); }
+    });
+  }
+
+  /* ---------- enquiry: prefill from the link, open the visitor's own e-mail or WhatsApp ---------- */
+  function initEnquiry() {
+    var form = $('#enquiry');
+    if (!form) return;
+    var status = $('#form-status');
+    var params = new URLSearchParams(location.search);
+    ['destination', 'stay', 'interest'].forEach(function (key) {
+      var value = params.get(key);
+      var select = form.elements[key];
+      if (!value || !select) return;
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === value) { select.value = value; break; }
+      }
+    });
+    function label(name) {
+      var el = form.elements[name];
+      if (!el || !el.value) return '';
+      return el.tagName === 'SELECT' ? el.options[el.selectedIndex].text : el.value.trim();
+    }
+    function message() {
+      var lines = [
+        ['Name', label('name')], ['E-mail', label('email')], ['Phone', label('phone')],
+        ['Destination', label('destination')], ['Where to stay', label('stay')],
+        ['Interested in', label('interest')], ['Group size', label('group')], ['Dates', label('dates')]
+      ].filter(function (l) { return l[1]; }).map(function (l) { return l[0] + ': ' + l[1]; });
+      var note = label('message');
+      if (note) lines.push('', note);
+      return lines.join('\n');
+    }
+    function valid() {
+      if (form.reportValidity()) return true;
+      status.textContent = 'Please add your name and a valid e-mail address.';
+      return false;
+    }
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (!valid()) return;
+      var email = form.getAttribute('data-email');
+      location.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Trip enquiry: ' + label('name')) +
+        '&body=' + encodeURIComponent(message());
+      status.textContent = 'Your e-mail app should open with the message ready. Send it from there. If nothing opens, write to ' + email + '.';
+    });
+    var wa = $('#send-whatsapp');
+    if (wa) wa.addEventListener('click', function () {
+      if (!valid()) return;
+      window.open('https://wa.me/' + form.getAttribute('data-whatsapp') + '?text=' + encodeURIComponent(message()), '_blank', 'noopener');
+      status.textContent = 'WhatsApp should open with the message ready. Send it from there.';
+    });
+  }
+
+  /* ---------- map: Leaflet and the OpenStreetMap tiles load only after the click ---------- */
+  function load(tag, attrs) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement(tag);
+      Object.keys(attrs).forEach(function (k) { el[k] = attrs[k]; });
+      el.onload = resolve;
+      el.onerror = reject;
+      document.head.appendChild(el);
+    });
+  }
+  function initMap() {
+    var box = $('#map');
+    var button = $('#map-load');
+    if (!box || !button) return;
+    button.addEventListener('click', function () {
+      button.disabled = true;
+      button.textContent = 'Loading…';
+      Promise.all([
+        load('link', { rel: 'stylesheet', href: '/assets/vendor/leaflet/leaflet.css' }),
+        load('script', { src: '/assets/vendor/leaflet/leaflet.js' })
+      ]).then(function () { buildMap(box); }, function () { button.textContent = 'The map could not be loaded'; });
+    });
+  }
+  function el(tag, text, href) {
+    var n = document.createElement(tag);
+    if (href) n.href = href;
+    n.textContent = text;
+    return n;
+  }
+  function buildMap(box) {
+    var pins = JSON.parse(box.getAttribute('data-pins'));
+    var consent = $('.map-consent', box);
+    if (consent) consent.parentNode.removeChild(consent);
+    var map = L.map(box, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    var bounds = [];
+    pins.forEach(function (p) {
+      var icon = L.divIcon({ className: 'map-pin' + (p.s.length ? ' map-pin--stay' : ''), html: '<span></span>', iconSize: [20, 20], iconAnchor: [10, 10] });
+      var popup = document.createElement('div');
+      var title = el('p', '');
+      title.className = 'map-popup-title';
+      title.appendChild(el('a', p.n, p.u));
+      popup.appendChild(title);
+      if (p.s.length) {
+        var ul = document.createElement('ul');
+        ul.className = 'map-popup-list';
+        p.s.forEach(function (s) { var li = document.createElement('li'); li.appendChild(el('a', s[0], s[1])); ul.appendChild(li); });
+        popup.appendChild(ul);
+      }
+      L.marker([p.lat, p.lon], { icon: icon, title: p.n, alt: p.n }).addTo(map).bindPopup(popup);
+      bounds.push([p.lat, p.lon]);
+    });
+    map.fitBounds(L.latLngBounds(bounds).pad(0.08));
+  }
+
+  function ready() {
+    initMenu();
+    $$('[data-gallery]').forEach(initGallery);
+    initVideo();
+    initEnquiry();
+    initMap();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
+})();

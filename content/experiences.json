@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "ski-coaching",
+    "title": "Ski and snowboard coaching",
+    "status": "Available now",
+    "featured": true,
+    "text": "The heart of EverFlow since day one. Private, multilingual coaching: race-honed technique, smart progression, and days on snow shaped around your level and pace.",
+    "image": "assets/img/experiences/ski",
+    "alt": "A snowboarder carving through fresh snow"
+  },
+  {
+    "slug": "hotels-and-chalets",
+    "title": "Hotels and chalets",
+    "status": "By request",
+    "featured": true,
+    "text": "Hotels, chalets and mountain houses we know, matched to your group and arranged as part of one plan. [See where our guests stay](/stay/).",
+    "image": "assets/img/experiences/lodging",
+    "alt": "A chalet kitchen and dining room with mountain views"
+  },
+  {
+    "slug": "heli-and-backcountry",
+    "title": "Heli and backcountry",
+    "status": "By request",
+    "featured": true,
+    "text": "Untracked terrain with certified local guides: heli days, ski touring and freeride coaching, planned around the conditions and delivered with an uncompromising safety standard.",
+    "image": "assets/img/experiences/heli",
+    "alt": "A red helicopter above snowy mountains"
+  },
+  {
+    "slug": "private-guiding",
+    "title": "Private guiding: hiking and biking",
+    "status": "By request",
+    "text": "Days on foot or by bike with certified local guides, from easy valley trails to high mountain routes.",
+    "image": "assets/img/experiences/guiding",
+    "alt": "A mountain biker on a forest trail"
+  },
+  {
+    "slug": "culinary-and-wine",
+    "title": "Culinary and wine",
+    "status": "By request",
+    "text": "Mountain huts, chef's tables and wine evenings, reserved around your days on the mountain.",
+    "image": "assets/img/experiences/culinary",
+    "alt": "Cheese fondue on a table set for friends"
+  },
+  {
+    "slug": "wellness-and-spa",
+    "title": "Wellness and spa",
+    "status": "By request",
+    "text": "Spa time, massages and rest days, arranged with the hotels and spas we work with.",
+    "image": "assets/img/experiences/wellness",
+    "alt": "A wooden sauna with a window onto the forest"
+  },
+  {
+    "slug": "private-transport",
+    "title": "Private transport: jet and heli",
+    "status": "By request",
+    "text": "Airport transfers, private drivers, and helicopter or private jet connections, coordinated with the rest of the trip.",
+    "image": "assets/img/experiences/transport",
+    "alt": "A helicopter flying above the clouds near a summit"
+  },
+  {
+    "slug": "corporate-and-groups",
+    "title": "Corporate and group retreats",
+    "status": "By request",
+    "text": "Team days, offsites and group trips, with skiing, activities and venues in one plan.",
+    "image": "assets/img/experiences/corporate",
+    "alt": "A mountain hut at sunset"
+  },
+  {
+    "slug": "summer",
+    "title": "Summer in the Alps",
+    "status": "By request",
+    "text": "Lakes, high trails, biking and mountain huts: the Alps after the snow.",
+    "image": "assets/img/experiences/summer",
+    "alt": "A green alpine valley in summer"
+  }
+]

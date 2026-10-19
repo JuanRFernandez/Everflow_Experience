@@ -3,7 +3,7 @@ name: hotels
 description: Answer questions about the hotels EverFlow works with, put a hotel on the website, or turn a guest's request into an offer, always from the hotel library and with the source of every fact. Use when the user asks what a hotel offers, wants a hotel shown on the site, has received new material from a hotel, or has a request such as "four friends, 4 to 7 February, good skiing".
 ---
 
-# Hotels: the library, the website cards, the offers
+# Hotels: the library, the partner pages, the offers
 
 This repository is public. Three things never enter it: what a hotel pays us, who we talk to
 there, and any hotel that has not agreed to be shown. They live outside:
@@ -35,24 +35,32 @@ missing, copy `library.example.json` and ask Juan for the four paths.
    were left out). "Not found" is an answer; a guess is not. A price, a payment term or a
    bank detail that turns up in a document is not repeated in an answer.
 
-## A hotel on the website
+## A partner on the website
 
-1. `python scripts/library.py permissions`. Go on only if the hotel's line says `site: yes`.
+1. `python scripts/library.py permissions`. Go on only if the partner's line says `site: yes`.
    `never` and `no` stop the work: tell Juan what is missing and offer to draft the request.
-2. The section is "addresses we have visited ourselves": a hotel whose line shows no visit
-   date (`visited: -`) does not get a card.
-3. Write the facts as claim, quote, document and page into a facts file next to the library
-   (`facts/<hotel>.facts.json`) and run `python scripts/library.py verify <file>`. Every fact
-   on the card must pass. Facts that change with the season, and prices, do not go on a card.
-4. Copy a card in `index.html`. With photos: the `.stay-media` block. Without photos yet: the
-   `.stay-panel` block. The words are ours; the hotel's programme is named as the hotel's.
-5. Photos only when the register says `photos: yes`, with the credit line exactly as written
-   there. Pick two or three, save them at about 1000 pixels and under 250 KB without their
-   metadata in `assets/img/stays/<hotel>/`, and add the hotel to "Urheberrecht und
-   Bildnachweise" in `impressum.html` with a new "Stand" date.
-6. No downloads of hotel documents unless the register says `brochure: yes`.
-7. `python scripts/check.py`, a look at the page in a browser at full and at phone width,
-   then a pull request. One hotel, one pull request. Add the hotel to `docs/HOTEL_MATERIAL.md`.
+   The register records the basis (the partner's words in writing, or Juan's decision with its
+   date); a decision that is not in the register is not a basis. A partner the register shows
+   without its name (the chalets in Megève) is never named in the repository.
+2. Write the facts as claim, quote, document and page into a facts file next to the library
+   (`facts/<partner>.facts.json`) and run `python scripts/library.py verify <file>`. Every fact
+   on the page must pass, or stand on the partner's official website, which the page links.
+   Facts that change with the season, and prices, do not go on the page.
+3. Add the partner to `content/partners.json`: `register` (its exact name in the register),
+   `place` (a slug in `content/destinations.json`; add the place if it is new), our words for
+   `card`, `lead`, `facts`, `why`, the partner's own programme under `arranges`, `provider`,
+   `credit` exactly as the register writes it, and `photos`.
+4. Photos only when the register says `photos: yes`:
+   `uv run --with pillow python scripts/photos.py stay <partner> <name> "<original under the material folder>"`
+   (a photo inside a zip: `"<zip>::<member>"`). Four to eight photos: outside, a room, food or
+   spa, the surroundings. The script refuses what the register does not allow and writes WebP
+   files without metadata into `assets/img/stays/<partner>/`; every photo is shown with
+   "© <credit>". The Impressum lists the credit by itself: change `impressum_stand` in
+   `content/site.json`.
+5. No downloads of partner documents unless the register says `brochure: yes`.
+6. `python scripts/build.py`, `python scripts/check.py`, a look at the pages in a browser at
+   full and at phone width (`python -m http.server`), then a pull request. One partner, one
+   pull request. Add the partner to `docs/HOTEL_MATERIAL.md`.
 
 ## An offer for a guest
 

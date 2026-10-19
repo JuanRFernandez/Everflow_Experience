@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "kempinski-muenchen",
+    "register": "Hotel Vier Jahreszeiten Kempinski München",
+    "name": "Hotel Vier Jahreszeiten Kempinski München",
+    "kind": "Hotel",
+    "place": "munich",
+    "location": "Maximilianstraße, Munich",
+    "card": "Munich's grand hotel since 1858, on Maximilianstraße.",
+    "lead": "Munich's grand hotel since 1858, on Maximilianstraße. The natural first or last night of an alpine week: arrive, settle in, and let the city set the tone before the mountains.",
+    "facts": [
+      "On Maximilianstraße since 1858",
+      "Rooms and suites up to the presidential suites",
+      "The hotel's own Munich Eras programme, described below"
+    ],
+    "why": "A calm first night after a long flight, or a last evening in the city before flying home. From here the mountains are a short drive away the next morning.",
+    "arranges": {
+      "title": "The Munich Eras, curated by the hotel.",
+      "text": "Three Eras designed by the hotel's Resident Curator: Royalty, Adventure and Handmade. For example, a private helicopter morning over five royal castles with the first visit of the day to Hohenschwangau Castle; a run through the English Garden with a football legend; brewing at Munich's second-smallest craft brewery.",
+      "small": "A programme of the hotel, delivered by the hotel and its Local Insiders. We build it into your plan."
+    },
+    "brochure": {
+      "file": "assets/stays/kempinski-muenchen/The-Munich-Eras_Hotel-Vier-Jahreszeiten-Kempinski-Muenchen_official-brochure.pdf",
+      "label": "The Munich Eras: the hotel's official brochure (PDF, unmodified), published with the hotel's permission"
+    },
+    "links": [
+      {"label": "Programme page on kempinski.com", "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences"},
+      {"label": "The hotel on kempinski.com", "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten"}
+    ],
+    "provider": "The hotel stay is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH). The Munich Eras are the hotel's programme and are reserved through the hotel. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Hotel Vier Jahreszeiten Kempinski München",
+    "photos": [
+      {"name": "lobby", "alt": "The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome"},
+      {"name": "grand-deluxe-room", "alt": "A Grand Deluxe Room"},
+      {"name": "jahreszeiten-bar", "alt": "The Jahreszeiten Bar"},
+      {"name": "pool", "alt": "The indoor pool"},
+      {"name": "junior-suite", "alt": "A Junior Suite with a sitting area"}
+    ]
+  },
+  {
+    "slug": "kempinski-berchtesgaden",
+    "register": "Kempinski Hotel Berchtesgaden",
+    "name": "Kempinski Hotel Berchtesgaden",
+    "kind": "Hotel",
+    "place": "berchtesgaden",
+    "location": "Berchtesgaden",
+    "card": "A thousand metres up, looking out over the Berchtesgaden Alps.",
+    "lead": "A thousand metres up, looking out over the Berchtesgaden Alps. A hotel for families who want more from winter than downhill skiing: on the days off the slopes, the hotel's Activity Team arranges the outings.",
+    "facts": [
+      "The local winter sports school plans your lessons with you in the hotel lobby: skiing, snowboarding, cross-country and snowshoeing, with full days in the neighbouring Austrian ski areas",
+      "Cross-country trails a five-minute drive away, and the 2.3 km natural toboggan run at Hochschwarzeck, reached by chairlift",
+      "In summer: e-bike tours to Lake Königssee, golf, and walks to mountain huts"
+    ],
+    "why": "For families who want a week with variety: a morning of lessons, an afternoon on the toboggan run, and a hotel that organises the rest.",
+    "arranges": {
+      "title": "Activities arranged by the hotel.",
+      "text": "On the days off the slopes, the hotel's Activity Team arranges the outings.",
+      "small": "The activities are run by the hotel and by the local providers it works with."
+    },
+    "links": [
+      {"label": "The hotel on kempinski.com", "url": "https://www.kempinski.com/berchtesgaden"}
+    ],
+    "provider": "The hotel stay is provided by Kempinski Hotel Berchtesgaden; activities are reserved through the hotel. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Kempinski Hotel Berchtesgaden",
+    "photos": [
+      {"name": "indoor-pool", "alt": "The indoor pool"},
+      {"name": "exterior", "alt": "Kempinski Hotel Berchtesgaden seen from the garden"},
+      {"name": "berchtesgaden-alps", "alt": "The Berchtesgaden Alps in autumn, with the first snow"}
+    ]
+  },
+  {
+    "slug": "rote-wand",
+    "register": "Rote Wand Gourmet Hotel",
+    "name": "Rote Wand Gourmet Hotel",
+    "kind": "Hotel",
+    "place": "lech",
+    "location": "Zug, Lech am Arlberg",
+    "card": "A hotel known for its cooking, in Zug just outside Lech.",
+    "lead": "In Zug, the hamlet just outside Lech am Arlberg. A hotel known for its cooking, with the slopes within easy reach: the Zuger Bergbahn gondola takes you from Zug into the Lech Zürs ski area.",
+    "facts": [
+      "62 rooms and suites, including family suites",
+      "Heated indoor and outdoor pool and a 1,500 m² spa",
+      "Ski rental, shop and servicing in the hotel"
+    ],
+    "why": "For guests who plan the day around lunch and dinner as much as around the snow, and for families who want a quiet base close to the lifts.",
+    "arranges": {
+      "title": "Run by the hotel.",
+      "text": "The restaurants, the spa and the hotel's activities are run by the hotel.",
+      "small": ""
+    },
+    "links": [
+      {"label": "rotewand.com", "url": "https://www.rotewand.com"}
+    ],
+    "provider": "The hotel stay is provided by Rote Wand Gourmet Hotel. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Rote Wand Gourmet Hotel / Robert Rieger",
+    "photos": [
+      {"name": "hotel-summer", "alt": "Rote Wand Gourmet Hotel and the church of Zug in summer"},
+      {"name": "room-view", "alt": "A room with a large window onto the mountains"},
+      {"name": "pool", "alt": "The outdoor pool with the mountains behind"},
+      {"name": "stube", "alt": "A wood-panelled dining room"},
+      {"name": "breakfast", "alt": "Breakfast on a wooden table"},
+      {"name": "lounge", "alt": "The lounge with armchairs and tall windows"},
+      {"name": "room-bed", "alt": "A bedroom panelled in pine"},
+      {"name": "meadow", "alt": "Sun loungers on a meadow at sunset"}
+    ]
+  }
+]
