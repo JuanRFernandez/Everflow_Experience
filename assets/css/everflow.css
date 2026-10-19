@@ -272,6 +272,9 @@ th{color:var(--ink);font-weight:600}
 .prose h2{font-size:var(--step-2);margin-top:2rem}
 .prose h3{font-size:var(--step-1);margin-top:1.5rem}
 .prose :first-child{margin-top:0}
+.prose figure{margin:1.25rem 0 1.5rem}
+.prose figure img{width:100%}
+.prose figure .credit{margin-top:.5rem}
 .table-wrap{overflow-x:auto;margin-bottom:1rem}
 
 /* ---------- enquiry ---------- */
@@ -313,13 +316,15 @@ th{color:var(--ink);font-weight:600}
 /* ---------- footer ---------- */
 .site-footer{background:var(--ink);color:#bdb6a6;padding-block:clamp(3rem,2rem + 4vw,5rem) 1.5rem;font-size:.9375rem}
 .footer-grid{display:grid;gap:2rem;grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (min-width:64rem){.footer-grid{grid-template-columns:1.6fr repeat(4,1fr)}}
-.footer-brand{grid-column:1/-1}
-@media (min-width:64rem){.footer-brand{grid-column:auto}}
+.footer-brand,.footer-contact{grid-column:1/-1}  /* phones and tablets: the e-mail address and the numbers get the full width */
+@media (min-width:64rem){
+  .footer-grid{grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr)) auto minmax(0,1fr)}  /* contact: as wide as its longest line */
+  .footer-brand,.footer-contact{grid-column:auto}
+}
 .footer-brand img{height:3rem;width:auto;margin-bottom:1rem}
 .footer-title{font:600 .75rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-on-ink);margin-bottom:.8rem}
 .site-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
-.site-footer a{color:#e7e1d3;text-decoration:none}
+.site-footer a{color:#e7e1d3;text-decoration:none;overflow-wrap:break-word}
 .site-footer a:hover{color:#fff;text-decoration:underline}
 .footer-bottom{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.12);font-size:var(--step--1)}
 .footer-bottom p{margin:0}

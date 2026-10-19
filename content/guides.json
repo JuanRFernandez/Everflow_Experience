@@ -1,0 +1,154 @@
+[
+  {
+    "slug": "ski-week-with-kids",
+    "name": "A ski week with kids in the Alps",
+    "eyebrow": "Guide · Families",
+    "h1": "A ski week with kids.",
+    "lead": "A good family week is planned around the youngest skier. How we plan one, and where we would go.",
+    "description": "How to plan a family ski week in the Alps: a short journey, a private coach in your language, a day off the skis, chalet or hotel, and the places we suggest to families.",
+    "card": "A short journey, the right teacher, a day off the skis, and the places we suggest to families.",
+    "image": {"place": "megeve"},
+    "related": ["garmisch-partenkirchen", "seefeld", "berchtesgaden", "megeve", "lech", "engelberg"],
+    "interest": "ski-coaching",
+    "sections": [
+      {
+        "h2": "Keep the journey short.",
+        "text": [
+          "Small children feel every hour on the road, so the easiest family weeks start close to an airport. Seefeld is about 30 minutes from Innsbruck Airport, Garmisch-Partenkirchen about an hour and a half from Munich Airport, and Megève about an hour and a quarter from Geneva. We arrange the transfer, so the first day starts on the snow, not on the motorway."
+        ]
+      },
+      {
+        "h2": "Choose the teacher.",
+        "text": [
+          "Children learn fastest with someone who speaks their language and follows their pace. Private coaching is where EverFlow began, as a ski school in Garmisch-Partenkirchen. We coach in English, Spanish and Portuguese, with German-speaking instructors across the Alps, and shape each day around the child: a first slide on the nursery slope, or a first red run with the parents. [Ski and snowboard coaching](/experiences/#ski-coaching)."
+        ]
+      },
+      {
+        "h2": "Plan a day without skis.",
+        "image": {"place": "berchtesgaden"},
+        "text": [
+          "Even keen young skiers are tired by the middle of the week. A morning of tobogganing, a winter walk or an afternoon in the pool keeps the week fun for everyone.",
+          "Berchtesgaden is made for this. At the [Kempinski Hotel Berchtesgaden](/stay/kempinski-berchtesgaden/), the local winter sports school plans the lessons with you in the lobby, and the 2.3 km natural toboggan run at Hochschwarzeck is reached by chairlift. Seefeld has the same calmer rhythm on a sunny plateau: [Alpin Resort Sacher Seefeld](/stay/sacher-seefeld/) has a 4,700 m² wellness area with an infinity pool and a natural bathing lake."
+        ]
+      },
+      {
+        "h2": "A chalet, or a hotel?",
+        "text": [
+          "A chalet gives a family space and its own rhythm: meals when the children are hungry, a living room to play in after skiing, bedtimes nobody else hears. In Megève, some of the [chalets we arrange](/stay/chalets-megeve/) let you ski back to the door. A hotel looks after everything and adds a spa and restaurants: the [Rote Wand Gourmet Hotel](/stay/rote-wand/) near Lech has family suites and a heated indoor and outdoor pool. More in [Chalet or hotel?](/guides/chalet-or-hotel/)"
+        ]
+      },
+      {
+        "h2": "When to go.",
+        "text": [
+          "The weeks around Christmas and New Year, the February school holidays and Easter are the busiest in the Alps, and the larger chalets fill early. January, once New Year is over, and March are usually quieter. For families from Brazil and Argentina, the summer school holidays fall right in the alpine ski season. Tell us your dates as early as you can."
+        ]
+      },
+      {
+        "h2": "Where we would go.",
+        "places": [
+          ["garmisch-partenkirchen", "Where EverFlow began as a ski school: varied terrain for a first ski week, an hour and a half from Munich Airport."],
+          ["seefeld", "A sunny plateau for gentle skiing and cross-country, with big hotel spas, 30 minutes from Innsbruck Airport."],
+          ["berchtesgaden", "Winter beyond the piste: lessons, tobogganing and Lake Königssee, with skiing close by."],
+          ["megeve", "A village of chalets with wide, tree-lined slopes, about an hour and a quarter from Geneva."],
+          ["lech", "A small village to ski from, on one of the largest connected ski areas in Austria."],
+          ["engelberg", "An easy trip from Zurich or Lucerne; at the Kempinski, private instructors are arranged in the hotel."]
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "lech-or-st-moritz",
+    "name": "Lech or St. Moritz?",
+    "eyebrow": "Guide · Choosing a resort",
+    "h1": "Lech or St. Moritz?",
+    "lead": "Two of the great winter names of the Alps, and two very different weeks. How they compare, and how we help guests choose.",
+    "description": "Lech am Arlberg or St. Moritz? How the two compare for skiing, setting, getting there and where to stay, and how we help guests choose.",
+    "card": "Two great winter names and two very different weeks: the skiing, the setting, the journey and where to stay.",
+    "image": {"place": "lech"},
+    "related": ["lech", "st-moritz"],
+    "sections": [
+      {
+        "h2": "The short answer.",
+        "text": [
+          "Choose Lech for the skiing: big terrain without big crowds, a season that usually runs from early December to late April, and a small village to come back to. Choose St. Moritz for the setting: classic grand hotels, sunny pistes and a winter calendar full of events on the frozen lake."
+        ]
+      },
+      {
+        "h2": "Lech: the skiing.",
+        "text": [
+          "Lech is a village in Vorarlberg, on the Arlberg. It is part of Ski Arlberg, one of the largest connected ski areas in Austria: Lech, Zürs, Zug, Oberlech, St. Anton, Stuben and Warth-Schröcken share one lift pass. Off-piste days are best with a local guide.",
+          "Lech is also a place for long lunches and good hotels. The [Rote Wand Gourmet Hotel](/stay/rote-wand/) in Zug is known for its cooking, and [Hotel & Chalet Aurelio](/stay/aurelio-lech/) sits directly on the Schlegelkopf slope, at about 1,500 m."
+        ]
+      },
+      {
+        "h2": "St. Moritz: the setting.",
+        "image": {"place": "st-moritz"},
+        "text": [
+          "St. Moritz lies at about 1,800 m in the Upper Engadin, with the slopes of Corviglia above the village and a lake below it that freezes in deep winter, when the season's events are held on the ice. The town hosted the Winter Olympics in 1928 and 1948 and is known for its classic grand hotels."
+        ]
+      },
+      {
+        "h2": "Getting there.",
+        "text": [
+          "Lech is about an hour and a half by car from Innsbruck Airport and two and a half hours from Zurich; by train, to Langen am Arlberg or St. Anton, then a short transfer. St. Moritz is about three hours from Zurich by car or train, and private flights land at Engadin Airport in Samedan, a few minutes away."
+        ]
+      },
+      {
+        "h2": "Where to stay.",
+        "text": [
+          "In Lech we know three places well: a hotel known for its food, a boutique hotel on the slope, and private chalets with the service of a hotel. In St. Moritz we arrange hotels on request."
+        ],
+        "stays": ["rote-wand", "aurelio-lech", "pepper-collection"]
+      },
+      {
+        "h2": "Still not sure?",
+        "text": [
+          "Tell us who is travelling and what a good day looks like for you. We will say which of the two fits better, or suggest a third place that fits better than both, from [Zermatt](/destinations/zermatt/) to [Cortina](/destinations/cortina/)."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "chalet-or-hotel",
+    "name": "Chalet or hotel?",
+    "eyebrow": "Guide · Where to stay",
+    "h1": "Chalet or hotel?",
+    "lead": "Both can make a perfect week. What each one gives you, and which we suggest for which group.",
+    "description": "A private chalet or a hotel for a ski week in the Alps? What each one gives you, which suits which group, and the chalets and hotels we know.",
+    "card": "What a private chalet gives you, what a hotel does, and which we suggest for which group.",
+    "image": {"experience": "hotels-and-chalets"},
+    "related": ["megeve", "lech", "seefeld"],
+    "interest": "hotels-and-chalets",
+    "sections": [
+      {
+        "h2": "A chalet: your house, your rhythm.",
+        "text": [
+          "A private chalet suits families and groups who want space and their own schedule: breakfast when everyone is up, one long table, a living room to meet in after skiing. With a chef, dinner happens at home.",
+          "In Megève we arrange [twenty-two houses](/stay/chalets-megeve/), twenty chalets and two apartments for 4 to 18 guests, many with an indoor pool, a spa or a cinema room. A concierge prepares the stay, and chefs, butlers and ski instructors are arranged on request. On the Arlberg, [pepper-collection](/stay/pepper-collection/) has chalets such as The Barn in Oberlech, with a butler around the clock and a private chef."
+        ]
+      },
+      {
+        "h2": "A hotel: everything looked after.",
+        "text": [
+          "A hotel suits couples, smaller families and anyone who wants a spa, restaurants and a team that looks after the details. Several hotels we know have very large spas: the [Interalpen-Hotel Tyrol](/stay/interalpen-tyrol/) more than 5,300 m², [Alpin Resort Sacher Seefeld](/stay/sacher-seefeld/) 4,700 m² and the [Schlosshotel Kitzbühel](/stay/schlosshotel-kitzbuehel/) 3,000 m². At the [Kempinski Palace Engelberg](/stay/kempinski-engelberg/), private instructors are arranged in the hotel and boots are dried for the next day."
+        ]
+      },
+      {
+        "h2": "Or both.",
+        "text": [
+          "Some places offer both. At [Hotel & Chalet Aurelio](/stay/aurelio-lech/) in Lech, the Club Chalet has eight rooms for up to 16 guests, with its own spa and indoor pool, and the hotel next door."
+        ]
+      },
+      {
+        "h2": "Which one for you.",
+        "text": [
+          "Families with young children and groups of friends: usually a chalet, for the space and the rhythm. Couples, and anyone who wants a spa and restaurants under one roof: usually a hotel. Tell us who is travelling, and we suggest one or two places that fit, with the reasons, and arrange the stay together with coaching, transfers and the rest of the week."
+        ]
+      },
+      {
+        "h2": "The chalets and hotels we know.",
+        "stays": ["chalets-megeve", "pepper-collection", "aurelio-lech", "interalpen-tyrol", "sacher-seefeld", "rote-wand"]
+      }
+    ]
+  }
+]

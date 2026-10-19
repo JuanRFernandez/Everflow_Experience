@@ -27,7 +27,7 @@ Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
 5. **No prices, no booking, no payment on the site.**
 6. **Legal pages stay current.** A change of address, tax status, tool or provider goes into
    `content/legal/` together with a new "Stand" / "Last updated" date in `content/site.json`.
-7. **Never edit a generated page** (`index.html`, `destinations/`, `stay/`, `es/`, `pt/`,
+7. **Never edit a generated page** (`index.html`, `destinations/`, `stay/`, `guides/`, `es/`, `pt/`,
    `impressum.html` …). Change `content/` or `scripts/build.py`, then run `python scripts/build.py`.
 8. **Spanish and Portuguese follow the English.** A new or changed English text on a page that
    exists in all three languages gets its translation in `content/i18n/es.json` and `pt.json` in
