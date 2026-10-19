@@ -5,16 +5,25 @@
   "description": "Tailor-made ski and mountain trips, planned by one host. Based in Munich, hosted across the Alps.",
   "email": "info@everflowexperience.com",
   "whatsapp": [
-    {"number": "491759505075", "label": "+49 175 9505075"},
-    {"number": "5492616940320", "label": "+54 9 261 694-0320"}
+    {
+      "number": "491759505075",
+      "label": "+49 175 9505075"
+    },
+    {
+      "number": "5492616940320",
+      "label": "+54 9 261 694-0320"
+    }
   ],
   "instagram": "everflowexperience",
   "copyright": "© 2022–2026 EverFlow Experience · Juan Rodrigo Fernandez, München",
   "impressum_stand": "19. Oktober 2026",
-  "datenschutz_stand": {"en": "19 October 2026", "de": "19. Oktober 2026"},
+  "datenschutz_stand": {
+    "en": "19 October 2026",
+    "de": "19. Oktober 2026"
+  },
   "commission_note": "For hotel and chalet stays we arrange, we may receive a commission from the provider.",
   "credits_de": [
-    "Fotos der Destinationen und Erlebnisse sowie das Video auf der Startseite (Zugspitze): lizenziertes Bildmaterial.",
+    "Fotos von München und der Zugspitze, Fotos der Erlebnisse sowie das Video auf der Startseite (Zugspitze): lizenziertes Bildmaterial.",
     "Das „Profi Ski“-Zeichen ist ein Zeichen des Deutschen Skilehrerverbands (DSLV)."
   ]
 }

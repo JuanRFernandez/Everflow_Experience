@@ -596,8 +596,8 @@ def place_page(p):
     if stays:
         stay_html = grid([partner_card(s) for s in stays])
     else:
-        stay_html = ('<p class="note">We place guests in hotels and chalets we know in and around '
-                     f'{e(p["name"])}. <a href="{enquire_url(p["slug"])}">Tell us what you need</a> and we suggest the right one.</p>')
+        stay_html = (f'<p class="note">We arrange hotels and chalets in {e(p["name"])} on request. '
+                     f'<a href="{enquire_url(p["slug"])}">Tell us what you need</a> and we suggest the right one for your group.</p>')
     actions = f'<a class="button" href="{enquire_url(p["slug"])}">Plan a trip to {e(p["name"])}</a>'
     body = f'''{page_head(f"{country['name']} / {coords(p['lat'], p['lon'])}", p["name"], p["tagline"], actions,
                           [("Destinations", "/destinations/"), (country["name"], f"/destinations/#{country['slug']}"), (p["name"], "")])}
@@ -887,12 +887,12 @@ def legal(name):
         im = p.get('image') or {}
         if not im.get('license'):
             continue
-        src = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
+        origin = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
         lic = f'<a href="{a(im["license_url"])}" rel="noopener">{e(im["license"])}</a>'
         same_de = '; die bearbeitete Fassung steht unter derselben Lizenz' if 'SA' in im['license'] else ''
         same_en = '; the adapted version is available under the same licence' if 'SA' in im['license'] else ''
-        credits_de.append(f'<li>{e(p["name"])}: Foto von {e(im["credit"])}, {src}, Lizenz {lic}; Ausschnitt und Größe angepasst{same_de}.</li>')
-        credits_en.append(f'<li>{e(p["name"])}: photo by {e(im["credit"])}, {src}, licence {lic}; cropped and resized{same_en}.</li>')
+        credits_de.append(f'<li>{e(p["name"])}: Foto von {e(im["credit"])}, {origin}, Lizenz {lic}; Ausschnitt und Größe angepasst{same_de}.</li>')
+        credits_en.append(f'<li>{e(p["name"])}: photo by {e(im["credit"])}, {origin}, licence {lic}; cropped and resized{same_en}.</li>')
     for c in SITE['credits_de']:
         credits_de.append(f'<li>{e(c)}</li>')
     slots = {
