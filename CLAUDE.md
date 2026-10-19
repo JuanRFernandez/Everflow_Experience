@@ -4,8 +4,10 @@ The website of EverFlow Experience: plain HTML, CSS and JavaScript, served by Gi
 from `master`, generated from `content/*.json` by `scripts/build.py`. `README.md` explains the
 structure; this file holds the rules.
 
-Answer Juan in the language he writes (usually Argentine Spanish). Everything on the site and
-in this repository is English, with German for the legal pages.
+Answer Juan in the language he writes (usually Argentine Spanish). Everything in this
+repository is English. The site is English, with German for the legal pages, and the home
+page, the destinations and the enquiry form also exist in Spanish (`/es/`) and Brazilian
+Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
 
 ## Rules
 
@@ -25,9 +27,12 @@ in this repository is English, with German for the legal pages.
 5. **No prices, no booking, no payment on the site.**
 6. **Legal pages stay current.** A change of address, tax status, tool or provider goes into
    `content/legal/` together with a new "Stand" / "Last updated" date in `content/site.json`.
-7. **Never edit a generated page** (`index.html`, `destinations/`, `stay/`, `impressum.html` …).
-   Change `content/` or `scripts/build.py`, then run `python scripts/build.py`.
-8. Run `python scripts/check.py` before every commit. It must end with `0 failures`.
+7. **Never edit a generated page** (`index.html`, `destinations/`, `stay/`, `es/`, `pt/`,
+   `impressum.html` …). Change `content/` or `scripts/build.py`, then run `python scripts/build.py`.
+8. **Spanish and Portuguese follow the English.** A new or changed English text on a page that
+   exists in all three languages gets its translation in `content/i18n/es.json` and `pt.json` in
+   the same pull request, made with DeepL (ES-419, PT-BR). `scripts/check.py` warns until it has one.
+9. Run `python scripts/check.py` before every commit. It must end with `0 failures`.
 
 ## The hotels
 

@@ -12,13 +12,16 @@
     a label; every <img> has alt, width and height.
  5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
     whose caption starts with "©" and names the partner's credit; every credit is in the Impressum.
- 6. Words: no price anywhere; no booking, commission or "racers" outside the legal pages; no regional brand line;
-    German quotes close with “; names that must never appear on the site do not.
+ 6. Words: no price anywhere; no booking, commission or "racers" outside the legal pages, and no
+    reserva/comisión/comissão on the Spanish and Portuguese pages; no regional brand line; German
+    quotes close with “; names that must never appear on the site do not.
  7. This repository is public: nothing of the hotel library is in it (local configuration, extracted
     text, facts files, the permission register, internal hotel documents), and no text file holds a
     Drive path, a local path, a Drive link or an e-mail address other than the site's own.
- 8. sitemap.xml lists exactly the pages that may be indexed.
-Unreferenced files under assets/img, assets/video, assets/css, assets/js are reported as warnings.
+ 8. sitemap.xml lists exactly the pages that may be indexed; every language version a page names
+    (hreflang) exists.
+Warnings: unreferenced files under assets/img, assets/video, assets/css, assets/js; a text that has
+no translation in content/i18n/ yet (the page shows it in English), and a translation no page uses.
 Exit code 1 on any failure.
 """
 import codecs
@@ -61,6 +64,8 @@ CODE = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.I | re.S)
 TAGS = re.compile(r'<[^>]+>')
 BOOKING = re.compile(r'\bbook(?:s|ed|ing|ings)?\b|request has been received', re.I)
 NOT_SAID = re.compile(r'\bcommissions?\b|\bracers?\b', re.I)  # Juan, 19.10.2026: no commissions, no "racers"
+NOT_SAID_ES_PT = re.compile(r'\breserv\w*|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)  # the same in es/ and pt/
+ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
 REGIONAL = re.compile('bavarian' + r'\s+' + 'alps', re.I)
 NEVER = [codecs.decode(w, 'rot13') for w in ('rqra yhkhel', 'rqrayhkhel', 'ubgry qnf gveby', 'enr cvafba')]
 DE_QUOTE = re.compile(r'„[^“"]{0,200}"')
@@ -192,6 +197,12 @@ for path, text in out.items():
 for path in build.generated_on_disk():
     if out and path not in out:
         failures.append(f'{path} was generated before but no longer is: run python scripts/build.py')
+for code, texts in sorted(build.MISSING.items()):  # the page shows the English text meanwhile
+    for s in sorted(texts):
+        warnings.append(f'content/i18n/{code}.json: no translation yet for "{s[:70]}"')
+for code in sorted(build.I18N):
+    for s in sorted(set(build.I18N[code]) - build.USED.get(code, set())):
+        warnings.append(f'content/i18n/{code}.json: "{s[:70]}" is no longer on any page; remove it')
 
 partners = json.load(open('content/partners.json', encoding='utf-8'))
 credits = {p['slug']: {build.credit_text(c) for c in build.partner_credits(p)} for p in partners}
@@ -210,8 +221,8 @@ for page in PAGES:
         if not os.path.isfile(target):
             failures.append(f'{page}: broken reference {raw}')
     for m in EXTERNAL_TAG.finditer(text):
-        if m.group(1).lower() == 'link' and re.search(r'rel\s*=\s*["\']?canonical', m.group(2) + text[m.end():m.end() + 80], re.I):
-            continue
+        if m.group(1).lower() == 'link' and re.search(r'rel\s*=\s*["\']?(?:canonical|alternate)\b', m.group(2) + text[m.end():m.end() + 80], re.I):
+            continue  # names a page, loads nothing
         failures.append(f'{page}: external <{m.group(1).lower()}> loaded on page view: {m.group(3)}')
     if p.stack or p.errors:
         failures.append(f'{page}: unbalanced tags {p.stack[:5]} {p.errors[:5]}')
@@ -246,6 +257,12 @@ for page in PAGES:
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings (say plan, arrange, enquire)')
         for m in NOT_SAID.finditer(visible):
             failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
+    if page.startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
+        for m in NOT_SAID_ES_PT.finditer(html.unescape(CODE.sub(' ', text))):
+            failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
+    for m in ALTERNATE.finditer(text):
+        if resolve('index.html', m.group(1)) not in PAGES:
+            failures.append(f'{page}: names {m.group(1)} as a language version, but there is no such page')
     for m in DE_QUOTE.finditer(visible):
         failures.append(f'{page}: German quote closed with a straight quote: {m.group(0)[:40]}')
 

@@ -96,9 +96,11 @@
     }, { once: true });
     var p = video.play();
     if (p && p.catch) p.catch(function () {});
+    var pauseLabel = button.getAttribute('data-pause') || 'Pause video';
+    var playLabel = button.getAttribute('data-play') || 'Play video';
     button.addEventListener('click', function () {
-      if (video.paused) { video.play(); button.textContent = 'Pause video'; button.setAttribute('aria-pressed', 'false'); }
-      else { video.pause(); button.textContent = 'Play video'; button.setAttribute('aria-pressed', 'true'); }
+      if (video.paused) { video.play(); button.textContent = pauseLabel; button.setAttribute('aria-pressed', 'false'); }
+      else { video.pause(); button.textContent = playLabel; button.setAttribute('aria-pressed', 'true'); }
     });
   }
 
@@ -107,6 +109,9 @@
     var form = $('#enquiry');
     if (!form) return;
     var status = $('#form-status');
+    var words = {};  // the page's language: the Spanish and Portuguese pages carry their texts in data-i18n
+    try { words = JSON.parse(form.getAttribute('data-i18n') || '{}'); } catch (err) { words = {}; }
+    function say(key, english) { return (words[key] || english).replace('{email}', form.getAttribute('data-email')); }
     var params = new URLSearchParams(location.search);
     ['destination', 'stay', 'interest'].forEach(function (key) {
       var value = params.get(key);
@@ -123,9 +128,10 @@
     }
     function message() {
       var lines = [
-        ['Name', label('name')], ['E-mail', label('email')], ['Phone', label('phone')],
-        ['Destination', label('destination')], ['Where to stay', label('stay')],
-        ['Interested in', label('interest')], ['Group size', label('group')], ['Dates', label('dates')]
+        [say('name', 'Name'), label('name')], [say('email', 'E-mail'), label('email')], [say('phone', 'Phone'), label('phone')],
+        [say('destination', 'Destination'), label('destination')], [say('stay', 'Where to stay'), label('stay')],
+        [say('interest', 'Interested in'), label('interest')], [say('group', 'Group size'), label('group')],
+        [say('dates', 'Dates'), label('dates')]
       ].filter(function (l) { return l[1]; }).map(function (l) { return l[0] + ': ' + l[1]; });
       var note = label('message');
       if (note) lines.push('', note);
@@ -133,22 +139,22 @@
     }
     function valid() {
       if (form.reportValidity()) return true;
-      status.textContent = 'Please add your name and a valid e-mail address.';
+      status.textContent = say('invalid', 'Please add your name and a valid e-mail address.');
       return false;
     }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (!valid()) return;
       var email = form.getAttribute('data-email');
-      location.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Trip enquiry: ' + label('name')) +
+      location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(say('subject', 'Trip enquiry: ') + label('name')) +
         '&body=' + encodeURIComponent(message());
-      status.textContent = 'Your e-mail app should open with the message ready. Send it from there. If nothing opens, write to ' + email + '.';
+      status.textContent = say('mail', 'Your e-mail app should open with the message ready. Send it from there. If nothing opens, write to {email}.');
     });
     var wa = $('#send-whatsapp');
     if (wa) wa.addEventListener('click', function () {
       if (!valid()) return;
       window.open('https://wa.me/' + form.getAttribute('data-whatsapp') + '?text=' + encodeURIComponent(message()), '_blank', 'noopener');
-      status.textContent = 'WhatsApp should open with the message ready. Send it from there.';
+      status.textContent = say('wa', 'WhatsApp should open with the message ready. Send it from there.');
     });
   }
 
