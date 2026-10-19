@@ -339,7 +339,7 @@ def footer():
       <p class="footer-title">{ui("Explore")}</p>
       <ul><li><a href="/stay/">{ui("Where to stay")}</a></li><li><a href="/experiences/">{ui("Experiences")}</a></li><li><a href="/guides/">{ui("Guides")}</a></li><li><a href="/about/">{ui("About")}</a></li><li><a href="{localized("/enquire/")}">{ui("Plan a trip")}</a></li></ul>
     </div>
-    <div>
+    <div class="footer-contact">
       <p class="footer-title">{ui("Contact")}</p>
       <ul><li><a href="mailto:{SITE["email"]}">{SITE["email"]}</a></li>{whatsapp}<li><a href="https://www.instagram.com/{SITE["instagram"]}" rel="noopener">Instagram @{SITE["instagram"]}</a></li></ul>
     </div>
@@ -798,7 +798,8 @@ def partner_page(p):
     if arr:
         brochure = ''
         if p.get('brochure'):
-            brochure = f'<p><a class="arrow-link" href="/{p["brochure"]["file"]}">{e(p["brochure"]["label"])}</a></p>'
+            mb = os.path.getsize(os.path.join(ROOT, p['brochure']['file'])) / 1e6
+            brochure = f'<p><a class="arrow-link" href="/{p["brochure"]["file"]}">{e(p["brochure"]["label"])} (PDF, {mb:.0f} MB)</a></p>'
         small = f'<p class="small">{t(arr["small"])}</p>' if arr.get('small') else ''
         arr_html = f'''<div class="panel">
       <h2>{e(arr["title"])}</h2>
