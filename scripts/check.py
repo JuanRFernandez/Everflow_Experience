@@ -193,7 +193,7 @@ for path in build.generated_on_disk():
         failures.append(f'{path} was generated before but no longer is: run python scripts/build.py')
 
 partners = json.load(open('content/partners.json', encoding='utf-8'))
-credits = {p['slug']: build.credit_text(p['credit']) for p in partners if p.get('photos')}
+credits = {p['slug']: {build.credit_text(c) for c in build.partner_credits(p)} for p in partners}
 
 # ---------------------------------------------------------------- 2-6. every page
 parsed = {}
@@ -235,8 +235,8 @@ for page in PAGES:
         caption = fig['caption'].strip()
         if not caption.startswith('©'):
             failures.append(f'{page}: photo {fig["stay"]} has no "©" credit under it')
-        elif slug in credits and credits[slug] not in caption:
-            failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", not "{credits[slug]}"')
+        elif slug in credits and caption not in credits[slug]:
+            failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", which is not a credit line of {slug} in content/partners.json')
     visible = html.unescape(TAGS.sub(' ', CODE.sub(' ', text)))
     for m in PRICE.finditer(html.unescape(CODE.sub(' ', text))):  # attributes count: alt, title, meta
         failures.append(f'{page}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
@@ -261,9 +261,10 @@ for page in PAGES:
 # Every credit shown under a photo is listed in the Impressum.
 if 'impressum.html' in parsed:
     imp = html.unescape(open('impressum.html', encoding='utf-8').read())
-    for slug, c in credits.items():
-        if c not in imp:
-            failures.append(f'impressum.html: the photo credit "{c}" ({slug}) is missing from "Urheberrecht und Bildnachweise"')
+    for slug, cs in credits.items():
+        for c in sorted(cs):
+            if c not in imp:
+                failures.append(f'impressum.html: the photo credit "{c}" ({slug}) is missing from "Urheberrecht und Bildnachweise"')
 
 for css in CSS:
     text = open(css, encoding='utf-8').read()

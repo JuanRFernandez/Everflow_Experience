@@ -24,17 +24,38 @@
       "label": "The Munich Eras: the hotel's official brochure (PDF, unmodified), published with the hotel's permission"
     },
     "links": [
-      {"label": "Programme page on kempinski.com", "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences"},
-      {"label": "The hotel on kempinski.com", "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten"}
+      {
+        "label": "Programme page on kempinski.com",
+        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences"
+      },
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten"
+      }
     ],
     "provider": "The hotel stay is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH). The Munich Eras are the hotel's programme and are reserved through the hotel. EverFlow arranges your stay; your contract is with the hotel.",
     "credit": "Hotel Vier Jahreszeiten Kempinski München",
     "photos": [
-      {"name": "lobby", "alt": "The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome"},
-      {"name": "grand-deluxe-room", "alt": "A Grand Deluxe Room"},
-      {"name": "jahreszeiten-bar", "alt": "The Jahreszeiten Bar"},
-      {"name": "pool", "alt": "The indoor pool"},
-      {"name": "junior-suite", "alt": "A Junior Suite with a sitting area"}
+      {
+        "name": "lobby",
+        "alt": "The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome"
+      },
+      {
+        "name": "grand-deluxe-room",
+        "alt": "A Grand Deluxe Room"
+      },
+      {
+        "name": "jahreszeiten-bar",
+        "alt": "The Jahreszeiten Bar"
+      },
+      {
+        "name": "pool",
+        "alt": "The indoor pool"
+      },
+      {
+        "name": "junior-suite",
+        "alt": "A Junior Suite with a sitting area"
+      }
     ]
   },
   {
@@ -58,14 +79,26 @@
       "small": "The activities are run by the hotel and by the local providers it works with."
     },
     "links": [
-      {"label": "The hotel on kempinski.com", "url": "https://www.kempinski.com/berchtesgaden"}
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/berchtesgaden"
+      }
     ],
     "provider": "The hotel stay is provided by Kempinski Hotel Berchtesgaden; activities are reserved through the hotel. EverFlow arranges your stay; your contract is with the hotel.",
     "credit": "Kempinski Hotel Berchtesgaden",
     "photos": [
-      {"name": "indoor-pool", "alt": "The indoor pool"},
-      {"name": "exterior", "alt": "Kempinski Hotel Berchtesgaden seen from the garden"},
-      {"name": "berchtesgaden-alps", "alt": "The Berchtesgaden Alps in autumn, with the first snow"}
+      {
+        "name": "indoor-pool",
+        "alt": "The indoor pool"
+      },
+      {
+        "name": "exterior",
+        "alt": "Kempinski Hotel Berchtesgaden seen from the garden"
+      },
+      {
+        "name": "berchtesgaden-alps",
+        "alt": "The Berchtesgaden Alps in autumn, with the first snow"
+      }
     ]
   },
   {
@@ -89,19 +122,648 @@
       "small": ""
     },
     "links": [
-      {"label": "rotewand.com", "url": "https://www.rotewand.com"}
+      {
+        "label": "rotewand.com",
+        "url": "https://www.rotewand.com"
+      }
     ],
     "provider": "The hotel stay is provided by Rote Wand Gourmet Hotel. EverFlow arranges your stay; your contract is with the hotel.",
     "credit": "Rote Wand Gourmet Hotel / Robert Rieger",
     "photos": [
-      {"name": "hotel-summer", "alt": "Rote Wand Gourmet Hotel and the church of Zug in summer"},
-      {"name": "room-view", "alt": "A room with a large window onto the mountains"},
-      {"name": "pool", "alt": "The outdoor pool with the mountains behind"},
-      {"name": "stube", "alt": "A wood-panelled dining room"},
-      {"name": "breakfast", "alt": "Breakfast on a wooden table"},
-      {"name": "lounge", "alt": "The lounge with armchairs and tall windows"},
-      {"name": "room-bed", "alt": "A bedroom panelled in pine"},
-      {"name": "meadow", "alt": "Sun loungers on a meadow at sunset"}
+      {
+        "name": "hotel-summer",
+        "alt": "Rote Wand Gourmet Hotel and the church of Zug in summer"
+      },
+      {
+        "name": "room-view",
+        "alt": "A room with a large window onto the mountains"
+      },
+      {
+        "name": "pool",
+        "alt": "The outdoor pool with the mountains behind"
+      },
+      {
+        "name": "stube",
+        "alt": "A wood-panelled dining room"
+      },
+      {
+        "name": "breakfast",
+        "alt": "Breakfast on a wooden table"
+      },
+      {
+        "name": "lounge",
+        "alt": "The lounge with armchairs and tall windows"
+      },
+      {
+        "name": "room-bed",
+        "alt": "A bedroom panelled in pine"
+      },
+      {
+        "name": "meadow",
+        "alt": "Sun loungers on a meadow at sunset"
+      }
     ]
+  },
+  {
+    "slug": "sacher-seefeld",
+    "register": "Alpin Resort Sacher Seefeld",
+    "name": "Alpin Resort Sacher Seefeld",
+    "kind": "Hotel",
+    "place": "seefeld",
+    "location": "Seefeld in Tirol",
+    "card": "Sacher in the mountains: a resort with a 4,700 m² spa on the Seefeld plateau.",
+    "lead": "Sacher in the mountains. A resort at 1,200 m on the Seefeld plateau, set in its own 20,000 m² natural park, and part of Sacher Hotels since 2022. Innsbruck is half an hour away.",
+    "facts": [
+      "81 rooms and suites in six categories, from 30 to 95 m²; the Signature suites have their own sauna",
+      "A 4,700 m² wellness area with an infinity sports pool and a natural bathing lake with an alpine beach",
+      "The toque-awarded restaurant Der Max, and a piece of the original Sacher-Torte",
+      "245 km of cross-country trails in the region, right from the plateau"
+    ],
+    "why": "For a calm week of cross-country skiing, spa days and long dinners, with gentle slopes close by and Innsbruck for a day in town.",
+    "arranges": {
+      "title": "The Sacher Academy For Better Aging.",
+      "text": "The hotel's own health programme: a personalised Healthy Longevity programme under medical direction, with diagnostics, treatments and nutrition planned around your stay.",
+      "small": "A programme of the hotel, delivered by the hotel's physicians and therapists."
+    },
+    "links": [
+      {
+        "label": "The hotel's website",
+        "url": "https://seefeld.sacher.com/en/"
+      }
+    ],
+    "provider": "The hotel stay is provided by Alpin Resort Sacher Seefeld; the Academy programme is reserved through the hotel. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Alpin Resort Sacher Seefeld",
+    "photos": [
+      {
+        "name": "pool-winter",
+        "alt": "The heated outdoor pool of Alpin Resort Sacher Seefeld in winter"
+      },
+      {
+        "name": "infinity-pool",
+        "alt": "The infinity pool with snowy mountains behind it"
+      },
+      {
+        "name": "resort-summer",
+        "alt": "The resort and its park seen from above in summer"
+      },
+      {
+        "name": "junior-suite",
+        "alt": "A Junior Suite with a fireplace and a wooden ceiling"
+      },
+      {
+        "name": "family-suite",
+        "alt": "The bedroom of a Family Suite"
+      },
+      {
+        "name": "dish",
+        "alt": "A dish of venison from the region"
+      }
+    ]
+  },
+  {
+    "slug": "chalets-megeve",
+    "register": "Chalets Megève",
+    "name": "Chalets in Megève",
+    "kind": "Chalets",
+    "place": "megeve",
+    "location": "Megève",
+    "card": "Twenty-two private chalets and apartments in and around Megève, for 4 to 18 guests.",
+    "lead": "Private chalets and apartments in Megève: in the village, at Mont d'Arbois and around Le Jaillet, for families and groups of up to 18 guests. Geneva Airport is about an hour away.",
+    "facts": [
+      "Twenty-two houses: twenty chalets and two apartments, for 4 to 18 guests",
+      "In the village centre, at Mont d'Arbois and around Le Jaillet; some let you ski back to the door",
+      "Many with an indoor pool, a spa or hammam, or a cinema room",
+      "Geneva Airport about an hour away by car"
+    ],
+    "why": "For families and groups who want a house of their own: one long table, one fireplace, and the village or the slopes a few minutes away.",
+    "arranges": {
+      "title": "Service in the house.",
+      "text": "A concierge prepares the stay, and private chefs, butlers and ski instructors can be arranged on request.",
+      "small": ""
+    },
+    "links": [],
+    "provider": "Each chalet is provided by its owner through our local partner in Megève. EverFlow arranges your stay; the terms of the house come with your proposal.",
+    "credit": "Photos courtesy of the owner",
+    "photos": [
+      {
+        "name": "house-chalet-altai",
+        "alt": "Chalet Altai in the snow"
+      },
+      {
+        "name": "house-chalet-etoile-du-nord",
+        "alt": "A living room with a wide view over Megève"
+      },
+      {
+        "name": "house-chalet-infinity",
+        "alt": "Chalet Infinity with its outdoor pool in summer"
+      },
+      {
+        "name": "hermine-living",
+        "alt": "A wood-panelled living room with a fireplace"
+      },
+      {
+        "name": "whymper-pool",
+        "alt": "An indoor pool in a chalet"
+      },
+      {
+        "name": "141-view",
+        "alt": "A terrace with a view of the village of Megève"
+      }
+    ],
+    "residences_head": [
+      "The houses",
+      "Chalets and apartments."
+    ],
+    "residences_lead": "Every house is different. Tell us your dates and your group, and we suggest the right one.",
+    "residences": [
+      {
+        "name": "Chalet 141",
+        "where": "Le Jaillet",
+        "line": "12–16 guests · 7 bedrooms. Views of the village and Mont Blanc; indoor pool, hammam and gym.",
+        "photo": {
+          "name": "house-chalet-141",
+          "alt": "Chalet 141"
+        }
+      },
+      {
+        "name": "Chalet Alexandra",
+        "where": "Village centre",
+        "line": "8–14 guests · 7 bedrooms. In the village, two minutes' walk from the slopes.",
+        "photo": {
+          "name": "house-chalet-alexandra",
+          "alt": "Chalet Alexandra"
+        }
+      },
+      {
+        "name": "Chalet Allobroges",
+        "where": "Village centre",
+        "line": "7–14 guests · 7 bedrooms. Five minutes' walk from the shops, built around a big fireplace.",
+        "photo": {
+          "name": "house-chalet-allobroges",
+          "alt": "Chalet Allobroges"
+        }
+      },
+      {
+        "name": "Chalet Altai",
+        "where": "Near the village",
+        "line": "12–16 guests · 7 bedrooms. Two chalets taken together, five minutes' walk from the village, with views of Mont d'Arbois and Rochebrune.",
+        "photo": {
+          "name": "house-chalet-altai",
+          "alt": "Chalet Altai"
+        }
+      },
+      {
+        "name": "Chalet Apollo",
+        "where": "A quiet area near Megève",
+        "line": "9–14 guests · 6 bedrooms. Close to the slopes, eight minutes by car from the village.",
+        "photo": {
+          "name": "house-chalet-apollo",
+          "alt": "Chalet Apollo"
+        }
+      },
+      {
+        "name": "Chalet Ariana",
+        "where": "Village centre",
+        "line": "10–16 guests · 7 bedrooms. New, in a picturesque street in the heart of the village; indoor pool and hot tub.",
+        "photo": {
+          "name": "house-chalet-ariana",
+          "alt": "Chalet Ariana"
+        }
+      },
+      {
+        "name": "Chalet Des Soeurs",
+        "where": "Village centre",
+        "line": "14–16 guests · 7 bedrooms. In the heart of the village, in the quiet Clos des Rennes.",
+        "photo": {
+          "name": "house-chalet-des-soeurs",
+          "alt": "Chalet Des Soeurs"
+        }
+      },
+      {
+        "name": "Chalet Etoile du Nord",
+        "where": "Megève",
+        "line": "6–10 guests · 4 bedrooms. Eight minutes' walk from the village.",
+        "photo": {
+          "name": "house-chalet-etoile-du-nord",
+          "alt": "Chalet Etoile du Nord"
+        }
+      },
+      {
+        "name": "Chalet Hermine",
+        "where": "Near the Calvaire",
+        "line": "6–14 guests · 6 bedrooms. A quiet neighbourhood with views of Mont d'Arbois, under ten minutes' walk from the village.",
+        "photo": {
+          "name": "house-chalet-hermine",
+          "alt": "Chalet Hermine"
+        }
+      },
+      {
+        "name": "Chalet Le Lodge",
+        "where": "Near the Chamois lifts",
+        "line": "14–18 guests · 8 bedrooms. A stone's throw from the village and the Chamois ski lifts.",
+        "photo": {
+          "name": "house-chalet-le-lodge",
+          "alt": "Chalet Le Lodge"
+        }
+      },
+      {
+        "name": "Chalet Penelope",
+        "where": "Megève",
+        "line": "8 guests · 4 bedrooms. Five minutes' walk from the village.",
+        "photo": {
+          "name": "house-chalet-penelope",
+          "alt": "Chalet Penelope"
+        }
+      },
+      {
+        "name": "Chalet Whymper",
+        "where": "Near the Chamois lift",
+        "line": "10–12 guests · 6 bedrooms. Five minutes' walk from the village, and the Chamois lift on foot.",
+        "photo": {
+          "name": "house-chalet-whymper",
+          "alt": "Chalet Whymper"
+        }
+      },
+      {
+        "name": "Lodge Elan",
+        "where": "Village centre",
+        "line": "4–8 guests. An apartment in the centre, close to restaurants, shops and the Chamois lifts.",
+        "photo": {
+          "name": "house-lodge-elan",
+          "alt": "Lodge Elan"
+        }
+      },
+      {
+        "name": "Lodge Manou",
+        "where": "Village centre",
+        "line": "6–10 guests. An apartment in the centre with three bedrooms, a children's dormitory and a large balcony; hammam and fitness room in the residence.",
+        "photo": {
+          "name": "house-lodge-manou",
+          "alt": "Lodge Manou"
+        }
+      },
+      {
+        "name": "Chalet Sun",
+        "where": "Mont d'Arbois",
+        "line": "12–18 guests · 8 bedrooms. High above the valley at Mont d'Arbois, 100 metres from the slopes.",
+        "photo": {
+          "name": "house-chalet-sun",
+          "alt": "Chalet Sun"
+        }
+      },
+      {
+        "name": "Chalet Cham Lou'Ka",
+        "where": "Mont d'Arbois",
+        "line": "10–14 guests · 6 bedrooms. Three minutes by car from the slopes; the master suite has a floor of its own.",
+        "photo": {
+          "name": "house-chalet-cham-louka",
+          "alt": "Chalet Cham Lou'Ka"
+        }
+      },
+      {
+        "name": "Chalet des Sens",
+        "where": "Mont d'Arbois",
+        "line": "10–14 guests · 6 bedrooms. Ski back to the door; spa, pool, games room and cinema.",
+        "photo": {
+          "name": "house-chalet-des-sens",
+          "alt": "Chalet des Sens"
+        }
+      },
+      {
+        "name": "Chalet Divinity",
+        "where": "Mont d'Arbois",
+        "line": "5–10 guests · 5 bedrooms. Ski back to the door.",
+        "photo": {
+          "name": "house-chalet-divinity",
+          "alt": "Chalet Divinity"
+        }
+      },
+      {
+        "name": "Chalet Mariva",
+        "where": "Mont d'Arbois",
+        "line": "10–14 guests · 6 bedrooms. Near the Mont d'Arbois golf course, five minutes' walk from the lifts.",
+        "photo": {
+          "name": "house-chalet-mariva",
+          "alt": "Chalet Mariva"
+        }
+      },
+      {
+        "name": "Chalet Olivier",
+        "where": "Mont d'Arbois",
+        "line": "12–14 guests · 6 bedrooms. A quiet setting with mountain views, a few minutes by car from the slopes and the village.",
+        "photo": {
+          "name": "house-chalet-olivier",
+          "alt": "Chalet Olivier"
+        }
+      },
+      {
+        "name": "Chalet Black Lodge",
+        "where": "Le Villaret",
+        "line": "12–16 guests · 7 bedrooms. A calm area with mountain views, five minutes by car from the village.",
+        "photo": {
+          "name": "house-chalet-black-lodge",
+          "alt": "Chalet Black Lodge"
+        }
+      },
+      {
+        "name": "Chalet Infinity",
+        "where": "Near Le Jaillet",
+        "line": "8–10 guests · 5 bedrooms. A small hamlet set back from the road, five minutes by car from the village.",
+        "photo": {
+          "name": "house-chalet-infinity",
+          "alt": "Chalet Infinity"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "aurelio-lech",
+    "register": "Hotel & Chalet Aurelio",
+    "name": "Hotel & Chalet Aurelio",
+    "kind": "Hotel and chalet",
+    "place": "lech",
+    "location": "Lech am Arlberg",
+    "card": "A boutique hotel on the Schlegelkopf slope: ski-in, ski-out, a few minutes from the centre of Lech.",
+    "lead": "A boutique hotel in Lech, ski-in and ski-out, directly on the Schlegelkopf slope and a few minutes' walk from the centre. Next door, connected by an underground passage, the Club Chalet hosts up to 16 guests with a private chef and butler.",
+    "facts": [
+      "10 Top Deluxe Double Rooms and Aurelio Suites, from 55 to 110 m²",
+      "More than 1,000 m² of spa, with a 23-metre indoor pool",
+      "The Club Chalet: eight rooms for up to 16 guests, with its own spa and indoor pool",
+      "At about 1,500 m, directly on the Schlegelkopf slope"
+    ],
+    "why": "For guests who want to ski from the door of a small hotel, and for groups who want a chalet of their own with the hotel next door.",
+    "links": [
+      {
+        "label": "aureliolech.com",
+        "url": "https://www.aureliolech.com/en/"
+      }
+    ],
+    "provider": "The stay is provided by Hotel & Chalet Aurelio. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Hotel & Chalet Aurelio",
+    "photos": [
+      {
+        "name": "exterior-winter",
+        "alt": "Hotel Aurelio in winter, with the village of Lech and its church"
+      },
+      {
+        "name": "ski-view",
+        "alt": "A skier at the hotel, looking down over Lech"
+      },
+      {
+        "name": "suite",
+        "alt": "An Aurelio Suite",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "spa-pool",
+        "alt": "The indoor pool of the spa"
+      },
+      {
+        "name": "restaurant",
+        "alt": "The hotel's restaurant",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-winter",
+        "alt": "The Club Chalet in winter",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-living",
+        "alt": "The living room of the Club Chalet",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      }
+    ]
+  },
+  {
+    "slug": "pepper-collection",
+    "register": "pepper-collection",
+    "name": "pepper-collection",
+    "kind": "Chalets and apartments",
+    "place": "lech",
+    "location": "Lech, Oberlech and St. Christoph",
+    "card": "Private chalets and apartments on the Arlberg, some with a butler and a private chef.",
+    "lead": "A collection of private chalets and apartments in Lech, Oberlech and St. Christoph on the Arlberg, for families and friends. Some sit right on the slopes; The Barn comes with a butler and a private chef.",
+    "facts": [
+      "Chalet Mimi in Oberlech: ski-in and ski-out in winter, for up to 14 guests",
+      "The Barn in Oberlech: 1,000 m², with a 24/7 butler and a private chef",
+      "Skyfall in St. Christoph: four residences that connect, for up to 21 guests together",
+      "Arla Luxury Home on the Schlegelkopf slope, for groups of 2 to 10"
+    ],
+    "why": "For families and groups who want a private house on the Arlberg, with the service of a hotel when they want it.",
+    "links": [
+      {
+        "label": "peppercollection.com",
+        "url": "https://www.peppercollection.com/en/"
+      }
+    ],
+    "provider": "Each house is provided by pepper-collection. EverFlow arranges your stay; your contract is with the provider.",
+    "credit": "pepper-collection",
+    "photos": [
+      {
+        "name": "barn-dining",
+        "alt": "The dining room of The Barn, with a view of the mountains",
+        "credit": "pepper-collection / Patrick Schwienbacher"
+      },
+      {
+        "name": "mimi-living",
+        "alt": "The living and dining room of Chalet Mimi",
+        "credit": "pepper-collection / Patrick Schwienbacher"
+      },
+      {
+        "name": "mimi-spa",
+        "alt": "The spa pool of Chalet Mimi",
+        "credit": "pepper-collection / Patrick Schwienbacher"
+      },
+      {
+        "name": "falcon-living",
+        "alt": "The living room of The Falcon",
+        "credit": "pepper-collection / Patrick Schwienbacher"
+      },
+      {
+        "name": "toda-living",
+        "alt": "The living room of Chalet Toda with its fireplace",
+        "credit": "pepper-collection / Patrick Schwienbacher"
+      }
+    ],
+    "residences_head": [
+      "The houses",
+      "Chalets and apartments."
+    ],
+    "residences": [
+      {
+        "name": "Chalet Mimi",
+        "where": "Oberlech",
+        "line": "Up to 14 guests. Ski-in and ski-out in winter, right on the hiking trails in summer.",
+        "photo": {
+          "name": "house-mimi",
+          "alt": "Chalet Mimi in winter",
+          "credit": "pepper-collection / Stefano Scata"
+        }
+      },
+      {
+        "name": "The Barn",
+        "where": "Oberlech",
+        "line": "1,000 m², with a 24/7 butler and a private chef.",
+        "photo": {
+          "name": "house-barn",
+          "alt": "The Barn in winter, with the mountains behind",
+          "credit": "pepper-collection / Patrick Schwienbacher"
+        }
+      },
+      {
+        "name": "The Falcon",
+        "where": "Lech centre",
+        "line": "450 m² for 8 guests, a stone's throw from the next chairlift and the village centre.",
+        "photo": {
+          "name": "house-falcon",
+          "alt": "The Falcon in summer",
+          "credit": "pepper-collection / Patrick Schwienbacher"
+        }
+      },
+      {
+        "name": "Arla Luxury Home",
+        "where": "Lech centre",
+        "line": "Directly at the Schlegelkopf slope, for groups of 2 to 10.",
+        "photo": {
+          "name": "house-arla",
+          "alt": "Arla Luxury Home in winter",
+          "credit": "pepper-collection / Patrick Schwienbacher"
+        }
+      },
+      {
+        "name": "Chalet Toda",
+        "where": "Lech",
+        "line": "245 m² for up to 6 guests, a few minutes' walk from the village and the Rüfikopfbahn.",
+        "photo": {
+          "name": "house-toda",
+          "alt": "Chalet Toda in summer",
+          "credit": "pepper-collection / Patrick Schwienbacher"
+        }
+      },
+      {
+        "name": "Skyfall",
+        "where": "St. Christoph",
+        "line": "Four residences from 116 to 275 m² that connect: up to 21 guests together.",
+        "photo": {
+          "name": "house-skyfall",
+          "alt": "A living room at Skyfall",
+          "credit": "pepper-collection / Patrick Schwienbacher"
+        }
+      },
+      {
+        "name": "ULA Signature",
+        "where": "Omesberg, Lech",
+        "line": "A newly built apartment house in the quiet Omesberg area, five minutes' walk from the centre."
+      },
+      {
+        "name": "ULA Easy Stay",
+        "where": "Omesberg, Lech",
+        "line": "A renovated apartment house in the Omesberg area, a few minutes' walk from the centre."
+      }
+    ]
+  },
+  {
+    "slug": "interalpen-tyrol",
+    "register": "Interalpen-Hotel Tyrol",
+    "name": "Interalpen-Hotel Tyrol",
+    "kind": "Hotel",
+    "place": "seefeld",
+    "location": "Telfs-Buchen, Seefeld plateau",
+    "card": "A large hotel at 1,300 m on the Seefeld plateau, with a spa of more than 5,300 m².",
+    "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,300 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within an hour's drive.",
+    "facts": [
+      "274 rooms, suites and panorama suites",
+      "A spa of more than 5,300 m² with a panorama pool",
+      "The hotel's own mountain hut, five minutes' walk away",
+      "245 km of cross-country trails on the plateau; the Seefeld slopes 20 minutes away, the Nordkette 30 and the Sölden glaciers 70"
+    ],
+    "why": "For families and groups who want space, a big spa and a different ski area every day, and for cross-country skiers.",
+    "links": [
+      {
+        "label": "interalpen.com",
+        "url": "https://www.interalpen.com/en/"
+      }
+    ],
+    "provider": "The hotel stay is provided by Interalpen-Hotel Tyrol. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Interalpen-Hotel Tyrol",
+    "photos": [
+      {
+        "name": "exterior-winter",
+        "alt": "Interalpen-Hotel Tyrol on the snowy plateau, with the mountains behind"
+      },
+      {
+        "name": "suite",
+        "alt": "A panorama suite with a view of the mountains"
+      },
+      {
+        "name": "restaurant",
+        "alt": "A wood-panelled restaurant with large windows"
+      },
+      {
+        "name": "spa-indoor",
+        "alt": "The indoor pool, with a glass wall onto the mountains"
+      },
+      {
+        "name": "spa-outdoor",
+        "alt": "The outdoor pool in the snow"
+      },
+      {
+        "name": "mountain-hut",
+        "alt": "The hotel's mountain hut in winter"
+      }
+    ]
+  },
+  {
+    "slug": "kempinski-engelberg",
+    "register": "Kempinski Palace Engelberg",
+    "name": "Kempinski Palace Engelberg",
+    "kind": "Hotel",
+    "place": "engelberg",
+    "location": "Engelberg",
+    "card": "A Kempinski hotel in the monastery village below the Titlis.",
+    "lead": "A Kempinski hotel in Engelberg, the monastery village below the Titlis. Set up for ski days: a contact of the ski school in the lobby, a locker in the ski cellar for every room, and boots dried for the next morning.",
+    "facts": [
+      "A contact of the ski school in the hotel lobby; private ski and snowboard instructors arranged in the hotel",
+      "Every room has its own locker in the ski cellar, and boots are dried for the next day",
+      "A concierge team for information and reservations",
+      "Sister hotel: Frutt Mountain Resort, to extend the stay"
+    ],
+    "why": "For skiers who want an easy trip from Zurich or Lucerne and a hotel that takes care of the ski day.",
+    "links": [
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/en/kempinski-palace-engelberg"
+      }
+    ],
+    "provider": "The hotel stay is provided by Kempinski Palace Engelberg. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "Kempinski Palace Engelberg",
+    "photos": []
+  },
+  {
+    "slug": "schlosshotel-kitzbuehel",
+    "register": "Schlosshotel Kitzbühel",
+    "name": "Schlosshotel Kitzbühel",
+    "kind": "Hotel",
+    "place": "kitzbuehel",
+    "location": "Kitzbühel",
+    "card": "A five-star hotel just above Kitzbühel, with a 3,000 m² spa and its own shuttle to the lifts.",
+    "lead": "A five-star hotel just above Kitzbühel, a ten-minute walk from the centre. In winter the hotel's own shuttle runs to the cable car valley station; in summer a 9-hole golf course starts at the door.",
+    "facts": [
+      "The Momentum Spa: 3,000 m², with an indoor pool with mountain views and an outdoor pool heated all year",
+      "The hotel's own shuttle to the Kitzbühel cable car valley station",
+      "A 9-hole golf course on the doorstep",
+      "Kitzbühel station 10 minutes away"
+    ],
+    "why": "For guests who want the town and the Hahnenkamm close by, and a big spa to come back to.",
+    "links": [
+      {
+        "label": "schlosshotel-kitzbuehel.com",
+        "url": "https://www.schlosshotel-kitzbuehel.com/en"
+      }
+    ],
+    "provider": "The hotel stay is provided by Schlosshotel Kitzbühel. EverFlow arranges your stay; your contract is with the hotel.",
+    "credit": "",
+    "photos": []
   }
 ]
