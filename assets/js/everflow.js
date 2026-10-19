@@ -216,9 +216,95 @@
     map.fitBounds(L.latLngBounds(bounds).pad(0.08));
   }
 
+  /* ---------- photos open large: tap a photo of a gallery; arrows, swipe, Esc ---------- */
+  function initLightbox() {
+    var galleries = $$('[data-gallery]').filter(function (g) { return !g.classList.contains('gallery--cards'); });
+    if (!galleries.length || typeof HTMLDialogElement === 'undefined') return;
+    var box = document.createElement('dialog');
+    box.className = 'lightbox';
+    box.innerHTML = '<div class="lightbox-bar"><p class="lightbox-title"></p><span class="lightbox-count" aria-live="polite"></span>' +
+      '<button type="button" class="lightbox-close" aria-label="Close">×</button></div>' +
+      '<figure class="lightbox-figure"><img alt=""><figcaption class="credit"></figcaption></figure>' +
+      '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">←</button>' +
+      '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">→</button>';
+    document.body.appendChild(box);
+    var img = $('img', box), caption = $('figcaption', box), title = $('.lightbox-title', box), count = $('.lightbox-count', box);
+    var prev = $('.lightbox-prev', box), next = $('.lightbox-next', box);
+    var figures = [], current = 0, gallery = null;
+    function sharpest(source) {
+      // the smallest file that is sharp on this screen; set as src so the photo is never shown larger than it is
+      var need = window.innerWidth * (window.devicePixelRatio || 1);
+      var files = (source.getAttribute('srcset') || '').split(',').map(function (part) {
+        var bits = part.trim().split(/\s+/);
+        return { url: bits[0], w: parseInt(bits[1], 10) || 0 };
+      }).filter(function (f) { return f.url; }).sort(function (x, y) { return x.w - y.w; });
+      for (var k = 0; k < files.length; k++) if (files[k].w >= need) return files[k].url;
+      return files.length ? files[files.length - 1].url : source.getAttribute('src');
+    }
+    function show(i) {
+      current = Math.max(0, Math.min(figures.length - 1, i));
+      var source = $('img', figures[current]);
+      var credit = $('figcaption', figures[current]);
+      img.removeAttribute('src');
+      img.src = sharpest(source);
+      img.alt = source.alt;
+      caption.innerHTML = credit ? credit.innerHTML : '';
+      count.textContent = pad(current + 1) + ' / ' + pad(figures.length);
+      prev.disabled = current === 0;
+      next.disabled = current === figures.length - 1;
+    }
+    function open(g, i) {
+      gallery = g;
+      figures = $$('.gallery-item figure', g);
+      title.textContent = g.getAttribute('data-title') || '';
+      box.setAttribute('aria-label', g.getAttribute('aria-label') || 'Photos');
+      show(i);
+      document.documentElement.classList.add('has-lightbox');
+      box.showModal();
+    }
+    box.addEventListener('close', function () {
+      document.documentElement.classList.remove('has-lightbox');
+      var track = $('.gallery-track', gallery);
+      var item = figures[current] && figures[current].closest('.gallery-item');
+      if (track && item) track.scrollLeft = item.offsetLeft - track.offsetLeft;  // the gallery shows the photo seen last
+      var back = figures[current] && $('.photo-open', figures[current]);
+      if (back) back.focus({ preventScroll: true });
+    });
+    prev.addEventListener('click', function () { show(current - 1); });
+    next.addEventListener('click', function () { show(current + 1); });
+    $('.lightbox-close', box).addEventListener('click', function () { box.close(); });
+    box.addEventListener('click', function (ev) { if (ev.target === box || ev.target.classList.contains('lightbox-figure')) box.close(); });
+    box.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowLeft') { ev.preventDefault(); show(current - 1); }
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); show(current + 1); }
+    });
+    var startX = null;
+    box.addEventListener('touchstart', function (ev) { startX = ev.touches.length === 1 ? ev.touches[0].clientX : null; }, { passive: true });
+    box.addEventListener('touchend', function (ev) {
+      if (startX === null) return;
+      var dx = ev.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+      startX = null;
+    }, { passive: true });
+    galleries.forEach(function (g) {
+      $$('.gallery-item figure', g).forEach(function (fig, i) {
+        var photo = $('img', fig);
+        if (!photo) return;
+        var button = document.createElement('button');  // the photo becomes a button: keyboard and screen readers can open it too
+        button.type = 'button';
+        button.className = 'photo-open';
+        button.setAttribute('aria-haspopup', 'dialog');
+        fig.insertBefore(button, photo);
+        button.appendChild(photo);
+        button.addEventListener('click', function () { open(g, i); });
+      });
+    });
+  }
+
   function ready() {
     initMenu();
     $$('[data-gallery]').forEach(initGallery);
+    initLightbox();
     initVideo();
     initEnquiry();
     initMap();
