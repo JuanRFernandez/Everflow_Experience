@@ -1,22 +1,30 @@
 #!/usr/bin/env python3
-"""Turn an original photo into the web files the site uses (WebP, sRGB, no metadata, <= 250 KB).
+"""Turn an original photo into the web files the site uses: WebP, sRGB, no metadata, in up to
+three widths (800, 1600 and 2400 px, never wider than the original) so that every screen loads
+the size it needs, at a quality that keeps the photo sharp.
 
-    uv run --with pillow python scripts/photos.py site <source> <assets/img/... base> [--widths 800,1600] [--aspect 3:2] [--focus 0.5,0.4]
+    uv run --with pillow python scripts/photos.py site <source> <assets/img/... base> [--widths 800,1600,2400] [--aspect 3:2] [--focus 0.5,0.4]
     uv run --with pillow python scripts/photos.py stay <partner-slug> <name> <source> [--aspect 3:2] [--focus x,y]
+    uv run --with pillow python scripts/photos.py rebuild [<assets/img/... prefix>]
     uv run --with pillow python scripts/photos.py brand
 
-<source> is a file in this repository, or a path relative to the hotel material folder
-(`material_root` in library.local.json). A photo inside a zip is written "<zip>::<member>".
-The source path never enters the repository: only the processed files do.
+<source> is a file in this repository, a path relative to the material folder (`material_root` in
+library.local.json), a photo inside a zip there ("<zip>::<member>"), or a file of an earlier
+commit ("git:<commit>:<path>"). The source path never enters the repository: every processed
+photo is logged with its source and crop in photo-sources.json in the library folder (outside
+the repository), and `rebuild` processes them all again from the originals, for instance after
+a change of the sizes or the quality below.
 
 `stay` processes a partner's photo only when the permission register says `site: yes` and
 `photos: yes` for that partner (the register name is `register` in content/partners.json).
 The credit line comes from content/partners.json and is shown under every photo.
 """
 import csv
+import glob
 import io
 import json
 import os
+import subprocess
 import sys
 import zipfile
 
@@ -27,7 +35,15 @@ except ImportError:
     sys.exit(2)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAX_BYTES = 250 * 1024
+WIDTHS = (800, 1600, 2400)
+QUALITIES = (84, 80, 76, 72)            # tried in this order until the file fits its limit
+
+
+def limit_for(width):
+    """Largest file size for a width: generous, so that quality is lowered only for very busy photos."""
+    return 180 * 1024 if width <= 800 else 480 * 1024 if width <= 1600 else 900 * 1024
+
+
 SRGB = ImageCms.createProfile('sRGB')
 
 
@@ -44,7 +60,11 @@ def local_config():
 
 
 def open_source(source):
-    """Open a photo from the repository, the material folder, or a zip in the material folder."""
+    """Open a photo from the repository, an earlier commit, the material folder, or a zip there."""
+    if source.startswith('git:'):
+        _, rev, path = source.split(':', 2)
+        data = subprocess.run(['git', 'show', f'{rev}:{path}'], cwd=ROOT, capture_output=True, check=True).stdout
+        return Image.open(io.BytesIO(data))
     member = None
     if '::' in source:
         source, member = source.split('::', 1)
@@ -93,35 +113,60 @@ def crop(img, aspect, focus):
     return img.crop((0, top, w, top + nh))
 
 
-def save_webp(img, target, width, limit):
-    """Resize to `width` (never up) and save as WebP under `limit` bytes, lowering quality, then size."""
+def save_webp(img, target, width):
+    """Resize to `width` (never up) and save as WebP within the limit for that width: quality first
+    stays high and only steps down for very busy photos; the width shrinks only as a last resort."""
     w = min(width, img.width)
+    limit = limit_for(width)
     while True:
         im = img if w == img.width else img.resize((w, round(img.height * w / img.width)), Image.LANCZOS)
-        im = im.filter(ImageFilter.UnsharpMask(radius=0.6, percent=40, threshold=2))
-        for q in (82, 76, 70, 64, 58):
+        if w < img.width:
+            im = im.filter(ImageFilter.UnsharpMask(radius=0.6, percent=35, threshold=2))
+        for q in QUALITIES:
             buf = io.BytesIO()
             im.save(buf, 'WEBP', quality=q, method=6)  # no exif=, no icc_profile=: nothing but pixels
             if buf.tell() <= limit:
                 os.makedirs(os.path.dirname(target), exist_ok=True)
                 with open(target, 'wb') as f:
                     f.write(buf.getvalue())
-                return im.size, buf.tell()
+                return im.size, buf.tell(), q
         w = round(w * 0.9)
 
 
 def process(source, base, widths, aspect=None, focus=(0.5, 0.5)):
     img = crop(to_srgb(open_source(source)), aspect, focus)
+    for old in glob.glob(os.path.join(ROOT, f'{base}-*.webp')):
+        os.remove(old)
     out = []
     for i, width in enumerate(widths):
-        if i and widths[i - 1] >= img.width:
-            break  # the original is no wider than the previous file: a larger one would be the same
-        limit = MAX_BYTES if width > 800 else 110 * 1024
+        if i and img.width <= widths[i - 1] * 1.2:
+            break  # the original is hardly wider than the previous file: a larger one would add nothing
         target = os.path.join(ROOT, f'{base}-{width}.webp')
-        size, nbytes = save_webp(img, target, width, limit)
-        out.append(f'{os.path.relpath(target, ROOT)}  {size[0]}x{size[1]}  {nbytes // 1024} KB')
+        size, nbytes, q = save_webp(img, target, width)
+        out.append(f'{os.path.relpath(target, ROOT)}  {size[0]}x{size[1]}  q{q}  {nbytes // 1024} KB')
     for line in out:
         print('wrote', line.replace(os.sep, '/'))
+
+
+def log_path():
+    return os.path.join(local_config()['library'], 'photo-sources.json')
+
+
+def read_log():
+    path = log_path()
+    return json.load(open(path, encoding='utf-8')) if os.path.isfile(path) else {}
+
+
+def write_log(entries):
+    with open(log_path(), 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(dict(sorted(entries.items())), f, ensure_ascii=False, indent=1)
+        f.write('\n')
+
+
+def remember(base, entry):
+    entries = read_log()
+    entries[base] = entry
+    write_log(entries)
 
 
 def register_row(name):
@@ -137,6 +182,20 @@ def partner(slug):
         if p['slug'] == slug:
             return p
     fail(f'no partner "{slug}" in content/partners.json')
+
+
+def allowed(slug):
+    p = partner(slug)
+    row = register_row(p['register'])
+    if row['on_website'].strip().lower() != 'yes' or row['photos'].strip().lower() != 'yes':
+        fail(f'the permission register does not allow photos of {p["register"]} on the site')
+
+
+def run(base, entry):
+    if entry['kind'] == 'stay':
+        allowed(entry['partner'])
+    process(entry['source'], base, entry['widths'], entry.get('aspect'), tuple(entry.get('focus', (0.5, 0.5))))
+    remember(base, entry)
 
 
 def brand():
@@ -181,18 +240,25 @@ def main(argv):
         else:
             args.append(a)
     aspect = opts.get('aspect')
-    focus = tuple(float(n) for n in opts.get('focus', '0.5,0.5').split(','))
+    focus = [float(n) for n in opts.get('focus', '0.5,0.5').split(',')]
+    widths = [int(w) for w in opts['widths'].split(',')] if 'widths' in opts else list(WIDTHS)
     if argv[0] == 'site':
         source, base = args
-        widths = [int(w) for w in opts.get('widths', '800,1600').split(',')]
-        process(source, base, widths, aspect, focus)
+        run(base, {'kind': 'site', 'source': source, 'widths': widths, 'aspect': aspect, 'focus': focus})
     elif argv[0] == 'stay':
         slug, name, source = args
-        p = partner(slug)
-        row = register_row(p['register'])
-        if row['on_website'].strip().lower() != 'yes' or row['photos'].strip().lower() != 'yes':
-            fail(f'the permission register does not allow photos of {p["register"]} on the site')
-        process(source, f'assets/img/stays/{slug}/{name}', [800, 1600], aspect or '3:2', focus)
+        run(f'assets/img/stays/{slug}/{name}', {'kind': 'stay', 'partner': slug, 'source': source, 'widths': widths,
+                                                'aspect': aspect or '3:2', 'focus': focus})
+    elif argv[0] == 'rebuild':
+        prefix = args[0] if args else ''
+        entries = read_log()
+        todo = {b: e for b, e in entries.items() if b.startswith(prefix)}
+        if not todo:
+            fail(f'no logged photo starts with "{prefix}"')
+        for base, entry in todo.items():
+            if 'widths' not in opts and entry['kind'] == 'stay':
+                entry['widths'] = list(WIDTHS)
+            run(base, entry)
     elif argv[0] == 'brand':
         brand()
     else:

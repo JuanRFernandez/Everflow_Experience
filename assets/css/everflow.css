@@ -11,7 +11,7 @@
 :root{
   --cream:#f4f0e8; --cream-2:#ebe5d9; --line:#d9d1c1; --white:#fffdf9;
   --ink:#17140f; --ink-2:#56514a; --ink-3:#2a261f;
-  --accent:#76663a; --accent-dark:#5c4f2a; --accent-on-ink:#c9bc8e;
+  --accent:#6f6036; --accent-dark:#5c4f2a; --accent-on-ink:#c9bc8e;
   --serif:"Playfair Display",Georgia,"Times New Roman",serif;
   --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --step--1:.8125rem; --step-0:1.0625rem; --step-1:1.25rem;
@@ -30,6 +30,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 1rem)}
 body{margin:0;background:var(--cream);color:var(--ink-2);font:400 var(--step-0)/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
 img,video{display:block;max-width:100%;height:auto}
+[hidden]{display:none !important}
 h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--ink);line-height:1.15;margin:0 0 .5em;text-wrap:balance}
 h1{font-size:var(--step-4);letter-spacing:-.01em}
 h2{font-size:var(--step-3)}
@@ -125,7 +126,7 @@ th{color:var(--ink);font-weight:600}
 /* ---------- hero (home) ---------- */
 .hero{position:relative;min-height:min(88svh,52rem);display:flex;align-items:flex-end;color:#fff;background:var(--ink);overflow:hidden}
 .hero-media{position:absolute;inset:0}
-.hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover}
+.hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,20,15,.55) 0%,rgba(23,20,15,.15) 60%,rgba(23,20,15,0) 100%),linear-gradient(180deg,rgba(23,20,15,.1) 0%,rgba(23,20,15,.2) 45%,rgba(23,20,15,.7) 100%)}
 .hero-content{position:relative;z-index:1;padding-block:clamp(6rem,4rem + 10vw,10rem) clamp(2.5rem,2rem + 3vw,4.5rem)}
 .hero h1{color:#fff;max-width:14ch}
@@ -166,6 +167,7 @@ th{color:var(--ink);font-weight:600}
 .gallery-item{scroll-snap-align:start}
 .gallery-item figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
 .gallery-item .credit{margin-top:.5rem}
+.gallery--small .gallery-track{grid-auto-columns:min(100%,46.875rem)}
 .gallery--cards .gallery-track{grid-auto-columns:minmax(16rem,82%)}
 @media (min-width:40rem){.gallery--cards .gallery-track{grid-auto-columns:calc((100% - var(--gap)) / 2)}}
 @media (min-width:64rem){.gallery--cards .gallery-track{grid-auto-columns:calc((100% - 2 * var(--gap)) / 3)}}

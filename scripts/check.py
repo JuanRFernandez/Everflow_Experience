@@ -10,7 +10,7 @@
  4. HTML tags are balanced; every page has one <main> and one <h1>; generated pages carry no inline
     style, script or event handler (the Content-Security-Policy forbids them); every form field has
     a label; every <img> has alt, width and height.
- 5. Images: at most 250 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
+ 5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
     whose caption starts with "©" and names the partner's credit; every credit is in the Impressum.
  6. Words: no price anywhere; no booking wording outside the legal pages; no regional brand line;
     German quotes close with “; names that must never appear on the site do not.
@@ -70,7 +70,7 @@ INTERNAL = re.compile(  # a Drive folder of the team, a drive-letter path, a Dri
     r'\b\d\d_[A-Z][A-Z0-9_&-]{2,}|[A-Za-z]:[\\/](?![\\/ ])|(?i:my[ ]drive|meine[ ]ablage|(?:drive|docs|sheets)\.google\.com)')
 MAIL = re.compile(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}')
 OWN_MAIL = {'info@everflowexperience.com'}  # an address meant to be public is added here, on purpose
-IMG_MAX = 250 * 1024
+IMG_MAX = 950 * 1024  # scripts/photos.py keeps 800 px under 180 KB, 1600 px under 480 KB, 2400 px under 900 KB
 
 failures, warnings, referenced = [], [], set()
 
@@ -124,7 +124,7 @@ class Page(html.parser.HTMLParser):
         for k in d:
             if k.startswith('on'):
                 self.inline.append(f'{k}= on <{tag}>')
-        if tag == 'script' and not d.get('src'):
+        if tag == 'script' and not d.get('src') and d.get('type') != 'application/ld+json':
             self.inline.append('inline <script>')
         if tag == 'style':
             self.inline.append('<style> block')

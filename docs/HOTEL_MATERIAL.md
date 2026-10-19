@@ -35,7 +35,9 @@ The steps are in `.claude/skills/hotels/SKILL.md`. What decides:
    The words are ours; the partner's own programme is named as the partner's.
 3. Every photo carries the partner's **exact credit line**, never EverFlow's. If photos come
    from several photographers, ask whether one line covers all of them. Photos go through
-   `scripts/photos.py` (WebP, sRGB, no metadata, under 250 KB). The originals stay in Drive.
+   `scripts/photos.py` (WebP, sRGB, no metadata, in up to three sizes from 800 to 2400 px, so
+   phones load the small one and large screens a sharp one). The originals stay in Drive; the
+   script logs each source in the library folder, and `photos.py rebuild` redoes them all.
 4. Brochures only when the partner allowed the download: `assets/stays/<partner>/`, byte for
    byte as the partner sent them.
 5. Never in this repository: room overviews, rate sheets, agreements, presentations made for

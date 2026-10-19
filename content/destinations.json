@@ -1,10 +1,30 @@
 {
   "countries": [
-    {"slug": "germany", "name": "Germany", "lead": "Our home ground: Munich, the Zugspitze and the Berchtesgaden Alps."},
-    {"slug": "austria", "name": "Austria", "lead": "Tyrol and the Arlberg: old ski towns, big ski areas and quiet high plateaus."},
-    {"slug": "switzerland", "name": "Switzerland", "lead": "Glaciers, car-free villages and the classic resorts of the Swiss Alps."},
-    {"slug": "france", "name": "France", "lead": "Chalet villages below Mont Blanc and the high slopes of Les 3 Vallées."},
-    {"slug": "italy", "name": "Italy", "lead": "The Dolomites: big views, long lunches and skiing between the peaks."}
+    {
+      "slug": "germany",
+      "name": "Germany",
+      "lead": "Our home ground: Munich, the Zugspitze and the Berchtesgaden Alps."
+    },
+    {
+      "slug": "austria",
+      "name": "Austria",
+      "lead": "Tyrol and the Arlberg: old ski towns, big ski areas and quiet high plateaus."
+    },
+    {
+      "slug": "switzerland",
+      "name": "Switzerland",
+      "lead": "Glaciers, car-free villages and the classic resorts of the Swiss Alps."
+    },
+    {
+      "slug": "france",
+      "name": "France",
+      "lead": "Chalet villages below Mont Blanc and the high slopes of Les 3 Vallées."
+    },
+    {
+      "slug": "italy",
+      "name": "Italy",
+      "lead": "The Dolomites: big views, long lunches and skiing between the peaks."
+    }
   ],
   "places": [
     {
@@ -12,12 +32,33 @@
       "name": "Munich",
       "country": "germany",
       "area": "Bavaria",
-      "lat": 48.1372, "lon": 11.5755,
+      "lat": 48.1372,
+      "lon": 11.5755,
       "featured": true,
-      "image": {"src": "assets/img/destinations/munich", "alt": "Marienplatz and the old town of Munich at sunset"},
+      "image": {
+        "src": "assets/img/destinations/munich",
+        "alt": "Marienplatz and the old town of Munich at sunset"
+      },
       "tagline": "Our home base, and the natural first and last night of an alpine week.",
       "intro": "Munich is where EverFlow is based. Most of our guests fly in here, and the mountains begin about an hour south of the city.",
-      "facts": [["Region", "Bavaria, Germany"], ["Airport", "Munich (MUC)"], ["To the mountains", "About 1.5 hours by car to Garmisch-Partenkirchen"], ["Best for", "Arrival and departure days, culture, a city night before or after the snow"]],
+      "facts": [
+        [
+          "Region",
+          "Bavaria, Germany"
+        ],
+        [
+          "Airport",
+          "Munich (MUC)"
+        ],
+        [
+          "To the mountains",
+          "About 1.5 hours by car to Garmisch-Partenkirchen"
+        ],
+        [
+          "Best for",
+          "Arrival and departure days, culture, a city night before or after the snow"
+        ]
+      ],
       "who": "For guests who want a day of museums, beer halls or shopping before heading into the mountains, and for anyone who lands late and wants a good night's sleep before the drive.",
       "when": "All year. In winter a city night fits easily at the start or end of a ski week; the Christmas markets run through Advent.",
       "how": "Munich Airport has direct flights from across Europe and overseas. From the airport, the city centre is about 40 to 45 minutes by train or car."
@@ -27,12 +68,37 @@
       "name": "Garmisch-Partenkirchen",
       "country": "germany",
       "area": "Werdenfelser Land · Zugspitze",
-      "lat": 47.4917, "lon": 11.0955,
+      "lat": 47.4917,
+      "lon": 11.0955,
       "featured": true,
-      "image": {"src": "assets/img/destinations/garmisch-partenkirchen", "alt": "The summit station of the Zugspitze above Garmisch-Partenkirchen"},
+      "image": {
+        "src": "assets/img/destinations/garmisch-partenkirchen",
+        "alt": "The summit station of the Zugspitze above Garmisch-Partenkirchen"
+      },
       "tagline": "Germany's highest mountain, and the World Cup slopes of the Kandahar.",
       "intro": "Where EverFlow began as a ski school. Garmisch-Partenkirchen lies below the Zugspitze, Germany's highest mountain at 2,962 m, with the Garmisch-Classic ski area right above the town.",
-      "facts": [["Region", "Bavaria, Germany"], ["Highest point", "Zugspitze, 2,962 m"], ["Ski areas", "Garmisch-Classic and the Zugspitze glacier"], ["Nearest airports", "Munich (about 1.5 hours), Innsbruck (about 1 hour)"], ["Best for", "Ski coaching, families, a first ski week"]],
+      "facts": [
+        [
+          "Region",
+          "Bavaria, Germany"
+        ],
+        [
+          "Highest point",
+          "Zugspitze, 2,962 m"
+        ],
+        [
+          "Ski areas",
+          "Garmisch-Classic and the Zugspitze glacier"
+        ],
+        [
+          "Nearest airports",
+          "Munich (about 1.5 hours), Innsbruck (about 1 hour)"
+        ],
+        [
+          "Best for",
+          "Ski coaching, families, a first ski week"
+        ]
+      ],
       "who": "Families, first-timers and anyone who wants coaching on varied terrain without a long transfer. The town hosted the 1936 Winter Olympics, and the Kandahar run is still on the World Cup calendar.",
       "when": "Winter for skiing, with the Zugspitze glacier often opening earlier and closing later than the slopes above the town. Summer for hiking, biking and the lakes.",
       "how": "About 1.5 hours by car from Munich Airport, or by train from Munich in around 1.5 hours. Innsbruck Airport is about an hour away."
@@ -42,11 +108,36 @@
       "name": "Berchtesgaden",
       "country": "germany",
       "area": "Berchtesgadener Land",
-      "lat": 47.6302, "lon": 13.0019,
-      "image": {"src": "assets/img/stays/kempinski-berchtesgaden/berchtesgaden-alps", "alt": "The Berchtesgaden Alps in winter", "credit": "Kempinski Hotel Berchtesgaden"},
+      "lat": 47.6302,
+      "lon": 13.0019,
+      "image": {
+        "src": "assets/img/destinations/berchtesgaden",
+        "alt": "St. Bartholomä on Lake Königssee below the east face of the Watzmann",
+        "credit": "Coastfield",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nationalpark_Berchtesgaden_K%C3%B6nigssee_St._Bartholom%C3%A4_Watzmann-Ostwand_01.jpg"
+      },
       "tagline": "A national park, Lake Königssee and the Watzmann, on the border with Salzburg.",
       "intro": "In the far south-east corner of Germany, Berchtesgaden is surrounded by the Berchtesgaden Alps and by Germany's only national park in the Alps.",
-      "facts": [["Region", "Bavaria, Germany"], ["Landmarks", "Lake Königssee and the Watzmann, 2,713 m"], ["Nearest airports", "Salzburg (about 40 minutes), Munich (about 2 hours)"], ["Best for", "Families, winter walks, tobogganing, a quieter ski week"]],
+      "facts": [
+        [
+          "Region",
+          "Bavaria, Germany"
+        ],
+        [
+          "Landmarks",
+          "Lake Königssee and the Watzmann, 2,713 m"
+        ],
+        [
+          "Nearest airports",
+          "Salzburg (about 40 minutes), Munich (about 2 hours)"
+        ],
+        [
+          "Best for",
+          "Families, winter walks, tobogganing, a quieter ski week"
+        ]
+      ],
       "who": "Families and couples who want winter beyond the piste: walks, tobogganing, cross-country and spa days, with skiing close by in Germany and Austria.",
       "when": "Winter for snow and Christmas in the mountains. Late spring to autumn for hiking, the lake and e-bike tours.",
       "how": "Salzburg Airport is about 40 minutes away by car; Munich Airport about two hours."
@@ -56,10 +147,36 @@
       "name": "Innsbruck",
       "country": "austria",
       "area": "Tyrol",
-      "lat": 47.2692, "lon": 11.4041,
+      "lat": 47.2692,
+      "lon": 11.4041,
+      "image": {
+        "src": "assets/img/destinations/innsbruck",
+        "alt": "The colourful houses of Mariahilf on the Inn, with the snow-covered Nordkette above Innsbruck",
+        "credit": "Ikiwaner",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Innsbruck_Flusspromenade.jpg"
+      },
       "tagline": "A city in the mountains, twice host of the Winter Olympics.",
       "intro": "The capital of Tyrol has the Nordkette range right above its old town and several ski areas within half an hour's drive.",
-      "facts": [["Region", "Tyrol, Austria"], ["Airport", "Innsbruck (INN), about 15 minutes from the centre"], ["Winter Olympics", "1964 and 1976"], ["Best for", "Short breaks, city and skiing in one trip"]],
+      "facts": [
+        [
+          "Region",
+          "Tyrol, Austria"
+        ],
+        [
+          "Airport",
+          "Innsbruck (INN), about 15 minutes from the centre"
+        ],
+        [
+          "Winter Olympics",
+          "1964 and 1976"
+        ],
+        [
+          "Best for",
+          "Short breaks, city and skiing in one trip"
+        ]
+      ],
       "who": "Guests who want a city and the mountains in the same day: a cable car from the old town to the Nordkette, and a different ski area every day.",
       "when": "Winter for skiing in the surrounding areas; summer for hiking and biking straight from town.",
       "how": "Innsbruck Airport is just outside the city. Munich Airport is about two hours by car, and Innsbruck is a main stop on the train line between Munich and Italy."
@@ -69,10 +186,32 @@
       "name": "Kitzbühel",
       "country": "austria",
       "area": "Kitzbühel Alps",
-      "lat": 47.4467, "lon": 12.3925,
+      "lat": 47.4467,
+      "lon": 12.3925,
+      "image": {
+        "src": "assets/img/destinations/kitzbuehel",
+        "alt": "Kitzbühel under snow, seen from the north-west",
+        "credit": "Ricardalovesmonuments",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ansicht_Kitzb%C3%BChel_v_Nordwesten.jpg"
+      },
       "tagline": "A medieval town, and the Hahnenkamm with its famous Streif.",
       "intro": "Kitzbühel combines a walled old town with one of Austria's best-known ski areas and the Streif, the downhill of the Hahnenkamm races each January.",
-      "facts": [["Region", "Tyrol, Austria"], ["Nearest airports", "Salzburg or Innsbruck (about 1¼ hours), Munich (about 2 hours)"], ["Best for", "Skiing with town life, the Hahnenkamm weekend, golf in summer"]],
+      "facts": [
+        [
+          "Region",
+          "Tyrol, Austria"
+        ],
+        [
+          "Nearest airports",
+          "Salzburg or Innsbruck (about 1¼ hours), Munich (about 2 hours)"
+        ],
+        [
+          "Best for",
+          "Skiing with town life, the Hahnenkamm weekend, golf in summer"
+        ]
+      ],
       "who": "Skiers who want lively evenings in town after the slopes, and couples and families who like long, cruising runs.",
       "when": "Winter for skiing and the Hahnenkamm races in January; summer for golf, hiking and biking.",
       "how": "Salzburg and Innsbruck airports are each about an hour and a quarter away by car; Munich Airport about two hours."
@@ -82,12 +221,37 @@
       "name": "Lech am Arlberg",
       "country": "austria",
       "area": "Arlberg · Ski Arlberg",
-      "lat": 47.2081, "lon": 10.1419,
+      "lat": 47.2081,
+      "lon": 10.1419,
       "featured": true,
-      "image": {"src": "assets/img/stays/rote-wand/hotel-summer", "alt": "Zug near Lech am Arlberg in summer, with Rote Wand Gourmet Hotel and the village church", "credit": "Rote Wand Gourmet Hotel / Robert Rieger"},
+      "image": {
+        "src": "assets/img/destinations/lech",
+        "alt": "Lech am Arlberg under deep snow",
+        "credit": "Florian Lindner",
+        "license": "CC BY 2.5",
+        "license_url": "https://creativecommons.org/licenses/by/2.5/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Lech_am_Arlberg_2006.jpg"
+      },
       "tagline": "High, snow-sure and quiet: Lech, Zürs, Zug and Oberlech on the Arlberg.",
       "intro": "Lech is a village in Vorarlberg on the Arlberg. It is part of Ski Arlberg, one of the largest connected ski areas in Austria, with Zürs, St. Anton and Warth-Schröcken on the same lift pass.",
-      "facts": [["Region", "Vorarlberg, Austria"], ["Ski area", "Ski Arlberg: Lech, Zürs, Zug, Oberlech, St. Anton, Stuben, Warth-Schröcken"], ["Nearest airports", "Innsbruck (about 1.5 hours), Zurich (about 2.5 hours)"], ["Best for", "Ski weeks with excellent food and hotels; off-piste with a guide"]],
+      "facts": [
+        [
+          "Region",
+          "Vorarlberg, Austria"
+        ],
+        [
+          "Ski area",
+          "Ski Arlberg: Lech, Zürs, Zug, Oberlech, St. Anton, Stuben, Warth-Schröcken"
+        ],
+        [
+          "Nearest airports",
+          "Innsbruck (about 1.5 hours), Zurich (about 2.5 hours)"
+        ],
+        [
+          "Best for",
+          "Ski weeks with excellent food and hotels; off-piste with a guide"
+        ]
+      ],
       "who": "Skiers who want big terrain without big crowds, and families who want to ski from a small village.",
       "when": "Winter for skiing, usually from early December to late April. Summer for hiking in the Lech valley.",
       "how": "Innsbruck Airport is about an hour and a half away by car; Zurich about two and a half hours. By train to Langen am Arlberg or St. Anton, then a short transfer."
@@ -97,11 +261,36 @@
       "name": "Seefeld in Tirol",
       "country": "austria",
       "area": "Olympiaregion Seefeld",
-      "lat": 47.3297, "lon": 11.1880,
-      "image": {"src": "assets/img/stays/sacher-seefeld/infinity-pool", "alt": "An infinity pool on the Seefeld plateau, with snowy mountains behind it", "credit": "Alpin Resort Sacher Seefeld"},
+      "lat": 47.3297,
+      "lon": 11.188,
+      "image": {
+        "src": "assets/img/destinations/seefeld",
+        "alt": "A floodlit cross-country trail leading to the Seekirchl in Seefeld",
+        "credit": "Dirk Schmidt",
+        "license": "CC0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Seefeld_in_Tirol_Nachtloipe_mit_Seekirchl.jpg"
+      },
       "tagline": "A sunny high plateau above Innsbruck, made for cross-country skiing.",
       "intro": "Seefeld sits on a plateau at about 1,200 m, half an hour above Innsbruck. It hosted the Nordic events of the 1964 and 1976 Winter Olympics and the 2019 Nordic World Ski Championships.",
-      "facts": [["Region", "Tyrol, Austria"], ["Skiing", "Rosshütte and Gschwandtkopf, and long cross-country trails"], ["Nearest airports", "Innsbruck (about 30 minutes), Munich (about 2 hours)"], ["Best for", "Cross-country skiing, families, wellness, gentle skiing"]],
+      "facts": [
+        [
+          "Region",
+          "Tyrol, Austria"
+        ],
+        [
+          "Skiing",
+          "Rosshütte and Gschwandtkopf, and long cross-country trails"
+        ],
+        [
+          "Nearest airports",
+          "Innsbruck (about 30 minutes), Munich (about 2 hours)"
+        ],
+        [
+          "Best for",
+          "Cross-country skiing, families, wellness, gentle skiing"
+        ]
+      ],
       "who": "Families, cross-country skiers and anyone who wants a quieter week with spa days, winter walks and easy skiing.",
       "when": "Winter for cross-country and downhill skiing; summer for hiking, biking and golf on the plateau.",
       "how": "Innsbruck Airport is about 30 minutes away by car. Seefeld also has its own station on the railway from Innsbruck to Garmisch-Partenkirchen."
@@ -111,10 +300,36 @@
       "name": "St. Moritz",
       "country": "switzerland",
       "area": "Engadin",
-      "lat": 46.4908, "lon": 9.8355,
+      "lat": 46.4908,
+      "lon": 9.8355,
+      "image": {
+        "src": "assets/img/destinations/st-moritz",
+        "alt": "St. Moritz and its grand hotels above the frozen lake",
+        "credit": "Franzfoto",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:St._Moritz-Dorf_-_Zugefrorener_See,.jpg"
+      },
       "tagline": "The sunny high valley of the Engadin, host of two Winter Olympics.",
       "intro": "St. Moritz lies at about 1,800 m in the Upper Engadin, with Corviglia above the village and a frozen lake below it in deep winter.",
-      "facts": [["Region", "Graubünden, Switzerland"], ["Winter Olympics", "1928 and 1948"], ["Nearest airports", "Zurich (about 3 hours); Engadin Airport in Samedan for private flights"], ["Best for", "Skiing with style, winter events on the lake"]],
+      "facts": [
+        [
+          "Region",
+          "Graubünden, Switzerland"
+        ],
+        [
+          "Winter Olympics",
+          "1928 and 1948"
+        ],
+        [
+          "Nearest airports",
+          "Zurich (about 3 hours); Engadin Airport in Samedan for private flights"
+        ],
+        [
+          "Best for",
+          "Skiing with style, winter events on the lake"
+        ]
+      ],
       "who": "Guests who want classic grand hotels, sunny pistes and a winter calendar full of events.",
       "when": "Winter for skiing and the events on the frozen lake; summer for hiking, biking and the Engadin lakes.",
       "how": "About three hours from Zurich by car or train. Private flights land at Engadin Airport in Samedan, a few minutes away."
@@ -124,10 +339,36 @@
       "name": "Engelberg",
       "country": "switzerland",
       "area": "Central Switzerland · Titlis",
-      "lat": 46.8200, "lon": 8.4016,
+      "lat": 46.82,
+      "lon": 8.4016,
+      "image": {
+        "src": "assets/img/destinations/engelberg",
+        "alt": "The Titlis above the Engelberg valley in winter",
+        "credit": "Gestumblindi",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Engelberg_with_Titlis_and_paraglider.jpg"
+      },
       "tagline": "A monastery village below the Titlis glacier, under an hour from Lucerne.",
       "intro": "Engelberg grew up around its Benedictine monastery, founded in 1120. Above the village, lifts climb to the Titlis glacier at over 3,000 m.",
-      "facts": [["Region", "Obwalden, Switzerland"], ["Ski areas", "Titlis and Brunni"], ["Nearest airport", "Zurich (about 1.5 hours)"], ["Best for", "Freeride, glacier skiing, summer hiking"]],
+      "facts": [
+        [
+          "Region",
+          "Obwalden, Switzerland"
+        ],
+        [
+          "Ski areas",
+          "Titlis and Brunni"
+        ],
+        [
+          "Nearest airport",
+          "Zurich (about 1.5 hours)"
+        ],
+        [
+          "Best for",
+          "Freeride, glacier skiing, summer hiking"
+        ]
+      ],
       "who": "Strong skiers looking for freeride terrain, and families who want an easy trip from Zurich or Lucerne.",
       "when": "Winter for skiing, with the Titlis glacier often holding snow late into spring; summer for hiking and the mountain lakes.",
       "how": "About an hour and a half from Zurich Airport by car or train. Lucerne is under an hour away."
@@ -137,10 +378,32 @@
       "name": "Gstaad",
       "country": "switzerland",
       "area": "Saanenland · Bernese Oberland",
-      "lat": 46.4750, "lon": 7.2861,
+      "lat": 46.475,
+      "lon": 7.2861,
+      "image": {
+        "src": "assets/img/destinations/gstaad",
+        "alt": "Snow-covered chalets in Gstaad, with the Gstaad Palace and the mountains behind",
+        "credit": "Patrick Nouhailler",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Gstaad_-_panoramio_(10).jpg"
+      },
       "tagline": "A car-free promenade, chalets, and the high skiing of Glacier 3000.",
       "intro": "Gstaad is a chalet village in the Saanenland, known for its pedestrian promenade, its hotels and the high-alpine skiing of Glacier 3000.",
-      "facts": [["Region", "Bern, Switzerland"], ["Nearest airports", "Geneva (about 2 hours), Bern (about 1.5 hours); Saanen airfield for private flights"], ["Best for", "Quiet luxury, families, chalet weeks"]],
+      "facts": [
+        [
+          "Region",
+          "Bern, Switzerland"
+        ],
+        [
+          "Nearest airports",
+          "Geneva (about 2 hours), Bern (about 1.5 hours); Saanen airfield for private flights"
+        ],
+        [
+          "Best for",
+          "Quiet luxury, families, chalet weeks"
+        ]
+      ],
       "who": "Families and couples who want a calm village, beautiful chalets and skiing at their own pace.",
       "when": "Winter for skiing; summer for hiking, festivals and tennis.",
       "how": "About two hours from Geneva Airport by car, or by train via Montreux on the scenic GoldenPass line."
@@ -150,10 +413,37 @@
       "name": "Zermatt",
       "country": "switzerland",
       "area": "Valais · Matterhorn",
-      "lat": 46.0207, "lon": 7.7491,
+      "lat": 46.0207,
+      "lon": 7.7491,
+      "featured": true,
+      "image": {
+        "src": "assets/img/destinations/zermatt",
+        "alt": "Zermatt's chalets at dusk below the Matterhorn",
+        "credit": "Roy Egloff",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:CH.VS.Zermatt_2019-12-27_Mount-Matterhorn_7227_16x9-R_10K.jpg"
+      },
       "tagline": "A car-free village below the Matterhorn, skiing over into Italy.",
       "intro": "Zermatt is a car-free village in the Valais below the Matterhorn, 4,478 m. Its ski area reaches the Matterhorn Glacier Paradise and links over the border to Cervinia.",
-      "facts": [["Region", "Valais, Switzerland"], ["Access", "By train from Täsch or Visp; cars stay in Täsch"], ["Nearest airports", "Geneva or Zurich (about 3.5 hours)"], ["Best for", "High-altitude skiing, mountaineering, a long season"]],
+      "facts": [
+        [
+          "Region",
+          "Valais, Switzerland"
+        ],
+        [
+          "Access",
+          "By train from Täsch or Visp; cars stay in Täsch"
+        ],
+        [
+          "Nearest airports",
+          "Geneva or Zurich (about 3.5 hours)"
+        ],
+        [
+          "Best for",
+          "High-altitude skiing, mountaineering, a long season"
+        ]
+      ],
       "who": "Skiers who want altitude and long runs, and mountaineers drawn by the Matterhorn and the high peaks around it.",
       "when": "Winter for skiing on both sides of the border; summer for glacier skiing, hiking and mountaineering.",
       "how": "By train to Visp, then the mountain railway to Zermatt. Drivers leave the car in Täsch and take the shuttle train for the last few minutes."
@@ -163,12 +453,37 @@
       "name": "Megève",
       "country": "france",
       "area": "Haute-Savoie · Mont Blanc",
-      "lat": 45.8567, "lon": 6.6175,
+      "lat": 45.8567,
+      "lon": 6.6175,
       "featured": true,
-      "image": {"src": "assets/img/stays/chalets-megeve/house-chalet-altai", "alt": "A chalet in Megève in the snow", "credit": "Photos courtesy of the owner"},
+      "image": {
+        "src": "assets/img/destinations/megeve",
+        "alt": "Megève below the snowy slopes, with the Mont Blanc massif behind",
+        "credit": "DimiTalen",
+        "license": "CC0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:View_of_Meg%C3%A8ve_and_the_Mont_Blanc_massif_from_Le_Christomet,_Meg%C3%A8ve,_2025.jpg"
+      },
       "tagline": "A village of chalets with views of Mont Blanc, about an hour from Geneva.",
       "intro": "Megève was developed as a ski resort in the 1920s by the Rothschild family and has kept the feel of a Savoyard village: stone streets, chalets and wide, tree-lined slopes.",
-      "facts": [["Region", "Haute-Savoie, France"], ["Ski area", "Évasion Mont-Blanc"], ["Nearest airport", "Geneva (about 1¼ hours)"], ["Best for", "Chalet weeks, families, food"]],
+      "facts": [
+        [
+          "Region",
+          "Haute-Savoie, France"
+        ],
+        [
+          "Ski area",
+          "Évasion Mont-Blanc"
+        ],
+        [
+          "Nearest airport",
+          "Geneva (about 1¼ hours)"
+        ],
+        [
+          "Best for",
+          "Chalet weeks, families, food"
+        ]
+      ],
       "who": "Families and groups who want a private chalet, gentle and scenic skiing, and a village with good restaurants.",
       "when": "Winter for skiing and the village at Christmas; summer for hiking, biking and golf with views of Mont Blanc.",
       "how": "About an hour and a quarter from Geneva Airport by car. By train to Sallanches, then about 20 minutes by road."
@@ -178,10 +493,36 @@
       "name": "Courchevel",
       "country": "france",
       "area": "Savoie · Les 3 Vallées",
-      "lat": 45.4154, "lon": 6.6349,
+      "lat": 45.4154,
+      "lon": 6.6349,
+      "image": {
+        "src": "assets/img/destinations/courchevel",
+        "alt": "Courchevel's hotels at the foot of the ski slopes",
+        "credit": "qwesy qwesy",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Les_3_Vall%C3%A9es,_Courchevel_-_panoramio_(1).jpg"
+      },
       "tagline": "The top of Les 3 Vallées, with its own altiport.",
       "intro": "Courchevel is a set of villages at the top of Les 3 Vallées, one of the largest linked ski areas in the world, which also includes Méribel and Val Thorens.",
-      "facts": [["Region", "Savoie, France"], ["Ski area", "Les 3 Vallées"], ["Nearest airports", "Geneva or Lyon (about 2.5 hours), Chambéry (about 1.5 hours); the altiport for small aircraft and helicopters"], ["Best for", "Big-mileage skiing, chalets, fine dining"]],
+      "facts": [
+        [
+          "Region",
+          "Savoie, France"
+        ],
+        [
+          "Ski area",
+          "Les 3 Vallées"
+        ],
+        [
+          "Nearest airports",
+          "Geneva or Lyon (about 2.5 hours), Chambéry (about 1.5 hours); the altiport for small aircraft and helicopters"
+        ],
+        [
+          "Best for",
+          "Big-mileage skiing, chalets, fine dining"
+        ]
+      ],
       "who": "Skiers who want a different valley every day, and groups who want a chalet with a chef.",
       "when": "Winter, usually from December to April.",
       "how": "By car from Geneva or Lyon in about two and a half hours, or by train to Moûtiers and then about 40 minutes by road. Helicopter and small-plane transfers land at the altiport."
@@ -191,10 +532,37 @@
       "name": "Cortina d'Ampezzo",
       "country": "italy",
       "area": "Dolomites · Veneto",
-      "lat": 46.5405, "lon": 12.1357,
+      "lat": 46.5405,
+      "lon": 12.1357,
+      "featured": true,
+      "image": {
+        "src": "assets/img/destinations/cortina",
+        "alt": "Cortina d'Ampezzo under fresh snow at dawn, with the Dolomites behind",
+        "credit": "Alessio Battistella",
+        "license": "CC BY-SA 2.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ronco,_Cortina_d%27Ampezzo_13-12-2020.jpg"
+      },
       "tagline": "The Dolomites, host of the Winter Olympics in 1956 and 2026.",
       "intro": "Cortina d'Ampezzo sits in a wide valley ringed by the Dolomites, a UNESCO World Heritage Site. It hosted the 1956 Winter Olympics and co-hosted the Winter Olympics of 2026 with Milan.",
-      "facts": [["Region", "Veneto, Italy"], ["Ski area", "Dolomiti Superski"], ["Nearest airports", "Venice (about 2 hours), Innsbruck (about 2 hours)"], ["Best for", "Skiing with views, long lunches, ski touring"]],
+      "facts": [
+        [
+          "Region",
+          "Veneto, Italy"
+        ],
+        [
+          "Ski area",
+          "Dolomiti Superski"
+        ],
+        [
+          "Nearest airports",
+          "Venice (about 2 hours), Innsbruck (about 2 hours)"
+        ],
+        [
+          "Best for",
+          "Skiing with views, long lunches, ski touring"
+        ]
+      ],
       "who": "Skiers who care as much about the view and the lunch as the run, and couples who want an Italian mountain town.",
       "when": "Winter for skiing; summer for hiking, via ferrata and the high passes of the Dolomites.",
       "how": "About two hours by car from Venice Airport or Innsbruck Airport."
