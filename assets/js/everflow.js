@@ -33,7 +33,7 @@
     $$('#site-nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
   }
 
-  /* ---------- galleries: counter "01 / 06" and previous / next ---------- */
+  /* ---------- galleries: counter "01 / 06" (or "01–03 / 06" when three fit) and previous / next ---------- */
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function initGallery(g) {
     var track = $('.gallery-track', g);
@@ -44,27 +44,38 @@
     var next = $('[data-next]', g);
     if (!track || items.length < 2 || !controls) return;
     controls.hidden = false;
-    var current = 0;
-    function update() {
-      var left = track.scrollLeft;
-      var best = 0;
+    var first = 0;      // the first photo or card fully in view
+    var aim = null;     // where a click is scrolling to, so quick clicks add up
+    var settle = null;
+    function inView() {
+      var box = track.getBoundingClientRect();
+      var from = -1, to = -1, near = 0;
       items.forEach(function (it, i) {
-        if (Math.abs(it.offsetLeft - track.offsetLeft - left) < Math.abs(items[best].offsetLeft - track.offsetLeft - left)) best = i;
+        var r = it.getBoundingClientRect();
+        if (r.left >= box.left - 2 && r.right <= box.right + 2) { if (from < 0) from = i; to = i; }
+        if (Math.abs(r.left - box.left) < Math.abs(items[near].getBoundingClientRect().left - box.left)) near = i;
       });
-      var atEnd = left + track.clientWidth >= track.scrollWidth - 4;
-      current = atEnd ? items.length - 1 : best;
-      count.textContent = pad(current + 1) + ' / ' + pad(items.length);
-      prev.disabled = left <= 4;
-      next.disabled = atEnd;
+      return from < 0 ? [near, near] : [from, to];  // an item wider than the track: the one at its left edge
+    }
+    function update() {
+      var v = inView();
+      first = v[0];
+      count.textContent = (v[0] === v[1] ? pad(v[0] + 1) : pad(v[0] + 1) + '–' + pad(v[1] + 1)) + ' / ' + pad(items.length);
+      var left = track.scrollLeft;
+      prev.disabled = first === 0 && left <= 4;
+      next.disabled = v[1] === items.length - 1 || left + track.clientWidth >= track.scrollWidth - 4;
     }
     function go(i) {
-      i = Math.max(0, Math.min(items.length - 1, i));
-      track.scrollTo({ left: items[i].offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+      aim = Math.max(0, Math.min(items.length - 1, i));
+      var max = track.scrollWidth - track.clientWidth;
+      track.scrollTo({ left: Math.min(max, items[aim].offsetLeft - track.offsetLeft), behavior: reduceMotion ? 'auto' : 'smooth' });
     }
-    prev.addEventListener('click', function () { go(current - 1); });
-    next.addEventListener('click', function () { go(current + 1); });
+    prev.addEventListener('click', function () { go((aim === null ? first : aim) - 1); });
+    next.addEventListener('click', function () { go((aim === null ? first : aim) + 1); });
     var ticking = false;
     track.addEventListener('scroll', function () {
+      window.clearTimeout(settle);
+      settle = window.setTimeout(function () { aim = null; update(); }, 200);  // the scroll has come to rest
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(function () { ticking = false; update(); });
