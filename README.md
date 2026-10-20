@@ -23,6 +23,7 @@ and JavaScript, generated from the content files by one small Python script.
 ├── scripts/
 │   ├── build.py               # content/ → the HTML pages (standard library only)
 │   ├── photos.py              # original photo → WebP files for the site (needs Pillow)
+│   ├── map.py                 # Natural Earth data → assets/img/map/alps.svg, the drawn map of the destinations
 │   ├── check.py               # site checks (also run in CI)
 │   └── library.py             # the hotel library (local tool, see CLAUDE.md)
 ├── index.html, 404.html, impressum.html, datenschutz.html,
@@ -32,7 +33,7 @@ and JavaScript, generated from the content files by one small Python script.
 │   ├── css/everflow.css       # the one stylesheet (tokens in :root)
 │   ├── js/everflow.js         # menu, galleries (a photo opens large), enquiry form, click-to-load map, home video
 │   ├── fonts/                 # Playfair Display + Public Sans, self-hosted (SIL OFL)
-│   ├── vendor/leaflet/        # Leaflet 1.9.4 (BSD-2), loaded only after "Show map"
+│   ├── vendor/leaflet/        # Leaflet 1.9.4 (BSD-2), loaded only after "Open the interactive map"
 │   ├── img/                   # WebP files written by scripts/photos.py
 │   │   └── stays/<partner>/   # partner photos, each shown with the partner's "©" credit
 │   ├── stays/<partner>/       # partner brochures, unmodified, only with written permission
@@ -92,8 +93,8 @@ reserva/reservar and comisión/comissão there.
 
 - **Zero third-party requests on page load.** Fonts, scripts, photos and the video are served
   from this repo; a Content-Security-Policy on every page enforces it in the browser. The only
-  external request is the map tiles (OpenStreetMap), and only after the visitor clicks "Show
-  map". No cookies, no tracking, no cookie banner.
+  external request is the map tiles (OpenStreetMap), and only after the visitor clicks "Open the
+  interactive map"; the map shown first is drawn from Natural Earth data and served from this repo. No cookies, no tracking, no cookie banner.
 - **Partner photos carry their owner's credit.** Every photo of a hotel or chalet sits in a
   figure with "© <credit line>" under it, and every credit line is listed in the Impressum.
   `scripts/check.py` fails otherwise.

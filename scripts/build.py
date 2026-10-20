@@ -270,6 +270,18 @@ def places_in(country_slug):
     return [p for p in PLACES if p['country'] == country_slug]
 
 
+# The destinations map: an equirectangular view of the Alps; scripts/map.py draws its background in the same frame.
+MAP_BOX = (5.55, 44.95, 13.95, 48.65)   # west, south, east, north, in degrees
+MAP_W = 1000
+_MAP_K = math.cos(math.radians(46.8))
+_MAP_SCALE = MAP_W / ((MAP_BOX[2] - MAP_BOX[0]) * _MAP_K)
+MAP_H = round((MAP_BOX[3] - MAP_BOX[1]) * _MAP_SCALE)
+
+
+def map_xy(lat, lon):
+    return (lon - MAP_BOX[0]) * _MAP_K * _MAP_SCALE, (MAP_BOX[3] - lat) * _MAP_SCALE
+
+
 def distance(p, q):
     la1, lo1, la2, lo2 = map(math.radians, (p['lat'], p['lon'], q['lat'], q['lon']))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
@@ -680,6 +692,68 @@ def organisation():
     }
 
 
+MAP_COUNTRIES = {'germany': (48.42, 9.4), 'austria': (47.02, 13.3), 'switzerland': (47.17, 7.55), 'france': (45.12, 6.3),
+                 'italy': (45.27, 9.9)}       # where each country's name sits on the map
+MAP_CITIES = [('Zurich', 47.37, 8.54), ('Geneva', 46.20, 6.14), ('Milan', 45.46, 9.19), ('Venice', 45.44, 12.33)]
+
+
+def static_map():
+    """The destinations on the drawn map (assets/img/map/alps.svg): a pin and a name for each, every pin a link.
+    Each name goes right, left, above or below its pin, wherever it hits no other name or pin."""
+    size, r, gap = 14, 6, 5
+    taken = []
+
+    def fits(b):
+        return (b[0] >= 3 and b[2] <= MAP_W - 3 and b[1] >= 3 and b[3] <= MAP_H - 3 and
+                all(b[2] < o[0] or b[0] > o[2] or b[3] < o[1] or b[1] > o[3] for o in taken))
+
+    def width(text, fs, spacing=0.0):
+        return len(text) * fs * (0.58 + spacing)
+
+    pins = [(p, *map_xy(p['lat'], p['lon'])) for p in PLACES]
+    for _, x, y in pins:
+        taken.append((x - r - 2, y - r - 2, x + r + 2, y + r + 2))
+    countries = []
+    for c in COUNTRIES:
+        lat, lon = MAP_COUNTRIES[c['slug']]
+        x, y = map_xy(lat, lon)
+        name = tr(c['name']).upper()
+        w = width(name, 15, 0.42)
+        taken.append((x - w / 2, y - 15, x + w / 2, y + 3))
+        countries.append(f'<text x="{x:.0f}" y="{y:.0f}" text-anchor="middle">{e(name)}</text>')
+    cities = []
+    for name, lat, lon in MAP_CITIES:
+        x, y = map_xy(lat, lon)
+        label = tro(name)
+        taken.append((x - 3, y - 3, x + 3 + 4 + width(label, 11), y + 6))
+        cities.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.4"/><text x="{x + 6:.1f}" y="{y + 4:.1f}">{e(label)}</text>')
+
+    def crowd(item):
+        _, x, y = item
+        return -sum(1 for _, x2, y2 in pins if abs(x2 - x) < 90 and abs(y2 - y) < 45)
+
+    places = []
+    for p, x, y in sorted(pins, key=crowd):
+        label = tro(p.get('map_label', p['name']))
+        w, h = width(label, size), size
+        options = [  # (box, text x, text y, anchor)
+            ((x + r + gap, y - h / 2, x + r + gap + w, y + h / 2), x + r + gap, y + size * 0.36, 'start'),
+            ((x - r - gap - w, y - h / 2, x - r - gap, y + h / 2), x - r - gap, y + size * 0.36, 'end'),
+            ((x - w / 2, y - r - gap - h, x + w / 2, y - r - gap), x, y - r - gap - 2, 'middle'),
+            ((x - w / 2, y + r + gap, x + w / 2, y + r + gap + h), x, y + r + gap + size * 0.8, 'middle'),
+        ]
+        box, tx, ty, anchor = next((o for o in options if fits(o[0])), options[0])
+        taken.append(box)
+        places.append(f'<a class="map-place" href="{localized("/destinations/" + p["slug"] + "/")}">'
+                      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}"/>'
+                      f'<text x="{tx:.1f}" y="{ty:.1f}" text-anchor="{anchor}">{e(label)}</text></a>')
+    return (f'<svg class="map-svg" viewBox="0 0 {MAP_W} {MAP_H}" role="group" aria-label="{a(ui("On the map"))}">'
+            f'<image href="{asset_url("assets/img/map/alps.svg")}" width="{MAP_W}" height="{MAP_H}"/>'
+            f'<g class="map-countries" aria-hidden="true">{"".join(countries)}</g>'
+            f'<g class="map-cities" aria-hidden="true">{"".join(cities)}</g>'
+            f'<g class="map-places">{"".join(places)}</g></svg>')
+
+
 def destinations_index():
     sections = []
     for c in COUNTRIES:
@@ -707,13 +781,11 @@ def destinations_index():
   <div class="wrap">
     {section_head(ui("On the map"), ui("Every place we host."))}
     <div class="map" id="map" data-pins="{pins_json}">
-      <div class="map-consent">
-        <div class="map-consent-box">
-          <p class="map-consent-title">{ui("Interactive map")}</p>
-          <p>{t(consent)}</p>
-          <button class="button" id="map-load" type="button">{ui("Show map")}</button>
-        </div>
-      </div>
+      <div class="map-static">{static_map()}</div>
+    </div>
+    <div class="map-live">
+      <p class="small"><strong>{ui("Interactive map")}.</strong> {t(consent)}</p>
+      <button class="button button--ghost" id="map-load" type="button">{ui("Open the interactive map")}</button>
     </div>
   </div>
 </section>

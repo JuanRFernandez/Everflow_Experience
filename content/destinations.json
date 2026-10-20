@@ -66,6 +66,7 @@
     {
       "slug": "garmisch-partenkirchen",
       "name": "Garmisch-Partenkirchen",
+      "map_label": "Garmisch",
       "country": "germany",
       "area": "Werdenfelser Land · Zugspitze",
       "lat": 47.4917,
@@ -219,6 +220,7 @@
     {
       "slug": "lech",
       "name": "Lech am Arlberg",
+      "map_label": "Lech",
       "country": "austria",
       "area": "Arlberg · Ski Arlberg",
       "lat": 47.2081,
@@ -259,6 +261,7 @@
     {
       "slug": "seefeld",
       "name": "Seefeld in Tirol",
+      "map_label": "Seefeld",
       "country": "austria",
       "area": "Olympiaregion Seefeld",
       "lat": 47.3297,
@@ -530,6 +533,7 @@
     {
       "slug": "cortina",
       "name": "Cortina d'Ampezzo",
+      "map_label": "Cortina",
       "country": "italy",
       "area": "Dolomites · Veneto",
       "lat": 46.5405,
