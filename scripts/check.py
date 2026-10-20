@@ -6,7 +6,7 @@
     link to an anchor (#x, /page/#x) finds that id on the target page.
  3. Nothing is loaded from a third-party host on page view: no <link>, <script>, <img>, <iframe>,
     <video>, <audio>, <source>, <object> or <embed> with an external URL, and no CSS @import /
-    url(http...). Fonts and Leaflet are self-hosted; map tiles load only after "Show map".
+    url(http...). Fonts and Leaflet are self-hosted; map tiles load only after "Open the interactive map".
  4. HTML tags are balanced; every page has one <main> and one <h1>; generated pages carry no inline
     style, script or event handler (the Content-Security-Policy forbids them); every form field has
     a label; every <img> has alt, width and height.

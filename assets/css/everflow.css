@@ -330,10 +330,25 @@ th{color:var(--ink);font-weight:600}
 .aside-title{margin-top:1.5rem;font-weight:600;color:var(--ink)}
 
 /* ---------- map ---------- */
-.map{position:relative;height:clamp(22rem,60vh,34rem);border:1px solid var(--line);border-radius:var(--radius);background:#e9e4d8 url(../img/ui/map-placeholder.svg) center/cover no-repeat;overflow:hidden}
-.map-consent{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem}
-.map-consent-box{max-width:28rem;background:var(--white);border:1px solid var(--line);padding:1.5rem;box-shadow:0 10px 30px rgba(23,20,15,.12)}
-.map-consent-title{font:400 var(--step-2)/1.2 var(--serif);color:var(--ink);margin-bottom:.5rem}
+.map{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:#dde3e0;overflow:hidden}
+.map.is-live{height:clamp(22rem,60vh,34rem)}
+.map-svg{display:block;width:100%;height:auto}
+.map-countries text{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.42em;fill:#b2a994}
+.map-cities circle{fill:#a39a87}
+.map-cities text{font-family:var(--sans);font-size:11px;font-style:italic;fill:#7c7465}
+.map-place circle{fill:var(--ink);stroke:#f6f2ea;stroke-width:2.5px;transition:fill .15s}
+.map-place text{font-family:var(--sans);font-size:14px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:#f6f2ea;stroke-width:4px;stroke-linejoin:round}
+.map-place:hover circle,.map-place:focus-visible circle{fill:var(--accent)}
+.map-place:hover text,.map-place:focus-visible text{fill:var(--accent)}
+.map-place:focus{outline:none}
+.map-place:focus-visible circle{stroke:var(--accent);stroke-width:4px}
+@media (max-width:44.99rem){  /* phones: the map keeps a readable size and scrolls sideways */
+  .map-static{overflow-x:auto;overscroll-behavior-x:contain}
+  .map-svg{width:45rem;max-width:none}
+}
+.map-live{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 2rem;margin-top:1rem}
+.map-live p{margin:0;max-width:44rem}
+.map-live[hidden]{display:none}
 .map .leaflet-tile-pane{filter:grayscale(1) sepia(.12) brightness(1.03)}
 .map-pin{background:none;border:0}
 .map-pin span{display:block;width:14px;height:14px;border-radius:50%;background:var(--ink);border:3px solid var(--cream);box-shadow:0 0 0 1px var(--ink)}

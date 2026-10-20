@@ -1,5 +1,5 @@
 /* EverFlow Experience: the one script of the site. No dependencies; Leaflet is loaded only
-   after the visitor clicks "Show map". Every page works without this script. */
+   after the visitor clicks "Open the interactive map". Every page works without this script. */
 (function () {
   'use strict';
 
@@ -183,6 +183,8 @@
     var box = $('#map');
     var button = $('#map-load');
     if (!box || !button) return;
+    var drawn = $('.map-static', box);  // on a phone the drawn map scrolls sideways: start in the middle
+    if (drawn && drawn.scrollWidth > drawn.clientWidth) drawn.scrollLeft = (drawn.scrollWidth - drawn.clientWidth) / 2;
     button.addEventListener('click', function () {
       button.disabled = true;
       button.textContent = 'Loading…';
@@ -200,8 +202,11 @@
   }
   function buildMap(box) {
     var pins = JSON.parse(box.getAttribute('data-pins'));
-    var consent = $('.map-consent', box);
-    if (consent) consent.parentNode.removeChild(consent);
+    var drawn = $('.map-static', box);
+    if (drawn) drawn.parentNode.removeChild(drawn);  // the interactive map takes the place of the drawn one
+    var live = $('.map-live');
+    if (live) live.hidden = true;
+    box.classList.add('is-live');
     var map = L.map(box, { scrollWheelZoom: false });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
