@@ -116,9 +116,8 @@
     "lead": "Both can make a perfect week. What each one gives you, and which we suggest for which group.",
     "description": "A private chalet or a hotel for a ski week in the Alps? What each one gives you, which suits which group, and the chalets and hotels we know.",
     "card": "What a private chalet gives you, what a hotel does, and which we suggest for which group.",
-    "image": {"experience": "hotels-and-chalets"},
+    "image": {"src": "assets/img/experiences/lodging", "alt": "A chalet kitchen and dining room with mountain views"},
     "related": ["megeve", "lech", "seefeld"],
-    "interest": "hotels-and-chalets",
     "sections": [
       {
         "h2": "A chalet: your house, your rhythm.",

@@ -9,15 +9,6 @@
     "alt": "A snowboarder carving through fresh snow"
   },
   {
-    "slug": "hotels-and-chalets",
-    "title": "Hotels and chalets",
-    "status": "By request",
-    "featured": true,
-    "text": "Hotels, chalets and mountain houses we know, matched to your group and arranged as part of one plan. [See where our guests stay](/stay/).",
-    "image": "assets/img/experiences/lodging",
-    "alt": "A chalet kitchen and dining room with mountain views"
-  },
-  {
     "slug": "heli-and-backcountry",
     "title": "Heli and backcountry",
     "status": "By request",
@@ -38,7 +29,8 @@
     "slug": "culinary-and-wine",
     "title": "Culinary and wine",
     "status": "By request",
-    "text": "Mountain huts, chef's tables and wine evenings, reserved around your days on the mountain.",
+    "featured": true,
+    "text": "Mountain huts, chef's tables and wine evenings, planned around your days on the mountain.",
     "image": "assets/img/experiences/culinary",
     "alt": "Cheese fondue on a table set for friends"
   },
@@ -49,6 +41,14 @@
     "text": "Spa time, massages and rest days, arranged with the hotels and spas we work with.",
     "image": "assets/img/experiences/wellness",
     "alt": "A wooden sauna with a window onto the forest"
+  },
+  {
+    "slug": "summer",
+    "title": "Summer in the Alps",
+    "status": "By request",
+    "text": "Lakes, high trails, biking and mountain huts: the Alps after the snow.",
+    "image": "assets/img/experiences/summer",
+    "alt": "A green alpine valley in summer"
   },
   {
     "slug": "private-transport",
@@ -65,13 +65,5 @@
     "text": "Team days, offsites and group trips, with skiing, activities and venues in one plan.",
     "image": "assets/img/experiences/corporate",
     "alt": "A mountain hut at sunset"
-  },
-  {
-    "slug": "summer",
-    "title": "Summer in the Alps",
-    "status": "By request",
-    "text": "Lakes, high trails, biking and mountain huts: the Alps after the snow.",
-    "image": "assets/img/experiences/summer",
-    "alt": "A green alpine valley in summer"
   }
 ]

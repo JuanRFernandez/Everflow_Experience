@@ -16,6 +16,9 @@
       !document.getElementById(location.hash.slice(1))) {
     location.replace(LEGACY[location.hash]);
   }
+  if (location.pathname === '/experiences/' && location.hash === '#hotels-and-chalets') {
+    location.replace('/stay/');  // hotels and chalets were an experience until 21.10.2026; they have their own pages
+  }
 
   /* ---------- mobile menu ---------- */
   function initMenu() {
