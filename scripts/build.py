@@ -488,11 +488,13 @@ def experience_card(x, level=3):
 
 
 def guide_media(g, sizes, cls='', eager=False, links=True):
-    """A guide's photo: a destination's, with its credit, or an experience's."""
+    """A guide's photo: a destination's, with its credit, an experience's, or one of its own (src, alt)."""
     im = g['image']
     if im.get('place'):
         pi = PLACE[im['place']]['image']
         return figure(pi['src'], pi['alt'], sizes, pi.get('credit'), cls=cls, eager=eager, image=pi, links=links)
+    if im.get('src'):
+        return figure(im['src'], im['alt'], sizes, cls=cls, eager=eager)
     x = EXPERIENCE[im['experience']]
     return figure(x['image'], x['alt'], sizes, cls=cls, eager=eager)
 
@@ -1108,7 +1110,7 @@ def guide_page(g):
             prose.append(f'<h2>{e(s["h2"])}</h2>{fig}' + ''.join(f'<p>{t(x)}</p>' for x in s.get('text', [])))
     flush()
     im = g['image']
-    base = PLACE[im['place']]['image']['src'] if im.get('place') else EXPERIENCE[im['experience']]['image']
+    base = PLACE[im['place']]['image']['src'] if im.get('place') else im.get('src') or EXPERIENCE[im['experience']]['image']
     body = f'''{page_head(g["eyebrow"], g["h1"], g["lead"], crumbs=[("Guides", "/guides/"), (g["name"], "")])}
 <div class="wrap">{guide_media(g, "(min-width: 75rem) 1180px, 100vw", cls="hero-figure", eager=True)}</div>
 {chr(10).join(blocks)}
@@ -1274,8 +1276,8 @@ def validate():
     for g in GUIDES:
         where = f'guide {g["slug"]}'
         im = g['image']
-        if not (PLACE.get(im.get('place'), {}).get('image') or im.get('experience') in EXPERIENCE):
-            problems.append(f'{where}: the image names neither a destination with a photo nor an experience')
+        if not (PLACE.get(im.get('place'), {}).get('image') or im.get('experience') in EXPERIENCE or (im.get('src') and im.get('alt'))):
+            problems.append(f'{where}: the image names neither a destination with a photo, an experience, nor its own src and alt')
         if g.get('interest') and g['interest'] not in EXPERIENCE:
             problems.append(f'{where}: unknown experience {g["interest"]}')
         named = list(g.get('related', []))
