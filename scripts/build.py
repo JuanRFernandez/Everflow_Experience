@@ -1028,7 +1028,7 @@ def experiences_page():
 {how_section()}
 {cta_band()}'''
     return page('experiences/index.html', 'Experiences — EverFlow Experience',
-                'Ski and snowboard coaching, hotels and chalets, heli and backcountry, guiding, food, spa and transfers, arranged in one tailor-made plan.',
+                'Ski and snowboard coaching, heli and backcountry, guiding, food, spa and transfers, arranged in one tailor-made plan.',
                 body)
 
 
