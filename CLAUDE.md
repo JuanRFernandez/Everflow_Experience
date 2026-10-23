@@ -51,8 +51,8 @@ uv run --with pillow python scripts/photos.py stay <partner> <name> <original>  
 
 `library.local.json` (git-ignored) holds the four local paths: the material, the folders that
 may be read, the library and the permission register. All four lie outside this repository.
-A file is never read when its name, or the name of its folder, says agreement, form, rate,
-payment or identity paper; a folder of archived material is skipped. The name is all the tool
+A file is never read when its name, or the name of its folder, says agreement or contract (in
+English, German, French, Spanish or Portuguese), form, rate, payment or identity paper; a folder of archived material is skipped. The name is all the tool
 looks at: a document with a neutral name is read, so name what you save for what it is.
 Besides the PDFs it reads only our own notes on a partner's website or offer
 (`…_EFE_<Partner>-Website-Facts_vNN.md`, `-Offer-Text_`, `-Owner-Facts_`), one page per `##`

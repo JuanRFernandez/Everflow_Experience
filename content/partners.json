@@ -2349,6 +2349,49 @@
     "photos": []
   },
   {
+    "slug": "rocksresort-laax",
+    "register": "rocksresort LAAX",
+    "name": "rocksresort",
+    "kind": "Apartments",
+    "type": "apartment",
+    "place": "laax",
+    "location": "Laax",
+    "card": "Apartments with a full kitchen at the valley station of the LAAX ski area.",
+    "guests": "2–8",
+    "bedrooms": "1–4",
+    "size_m2": "56–120",
+    "ski_access": "Gondola at the door",
+    "highlights": [
+      "Steam bath",
+      "Heated ski locker"
+    ],
+    "lead": "The rocksresort stands at the valley station of the LAAX ski area, with the gondola on the doorstep. Its apartments, from one to four bedrooms, have a fully equipped kitchen and a bathroom with a steam bath. We arrange the lift passes, ready to collect at the ticket desks in Flims, Laax and Falera.",
+    "facts": [
+      "248 apartments, directly at the valley station of the LAAX ski area",
+      "The LAAX gondola on the doorstep",
+      "Apartments from one to four bedrooms, for 2 to 8 guests, from 56 to 120 m²",
+      "A fully equipped kitchen, free Wi-Fi and a heated ski locker",
+      "Bathrooms with a steam bath or a steam shower",
+      "8 restaurants, 6 bars and 9 stores in the resort",
+      "Lift passes arranged by us, ready to collect at the ticket desks in Flims, Laax and Falera",
+      "30 minutes by car from Chur, 1 hour 45 minutes from Zurich"
+    ],
+    "why": "For families and groups who want their own kitchen and room to spread out, and for skiers who want to step out of the door onto the gondola. The snow parks and the largest halfpipe in the world are in the same ski area.",
+    "links": [
+      {
+        "label": "rocksresort.com",
+        "url": "https://www.rocksresort.com/en/"
+      },
+      {
+        "label": "laax.com",
+        "url": "https://www.laax.com/en"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The apartments are provided by rocksresort and the lift passes by LAAX, each under its own terms.",
+    "credit": "Weisse Arena Gruppe",
+    "photos": []
+  },
+  {
     "slug": "schlosshotel-kitzbuehel",
     "register": "Schlosshotel Kitzbühel",
     "name": "Schlosshotel Kitzbühel",

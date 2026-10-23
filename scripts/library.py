@@ -34,16 +34,19 @@ CONFIG = os.path.join(ROOT, 'library.local.json')
 MAX_MB = 60
 
 # A file is never read when its name, or the name of a folder between it and the listed folder,
-# says agreement, form, rate, payment or identity paper.
+# says agreement or contract (in English, German, French, Spanish or Portuguese), form, rate,
+# payment or identity paper.
 DENY = re.compile(
-    r'agreement|vereinbarung|vertrag|contract|vendor|supplier|lieferant|kommission|commission|provision|comisi'
+    r'agreement|vereinbarung|vertrag|contract|kontrakt|contrat|acuerdo|convenio|(?<![a-z])acordos?(?![a-z])'
+    r'|vendor|supplier|lieferant|kommission|commission|provision|comisi'
     r'|konditionen|conditions|(?<![a-z])terms(?![a-z])|(?<![a-z])agb(?![a-z])|(?<![a-z])nda(?![a-z])'
     r'|countersigned|(?<![a-z])signed|unterschr|unterzeichn|signiert|firmad'
     r'|bank(?!ett)|(?<![a-z])iban(?![a-z])|konto|(?<![a-z])sepa(?![a-z])|passport|reisepass|pasaporte|ausweis'
-    r'|(?<![a-z])dni(?![a-z])|steuer|authoris|authoriz|vollmacht'
+    r'|(?<![a-z])dni(?![a-z])|identity|(?<![a-z])id[-_ ]?card|steuer|authoris|authoriz|vollmacht'
     r'|formular|(?<![a-z])forms?(?![a-z])|booking|buchung|reserv'
-    r'|(?<![a-z])rates?(?![a-z])|rate[-_ ]?(?:sheet|card)|netto|preis|price|pricing|tarif'
-    r'|invoice|rechnung|gewerbe', re.I)
+    r'|(?<![a-z])rates?(?![a-z])|rate[-_ ]?(?:sheet|card)|(?:net|hotel|room|agency|agent|group|trade|special)[-_ ]?rates?'
+    r'|netto|preis|price|pricing|tarif|payment|zahlung|(?<![a-z])pagos?(?![a-z])|pagamento'
+    r'|kreditkarte|credit[-_ ]?card|invoice|rechnung|gewerbe', re.I)
 # A folder of superseded material is not walked at all.
 SHELVED = re.compile(r'archive|archiv|superseded', re.I)
 # Our own notes that are read besides the PDFs; no other Markdown file is (the inventory holds terms).
@@ -122,7 +125,7 @@ def sources(cfg):
                 full = os.path.join(path, name)
                 rel = os.path.relpath(full, root).replace(os.sep, '/')
                 if DENY.search(os.path.relpath(full, top)):
-                    yield rel, full, 'never read: the name says agreement, form, rate or identity paper'
+                    yield rel, full, 'never read: the name says agreement or contract, form, rate, payment or identity paper'
                 elif os.path.getsize(full) > MAX_MB * 1e6:
                     yield rel, full, f'larger than {MAX_MB} MB'
                 else:
