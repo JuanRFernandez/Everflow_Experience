@@ -4,9 +4,14 @@
     "register": "Hotel Vier Jahreszeiten Kempinski München",
     "name": "Hotel Vier Jahreszeiten Kempinski München",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "munich",
     "location": "Maximilianstraße, Munich",
     "card": "Munich's grand hotel since 1858, on Maximilianstraße.",
+    "highlights": [
+      "The Munich Eras",
+      "Presidential suites"
+    ],
     "lead": "Munich's grand hotel since 1858, on Maximilianstraße. The natural first or last night of an alpine week: arrive, settle in, and let the city set the tone before the mountains.",
     "facts": [
       "On Maximilianstraße since 1858",
@@ -63,9 +68,15 @@
     "register": "Kempinski Hotel Berchtesgaden",
     "name": "Kempinski Hotel Berchtesgaden",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "berchtesgaden",
     "location": "Berchtesgaden",
     "card": "A thousand metres up, looking out over the Berchtesgaden Alps.",
+    "highlights": [
+      "Ski school in the lobby",
+      "Activity Team for outings",
+      "Cross-country trails, 5 min drive"
+    ],
     "lead": "A thousand metres up, looking out over the Berchtesgaden Alps. A hotel for families who want more from winter than downhill skiing: on the days off the slopes, the hotel's Activity Team arranges the outings.",
     "facts": [
       "The local winter sports school plans your lessons with you in the hotel lobby: skiing, snowboarding, cross-country and snowshoeing, with full days in the neighbouring Austrian ski areas",
@@ -106,9 +117,15 @@
     "register": "Rote Wand Gourmet Hotel",
     "name": "Rote Wand Gourmet Hotel",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "lech",
     "location": "Zug, Lech am Arlberg",
     "card": "A hotel known for its cooking, in Zug just outside Lech.",
+    "ski_access": "Gondola to Lech Zürs",
+    "highlights": [
+      "Heated indoor and outdoor pool",
+      "1,500 m² spa"
+    ],
     "lead": "In Zug, the hamlet just outside Lech am Arlberg. A hotel known for its cooking, with the slopes within easy reach: the Zuger Bergbahn gondola takes you from Zug into the Lech Zürs ski area.",
     "facts": [
       "62 rooms and suites, including family suites",
@@ -169,9 +186,15 @@
     "register": "Alpin Resort Sacher Seefeld",
     "name": "Alpin Resort Sacher Seefeld",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "seefeld",
     "location": "Seefeld in Tirol",
     "card": "Sacher in the mountains: a resort with a 4,700 m² spa on the Seefeld plateau.",
+    "highlights": [
+      "Infinity pool and bathing lake",
+      "Signature suites with a private sauna",
+      "81 rooms and suites"
+    ],
     "lead": "Sacher in the mountains. A resort at 1,200 m on the Seefeld plateau, set in its own 20,000 m² natural park, and part of Sacher Hotels since 2022. Innsbruck is half an hour away.",
     "facts": [
       "81 rooms and suites in six categories, from 30 to 95 m²; the Signature suites have their own sauna",
@@ -243,7 +266,7 @@
     },
     "links": [],
     "provider": "EverFlow is your contact before and during your stay. Each chalet is provided by its owner through our local partner in Megève; the terms of the house come with your proposal.",
-    "credit": "Photos courtesy of the owner",
+    "credit": "Photo courtesy of the owner",
     "photos": [
       {
         "name": "house-chalet-altai",
@@ -278,8 +301,20 @@
     "residences": [
       {
         "name": "Chalet 141",
+        "type": "chalet",
         "where": "Le Jaillet",
-        "line": "12–16 guests · 7 bedrooms. Views of the village and Mont Blanc; indoor pool, hammam and gym.",
+        "guests": "12–16",
+        "bedrooms": 7,
+        "size_m2": 585,
+        "ski_access": "10 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Hammam",
+          "Hot tub",
+          "Gym"
+        ],
+        "card": "At Le Jaillet, overlooking the village, with views of Mont Blanc.",
+        "about": "Chalet 141 stands at Le Jaillet, overlooking the village, with views of Mont d'Arbois, Rochebrune and Mont Blanc. The centre is within walking distance. Its wellness area has an indoor pool, a hammam, a gym and a massage room.",
         "photos": [
           {
             "name": "house-chalet-141",
@@ -325,8 +360,21 @@
       },
       {
         "name": "Chalet Alexandra",
+        "type": "chalet",
         "where": "Village centre",
-        "line": "8–14 guests · 7 bedrooms. In the village, two minutes' walk from the slopes.",
+        "guests": "8–14",
+        "bedrooms": 7,
+        "bathrooms": 7,
+        "size_m2": 420,
+        "ski_access": "2 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hammam",
+          "Hot tub"
+        ],
+        "card": "In the heart of Megève's historic pedestrian centre.",
+        "about": "A modern chalet on five levels in the heart of Megève's historic pedestrian centre. It has a large living area with a fireplace and a separate kitchen. The wellness area has a sauna, a hammam and a massage room, and there is also an indoor pool and an outdoor hot tub.",
         "photos": [
           {
             "name": "house-chalet-alexandra",
@@ -372,8 +420,19 @@
       },
       {
         "name": "Chalet Allobroges",
+        "type": "chalet",
         "where": "Village centre",
-        "line": "7–14 guests · 7 bedrooms. Five minutes' walk from the shops, built around a big fireplace.",
+        "guests": "7–14",
+        "bedrooms": 7,
+        "size_m2": 450,
+        "ski_access": "5 min walk to the slopes",
+        "highlights": [
+          "Sauna",
+          "Hot tub",
+          "Gym"
+        ],
+        "card": "A contemporary chalet with its living area around the fireplace, close to the village shops.",
+        "about": "Chalet Allobroges is less than five minutes' walk from the shops in the village centre. The living area is set around the fireplace, and the interiors are full of light. The wellness area has a sauna and a gym, and there is an indoor hot tub.",
         "photos": [
           {
             "name": "house-chalet-allobroges",
@@ -419,8 +478,18 @@
       },
       {
         "name": "Chalet Altai",
+        "type": "chalet",
         "where": "Near the village",
-        "line": "12–16 guests · 7 bedrooms. Two chalets taken together, five minutes' walk from the village, with views of Mont d'Arbois and Rochebrune.",
+        "guests": "12–16",
+        "ski_access": "5 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hammam",
+          "Gym"
+        ],
+        "card": "Two chalets taken together, with views of the Mont d'Arbois and Rochebrune slopes.",
+        "about": "Two chalets taken together, five minutes' walk from the village centre with its restaurants and shops. They look out to the Mont d'Arbois and Rochebrune slopes. The wellness area has an indoor pool, a sauna and a hammam, and there is a fully equipped fitness room.",
         "photos": [
           {
             "name": "house-chalet-altai",
@@ -466,8 +535,20 @@
       },
       {
         "name": "Chalet Apollo",
+        "type": "chalet",
         "where": "A quiet area near Megève",
-        "line": "9–14 guests · 6 bedrooms. Close to the slopes, eight minutes by car from the village.",
+        "guests": "9–14",
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "size_m2": 750,
+        "highlights": [
+          "Pool",
+          "Sauna",
+          "Hot tub",
+          "Cinema room"
+        ],
+        "card": "A chalet in a quiet area of Demi-Quartier, near Megève, with a private cinema room.",
+        "about": "Chalet Apollo stands in a quiet area of Demi-Quartier, near Megève, eight minutes by car from the village. All six bedrooms have their own bathroom, and the wellness area has a pool, a sauna, a hot tub and a gym. There is also a private cinema room.",
         "photos": [
           {
             "name": "house-chalet-apollo",
@@ -513,8 +594,18 @@
       },
       {
         "name": "Chalet Ariana",
+        "type": "chalet",
         "where": "Village centre",
-        "line": "10–16 guests · 7 bedrooms. New, in a picturesque street in the heart of the village; indoor pool and hot tub.",
+        "bedrooms": 7,
+        "ski_access": "2 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub",
+          "Gym"
+        ],
+        "card": "In a picturesque street in the very centre of the village.",
+        "about": "Chalet Ariana stands in a picturesque street in the very centre of Megève. Its design mixes modern comfort with old wood for a warm feel. It has an indoor pool with a wave system and an outdoor hot tub.",
         "photos": [
           {
             "name": "house-chalet-ariana",
@@ -560,8 +651,20 @@
       },
       {
         "name": "Chalet Des Soeurs",
+        "type": "chalet",
         "where": "Village centre",
-        "line": "14–16 guests · 7 bedrooms. In the heart of the village, in the quiet Clos des Rennes.",
+        "guests": "14–16",
+        "bedrooms": 7,
+        "size_m2": 410,
+        "ski_access": "2 min walk to the slopes",
+        "highlights": [
+          "Pool",
+          "Sauna",
+          "Hammam",
+          "Hot tub"
+        ],
+        "card": "In the quiet Clos des Rennes, in the heart of the village, a few metres from the Chamois lifts.",
+        "about": "Chalet Des Soeurs is in the peaceful Clos des Rennes, in the heart of Megève, close to restaurants and shops, with the Chamois ski lifts a few metres away. A mix of modern and rustic, it has a wellness area, a pool, a sauna, a hammam and an outdoor hot tub.",
         "photos": [
           {
             "name": "house-chalet-des-soeurs",
@@ -607,8 +710,18 @@
       },
       {
         "name": "Chalet Etoile du Nord",
+        "type": "chalet",
         "where": "Megève",
-        "line": "6–10 guests · 4 bedrooms. Eight minutes' walk from the village.",
+        "guests": "6–10",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "size_m2": 340,
+        "ski_access": "10 min walk to the slopes",
+        "highlights": [
+          "Gym"
+        ],
+        "card": "Large bay windows onto the mountains and the village, eight minutes' walk from the centre.",
+        "about": "Chalet Etoile du Nord combines Alpine charm and modernity, eight minutes' walk from the village centre, with large bay windows looking out over the mountains and the village. All four bedrooms are en suite. It has a TV room, a fireplace in the living room, a ski room, a garage for one car and two outdoor parking spaces.",
         "photos": [
           {
             "name": "house-chalet-etoile-du-nord",
@@ -654,8 +767,19 @@
       },
       {
         "name": "Chalet Hermine",
+        "type": "chalet",
         "where": "Near the Calvaire",
-        "line": "6–14 guests · 6 bedrooms. A quiet neighbourhood with views of Mont d'Arbois, under ten minutes' walk from the village.",
+        "guests": "6–14",
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "size_m2": 280,
+        "ski_access": "5 min drive to the slopes",
+        "highlights": [
+          "Sauna",
+          "Hot tub"
+        ],
+        "card": "In a quiet neighbourhood near the Calvaire, with views of Mont d'Arbois.",
+        "about": "Chalet Hermine is in a peaceful neighbourhood near the Calvaire, less than ten minutes' walk from the village centre, with views of Mont d'Arbois. The six bedrooms are en suite, one of them a children's bunk room. It has a private sauna, an indoor hot tub, covered parking, a ski room and spacious terraces.",
         "photos": [
           {
             "name": "house-chalet-hermine",
@@ -691,7 +815,7 @@
           },
           {
             "name": "house-chalet-hermine-4",
-            "alt": "Chalet Hermine: the indoor pool"
+            "alt": "Chalet Hermine: the indoor hot tub"
           },
           {
             "name": "chalet-hermine-10",
@@ -701,8 +825,21 @@
       },
       {
         "name": "Chalet Le Lodge",
+        "type": "chalet",
         "where": "Near the Chamois lifts",
-        "line": "14–18 guests · 8 bedrooms. A stone's throw from the village and the Chamois ski lifts.",
+        "guests": "14–18",
+        "bedrooms": 8,
+        "bathrooms": 8,
+        "size_m2": 770,
+        "ski_access": "5 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hammam",
+          "Hot tub"
+        ],
+        "card": "A stone's throw from the village and the Chamois ski lifts, on five levels served by a lift.",
+        "about": "Chalet Le Lodge is a contemporary chalet a stone's throw from the village and the Chamois ski lifts, on five levels served by a lift. It has a wine cellar, a kitchen with a cold room and eight en-suite bedrooms, including a dormitory and a staff bedroom. There is also an indoor pool with a hot tub, a sauna, a hammam, a fitness room and a massage room.",
         "photos": [
           {
             "name": "house-chalet-le-lodge",
@@ -748,8 +885,15 @@
       },
       {
         "name": "Chalet Penelope",
+        "type": "chalet",
         "where": "Megève",
-        "line": "8 guests · 4 bedrooms. Five minutes' walk from the village.",
+        "guests": 8,
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "size_m2": 180,
+        "ski_access": "6 min walk to the slopes",
+        "card": "Chic and modern, five minutes' walk from the village centre.",
+        "about": "Chalet Penelope is five minutes' walk from the centre of Megève, close to the shops, restaurants and slopes. The living area is bright, with large windows and a view. All four bedrooms are en suite.",
         "photos": [
           {
             "name": "house-chalet-penelope",
@@ -795,8 +939,18 @@
       },
       {
         "name": "Chalet Whymper",
+        "type": "chalet",
         "where": "Near the Chamois lift",
-        "line": "10–12 guests · 6 bedrooms. Five minutes' walk from the village, and the Chamois lift on foot.",
+        "guests": "10–12",
+        "bedrooms": 6,
+        "size_m2": 370,
+        "ski_access": "3 min walk to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna"
+        ],
+        "card": "Five minutes' walk from the village centre, with the Chamois ski lift within walking distance.",
+        "about": "Chalet Whymper is five minutes' walk from the village centre, with the Chamois ski lift and the shops of Megève within walking distance. It is modern and high-tech, in a chic, traditional alpine setting. The wellness area has a pool and a sauna for six.",
         "photos": [
           {
             "name": "house-chalet-whymper",
@@ -842,8 +996,18 @@
       },
       {
         "name": "Lodge Elan",
+        "type": "apartment",
         "where": "Village centre",
-        "line": "4–8 guests. An apartment in the centre, close to restaurants, shops and the Chamois lifts.",
+        "guests": "4–8",
+        "bedrooms": 4,
+        "size_m2": 191,
+        "ski_access": "6 min walk to the slopes",
+        "highlights": [
+          "Hammam",
+          "Gym"
+        ],
+        "card": "An apartment in the centre of the village, close to restaurants, shops and the Chamois lifts.",
+        "about": "Lodge Elan is an apartment in the centre of Megève, close to restaurants, shops and the Chamois ski lifts. The decoration is refined and intimate, and there is a fireplace for evenings with friends or family.",
         "photos": [
           {
             "name": "house-lodge-elan",
@@ -889,8 +1053,18 @@
       },
       {
         "name": "Lodge Manou",
+        "type": "apartment",
         "where": "Village centre",
-        "line": "6–10 guests. An apartment in the centre with three bedrooms, a children's dormitory and a large balcony; hammam and fitness room in the residence.",
+        "guests": "6–10",
+        "bedrooms": 4,
+        "size_m2": 165,
+        "ski_access": "3 min walk to the slopes",
+        "highlights": [
+          "Hammam in the residence",
+          "Gym in the residence"
+        ],
+        "card": "An apartment in the centre with 36 m² of balcony space, a few minutes from the ski lift.",
+        "about": "Lodge Manou is an apartment in the centre of Megève, close to bars, restaurants and shops, and a few minutes from the ski lift. It has three bedrooms with double beds, a dormitory for four children, an open kitchen, a lounge with an ethanol fireplace and 36 m² of balcony space. The residence has a hammam and a fitness room.",
         "photos": [
           {
             "name": "house-lodge-manou",
@@ -936,8 +1110,20 @@
       },
       {
         "name": "Chalet Sun",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "12–18 guests · 8 bedrooms. High above the valley at Mont d'Arbois, 100 metres from the slopes.",
+        "guests": "12–18",
+        "bedrooms": 8,
+        "size_m2": 1100,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Hammam",
+          "Hot tub",
+          "Cinema room"
+        ],
+        "card": "At the top of the Calvaire path at Mont d'Arbois, with views of the valley.",
+        "about": "Chalet Sun sits at Mont d'Arbois, at the top of the Calvaire path, with views of the valley; it is private, yet easy to reach from the Mont d'Arbois road. Inside are a lounge with a central bar, a dining room that looks onto a wine cellar and, through an ice gallery, into the mountain, a spa and relaxation area, a hairdresser's salon and a cinema room.",
         "photos": [
           {
             "name": "house-chalet-sun",
@@ -983,8 +1169,20 @@
       },
       {
         "name": "Chalet Cham Lou'Ka",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "10–14 guests · 6 bedrooms. Three minutes by car from the slopes; the master suite has a floor of its own.",
+        "guests": "10–14",
+        "bedrooms": 6,
+        "size_m2": 640,
+        "ski_access": "3 min drive to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub",
+          "Cinema room"
+        ],
+        "card": "At Mont d'Arbois, with a master suite that takes up the whole top floor.",
+        "about": "Chalet Cham Lou'Ka is in the Mont d'Arbois area, three minutes by car from the slopes and seven from the village centre. It has an indoor pool, a fitness room and a home cinema, and the six bedrooms include a dormitory for four. The master suite takes up the whole top floor, and a lift serves the other floors.",
         "photos": [
           {
             "name": "house-chalet-cham-louka",
@@ -1030,8 +1228,20 @@
       },
       {
         "name": "Chalet des Sens",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "10–14 guests · 6 bedrooms. Ski back to the door; spa, pool, games room and cinema.",
+        "guests": "10–14",
+        "bedrooms": 6,
+        "size_m2": 890,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Pool",
+          "Hammam",
+          "Hot tub",
+          "Cinema room"
+        ],
+        "card": "On the Mont d'Arbois slopes, so you can ski back to the door.",
+        "about": "Chalet des Sens is on the Mont d'Arbois slopes, so you can ski back to the door. It combines modern design with the traditional alpine chalet, and has a games room, a cinema room and a relaxation area with a spa and a pool.",
         "photos": [
           {
             "name": "house-chalet-des-sens",
@@ -1077,8 +1287,19 @@
       },
       {
         "name": "Chalet Divinity",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "5–10 guests · 5 bedrooms. Ski back to the door.",
+        "guests": "5–10",
+        "bedrooms": 5,
+        "size_m2": 570,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Pool",
+          "Hammam",
+          "Gym"
+        ],
+        "card": "Ski back to the door at Mont d'Arbois, with views of the Rochebrune range.",
+        "about": "Chalet Divinity is on the Mont d'Arbois slopes, so you can ski back to the door. The design is contemporary, with a living area set around the fireplace and a view of the Rochebrune range. The wellness area has a pool, a hammam and a gym.",
         "photos": [
           {
             "name": "house-chalet-divinity",
@@ -1124,8 +1345,20 @@
       },
       {
         "name": "Chalet Mariva",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "10–14 guests · 6 bedrooms. Near the Mont d'Arbois golf course, five minutes' walk from the lifts.",
+        "guests": "10–14",
+        "bedrooms": 6,
+        "size_m2": 480,
+        "ski_access": "5 min walk to the slopes",
+        "highlights": [
+          "Pool",
+          "Hammam",
+          "Cinema room",
+          "Gym"
+        ],
+        "card": "Near the Mont d'Arbois golf course, in a green setting with views of Rochebrune.",
+        "about": "Chalet Mariva is near the Mont d'Arbois golf course, in a green setting with panoramic views of Rochebrune, five minutes' walk from the ski lifts. The house is equipped with home automation. After skiing, guests can relax in the large hammam or the counter-current pool.",
         "photos": [
           {
             "name": "house-chalet-mariva",
@@ -1171,8 +1404,20 @@
       },
       {
         "name": "Chalet Olivier",
+        "type": "chalet",
         "where": "Mont d'Arbois",
-        "line": "12–14 guests · 6 bedrooms. A quiet setting with mountain views, a few minutes by car from the slopes and the village.",
+        "guests": "12–14",
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "ski_access": "3 min drive to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hammam",
+          "Hot tub"
+        ],
+        "card": "A quiet chalet at Mont d'Arbois, with mountain views and a spa.",
+        "about": "Chalet Olivier is in a quiet part of Mont d'Arbois with mountain views, a few minutes by car from the slopes, the golf course and the village centre. It has a cinema room, a TV room and a gym, and every bedroom has its own bathroom. The spa has a counter-current pool, a hot tub, a sauna and a steam room, and there is an indoor bocce court and a billiards table.",
         "photos": [
           {
             "name": "house-chalet-olivier",
@@ -1218,8 +1463,20 @@
       },
       {
         "name": "Chalet Black Lodge",
+        "type": "chalet",
         "where": "Le Villaret",
-        "line": "12–16 guests · 7 bedrooms. A calm area with mountain views, five minutes by car from the village.",
+        "guests": "12–16",
+        "bedrooms": 7,
+        "size_m2": 371,
+        "ski_access": "6 min drive to the slopes",
+        "highlights": [
+          "Sauna",
+          "Hammam",
+          "Hot tub",
+          "Games room"
+        ],
+        "card": "A calm spot at Le Villaret with mountain views, under five minutes by car from the village.",
+        "about": "Chalet Black Lodge is in the calm Villaret area, with mountain views, less than five minutes by car from the centre of Megève. It has a fireplace, a TV room and an outdoor hot tub with a view, as well as a sauna and a hammam. It sleeps up to 12 adults and 4 children.",
         "photos": [
           {
             "name": "house-chalet-black-lodge",
@@ -1265,8 +1522,19 @@
       },
       {
         "name": "Chalet Infinity",
+        "type": "chalet",
         "where": "Near Le Jaillet",
-        "line": "8–10 guests · 5 bedrooms. A small hamlet set back from the road, five minutes by car from the village.",
+        "guests": "8–10",
+        "bedrooms": 5,
+        "ski_access": "5 min drive to the slopes",
+        "highlights": [
+          "Indoor pool",
+          "Outdoor pool",
+          "Hammam",
+          "Hot tub"
+        ],
+        "card": "In a small hamlet near Le Jaillet, set back from the main road.",
+        "about": "Chalet Infinity stands in a small hamlet of a few chalets near Le Jaillet, quietly set back from the main road. Completed in 2014, it has indoor and outdoor pools and gets plenty of sun, with views of the surrounding mountains.",
         "photos": [
           {
             "name": "house-chalet-infinity",
@@ -1317,9 +1585,18 @@
     "register": "Hotel & Chalet Aurelio",
     "name": "Hotel & Chalet Aurelio",
     "kind": "Hotel and chalet",
+    "type": [
+      "hotel",
+      "chalet"
+    ],
     "place": "lech",
     "location": "Lech am Arlberg",
     "card": "A boutique hotel on the Schlegelkopf slope: ski-in, ski-out, a few minutes from the centre of Lech.",
+    "highlights": [
+      "Club Chalet for up to 16 guests",
+      "23 m indoor pool",
+      "Spa of over 1,000 m²"
+    ],
     "lead": "A boutique hotel in Lech, ski-in and ski-out, directly on the Schlegelkopf slope and a few minutes' walk from the centre. Next door, connected by an underground passage, the Club Chalet hosts up to 16 guests with a private chef and butler.",
     "facts": [
       "10 Top Deluxe Double Rooms and Aurelio Suites, from 55 to 110 m²",
@@ -1403,7 +1680,7 @@
     "facts": [
       "Chalet Mimi in Oberlech: ski-in and ski-out in winter, for up to 14 guests, with a butler and a private chef",
       "The Barn in Oberlech: 1,000 m², with a 24/7 butler and a private chef",
-      "Skyfall in St. Christoph: four residences that connect, for up to 21 guests together",
+      "Skyfall in St. Christoph: four apartments; the two largest combine into one residence for up to 21 guests",
       "Arla Luxury Home on the Schlegelkopf slope, for groups of 2 to 10"
     ],
     "why": "For families and groups who want a private house on the Arlberg, with the service of a hotel when they want it.",
@@ -1449,8 +1726,20 @@
     "residences": [
       {
         "name": "Chalet Mimi",
+        "type": "chalet",
         "where": "Oberlech",
-        "line": "Up to 14 guests, with a butler and a private chef. Ski-in and ski-out in winter, right on the hiking trails in summer.",
+        "guests": 14,
+        "bedrooms": 6,
+        "size_m2": 830,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub",
+          "Butler and private chef"
+        ],
+        "card": "A warm, traditional alpine chalet in Oberlech, with wide mountain views.",
+        "about": "Chalet Mimi in Oberlech comes with a 24/7 butler, an in-house chef, a wine cellar and a heated outdoor hot tub facing the mountains. Besides the master suite, it has three double rooms, two of them with a connected bunk room for children. The spa has a 14 m indoor pool with a cinema screen, a bio sauna and a steam bath.",
         "photos": [
           {
             "name": "house-mimi",
@@ -1506,8 +1795,21 @@
       },
       {
         "name": "The Barn",
+        "type": "chalet",
         "where": "Oberlech",
-        "line": "1,000 m², with a 24/7 butler and a private chef.",
+        "guests": 14,
+        "bedrooms": 7,
+        "bathrooms": 7,
+        "size_m2": "about 1000",
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Butler and private chef",
+          "Gym"
+        ],
+        "card": "A chalet in Oberlech with a \"northern chic meets alpine luxury\" interior and panoramic mountain views.",
+        "about": "The Barn in Oberlech is designed in a \"northern chic meets alpine luxury\" style and comes with a 24/7 butler and a private chef. Its private spa has a 14 m indoor pool, a sauna, a steam room, a gym and a treatment room. It also has a wine cellar and an entertainment room with a bar that can be used as a cinema, a games room or for private events.",
         "photos": [
           {
             "name": "house-barn",
@@ -1563,8 +1865,21 @@
       },
       {
         "name": "The Falcon",
+        "type": "chalet",
         "where": "Lech centre",
-        "line": "450 m² for 8 guests, a stone's throw from the next chairlift and the village centre.",
+        "guests": 8,
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "size_m2": 450,
+        "ski_access": "Close to the Schlosskopf lift",
+        "highlights": [
+          "Sauna",
+          "Hot tub",
+          "Gym",
+          "Pets welcome"
+        ],
+        "card": "Close to the centre of Lech, with panoramic views over the village.",
+        "about": "The Falcon lies close to the centre of Lech, a stone's throw from the Schlosskopf chairlift, with panoramic views over the village and the surrounding mountains. It has four individually designed bedrooms, a wine cellar with a tasting area, and a spa with a hot tub and a bio sauna. Pets are welcome.",
         "photos": [
           {
             "name": "house-falcon",
@@ -1620,8 +1935,18 @@
       },
       {
         "name": "Arla Luxury Home",
+        "type": "chalet",
         "where": "Lech centre",
-        "line": "Directly at the Schlegelkopf slope, for groups of 2 to 10.",
+        "guests": "2–10",
+        "bedrooms": 5,
+        "ski_access": "Direct access to the slopes",
+        "highlights": [
+          "Sauna",
+          "Gym",
+          "Games room"
+        ],
+        "card": "In the heart of Lech, with views of the Omeshorn; three units to take separately or together.",
+        "about": "Arla Luxury Home is a chalet a few minutes' walk from the centre of Lech, with views of the Omeshorn. Its three units can be taken separately or together, for two to ten guests. Guests also have access to the spa and the 23-metre pool of the neighbouring Hotel Aurelio.",
         "photos": [
           {
             "name": "house-arla",
@@ -1677,8 +2002,19 @@
       },
       {
         "name": "Chalet Toda",
+        "type": "chalet",
         "where": "Lech",
-        "line": "245 m² for up to 6 guests, a few minutes' walk from the village and the Rüfikopfbahn.",
+        "guests": 6,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "size_m2": 245,
+        "ski_access": "A short walk to the lifts",
+        "highlights": [
+          "Sauna",
+          "Pets welcome"
+        ],
+        "card": "A traditional alpine chalet in Lech, with an 18th-century Stube.",
+        "about": "Chalet Toda is a traditional alpine chalet in a quiet yet central spot in Lech, a short walk from the Rüfikopf and Schlegelkopf lifts. The 18th-century Stube seats six at its dining table, every bedroom has a balcony with mountain views, and there is a private sauna. Pets are welcome.",
         "photos": [
           {
             "name": "house-toda",
@@ -1734,8 +2070,19 @@
       },
       {
         "name": "Skyfall",
+        "type": [
+          "chalet",
+          "apartment"
+        ],
+        "kind": "Chalet and apartments",
         "where": "St. Christoph",
-        "line": "Four residences from 116 to 275 m² that connect: up to 21 guests together.",
+        "size_m2": "about 800",
+        "highlights": [
+          "Sauna",
+          "Private lifts between floors"
+        ],
+        "card": "A landmark chalet in the hamlet of St. Christoph, with valley views from its elevated position.",
+        "about": "In the small hamlet of St. Christoph, Skyfall has four apartments of 116 to 275 m² across four floors. The two largest can be combined through private lifts into one 550 m² residence for up to 21 guests. There are saunas, freestanding bathtubs and kitchens designed by David Linley.",
         "photos": [
           {
             "name": "house-skyfall",
@@ -1791,8 +2138,18 @@
       },
       {
         "name": "ULA Signature",
+        "type": "apartment",
         "where": "Omesberg, Lech",
-        "line": "A newly built apartment house in the quiet Omesberg area, five minutes' walk from the centre. The pictures are renderings.",
+        "guests": 24,
+        "bedrooms": 12,
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub"
+        ],
+        "card": "An apartment house in the quiet Omesberg area, looking out to the Omeshorn; the pictures are renderings.",
+        "about": "ULA Signature is an apartment house in the quiet Omesberg area, about five minutes' walk from the centre of Lech. Its six suites and apartments, of about 50 to 150 m², can be taken separately, combined or as a whole house, and several have their own hot tub. The house has a restaurant and a spa with an indoor pool, a sauna and a steam bath. The pictures are renderings.",
+        "renderings": true,
         "photos": [
           {
             "name": "ula-signature-u16",
@@ -1838,8 +2195,14 @@
       },
       {
         "name": "ULA Easy Stay",
+        "type": "apartment",
         "where": "Omesberg, Lech",
-        "line": "A renovated apartment house in the Omesberg area, a few minutes' walk from the centre.",
+        "ski_access": "About 5 min walk to the lifts",
+        "highlights": [
+          "Sauna"
+        ],
+        "card": "A renovated house of six apartments in the quiet Omesberg area.",
+        "about": "ULA Easy Stay is a lovingly renovated house in the quiet Omesberg area, about five minutes' walk from the centre of Lech and the lifts. Each of its six apartments has a living area, a kitchen and a private balcony with mountain views, and the whole house can also be taken as one. Guests share a sauna and an infrared cabin.",
         "photos": [
           {
             "name": "ula-easy-stay-e30",
@@ -1901,9 +2264,15 @@
     "register": "Interalpen-Hotel Tyrol",
     "name": "Interalpen-Hotel Tyrol",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "seefeld",
     "location": "Telfs-Buchen, Seefeld plateau",
     "card": "A large hotel at 1,300 m on the Seefeld plateau, with a spa of more than 5,300 m².",
+    "highlights": [
+      "Panorama pool",
+      "Mountain hut, 5 min walk",
+      "Drive-in reception"
+    ],
     "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,300 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within an hour's drive.",
     "facts": [
       "274 rooms, suites and panorama suites",
@@ -1952,14 +2321,20 @@
     "register": "Kempinski Palace Engelberg",
     "name": "Kempinski Palace Engelberg",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "engelberg",
     "location": "Engelberg",
     "card": "A Kempinski hotel in the monastery village below the Titlis.",
+    "ski_access": "Shuttle to the cable car, 3 min",
+    "highlights": [
+      "Ski school contact in the lobby",
+      "Ski boots dried overnight"
+    ],
     "lead": "A Kempinski hotel in Engelberg, the monastery village below the Titlis. Set up for ski days: a contact of the ski school in the lobby, a locker in the ski cellar for every room, and boots dried for the next morning.",
     "facts": [
       "A contact of the ski school in the hotel lobby; private ski and snowboard instructors arranged in the hotel",
       "Every room has its own locker in the ski cellar, and boots are dried for the next day",
-      "A concierge team for information and reservations",
+      "A concierge team to help with outings around Engelberg and Lucerne",
       "Sister hotel: Frutt Mountain Resort, to extend the stay"
     ],
     "why": "For skiers who want an easy trip from Zurich or Lucerne and a hotel that takes care of the ski day.",
@@ -1978,9 +2353,14 @@
     "register": "Schlosshotel Kitzbühel",
     "name": "Schlosshotel Kitzbühel",
     "kind": "Hotel",
+    "type": "hotel",
     "place": "kitzbuehel",
     "location": "Kitzbühel",
     "card": "A five-star hotel just above Kitzbühel, with a 3,000 m² spa and its own shuttle to the lifts.",
+    "highlights": [
+      "Indoor and outdoor pool",
+      "9-hole golf course"
+    ],
     "lead": "A five-star hotel just above Kitzbühel, a ten-minute walk from the centre. In winter the hotel's own shuttle runs to the cable car valley station; in summer a 9-hole golf course starts at the door.",
     "facts": [
       "The Momentum Spa: 3,000 m², with an indoor pool with mountain views and an outdoor pool heated all year",

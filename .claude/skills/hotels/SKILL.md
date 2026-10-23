@@ -45,19 +45,33 @@ missing, copy `library.example.json` and ask Juan for the four paths.
 2. Write the facts as claim, quote, document and page into a facts file next to the library
    (`facts/<partner>.facts.json`) and run `python scripts/library.py verify <file>`. Every fact
    on the page must pass, or stand on the partner's official website, which the page links.
-   Facts that change with the season, and prices, do not go on the page.
+   Facts that change with the season, and prices, do not go on the page. Facts from a website
+   go first into our own note in the partner's Drive folder,
+   `YYYY-MM-DD_EFE_<Partner>-Website-Facts_vNN.md` (an offer page: `-Offer-Text_`; what an
+   owner tells us: `-Owner-Facts_`), each with its verbatim quote and address. The library reads
+   these notes, one page per `## ` section, so `verify` checks them too.
 3. Add the partner to `content/partners.json`: `register` (its exact name in the register),
    `place` (a slug in `content/destinations.json`; add the place if it is new), our words for
    `card`, `lead`, `facts`, `why`, the partner's own programme under `arranges`, `provider`,
-   `credit` exactly as the register writes it, and `photos`.
+   `credit` exactly as the register writes it, and `photos`. A hotel also gets `type` (`hotel`,
+   or a list such as `["hotel", "chalet"]`, the main one first), and `ski_access` and
+   `highlights`, three at most together: the labels its card shows, chosen to add to the card's
+   sentence. A collection lists its houses under `residences`, each with `type` (`chalet`
+   or `apartment`), `where`, the key facts `guests`, `bedrooms`, `bathrooms` and `size_m2` (a
+   number, a range such as `12–16`, or `about 800`), `ski_access`, `highlights`, a one-sentence
+   `card`, a two- or three-sentence `about`, and its photos; a house of more than one type
+   names them in `kind` ("Chalet and apartments"), and `renderings: true` marks pictures that
+   are renderings (the card and the text say so too). In the facts file such a value
+   carries `house`, `field` and `value` next to its quote. A value no document states stays
+   out, and so does one the documents contradict; Juan hears about both.
 4. Photos only when the register says `photos: yes`:
    `uv run --with pillow python scripts/photos.py stay <partner> <name> "<original under the material folder>"`
    (a photo inside a zip: `"<zip>::<member>"`). Four to eight photos: outside, a room, food or
    spa, the surroundings. The script refuses what the register does not allow and writes WebP
    files without metadata, in up to three sizes, into `assets/img/stays/<partner>/` and logs the
-   original in the library folder; every photo is shown with
-   "© <credit>". The Impressum lists the credit by itself: change `impressum_stand` in
-   `content/site.json`.
+   original in the library folder; every photo is shown with its credit line ("© <credit>",
+   or a courtesy line such as "Photo courtesy of the owner", which stands without "©"). The
+   Impressum lists the credit by itself: change `impressum_stand` in `content/site.json`.
 5. No downloads of partner documents unless the register says `brochure: yes`.
 6. `python scripts/build.py`, `python scripts/check.py`, a look at the pages in a browser at
    full and at phone width (`python -m http.server`), then a pull request. One partner, one

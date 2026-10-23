@@ -127,7 +127,7 @@
     try { words = JSON.parse(form.getAttribute('data-i18n') || '{}'); } catch (err) { words = {}; }
     function say(key, english) { return (words[key] || english).replace('{email}', form.getAttribute('data-email')); }
     var params = new URLSearchParams(location.search);
-    ['destination', 'stay', 'interest'].forEach(function (key) {
+    ['destination', 'stay', 'type', 'interest'].forEach(function (key) {
       var value = params.get(key);
       var select = form.elements[key];
       if (!value || !select) return;
@@ -135,6 +135,8 @@
         if (select.options[i].value === value) { select.value = value; break; }
       }
     });
+    var house = params.get('house');  // a text field: the name of the house, as the link gives it
+    if (house && form.elements.house) form.elements.house.value = house.slice(0, 120);
     function label(name) {
       var el = form.elements[name];
       if (!el || !el.value) return '';
@@ -144,6 +146,7 @@
       var lines = [
         [say('name', 'Name'), label('name')], [say('email', 'E-mail'), label('email')], [say('phone', 'Phone'), label('phone')],
         [say('destination', 'Destination'), label('destination')], [say('stay', 'Where to stay'), label('stay')],
+        [say('type', 'Type of stay'), label('type')], [say('house', 'House'), label('house')],
         [say('interest', 'Interested in'), label('interest')], [say('group', 'Group size'), label('group')],
         [say('dates', 'Dates'), label('dates')]
       ].filter(function (l) { return l[1]; }).map(function (l) { return l[0] + ': ' + l[1]; });
@@ -245,10 +248,11 @@
       '<button type="button" class="lightbox-close" aria-label="Close">×</button></div>' +
       '<figure class="lightbox-figure"><img alt=""><figcaption class="credit"></figcaption></figure>' +
       '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">←</button>' +
-      '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">→</button>';
+      '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">→</button>' +
+      '<a class="button button--small button--light lightbox-enquire" hidden></a>';
     document.body.appendChild(box);
     var img = $('img', box), caption = $('figcaption', box), title = $('.lightbox-title', box), count = $('.lightbox-count', box);
-    var prev = $('.lightbox-prev', box), next = $('.lightbox-next', box);
+    var prev = $('.lightbox-prev', box), next = $('.lightbox-next', box), ask = $('.lightbox-enquire', box);
     var figures = [], current = 0, gallery = null;
     function sharpest(source) {
       // the smallest file that is sharp on this screen; set as src so the photo is never shown larger than it is
@@ -277,6 +281,10 @@
       figures = $$('.gallery-item figure', g);
       title.textContent = g.getAttribute('data-title') || '';
       box.setAttribute('aria-label', g.getAttribute('aria-label') || 'Photos');
+      var href = g.getAttribute('data-enquire-href');  // the stay's enquiry button, under the photo
+      ask.hidden = !href;
+      box.classList.toggle('has-enquire', !!href);
+      if (href) { ask.href = href; ask.textContent = g.getAttribute('data-enquire-label') || 'Enquire'; }
       show(i);
       document.documentElement.classList.add('has-lightbox');
       box.showModal();
@@ -320,6 +328,69 @@
     });
   }
 
+  /* ---------- "Where to stay": filter by type and destination; the address keeps the choice (?type=chalet&place=megeve) ---------- */
+  function initStayFilters() {
+    var box = $('[data-stay-filters]');
+    var grid = $('#stay-grid');
+    if (!box || !grid) return;
+    var cards = $$('.card', grid);
+    var buttons = $$('[data-filter-type]', box);
+    var select = $('[data-filter-place]', box);
+    var count = $('[data-filter-count]', box);
+    var clear = $('[data-filter-clear]', box);
+    var empty = $('[data-filter-empty]');
+    var emptyLink = empty && $('a', empty);
+    var types = buttons.map(function (b) { return b.getAttribute('data-filter-type'); });
+    var places = $$('option', select).map(function (o) { return o.value; });
+    var state = { type: '', place: '' };
+    var params = new URLSearchParams(location.search);
+    var legacy = { '#hotels': 'hotel', '#chalets': 'chalet' }[location.hash];  // the page had a section per kind until 24.10.2026
+    var asked = params.get('type') || legacy || '';
+    var place = params.get('place') || '';
+    state.type = types.indexOf(asked) >= 0 ? asked : '';
+    state.place = places.indexOf(place) >= 0 ? place : '';
+    function write() {
+      var q = new URLSearchParams(location.search);
+      if (state.type) q.set('type', state.type); else q.delete('type');
+      if (state.place) q.set('place', state.place); else q.delete('place');
+      var s = q.toString();
+      history.replaceState(null, '', location.pathname + (s ? '?' + s : '') + (legacy ? '' : location.hash));
+    }
+    function apply() {
+      var shown = 0;
+      cards.forEach(function (card) {
+        var fits = (!state.type || (card.getAttribute('data-type') || '').split(' ').indexOf(state.type) >= 0) &&
+          (!state.place || card.getAttribute('data-place') === state.place);
+        card.hidden = !fits;
+        if (fits) shown++;
+      });
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-filter-type') === state.type ? 'true' : 'false'); });
+      select.value = state.place;
+      count.textContent = count.getAttribute(shown === 1 ? 'data-one' : 'data-many').replace('{n}', shown);
+      clear.hidden = !state.type && !state.place;
+      if (empty) empty.hidden = shown > 0;
+      if (emptyLink) {  // "Tell us what you need" takes the filters into the enquiry
+        var q = new URLSearchParams();
+        if (state.place) q.set('destination', state.place);
+        if (state.type) q.set('type', state.type);
+        emptyLink.href = '/enquire/' + (q.toString() ? '?' + q.toString() : '');
+      }
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var kind = b.getAttribute('data-filter-type');
+        state.type = kind && state.type === kind ? '' : kind;  // a pressed type, pressed again, lets go: all show
+        write();
+        apply();
+      });
+    });
+    select.addEventListener('change', function () { state.place = select.value; write(); apply(); });
+    clear.addEventListener('click', function () { state.type = ''; state.place = ''; write(); apply(); buttons[0].focus(); });
+    if (params.has('type') || params.has('place') || legacy) write();  // a value the page does not know leaves the address
+    box.hidden = false;
+    apply();
+  }
+
   function ready() {
     initMenu();
     $$('[data-gallery]').forEach(initGallery);
@@ -327,6 +398,7 @@
     initVideo();
     initEnquiry();
     initMap();
+    initStayFilters();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();

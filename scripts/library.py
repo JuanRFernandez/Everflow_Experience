@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """The hotel library: the material the hotels sent us, as searchable text.
 
-Runs on Juan's machine only. It reads the PDFs in the allow-listed Drive folders and writes
-one text file per document, one heading per page, into a folder OUTSIDE this repository.
+Runs on Juan's machine only. It reads the PDFs in the allow-listed Drive folders, and our own
+notes on a partner's website or offer (YYYY-MM-DD_EFE_<Partner>-Website-Facts_vNN.md, or
+-Offer-Text_ or -Owner-Facts_), and writes one text file per document, one heading per page,
+into a folder OUTSIDE this repository. In a note, the text before the first "## " heading is
+page 1 and every "## " section is the next page, so a fact cites the section it stands in.
 This repository is public: the library, the local configuration and the permission register
 never enter it (scripts/check.py fails the build if they do).
 
@@ -43,6 +46,8 @@ DENY = re.compile(
     r'|invoice|rechnung|gewerbe', re.I)
 # A folder of superseded material is not walked at all.
 SHELVED = re.compile(r'archive|archiv|superseded', re.I)
+# Our own notes that are read besides the PDFs; no other Markdown file is (the inventory holds terms).
+NOTE = re.compile(r'_EFE_.+-(?:Website-Facts|Offer-Text|Owner-Facts)_v\d+\.md$', re.I)
 FOLD = str.maketrans('’‘“”„–—', '\'\'"""--')
 
 
@@ -100,17 +105,19 @@ def squash(text):
 
 
 def sources(cfg):
-    """Every PDF under the allow-listed folders, with the reason when it will not be read."""
+    """Every PDF and note under the allow-listed folders, with the reason when it will not be read."""
     root = cfg['material_root']
+    library = os.path.normcase(os.path.realpath(cfg['library']))
     for folder in cfg['folders']:
         top = os.path.join(root, folder)
         if not os.path.isdir(top):
             yield folder, None, 'folder not found'
             continue
         for path, dirs, files in os.walk(top):
-            dirs[:] = [d for d in dirs if not SHELVED.search(d)]
+            dirs[:] = [d for d in dirs if not SHELVED.search(d)
+                       and os.path.normcase(os.path.realpath(os.path.join(path, d))) != library]
             for name in sorted(files):
-                if not name.lower().endswith('.pdf'):
+                if not (name.lower().endswith('.pdf') or NOTE.search(name)):
                     continue
                 full = os.path.join(path, name)
                 rel = os.path.relpath(full, root).replace(os.sep, '/')
@@ -123,8 +130,27 @@ def sources(cfg):
 
 
 def read_pages(full):
+    if full.lower().endswith('.md'):
+        return read_note(full)
     from pypdf import PdfReader
     return [clean(page.extract_text() or '') for page in PdfReader(full).pages]
+
+
+def read_note(full):
+    """A note's pages: the text before the first "## " heading, then one page per "## " section.
+    Heading marks, quote marks and bold marks are dropped; empty sections keep their number."""
+    text = open(full, encoding='utf-8-sig').read().replace('\r\n', '\n')
+    parts = re.split(r'(?m)^(?=## )', text)
+    if not parts[0].startswith('## '):
+        first, parts = parts[0], parts[1:]
+    else:
+        first = ''
+    pages = []
+    for part in [first] + parts:
+        part = re.sub(r'(?m)^#+ +', '', part)
+        part = re.sub(r'(?m)^> ?', '', part).replace('**', '')
+        pages.append(clean(part))
+    return pages
 
 
 def build(cfg, apply):
@@ -168,7 +194,7 @@ def build(cfg, apply):
             continue
         chars = sum(len(p) for p in pages)
         entry = {'source': rel, 'pages': len(pages), 'modified': int(os.path.getmtime(full))}
-        if chars < 200:
+        if chars < (1 if full.lower().endswith('.md') else 200):  # a PDF with almost no text is a scan; a note is text
             entry['status'] = 'scan without text'
         else:
             name = slug(rel) + '.md'

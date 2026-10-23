@@ -10,7 +10,7 @@ the material.
 
 ## Shown
 
-| Partner | Page | Basis | Credit line (shown as "© …" under every photo) | Files |
+| Partner | Page | Basis | Credit line (shown under every photo: "© …", or a courtesy line as it stands) | Files |
 |---|---|---|---|---|
 | Hotel Vier Jahreszeiten Kempinski München | `/stay/kempinski-muenchen/`: five photos and the official brochure "The Munich Eras" | In writing from the hotel, 01.09., 04.09. and 15.09.2026: photos for our use with the photo credit, offers presented as the hotel's own, brochure downloadable | `Hotel Vier Jahreszeiten Kempinski München` | `assets/img/stays/kempinski-muenchen/` · `assets/stays/kempinski-muenchen/` |
 | Kempinski Hotel Berchtesgaden | `/stay/kempinski-berchtesgaden/`: three photos | In writing from the hotel, 04.09.2026 (offers presented as the hotel's own) and 01.10.2026 (photos and their copyright, in answer to our request for the website) | `Kempinski Hotel Berchtesgaden` | `assets/img/stays/kempinski-berchtesgaden/` |
@@ -21,7 +21,7 @@ the material.
 | Hotel & Chalet Aurelio | `/stay/aurelio-lech/`: eleven photos (hotel and Club Chalet) from the press material of its collection | Spoken permission; shown on Juan's decision of 19.10.2026. The credits confirmed in writing by pepper-collection, whose collection the hotel belongs to, 19.10.2026; the hotel's own reply outstanding | `Hotel & Chalet Aurelio`, and `Hotel & Chalet Aurelio / Patrick Schwienbacher` where the file names the photographer | `assets/img/stays/aurelio-lech/` |
 | pepper-collection | `/stay/pepper-collection/`: eight houses, ten photos each (ULA Signature: eight renderings, marked as renderings), from its media page and the photo package the partner shared on 20.10.2026 | In writing from the partner: the credits on 19.10.2026, the listings and the package on 20.10.2026 | `pepper-collection / Patrick Schwienbacher`, `pepper-collection / Stefano Scata`, `pepper-collection / Andreas Pollok` (the photographer each file names); `KITZMÜLLER Architektur` for the renderings of ULA Signature (the partner's wording, 21.10.2026); `pepper-collection` for ULA Easy Stay | `assets/img/stays/pepper-collection/` |
 | Schlosshotel Kitzbühel | `/stay/schlosshotel-kitzbuehel/`: text only, facts from the hotel's website | Shown on Juan's decision of 19.10.2026 | — | — |
-| Chalets in Megève | `/stay/chalets-megeve/`: 22 houses with ten photos each (every photo of the house saved in Drive) | In writing from the partner, 29.09.2026 (its properties on our website), and Juan's decision of 19.10.2026: shown as EverFlow's chalets, without the partner's name | `Photos courtesy of the owner` | `assets/img/stays/chalets-megeve/` |
+| Chalets in Megève | `/stay/chalets-megeve/`: 22 houses with ten photos each (every photo of the house saved in Drive) | In writing from the partner, 29.09.2026 (its properties on our website), and Juan's decision of 19.10.2026: shown as EverFlow's chalets, without the partner's name. The credit as a courtesy line without "©", on Juan's decision of 24.10.2026 | `Photo courtesy of the owner` | `assets/img/stays/chalets-megeve/` |
 
 ## Adding a partner
 

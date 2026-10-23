@@ -20,7 +20,8 @@ Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
    and when a text file holds a Drive path, a local path or an e-mail address other than the
    site's own.
 3. **Partner material only when the permission register allows it**, with the partner's
-   exact credit line ("© …") under every photo, never EverFlow's. The register records the
+   exact credit line under every photo ("© …", or a courtesy line such as "Photo courtesy of
+   the owner"), never EverFlow's. The register records the
    basis: the partner's words in writing, or Juan's decision with its date.
    `docs/HOTEL_MATERIAL.md` lists what is published.
 4. **Zero third-party requests on page load.** Fonts and Leaflet are served from this repo.
@@ -53,6 +54,9 @@ may be read, the library and the permission register. All four lie outside this 
 A file is never read when its name, or the name of its folder, says agreement, form, rate,
 payment or identity paper; a folder of archived material is skipped. The name is all the tool
 looks at: a document with a neutral name is read, so name what you save for what it is.
+Besides the PDFs it reads only our own notes on a partner's website or offer
+(`…_EFE_<Partner>-Website-Facts_vNN.md`, `-Offer-Text_`, `-Owner-Facts_`), one page per `##`
+section; no other Markdown file.
 
 ## Where things are
 

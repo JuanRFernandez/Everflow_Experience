@@ -11,13 +11,17 @@
     style, script or event handler (the Content-Security-Policy forbids them); every form field has
     a label; every <img> has alt, width and height.
  5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
-    whose caption starts with "©" and names the partner's credit; every credit is in the Impressum.
- 6. Words: no price anywhere; no booking, commission or "racers" outside the legal pages, and no
-    reserva/comisión/comissão on the Spanish and Portuguese pages; no regional brand line; German
-    quotes close with “; names that must never appear on the site do not.
+    whose caption is one of the partner's credit lines ("© Owner", or "Photo courtesy of the owner");
+    every credit is in the Impressum.
+ 6. Words: no price anywhere; no book/booking, reserve/reservation, pay/paid/payment/payable,
+    commission or "racers" outside the legal pages (in the text, in alt/title/aria-label/placeholder/
+    description attributes and in the script's texts), and no reserva, no form of pagar/pagamento and
+    no comisión/comissão on the Spanish and Portuguese pages; no regional brand line; German quotes
+    close with “; names that must never appear on the site do not.
  7. This repository is public: nothing of the hotel library is in it (local configuration, extracted
-    text, facts files, the permission register, internal hotel documents), and no text file holds a
-    Drive path, a local path, a Drive link or an e-mail address other than the site's own.
+    text, facts files, our notes on a partner's website or offer, the permission register, internal
+    hotel documents), and no text file holds a Drive path, a local path, a Drive link or an e-mail
+    address other than the site's own.
  8. sitemap.xml lists exactly the pages that may be indexed; every language version a page names
     (hreflang) exists.
 Warnings: unreferenced files under assets/img, assets/video, assets/css, assets/js; a text that has
@@ -62,15 +66,21 @@ PRICE = re.compile(rf'(?:[€$£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[
 PRICE_JS = re.compile(rf'(?:[€£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[€£]|{MONEY}\b)', re.I)  # "$1" is code
 CODE = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.I | re.S)
 TAGS = re.compile(r'<[^>]+>')
-BOOKING = re.compile(r'\bbook(?:s|ed|ing|ings)?\b|request has been received', re.I)
+BOOKING = re.compile(r'\bbook(?:s|ed|ing|ings)?\b|\breserv(?:e|es|ed|ing|ation|ations)\b'
+                     r'|\b(?:pre|re|un|over)?(?:pay(?:s|ing|ment|ments|able|er)?|paid)\b|\bpaypal\b'
+                     r'|request has been received', re.I)
 NOT_SAID = re.compile(r'\bcommissions?\b|\bracers?\b', re.I)  # Juan, 19.10.2026: no commissions, no "racers"
-NOT_SAID_ES_PT = re.compile(r'\breserv\w*|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)  # the same in es/ and pt/
+NOT_SAID_ES_PT = re.compile(  # the same in es/ and pt/: the site takes no bookings and no payments
+    r'\breserv\w*|\b(?:pre)?pag(?:a|as|an|am|ás|ado|ados|ada|adas|ando|ar|ará|arán|o|os|ou|ue|uen|uem|amos|amento|amentos'
+    r'|ável|adero)\b|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)
+READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|data-title|data-[\w-]*label)\s*=\s*"([^"]*)"', re.I)
 ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
 REGIONAL = re.compile('bavarian' + r'\s+' + 'alps', re.I)
 NEVER = [codecs.decode(w, 'rot13') for w in ('rqra yhkhel', 'rqrayhkhel', 'ubgry qnf gveby', 'enr cvafba')]
 DE_QUOTE = re.compile(r'„[^“"]{0,200}"')
-PRIVATE = re.compile(
-    r'(^|/)(library\.local\.json|\.library/|assets/Hotels/|facts/)|(^|[/.])facts\.json$|permission[^/]*\.csv$', re.I)
+PRIVATE = re.compile(  # also our own notes on a partner's website or offer, which the library reads
+    r'(^|/)(library\.local\.json|\.library/|assets/Hotels/|facts/)|(^|[/.])facts\.json$|permission[^/]*\.csv$'
+    r'|_EFE_[^/]*-(?:Website-Facts|Offer-Text|Owner-Facts)_v\d+\.md$', re.I)
 TEXT = ('.html', '.css', '.js', '.md', '.json', '.yml', '.yaml', '.txt', '.py', '.svg', '.xml')
 INTERNAL = re.compile(  # a Drive folder of the team, a drive-letter path, a Drive link
     r'\b\d\d_[A-Z][A-Z0-9_&-]{2,}|[A-Za-z]:[\\/](?![\\/ ])|(?i:my[ ]drive|meine[ ]ablage|(?:drive|docs|sheets)\.google\.com)')
@@ -241,21 +251,22 @@ for page in PAGES:
             if attr not in d:
                 failures.append(f'{page}: <img src="{d.get("src")}"> has no {attr}')
     for src in p.loose:
-        failures.append(f'{page}: photo {src} is shown without a <figure> and its "©" credit')
+        failures.append(f'{page}: photo {src} is shown without a <figure> and its credit')
     for fig in p.stay_figures:
         slug = fig['stay'].split('/')[4]
         caption = fig['caption'].strip()
-        if not caption.startswith('©'):
-            failures.append(f'{page}: photo {fig["stay"]} has no "©" credit under it')
+        if not caption.startswith(('©', 'Photo courtesy')):
+            failures.append(f'{page}: photo {fig["stay"]} has no credit under it ("© Owner" or "Photo courtesy of …")')
         elif slug in credits and caption not in credits[slug]:
             failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", which is not a credit line of {slug} in content/partners.json')
     visible = html.unescape(TAGS.sub(' ', CODE.sub(' ', text)))
     for m in PRICE.finditer(html.unescape(CODE.sub(' ', text))):  # attributes count: alt, title, meta
         failures.append(f'{page}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
     if page not in LEGAL:
-        for m in BOOKING.finditer(visible):
-            failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings (say plan, arrange, enquire)')
-        for m in NOT_SAID.finditer(visible):
+        readable = visible + ' ' + ' '.join(html.unescape(m.group(1)) for m in READABLE.finditer(CODE.sub(' ', text)))
+        for m in BOOKING.finditer(readable):
+            failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and no payments (say plan, arrange, enquire)')
+        for m in NOT_SAID.finditer(readable):
             failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
     if page.startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
         for m in NOT_SAID_ES_PT.finditer(html.unescape(CODE.sub(' ', text))):
@@ -304,6 +315,11 @@ for dp, _, fs in os.walk('assets/js'):
         p = os.path.join(dp, f).replace(os.sep, '/')
         for m in PRICE_JS.finditer(open(p, encoding='utf-8').read()):
             failures.append(f'{p}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
+        texts = ' '.join(re.findall(r"'([^'\n]*)'", open(p, encoding='utf-8').read()))
+        for m in BOOKING.finditer(texts):
+            failures.append(f'{p}: a text of the script says "{m.group(0)}"; the site takes no bookings and no payments')
+        for m in NOT_SAID.finditer(texts):
+            failures.append(f'{p}: a text of the script says "{m.group(0)}"; the site does not mention commissions or racers')
         referenced.update(re.findall(r"'/(assets/vendor/[^']+)'", open(p, encoding='utf-8').read()))
 
 for folder in ('assets/img', 'assets/video', 'assets/css', 'assets/js', 'assets/stays'):
