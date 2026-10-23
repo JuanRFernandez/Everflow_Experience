@@ -44,6 +44,7 @@ PAGES = load('pages')
 DEST = load('destinations')
 COUNTRIES = DEST['countries']
 PLACES = DEST['places']
+FEATURED = DEST.get('featured', [])  # the destinations the home page shows first, most asked for first
 PARTNERS = load('partners')
 EXPERIENCES = load('experiences')
 GUIDES = load('guides')
@@ -711,7 +712,7 @@ def page_head(eyebrow_text, h1, lead=None, actions='', crumbs=None):
 
 def home():
     h = PAGES['home']
-    featured = [p for p in PLACES if p.get('featured')] + [p for p in PLACES if not p.get('featured')]
+    featured = [PLACE[s] for s in FEATURED] + [p for p in PLACES if p['slug'] not in FEATURED]
     row = '\n'.join(f'<li class="gallery-item gallery-item--card">{place_card(p)}</li>' for p in featured[:6])
     exps = [x for x in EXPERIENCES if x.get('featured')]
     juan = TEAM[0]
@@ -860,7 +861,7 @@ def destinations_index():
         pins.append({'n': tro(p['name']), 'u': localized(f'/destinations/{p["slug"]}/'), 'lat': p['lat'], 'lon': p['lon'], 's': stays})
     pins_json = a(json.dumps(pins, ensure_ascii=False, separators=(',', ':')))
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
-    lead = ui('{n} places in {m} countries, from Bavaria to the Dolomites. Each page shows the hotels and chalets we know there.',
+    lead = ui('{n} places in {m} countries across the Alps. Each page shows the hotels and chalets we know there.',
               n=len(PLACES), m=len(COUNTRIES))
     consent = ui('The map is loaded from OpenStreetMap only when you click below. Your IP address is then sent to the map provider. '
                  'Details in our [privacy policy](/datenschutz.html#map).')
@@ -881,7 +882,7 @@ def destinations_index():
 </section>
 {cta_band()}'''
     return page('destinations/index.html', ui('Destinations — EverFlow Experience'),
-                ui('Tailor-made ski and mountain trips in {n} places across the Alps: Germany, Austria, Switzerland, France and Italy.',
+                ui('Tailor-made ski and mountain trips in {n} places across the Alps: Switzerland, Austria, France, Italy and Germany.',
                    n=len(PLACES)),
                 body)
 
@@ -1338,6 +1339,9 @@ def validate():
     for s in set(slugs):
         if slugs.count(s) > 1:
             problems.append(f'slug used twice: {s}')
+    for s in FEATURED:
+        if s not in PLACE:
+            problems.append(f'destinations.json "featured": unknown destination {s}')
     for p in PLACES:
         if p['country'] not in COUNTRY:
             problems.append(f'place {p["slug"]}: unknown country {p["country"]}')

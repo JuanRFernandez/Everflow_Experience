@@ -1,114 +1,680 @@
 [
   {
-    "slug": "kempinski-muenchen",
-    "register": "Hotel Vier Jahreszeiten Kempinski München",
-    "name": "Hotel Vier Jahreszeiten Kempinski München",
-    "kind": "Hotel",
-    "type": "hotel",
-    "place": "munich",
-    "location": "Maximilianstraße, Munich",
-    "card": "Munich's grand hotel since 1858, on Maximilianstraße.",
-    "highlights": [
-      "The Munich Eras",
-      "Presidential suites"
-    ],
-    "lead": "Munich's grand hotel since 1858, on Maximilianstraße. The natural first or last night of an alpine week: arrive, settle in, and let the city set the tone before the mountains.",
+    "slug": "pepper-collection",
+    "register": "pepper-collection",
+    "name": "pepper-collection",
+    "kind": "Chalets and apartments",
+    "place": "lech",
+    "location": "Lech, Oberlech and St. Christoph",
+    "card": "Private chalets and apartments on the Arlberg, some with a butler and a private chef.",
+    "lead": "A collection of private chalets and apartments in Lech, Oberlech and St. Christoph on the Arlberg, for families and friends. Some sit right on the slopes; The Barn & Chalet Mimi come with a butler and a private chef.",
     "facts": [
-      "On Maximilianstraße since 1858",
-      "Rooms and suites up to the presidential suites",
-      "The hotel's own Munich Eras programme, described below"
+      "Chalet Mimi in Oberlech: ski-in and ski-out in winter, for up to 14 guests, with a butler and a private chef",
+      "The Barn in Oberlech: 1,000 m², with a 24/7 butler and a private chef",
+      "Skyfall in St. Christoph: four apartments; the two largest combine into one residence for up to 21 guests",
+      "Arla Luxury Home on the Schlegelkopf slope, for groups of 2 to 10"
     ],
-    "why": "A calm first night after a long flight, or a last evening in the city before flying home. From here the mountains are a short drive away the next morning.",
-    "arranges": {
-      "title": "The Munich Eras, curated by the hotel.",
-      "text": "Three Eras designed by the hotel's Resident Curator: Royalty, Adventure and Handmade. For example, a private helicopter morning over five royal castles with the first visit of the day to Hohenschwangau Castle; a run through the English Garden with a football legend; brewing at Munich's second-smallest craft brewery.",
-      "small": "A programme of the hotel, delivered by the hotel and its Local Insiders. We build it into your plan."
-    },
-    "brochure": {
-      "file": "assets/stays/kempinski-muenchen/The-Munich-Eras_Hotel-Vier-Jahreszeiten-Kempinski-Muenchen_official-brochure.pdf",
-      "label": "Download the Munich Eras brochure"
-    },
+    "why": "For families and groups who want a private house on the Arlberg, with the service of a hotel when they want it.",
     "links": [
       {
-        "label": "Programme page on kempinski.com",
-        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences"
-      },
-      {
-        "label": "The hotel on kempinski.com",
-        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten"
+        "label": "peppercollection.com",
+        "url": "https://www.peppercollection.com/en/"
       }
     ],
-    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH), and the Munich Eras are the hotel's own programme, under the hotel's terms.",
-    "credit": "Hotel Vier Jahreszeiten Kempinski München",
+    "provider": "EverFlow is your contact before and during your stay. Each house is provided by pepper-collection, under its terms.",
+    "credit": "pepper-collection",
     "photos": [
       {
-        "name": "lobby",
-        "alt": "The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome"
+        "name": "barn-dining",
+        "alt": "The dining room of The Barn, with a view of the mountains",
+        "credit": "pepper-collection / Patrick Schwienbacher"
       },
       {
-        "name": "grand-deluxe-room",
-        "alt": "A Grand Deluxe Room"
+        "name": "mimi-living",
+        "alt": "The living and dining room of Chalet Mimi",
+        "credit": "pepper-collection / Patrick Schwienbacher"
       },
       {
-        "name": "jahreszeiten-bar",
-        "alt": "The Jahreszeiten Bar"
+        "name": "mimi-spa",
+        "alt": "The spa pool of Chalet Mimi",
+        "credit": "pepper-collection / Patrick Schwienbacher"
       },
       {
-        "name": "pool",
-        "alt": "The indoor pool"
+        "name": "falcon-living",
+        "alt": "The living room of The Falcon",
+        "credit": "pepper-collection / Patrick Schwienbacher"
       },
       {
-        "name": "junior-suite",
-        "alt": "A Junior Suite with a sitting area"
+        "name": "toda-living",
+        "alt": "The living room of Chalet Toda with its fireplace",
+        "credit": "pepper-collection / Patrick Schwienbacher"
       }
-    ]
+    ],
+    "residences_head": [
+      "The houses",
+      "Chalets and apartments."
+    ],
+    "residences": [
+      {
+        "name": "Chalet Mimi",
+        "type": "chalet",
+        "where": "Oberlech",
+        "guests": 14,
+        "bedrooms": 6,
+        "size_m2": 830,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub",
+          "Butler and private chef"
+        ],
+        "card": "A warm, traditional alpine chalet in Oberlech, with wide mountain views.",
+        "about": "Chalet Mimi in Oberlech comes with a 24/7 butler, an in-house chef, a wine cellar and a heated outdoor hot tub facing the mountains. Besides the master suite, it has three double rooms, two of them with a connected bunk room for children. The spa has a 14 m indoor pool with a cinema screen, a bio sauna and a steam bath.",
+        "photos": [
+          {
+            "name": "house-mimi",
+            "alt": "Chalet Mimi in winter",
+            "credit": "pepper-collection / Stefano Scata"
+          },
+          {
+            "name": "house-mimi-summer",
+            "alt": "Chalet Mimi in summer",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-living",
+            "alt": "The living and dining room of Chalet Mimi",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-spa",
+            "alt": "The spa pool of Chalet Mimi",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-m26",
+            "alt": "Chalet Mimi: the living room in winter",
+            "credit": "pepper-collection / Stefano Scata"
+          },
+          {
+            "name": "mimi-m0",
+            "alt": "Chalet Mimi: the library",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-m10",
+            "alt": "Chalet Mimi: breakfast with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-m25",
+            "alt": "Chalet Mimi: the outdoor hot tub in the snow",
+            "credit": "pepper-collection / Stefano Scata"
+          },
+          {
+            "name": "mimi-m32",
+            "alt": "Chalet Mimi: the master suite",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "mimi-m30",
+            "alt": "Chalet Mimi: the children's room with bunk beds",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "The Barn",
+        "type": "chalet",
+        "where": "Oberlech",
+        "guests": 14,
+        "bedrooms": 7,
+        "bathrooms": 7,
+        "size_m2": "about 1000",
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Butler and private chef",
+          "Gym"
+        ],
+        "card": "A chalet in Oberlech with a \"northern chic meets alpine luxury\" interior and panoramic mountain views.",
+        "about": "The Barn in Oberlech is designed in a \"northern chic meets alpine luxury\" style and comes with a 24/7 butler and a private chef. Its private spa has a 14 m indoor pool, a sauna, a steam room, a gym and a treatment room. It also has a wine cellar and an entertainment room with a bar that can be used as a cinema, a games room or for private events.",
+        "photos": [
+          {
+            "name": "house-barn",
+            "alt": "The Barn in winter, with the mountains behind",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-barn-summer",
+            "alt": "The Barn in summer",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-dining",
+            "alt": "The dining room of The Barn, with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-barn-bedroom",
+            "alt": "A bedroom of The Barn with a view",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b0",
+            "alt": "The Barn: the lounge around the fireplace",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b1",
+            "alt": "The Barn: breakfast with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b6",
+            "alt": "The Barn: the terrace and its fire pit at dusk",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b13",
+            "alt": "The Barn: the bar",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b34",
+            "alt": "The Barn: a bathtub with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "barn-b63",
+            "alt": "The Barn: the indoor pool",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "The Falcon",
+        "type": "chalet",
+        "where": "Lech centre",
+        "guests": 8,
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "size_m2": 450,
+        "ski_access": "Close to the Schlosskopf lift",
+        "highlights": [
+          "Sauna",
+          "Hot tub",
+          "Gym",
+          "Pets welcome"
+        ],
+        "card": "Close to the centre of Lech, with panoramic views over the village.",
+        "about": "The Falcon lies close to the centre of Lech, a stone's throw from the Schlosskopf chairlift, with panoramic views over the village and the surrounding mountains. It has four individually designed bedrooms, a wine cellar with a tasting area, and a spa with a hot tub and a bio sauna. Pets are welcome.",
+        "photos": [
+          {
+            "name": "house-falcon",
+            "alt": "The Falcon in summer",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-living",
+            "alt": "The living room of The Falcon",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-falcon-bedroom",
+            "alt": "A bedroom of The Falcon",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-falcon-spa",
+            "alt": "The whirlpool of The Falcon",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f5",
+            "alt": "The Falcon: the living room",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f6",
+            "alt": "The Falcon: the kitchen and its breakfast bar",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f18",
+            "alt": "The Falcon: the dining table",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f13",
+            "alt": "The Falcon: the cinema room",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f27",
+            "alt": "The Falcon: a bathroom with a marble bath",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "falcon-f37",
+            "alt": "The Falcon: the spa lounge",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "Arla Luxury Home",
+        "type": "chalet",
+        "where": "Lech centre",
+        "guests": "2–10",
+        "bedrooms": 5,
+        "ski_access": "Direct access to the slopes",
+        "highlights": [
+          "Sauna",
+          "Gym",
+          "Games room"
+        ],
+        "card": "In the heart of Lech, with views of the Omeshorn; three units to take separately or together.",
+        "about": "Arla Luxury Home is a chalet a few minutes' walk from the centre of Lech, with views of the Omeshorn. Its three units can be taken separately or together, for two to ten guests. Guests also have access to the spa and the 23-metre pool of the neighbouring Hotel Aurelio.",
+        "photos": [
+          {
+            "name": "house-arla",
+            "alt": "Arla Luxury Home in winter",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-arla-living",
+            "alt": "A living room at Arla Luxury Home",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-arla-bedroom",
+            "alt": "A bedroom with a view at Arla Luxury Home",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a9",
+            "alt": "Arla Luxury Home: the living room with its fireplace, with a view of Lech",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a25",
+            "alt": "Arla Luxury Home: the dining table, with a view of the village",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a15",
+            "alt": "Arla Luxury Home: the kitchen and the dining table",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a13",
+            "alt": "Arla Luxury Home: the spa with its sauna",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a29",
+            "alt": "Arla Luxury Home: a bedroom with a bathtub",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a20",
+            "alt": "Arla Luxury Home: the house in summer, from above",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "arla-a38",
+            "alt": "Arla Luxury Home: a balcony in winter",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Toda",
+        "type": "chalet",
+        "where": "Lech",
+        "guests": 6,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "size_m2": 245,
+        "ski_access": "A short walk to the lifts",
+        "highlights": [
+          "Sauna",
+          "Pets welcome"
+        ],
+        "card": "A traditional alpine chalet in Lech, with an 18th-century Stube.",
+        "about": "Chalet Toda is a traditional alpine chalet in a quiet yet central spot in Lech, a short walk from the Rüfikopf and Schlegelkopf lifts. The 18th-century Stube seats six at its dining table, every bedroom has a balcony with mountain views, and there is a private sauna. Pets are welcome.",
+        "photos": [
+          {
+            "name": "house-toda",
+            "alt": "Chalet Toda in summer",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-living",
+            "alt": "The living room of Chalet Toda with its fireplace",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-toda-bedroom",
+            "alt": "A bedroom of Chalet Toda",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t11",
+            "alt": "Chalet Toda: the dining room panelled in old wood",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t28",
+            "alt": "Chalet Toda: the kitchen",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t27",
+            "alt": "Chalet Toda: a sitting room",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t15",
+            "alt": "Chalet Toda: a bathroom with a bath",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t16",
+            "alt": "Chalet Toda: the sauna",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t9",
+            "alt": "Chalet Toda: the terrace in winter",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "toda-t7",
+            "alt": "Chalet Toda: a bedroom with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "Skyfall",
+        "type": [
+          "chalet",
+          "apartment"
+        ],
+        "kind": "Chalet and apartments",
+        "where": "St. Christoph",
+        "size_m2": "about 800",
+        "highlights": [
+          "Sauna",
+          "Private lifts between floors"
+        ],
+        "card": "A landmark chalet in the hamlet of St. Christoph, with valley views from its elevated position.",
+        "about": "In the small hamlet of St. Christoph, Skyfall has four apartments of 116 to 275 m² across four floors. The two largest can be combined through private lifts into one 550 m² residence for up to 21 guests. There are saunas, freestanding bathtubs and kitchens designed by David Linley.",
+        "photos": [
+          {
+            "name": "house-skyfall",
+            "alt": "The living room of the penthouse at Skyfall",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "house-skyfall-suite",
+            "alt": "The living room of a suite at Skyfall",
+            "credit": "pepper-collection / Andreas Pollok"
+          },
+          {
+            "name": "skyfall-s143",
+            "alt": "Skyfall: the dining room of the penthouse",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s115",
+            "alt": "Skyfall: the balcony of the penthouse, with a view of the mountains",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s116",
+            "alt": "Skyfall: the kitchen of the penthouse",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s130",
+            "alt": "Skyfall: a bedroom of the penthouse",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s121",
+            "alt": "Skyfall: the sauna, with a view",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s28",
+            "alt": "Skyfall: breakfast in one of the residences",
+            "credit": "pepper-collection / Andreas Pollok"
+          },
+          {
+            "name": "skyfall-s45",
+            "alt": "Skyfall: a living room with its fireplace",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          },
+          {
+            "name": "skyfall-s132",
+            "alt": "Skyfall: a room with bunk beds",
+            "credit": "pepper-collection / Patrick Schwienbacher"
+          }
+        ]
+      },
+      {
+        "name": "ULA Signature",
+        "type": "apartment",
+        "where": "Omesberg, Lech",
+        "guests": 24,
+        "bedrooms": 12,
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hot tub"
+        ],
+        "card": "An apartment house in the quiet Omesberg area, looking out to the Omeshorn; the pictures are renderings.",
+        "about": "ULA Signature is an apartment house in the quiet Omesberg area, about five minutes' walk from the centre of Lech. Its six suites and apartments, of about 50 to 150 m², can be taken separately, combined or as a whole house, and several have their own hot tub. The house has a restaurant and a spa with an indoor pool, a sauna and a steam bath. The pictures are renderings.",
+        "renderings": true,
+        "photos": [
+          {
+            "name": "ula-signature-u16",
+            "alt": "ULA Signature: rendering of a living room with a fireplace",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u9",
+            "alt": "ULA Signature: rendering of a living room with a mountain mural",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u22",
+            "alt": "ULA Signature: rendering of a living and dining room",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u12",
+            "alt": "ULA Signature: rendering of a bedroom",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u11",
+            "alt": "ULA Signature: rendering of a bathroom with a free-standing bath",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u34",
+            "alt": "ULA Signature: rendering of the indoor pool",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u38",
+            "alt": "ULA Signature: rendering of the relaxation room with its fireplace",
+            "credit": "KITZMÜLLER Architektur"
+          },
+          {
+            "name": "ula-signature-u18",
+            "alt": "ULA Signature: rendering of the bar",
+            "credit": "KITZMÜLLER Architektur"
+          }
+        ]
+      },
+      {
+        "name": "ULA Easy Stay",
+        "type": "apartment",
+        "where": "Omesberg, Lech",
+        "ski_access": "About 5 min walk to the lifts",
+        "highlights": [
+          "Sauna"
+        ],
+        "card": "A renovated house of six apartments in the quiet Omesberg area.",
+        "about": "ULA Easy Stay is a lovingly renovated house in the quiet Omesberg area, about five minutes' walk from the centre of Lech and the lifts. Each of its six apartments has a living area, a kitchen and a private balcony with mountain views, and the whole house can also be taken as one. Guests share a sauna and an infrared cabin.",
+        "photos": [
+          {
+            "name": "ula-easy-stay-e30",
+            "alt": "ULA Easy Stay: the living room of an apartment",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e2",
+            "alt": "ULA Easy Stay: the house, with a view over Lech",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e19",
+            "alt": "ULA Easy Stay: the dining corner and the living room",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e15",
+            "alt": "ULA Easy Stay: a bedroom with a balcony",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e23",
+            "alt": "ULA Easy Stay: a kitchen",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e38",
+            "alt": "ULA Easy Stay: a balcony with a view of the mountains",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e44",
+            "alt": "ULA Easy Stay: a studio with its bed and dining corner",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e73",
+            "alt": "ULA Easy Stay: a bedroom with a view",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e3",
+            "alt": "ULA Easy Stay: a bathroom",
+            "credit": "pepper-collection"
+          },
+          {
+            "name": "ula-easy-stay-e91",
+            "alt": "ULA Easy Stay: the sauna",
+            "credit": "pepper-collection"
+          }
+        ]
+      }
+    ],
+    "residences_lead": "Swipe through the photos of each house, or tap one to see it full screen."
   },
   {
-    "slug": "kempinski-berchtesgaden",
-    "register": "Kempinski Hotel Berchtesgaden",
-    "name": "Kempinski Hotel Berchtesgaden",
-    "kind": "Hotel",
-    "type": "hotel",
-    "place": "berchtesgaden",
-    "location": "Berchtesgaden",
-    "card": "A thousand metres up, looking out over the Berchtesgaden Alps.",
+    "slug": "aurelio-lech",
+    "register": "Hotel & Chalet Aurelio",
+    "name": "Hotel & Chalet Aurelio",
+    "kind": "Hotel and chalet",
+    "type": [
+      "hotel",
+      "chalet"
+    ],
+    "place": "lech",
+    "location": "Lech am Arlberg",
+    "card": "A boutique hotel on the Schlegelkopf slope: ski-in, ski-out, a few minutes from the centre of Lech.",
     "highlights": [
-      "Ski school in the lobby",
-      "Activity Team for outings",
-      "Cross-country trails, 5 min drive"
+      "Club Chalet for up to 16 guests",
+      "23 m indoor pool",
+      "Spa of over 1,000 m²"
     ],
-    "lead": "A thousand metres up, looking out over the Berchtesgaden Alps. A hotel for families who want more from winter than downhill skiing: on the days off the slopes, the hotel's Activity Team arranges the outings.",
+    "lead": "A boutique hotel in Lech, ski-in and ski-out, directly on the Schlegelkopf slope and a few minutes' walk from the centre. Next door, connected by an underground passage, the Club Chalet hosts up to 16 guests with a private chef and butler.",
     "facts": [
-      "The local winter sports school plans your lessons with you in the hotel lobby: skiing, snowboarding, cross-country and snowshoeing, with full days in the neighbouring Austrian ski areas",
-      "Cross-country trails a five-minute drive away, and the 2.3 km natural toboggan run at Hochschwarzeck, reached by chairlift",
-      "In summer: e-bike tours to Lake Königssee, golf, and walks to mountain huts"
+      "10 Top Deluxe Double Rooms and Aurelio Suites, from 55 to 110 m²",
+      "More than 1,000 m² of spa, with a 23-metre indoor pool",
+      "The Club Chalet: eight rooms for up to 16 guests, with its own spa and indoor pool",
+      "At about 1,500 m, directly on the Schlegelkopf slope"
     ],
-    "why": "For families who want a week with variety: a morning of lessons, an afternoon on the toboggan run, and a hotel that organises the rest.",
-    "arranges": {
-      "title": "Activities arranged by the hotel.",
-      "text": "On the days off the slopes, the hotel's Activity Team arranges the outings.",
-      "small": "The activities are run by the hotel and by the local providers it works with."
-    },
+    "why": "For guests who want to ski from the door of a small hotel, and for groups who want a chalet of their own with the hotel next door.",
     "links": [
       {
-        "label": "The hotel on kempinski.com",
-        "url": "https://www.kempinski.com/berchtesgaden"
+        "label": "aureliolech.com",
+        "url": "https://www.aureliolech.com/en/"
       }
     ],
-    "provider": "EverFlow is your contact before and during your stay. The stay and its activities are provided by Kempinski Hotel Berchtesgaden, under the hotel's terms.",
-    "credit": "Kempinski Hotel Berchtesgaden",
+    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Hotel & Chalet Aurelio, under the hotel's terms.",
+    "credit": "Hotel & Chalet Aurelio",
     "photos": [
       {
-        "name": "indoor-pool",
-        "alt": "The indoor pool"
+        "name": "exterior-winter",
+        "alt": "Hotel Aurelio in winter, with the village of Lech and its church"
       },
       {
-        "name": "exterior",
-        "alt": "Kempinski Hotel Berchtesgaden seen from the garden"
+        "name": "ski-view",
+        "alt": "A skier at the hotel, looking down over Lech"
       },
       {
-        "name": "berchtesgaden-alps",
-        "alt": "The Berchtesgaden Alps in autumn, with the first snow"
+        "name": "suite",
+        "alt": "An Aurelio Suite",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "spa-pool",
+        "alt": "The indoor pool of the spa"
+      },
+      {
+        "name": "restaurant",
+        "alt": "The hotel's restaurant",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-winter",
+        "alt": "The Club Chalet in winter",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-summer",
+        "alt": "The Club Chalet in summer",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-living",
+        "alt": "The living room of the Club Chalet",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-pool",
+        "alt": "The indoor pool of the Club Chalet",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-bedroom",
+        "alt": "A bedroom of the Club Chalet",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+      },
+      {
+        "name": "chalet-balcony",
+        "alt": "The balcony of the Club Chalet, looking over Lech in winter",
+        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
       }
     ]
   },
@@ -178,68 +744,6 @@
       {
         "name": "meadow",
         "alt": "Sun loungers on a meadow at sunset"
-      }
-    ]
-  },
-  {
-    "slug": "sacher-seefeld",
-    "register": "Alpin Resort Sacher Seefeld",
-    "name": "Alpin Resort Sacher Seefeld",
-    "kind": "Hotel",
-    "type": "hotel",
-    "place": "seefeld",
-    "location": "Seefeld in Tirol",
-    "card": "Sacher in the mountains: a resort with a 4,700 m² spa on the Seefeld plateau.",
-    "highlights": [
-      "Infinity pool and bathing lake",
-      "Signature suites with a private sauna",
-      "81 rooms and suites"
-    ],
-    "lead": "Sacher in the mountains. A resort at 1,200 m on the Seefeld plateau, set in its own 20,000 m² natural park, and part of Sacher Hotels since 2022. Innsbruck is half an hour away.",
-    "facts": [
-      "81 rooms and suites in six categories, from 30 to 95 m²; the Signature suites have their own sauna",
-      "A 4,700 m² wellness area with an infinity sports pool and a natural bathing lake with an alpine beach",
-      "The toque-awarded restaurant Der Max, and a piece of the original Sacher-Torte",
-      "245 km of cross-country trails in the region, right from the plateau"
-    ],
-    "why": "For a calm week of cross-country skiing, spa days and long dinners, with gentle slopes close by and Innsbruck for a day in town.",
-    "arranges": {
-      "title": "The Sacher Academy For Better Aging.",
-      "text": "The hotel's own health programme: a personalised Healthy Longevity programme under medical direction, with diagnostics, treatments and nutrition planned around your stay.",
-      "small": "A programme of the hotel, delivered by the hotel's physicians and therapists."
-    },
-    "links": [
-      {
-        "label": "The hotel's website",
-        "url": "https://seefeld.sacher.com/en/"
-      }
-    ],
-    "provider": "EverFlow is your contact before and during your stay. The stay and the Academy programme are provided by Alpin Resort Sacher Seefeld, under the hotel's terms.",
-    "credit": "Alpin Resort Sacher Seefeld",
-    "photos": [
-      {
-        "name": "pool-winter",
-        "alt": "The heated outdoor pool of Alpin Resort Sacher Seefeld in winter"
-      },
-      {
-        "name": "infinity-pool",
-        "alt": "The infinity pool with snowy mountains behind it"
-      },
-      {
-        "name": "resort-summer",
-        "alt": "The resort and its park seen from above in summer"
-      },
-      {
-        "name": "junior-suite",
-        "alt": "A Junior Suite with a fireplace and a wooden ceiling"
-      },
-      {
-        "name": "family-suite",
-        "alt": "The bedroom of a Family Suite"
-      },
-      {
-        "name": "dish",
-        "alt": "A dish of venison from the region"
       }
     ]
   },
@@ -1581,683 +2085,66 @@
     ]
   },
   {
-    "slug": "aurelio-lech",
-    "register": "Hotel & Chalet Aurelio",
-    "name": "Hotel & Chalet Aurelio",
-    "kind": "Hotel and chalet",
-    "type": [
-      "hotel",
-      "chalet"
-    ],
-    "place": "lech",
-    "location": "Lech am Arlberg",
-    "card": "A boutique hotel on the Schlegelkopf slope: ski-in, ski-out, a few minutes from the centre of Lech.",
+    "slug": "sacher-seefeld",
+    "register": "Alpin Resort Sacher Seefeld",
+    "name": "Alpin Resort Sacher Seefeld",
+    "kind": "Hotel",
+    "type": "hotel",
+    "place": "seefeld",
+    "location": "Seefeld in Tirol",
+    "card": "Sacher in the mountains: a resort with a 4,700 m² spa on the Seefeld plateau.",
     "highlights": [
-      "Club Chalet for up to 16 guests",
-      "23 m indoor pool",
-      "Spa of over 1,000 m²"
+      "Infinity pool and bathing lake",
+      "Signature suites with a private sauna",
+      "81 rooms and suites"
     ],
-    "lead": "A boutique hotel in Lech, ski-in and ski-out, directly on the Schlegelkopf slope and a few minutes' walk from the centre. Next door, connected by an underground passage, the Club Chalet hosts up to 16 guests with a private chef and butler.",
+    "lead": "Sacher in the mountains. A resort at 1,200 m on the Seefeld plateau, set in its own 20,000 m² natural park, and part of Sacher Hotels since 2022. Innsbruck is half an hour away.",
     "facts": [
-      "10 Top Deluxe Double Rooms and Aurelio Suites, from 55 to 110 m²",
-      "More than 1,000 m² of spa, with a 23-metre indoor pool",
-      "The Club Chalet: eight rooms for up to 16 guests, with its own spa and indoor pool",
-      "At about 1,500 m, directly on the Schlegelkopf slope"
+      "81 rooms and suites in six categories, from 30 to 95 m²; the Signature suites have their own sauna",
+      "A 4,700 m² wellness area with an infinity sports pool and a natural bathing lake with an alpine beach",
+      "The toque-awarded restaurant Der Max, and a piece of the original Sacher-Torte",
+      "245 km of cross-country trails in the region, right from the plateau"
     ],
-    "why": "For guests who want to ski from the door of a small hotel, and for groups who want a chalet of their own with the hotel next door.",
+    "why": "For a calm week of cross-country skiing, spa days and long dinners, with gentle slopes close by and Innsbruck for a day in town.",
+    "arranges": {
+      "title": "The Sacher Academy For Better Aging.",
+      "text": "The hotel's own health programme: a personalised Healthy Longevity programme under medical direction, with diagnostics, treatments and nutrition planned around your stay.",
+      "small": "A programme of the hotel, delivered by the hotel's physicians and therapists."
+    },
     "links": [
       {
-        "label": "aureliolech.com",
-        "url": "https://www.aureliolech.com/en/"
+        "label": "The hotel's website",
+        "url": "https://seefeld.sacher.com/en/"
       }
     ],
-    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Hotel & Chalet Aurelio, under the hotel's terms.",
-    "credit": "Hotel & Chalet Aurelio",
+    "provider": "EverFlow is your contact before and during your stay. The stay and the Academy programme are provided by Alpin Resort Sacher Seefeld, under the hotel's terms.",
+    "credit": "Alpin Resort Sacher Seefeld",
     "photos": [
       {
-        "name": "exterior-winter",
-        "alt": "Hotel Aurelio in winter, with the village of Lech and its church"
+        "name": "pool-winter",
+        "alt": "The heated outdoor pool of Alpin Resort Sacher Seefeld in winter"
       },
       {
-        "name": "ski-view",
-        "alt": "A skier at the hotel, looking down over Lech"
+        "name": "infinity-pool",
+        "alt": "The infinity pool with snowy mountains behind it"
       },
       {
-        "name": "suite",
-        "alt": "An Aurelio Suite",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+        "name": "resort-summer",
+        "alt": "The resort and its park seen from above in summer"
       },
       {
-        "name": "spa-pool",
-        "alt": "The indoor pool of the spa"
+        "name": "junior-suite",
+        "alt": "A Junior Suite with a fireplace and a wooden ceiling"
       },
       {
-        "name": "restaurant",
-        "alt": "The hotel's restaurant",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+        "name": "family-suite",
+        "alt": "The bedroom of a Family Suite"
       },
       {
-        "name": "chalet-winter",
-        "alt": "The Club Chalet in winter",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
-      },
-      {
-        "name": "chalet-summer",
-        "alt": "The Club Chalet in summer",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
-      },
-      {
-        "name": "chalet-living",
-        "alt": "The living room of the Club Chalet",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
-      },
-      {
-        "name": "chalet-pool",
-        "alt": "The indoor pool of the Club Chalet",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
-      },
-      {
-        "name": "chalet-bedroom",
-        "alt": "A bedroom of the Club Chalet",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
-      },
-      {
-        "name": "chalet-balcony",
-        "alt": "The balcony of the Club Chalet, looking over Lech in winter",
-        "credit": "Hotel & Chalet Aurelio / Patrick Schwienbacher"
+        "name": "dish",
+        "alt": "A dish of venison from the region"
       }
     ]
-  },
-  {
-    "slug": "pepper-collection",
-    "register": "pepper-collection",
-    "name": "pepper-collection",
-    "kind": "Chalets and apartments",
-    "place": "lech",
-    "location": "Lech, Oberlech and St. Christoph",
-    "card": "Private chalets and apartments on the Arlberg, some with a butler and a private chef.",
-    "lead": "A collection of private chalets and apartments in Lech, Oberlech and St. Christoph on the Arlberg, for families and friends. Some sit right on the slopes; The Barn & Chalet Mimi come with a butler and a private chef.",
-    "facts": [
-      "Chalet Mimi in Oberlech: ski-in and ski-out in winter, for up to 14 guests, with a butler and a private chef",
-      "The Barn in Oberlech: 1,000 m², with a 24/7 butler and a private chef",
-      "Skyfall in St. Christoph: four apartments; the two largest combine into one residence for up to 21 guests",
-      "Arla Luxury Home on the Schlegelkopf slope, for groups of 2 to 10"
-    ],
-    "why": "For families and groups who want a private house on the Arlberg, with the service of a hotel when they want it.",
-    "links": [
-      {
-        "label": "peppercollection.com",
-        "url": "https://www.peppercollection.com/en/"
-      }
-    ],
-    "provider": "EverFlow is your contact before and during your stay. Each house is provided by pepper-collection, under its terms.",
-    "credit": "pepper-collection",
-    "photos": [
-      {
-        "name": "barn-dining",
-        "alt": "The dining room of The Barn, with a view of the mountains",
-        "credit": "pepper-collection / Patrick Schwienbacher"
-      },
-      {
-        "name": "mimi-living",
-        "alt": "The living and dining room of Chalet Mimi",
-        "credit": "pepper-collection / Patrick Schwienbacher"
-      },
-      {
-        "name": "mimi-spa",
-        "alt": "The spa pool of Chalet Mimi",
-        "credit": "pepper-collection / Patrick Schwienbacher"
-      },
-      {
-        "name": "falcon-living",
-        "alt": "The living room of The Falcon",
-        "credit": "pepper-collection / Patrick Schwienbacher"
-      },
-      {
-        "name": "toda-living",
-        "alt": "The living room of Chalet Toda with its fireplace",
-        "credit": "pepper-collection / Patrick Schwienbacher"
-      }
-    ],
-    "residences_head": [
-      "The houses",
-      "Chalets and apartments."
-    ],
-    "residences": [
-      {
-        "name": "Chalet Mimi",
-        "type": "chalet",
-        "where": "Oberlech",
-        "guests": 14,
-        "bedrooms": 6,
-        "size_m2": 830,
-        "ski_access": "Ski-in/ski-out",
-        "highlights": [
-          "Indoor pool",
-          "Sauna",
-          "Hot tub",
-          "Butler and private chef"
-        ],
-        "card": "A warm, traditional alpine chalet in Oberlech, with wide mountain views.",
-        "about": "Chalet Mimi in Oberlech comes with a 24/7 butler, an in-house chef, a wine cellar and a heated outdoor hot tub facing the mountains. Besides the master suite, it has three double rooms, two of them with a connected bunk room for children. The spa has a 14 m indoor pool with a cinema screen, a bio sauna and a steam bath.",
-        "photos": [
-          {
-            "name": "house-mimi",
-            "alt": "Chalet Mimi in winter",
-            "credit": "pepper-collection / Stefano Scata"
-          },
-          {
-            "name": "house-mimi-summer",
-            "alt": "Chalet Mimi in summer",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-living",
-            "alt": "The living and dining room of Chalet Mimi",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-spa",
-            "alt": "The spa pool of Chalet Mimi",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-m26",
-            "alt": "Chalet Mimi: the living room in winter",
-            "credit": "pepper-collection / Stefano Scata"
-          },
-          {
-            "name": "mimi-m0",
-            "alt": "Chalet Mimi: the library",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-m10",
-            "alt": "Chalet Mimi: breakfast with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-m25",
-            "alt": "Chalet Mimi: the outdoor hot tub in the snow",
-            "credit": "pepper-collection / Stefano Scata"
-          },
-          {
-            "name": "mimi-m32",
-            "alt": "Chalet Mimi: the master suite",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "mimi-m30",
-            "alt": "Chalet Mimi: the children's room with bunk beds",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "The Barn",
-        "type": "chalet",
-        "where": "Oberlech",
-        "guests": 14,
-        "bedrooms": 7,
-        "bathrooms": 7,
-        "size_m2": "about 1000",
-        "ski_access": "Ski-in/ski-out",
-        "highlights": [
-          "Indoor pool",
-          "Sauna",
-          "Butler and private chef",
-          "Gym"
-        ],
-        "card": "A chalet in Oberlech with a \"northern chic meets alpine luxury\" interior and panoramic mountain views.",
-        "about": "The Barn in Oberlech is designed in a \"northern chic meets alpine luxury\" style and comes with a 24/7 butler and a private chef. Its private spa has a 14 m indoor pool, a sauna, a steam room, a gym and a treatment room. It also has a wine cellar and an entertainment room with a bar that can be used as a cinema, a games room or for private events.",
-        "photos": [
-          {
-            "name": "house-barn",
-            "alt": "The Barn in winter, with the mountains behind",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-barn-summer",
-            "alt": "The Barn in summer",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-dining",
-            "alt": "The dining room of The Barn, with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-barn-bedroom",
-            "alt": "A bedroom of The Barn with a view",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b0",
-            "alt": "The Barn: the lounge around the fireplace",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b1",
-            "alt": "The Barn: breakfast with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b6",
-            "alt": "The Barn: the terrace and its fire pit at dusk",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b13",
-            "alt": "The Barn: the bar",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b34",
-            "alt": "The Barn: a bathtub with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "barn-b63",
-            "alt": "The Barn: the indoor pool",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "The Falcon",
-        "type": "chalet",
-        "where": "Lech centre",
-        "guests": 8,
-        "bedrooms": 4,
-        "bathrooms": 4,
-        "size_m2": 450,
-        "ski_access": "Close to the Schlosskopf lift",
-        "highlights": [
-          "Sauna",
-          "Hot tub",
-          "Gym",
-          "Pets welcome"
-        ],
-        "card": "Close to the centre of Lech, with panoramic views over the village.",
-        "about": "The Falcon lies close to the centre of Lech, a stone's throw from the Schlosskopf chairlift, with panoramic views over the village and the surrounding mountains. It has four individually designed bedrooms, a wine cellar with a tasting area, and a spa with a hot tub and a bio sauna. Pets are welcome.",
-        "photos": [
-          {
-            "name": "house-falcon",
-            "alt": "The Falcon in summer",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-living",
-            "alt": "The living room of The Falcon",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-falcon-bedroom",
-            "alt": "A bedroom of The Falcon",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-falcon-spa",
-            "alt": "The whirlpool of The Falcon",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f5",
-            "alt": "The Falcon: the living room",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f6",
-            "alt": "The Falcon: the kitchen and its breakfast bar",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f18",
-            "alt": "The Falcon: the dining table",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f13",
-            "alt": "The Falcon: the cinema room",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f27",
-            "alt": "The Falcon: a bathroom with a marble bath",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "falcon-f37",
-            "alt": "The Falcon: the spa lounge",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "Arla Luxury Home",
-        "type": "chalet",
-        "where": "Lech centre",
-        "guests": "2–10",
-        "bedrooms": 5,
-        "ski_access": "Direct access to the slopes",
-        "highlights": [
-          "Sauna",
-          "Gym",
-          "Games room"
-        ],
-        "card": "In the heart of Lech, with views of the Omeshorn; three units to take separately or together.",
-        "about": "Arla Luxury Home is a chalet a few minutes' walk from the centre of Lech, with views of the Omeshorn. Its three units can be taken separately or together, for two to ten guests. Guests also have access to the spa and the 23-metre pool of the neighbouring Hotel Aurelio.",
-        "photos": [
-          {
-            "name": "house-arla",
-            "alt": "Arla Luxury Home in winter",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-arla-living",
-            "alt": "A living room at Arla Luxury Home",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-arla-bedroom",
-            "alt": "A bedroom with a view at Arla Luxury Home",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a9",
-            "alt": "Arla Luxury Home: the living room with its fireplace, with a view of Lech",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a25",
-            "alt": "Arla Luxury Home: the dining table, with a view of the village",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a15",
-            "alt": "Arla Luxury Home: the kitchen and the dining table",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a13",
-            "alt": "Arla Luxury Home: the spa with its sauna",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a29",
-            "alt": "Arla Luxury Home: a bedroom with a bathtub",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a20",
-            "alt": "Arla Luxury Home: the house in summer, from above",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "arla-a38",
-            "alt": "Arla Luxury Home: a balcony in winter",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "Chalet Toda",
-        "type": "chalet",
-        "where": "Lech",
-        "guests": 6,
-        "bedrooms": 3,
-        "bathrooms": 2,
-        "size_m2": 245,
-        "ski_access": "A short walk to the lifts",
-        "highlights": [
-          "Sauna",
-          "Pets welcome"
-        ],
-        "card": "A traditional alpine chalet in Lech, with an 18th-century Stube.",
-        "about": "Chalet Toda is a traditional alpine chalet in a quiet yet central spot in Lech, a short walk from the Rüfikopf and Schlegelkopf lifts. The 18th-century Stube seats six at its dining table, every bedroom has a balcony with mountain views, and there is a private sauna. Pets are welcome.",
-        "photos": [
-          {
-            "name": "house-toda",
-            "alt": "Chalet Toda in summer",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-living",
-            "alt": "The living room of Chalet Toda with its fireplace",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-toda-bedroom",
-            "alt": "A bedroom of Chalet Toda",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t11",
-            "alt": "Chalet Toda: the dining room panelled in old wood",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t28",
-            "alt": "Chalet Toda: the kitchen",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t27",
-            "alt": "Chalet Toda: a sitting room",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t15",
-            "alt": "Chalet Toda: a bathroom with a bath",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t16",
-            "alt": "Chalet Toda: the sauna",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t9",
-            "alt": "Chalet Toda: the terrace in winter",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "toda-t7",
-            "alt": "Chalet Toda: a bedroom with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "Skyfall",
-        "type": [
-          "chalet",
-          "apartment"
-        ],
-        "kind": "Chalet and apartments",
-        "where": "St. Christoph",
-        "size_m2": "about 800",
-        "highlights": [
-          "Sauna",
-          "Private lifts between floors"
-        ],
-        "card": "A landmark chalet in the hamlet of St. Christoph, with valley views from its elevated position.",
-        "about": "In the small hamlet of St. Christoph, Skyfall has four apartments of 116 to 275 m² across four floors. The two largest can be combined through private lifts into one 550 m² residence for up to 21 guests. There are saunas, freestanding bathtubs and kitchens designed by David Linley.",
-        "photos": [
-          {
-            "name": "house-skyfall",
-            "alt": "The living room of the penthouse at Skyfall",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "house-skyfall-suite",
-            "alt": "The living room of a suite at Skyfall",
-            "credit": "pepper-collection / Andreas Pollok"
-          },
-          {
-            "name": "skyfall-s143",
-            "alt": "Skyfall: the dining room of the penthouse",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s115",
-            "alt": "Skyfall: the balcony of the penthouse, with a view of the mountains",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s116",
-            "alt": "Skyfall: the kitchen of the penthouse",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s130",
-            "alt": "Skyfall: a bedroom of the penthouse",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s121",
-            "alt": "Skyfall: the sauna, with a view",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s28",
-            "alt": "Skyfall: breakfast in one of the residences",
-            "credit": "pepper-collection / Andreas Pollok"
-          },
-          {
-            "name": "skyfall-s45",
-            "alt": "Skyfall: a living room with its fireplace",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          },
-          {
-            "name": "skyfall-s132",
-            "alt": "Skyfall: a room with bunk beds",
-            "credit": "pepper-collection / Patrick Schwienbacher"
-          }
-        ]
-      },
-      {
-        "name": "ULA Signature",
-        "type": "apartment",
-        "where": "Omesberg, Lech",
-        "guests": 24,
-        "bedrooms": 12,
-        "highlights": [
-          "Indoor pool",
-          "Sauna",
-          "Hot tub"
-        ],
-        "card": "An apartment house in the quiet Omesberg area, looking out to the Omeshorn; the pictures are renderings.",
-        "about": "ULA Signature is an apartment house in the quiet Omesberg area, about five minutes' walk from the centre of Lech. Its six suites and apartments, of about 50 to 150 m², can be taken separately, combined or as a whole house, and several have their own hot tub. The house has a restaurant and a spa with an indoor pool, a sauna and a steam bath. The pictures are renderings.",
-        "renderings": true,
-        "photos": [
-          {
-            "name": "ula-signature-u16",
-            "alt": "ULA Signature: rendering of a living room with a fireplace",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u9",
-            "alt": "ULA Signature: rendering of a living room with a mountain mural",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u22",
-            "alt": "ULA Signature: rendering of a living and dining room",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u12",
-            "alt": "ULA Signature: rendering of a bedroom",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u11",
-            "alt": "ULA Signature: rendering of a bathroom with a free-standing bath",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u34",
-            "alt": "ULA Signature: rendering of the indoor pool",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u38",
-            "alt": "ULA Signature: rendering of the relaxation room with its fireplace",
-            "credit": "KITZMÜLLER Architektur"
-          },
-          {
-            "name": "ula-signature-u18",
-            "alt": "ULA Signature: rendering of the bar",
-            "credit": "KITZMÜLLER Architektur"
-          }
-        ]
-      },
-      {
-        "name": "ULA Easy Stay",
-        "type": "apartment",
-        "where": "Omesberg, Lech",
-        "ski_access": "About 5 min walk to the lifts",
-        "highlights": [
-          "Sauna"
-        ],
-        "card": "A renovated house of six apartments in the quiet Omesberg area.",
-        "about": "ULA Easy Stay is a lovingly renovated house in the quiet Omesberg area, about five minutes' walk from the centre of Lech and the lifts. Each of its six apartments has a living area, a kitchen and a private balcony with mountain views, and the whole house can also be taken as one. Guests share a sauna and an infrared cabin.",
-        "photos": [
-          {
-            "name": "ula-easy-stay-e30",
-            "alt": "ULA Easy Stay: the living room of an apartment",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e2",
-            "alt": "ULA Easy Stay: the house, with a view over Lech",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e19",
-            "alt": "ULA Easy Stay: the dining corner and the living room",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e15",
-            "alt": "ULA Easy Stay: a bedroom with a balcony",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e23",
-            "alt": "ULA Easy Stay: a kitchen",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e38",
-            "alt": "ULA Easy Stay: a balcony with a view of the mountains",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e44",
-            "alt": "ULA Easy Stay: a studio with its bed and dining corner",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e73",
-            "alt": "ULA Easy Stay: a bedroom with a view",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e3",
-            "alt": "ULA Easy Stay: a bathroom",
-            "credit": "pepper-collection"
-          },
-          {
-            "name": "ula-easy-stay-e91",
-            "alt": "ULA Easy Stay: the sauna",
-            "credit": "pepper-collection"
-          }
-        ]
-      }
-    ],
-    "residences_lead": "Swipe through the photos of each house, or tap one to see it full screen."
   },
   {
     "slug": "interalpen-tyrol",
@@ -2317,38 +2204,6 @@
     ]
   },
   {
-    "slug": "kempinski-engelberg",
-    "register": "Kempinski Palace Engelberg",
-    "name": "Kempinski Palace Engelberg",
-    "kind": "Hotel",
-    "type": "hotel",
-    "place": "engelberg",
-    "location": "Engelberg",
-    "card": "A Kempinski hotel in the monastery village below the Titlis.",
-    "ski_access": "Shuttle to the cable car, 3 min",
-    "highlights": [
-      "Ski school contact in the lobby",
-      "Ski boots dried overnight"
-    ],
-    "lead": "A Kempinski hotel in Engelberg, the monastery village below the Titlis. Set up for ski days: a contact of the ski school in the lobby, a locker in the ski cellar for every room, and boots dried for the next morning.",
-    "facts": [
-      "A contact of the ski school in the hotel lobby; private ski and snowboard instructors arranged in the hotel",
-      "Every room has its own locker in the ski cellar, and boots are dried for the next day",
-      "A concierge team to help with outings around Engelberg and Lucerne",
-      "Sister hotel: Frutt Mountain Resort, to extend the stay"
-    ],
-    "why": "For skiers who want an easy trip from Zurich or Lucerne and a hotel that takes care of the ski day.",
-    "links": [
-      {
-        "label": "The hotel on kempinski.com",
-        "url": "https://www.kempinski.com/en/kempinski-palace-engelberg"
-      }
-    ],
-    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Kempinski Palace Engelberg, under the hotel's terms.",
-    "credit": "Kempinski Palace Engelberg",
-    "photos": []
-  },
-  {
     "slug": "rocksresort-laax",
     "register": "rocksresort LAAX",
     "name": "rocksresort",
@@ -2392,6 +2247,38 @@
     "photos": []
   },
   {
+    "slug": "kempinski-engelberg",
+    "register": "Kempinski Palace Engelberg",
+    "name": "Kempinski Palace Engelberg",
+    "kind": "Hotel",
+    "type": "hotel",
+    "place": "engelberg",
+    "location": "Engelberg",
+    "card": "A Kempinski hotel in the monastery village below the Titlis.",
+    "ski_access": "Shuttle to the cable car, 3 min",
+    "highlights": [
+      "Ski school contact in the lobby",
+      "Ski boots dried overnight"
+    ],
+    "lead": "A Kempinski hotel in Engelberg, the monastery village below the Titlis. Set up for ski days: a contact of the ski school in the lobby, a locker in the ski cellar for every room, and boots dried for the next morning.",
+    "facts": [
+      "A contact of the ski school in the hotel lobby; private ski and snowboard instructors arranged in the hotel",
+      "Every room has its own locker in the ski cellar, and boots are dried for the next day",
+      "A concierge team to help with outings around Engelberg and Lucerne",
+      "Sister hotel: Frutt Mountain Resort, to extend the stay"
+    ],
+    "why": "For skiers who want an easy trip from Zurich or Lucerne and a hotel that takes care of the ski day.",
+    "links": [
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/en/kempinski-palace-engelberg"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Kempinski Palace Engelberg, under the hotel's terms.",
+    "credit": "Kempinski Palace Engelberg",
+    "photos": []
+  },
+  {
     "slug": "schlosshotel-kitzbuehel",
     "register": "Schlosshotel Kitzbühel",
     "name": "Schlosshotel Kitzbühel",
@@ -2421,5 +2308,118 @@
     "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Schlosshotel Kitzbühel, under the hotel's terms.",
     "credit": "",
     "photos": []
+  },
+  {
+    "slug": "kempinski-berchtesgaden",
+    "register": "Kempinski Hotel Berchtesgaden",
+    "name": "Kempinski Hotel Berchtesgaden",
+    "kind": "Hotel",
+    "type": "hotel",
+    "place": "berchtesgaden",
+    "location": "Berchtesgaden",
+    "card": "A thousand metres up, looking out over the Berchtesgaden Alps.",
+    "highlights": [
+      "Ski school in the lobby",
+      "Activity Team for outings",
+      "Cross-country trails, 5 min drive"
+    ],
+    "lead": "A thousand metres up, looking out over the Berchtesgaden Alps. A hotel for families who want more from winter than downhill skiing: on the days off the slopes, the hotel's Activity Team arranges the outings.",
+    "facts": [
+      "The local winter sports school plans your lessons with you in the hotel lobby: skiing, snowboarding, cross-country and snowshoeing, with full days in the neighbouring Austrian ski areas",
+      "Cross-country trails a five-minute drive away, and the 2.3 km natural toboggan run at Hochschwarzeck, reached by chairlift",
+      "In summer: e-bike tours to Lake Königssee, golf, and walks to mountain huts"
+    ],
+    "why": "For families who want a week with variety: a morning of lessons, an afternoon on the toboggan run, and a hotel that organises the rest.",
+    "arranges": {
+      "title": "Activities arranged by the hotel.",
+      "text": "On the days off the slopes, the hotel's Activity Team arranges the outings.",
+      "small": "The activities are run by the hotel and by the local providers it works with."
+    },
+    "links": [
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/berchtesgaden"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The stay and its activities are provided by Kempinski Hotel Berchtesgaden, under the hotel's terms.",
+    "credit": "Kempinski Hotel Berchtesgaden",
+    "photos": [
+      {
+        "name": "indoor-pool",
+        "alt": "The indoor pool"
+      },
+      {
+        "name": "exterior",
+        "alt": "Kempinski Hotel Berchtesgaden seen from the garden"
+      },
+      {
+        "name": "berchtesgaden-alps",
+        "alt": "The Berchtesgaden Alps in autumn, with the first snow"
+      }
+    ]
+  },
+  {
+    "slug": "kempinski-muenchen",
+    "register": "Hotel Vier Jahreszeiten Kempinski München",
+    "name": "Hotel Vier Jahreszeiten Kempinski München",
+    "kind": "Hotel",
+    "type": "hotel",
+    "place": "munich",
+    "location": "Maximilianstraße, Munich",
+    "card": "Munich's grand hotel since 1858, on Maximilianstraße.",
+    "highlights": [
+      "The Munich Eras",
+      "Presidential suites"
+    ],
+    "lead": "Munich's grand hotel since 1858, on Maximilianstraße. The natural first or last night of an alpine week: arrive, settle in, and let the city set the tone before the mountains.",
+    "facts": [
+      "On Maximilianstraße since 1858",
+      "Rooms and suites up to the presidential suites",
+      "The hotel's own Munich Eras programme, described below"
+    ],
+    "why": "A calm first night after a long flight, or a last evening in the city before flying home. From here the mountains are a short drive away the next morning.",
+    "arranges": {
+      "title": "The Munich Eras, curated by the hotel.",
+      "text": "Three Eras designed by the hotel's Resident Curator: Royalty, Adventure and Handmade. For example, a private helicopter morning over five royal castles with the first visit of the day to Hohenschwangau Castle; a run through the English Garden with a football legend; brewing at Munich's second-smallest craft brewery.",
+      "small": "A programme of the hotel, delivered by the hotel and its Local Insiders. We build it into your plan."
+    },
+    "brochure": {
+      "file": "assets/stays/kempinski-muenchen/The-Munich-Eras_Hotel-Vier-Jahreszeiten-Kempinski-Muenchen_official-brochure.pdf",
+      "label": "Download the Munich Eras brochure"
+    },
+    "links": [
+      {
+        "label": "Programme page on kempinski.com",
+        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten/experiences"
+      },
+      {
+        "label": "The hotel on kempinski.com",
+        "url": "https://www.kempinski.com/en/hotel-vier-jahreszeiten"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Hotel Vier Jahreszeiten Kempinski München (Hotel Vier Jahreszeiten GmbH), and the Munich Eras are the hotel's own programme, under the hotel's terms.",
+    "credit": "Hotel Vier Jahreszeiten Kempinski München",
+    "photos": [
+      {
+        "name": "lobby",
+        "alt": "The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome"
+      },
+      {
+        "name": "grand-deluxe-room",
+        "alt": "A Grand Deluxe Room"
+      },
+      {
+        "name": "jahreszeiten-bar",
+        "alt": "The Jahreszeiten Bar"
+      },
+      {
+        "name": "pool",
+        "alt": "The indoor pool"
+      },
+      {
+        "name": "junior-suite",
+        "alt": "A Junior Suite with a sitting area"
+      }
+    ]
   }
 ]
