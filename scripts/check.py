@@ -92,6 +92,25 @@ IMG_MAX = 950 * 1024  # scripts/photos.py keeps 800 px under 180 KB, 1600 px und
 failures, warnings, referenced = [], [], set()
 
 
+def courtesy_lines():
+    """EverFlow's own courtesy credit lines ("Photo courtesy of …") and their translations: shown without "©"."""
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    lines = set()
+    partners = json.load(open(os.path.join(root, 'content', 'partners.json'), encoding='utf-8'))
+    partners = partners['partners'] if isinstance(partners, dict) else partners
+    for p in partners:
+        credits = [p.get('credit')] + [ph.get('credit') for ph in p.get('photos', [])]
+        credits += [ph.get('credit') for r in p.get('residences', []) for ph in r.get('photos', [])]
+        lines.update(c for c in credits if c and c.startswith('Photo courtesy'))
+    for lang in ('es', 'pt'):
+        words = json.load(open(os.path.join(root, 'content', 'i18n', f'{lang}.json'), encoding='utf-8'))
+        lines.update(words[c] for c in list(lines) if c in words)
+    return lines
+
+
+COURTESY = courtesy_lines()
+
+
 def resolve(page, ref):
     """Repository path a reference points to: /x from the root, x from the page's folder; dir/ -> dir/index.html."""
     if ref.startswith('/'):
@@ -256,9 +275,9 @@ for page in PAGES:
     for fig in p.stay_figures:
         slug = fig['stay'].split('/')[4]
         caption = fig['caption'].strip()
-        if not caption.startswith(('©', 'Photo courtesy')):
+        if not (caption.startswith('©') or caption in COURTESY):
             failures.append(f'{page}: photo {fig["stay"]} has no credit under it ("© Owner" or "Photo courtesy of …")')
-        elif slug in credits and caption not in credits[slug]:
+        elif slug in credits and caption not in credits[slug] and caption not in COURTESY:
             failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", which is not a credit line of {slug} in content/partners.json')
     visible = html.unescape(TAGS.sub(' ', CODE.sub(' ', text)))
     for m in PRICE.finditer(html.unescape(CODE.sub(' ', text))):  # attributes count: alt, title, meta

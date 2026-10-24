@@ -18,12 +18,17 @@
 <meta property="og:description" content="Cuéntanos sobre el viaje: fechas, grupo, destino. Te presentaremos un plan bien definido.">
 <meta property="og:url" content="https://everflowexperience.com/es/enquire/">
 <meta property="og:image" content="https://everflowexperience.com/assets/img/og/everflow.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Viajes a medida para practicar esquí y disfrutar de la montaña por los Alpes, organizados por un solo anfitrión.">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
 <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/everflow.css?v=6862a23f">
-<script src="/assets/js/everflow.js?v=486441a4" defer></script>
+<link rel="stylesheet" href="/assets/css/everflow.css?v=b0833c8e">
+<script src="/assets/js/everflow.js?v=ab3eb35d" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Ir al contenido</a>
@@ -33,9 +38,9 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Menú</button>
     <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
       <a href="/es/destinations/">Destinos</a>
-      <a href="/stay/">Dónde hospedarse</a>
-      <a href="/experiences/">Experiencias</a>
-      <a href="/about/">Quiénes somos</a>
+      <a href="/stay/">Dónde hospedarse <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (en inglés)</span></a>
+      <a href="/experiences/">Experiencias <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (en inglés)</span></a>
+      <a href="/about/">Quiénes somos <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (en inglés)</span></a>
       <span class="lang-switch"><a href="/enquire/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/es/enquire/" hreflang="es" lang="es" aria-label="Español" aria-current="true">ES</a><a href="/pt/enquire/" hreflang="pt-BR" lang="pt-BR" aria-label="Português">PT</a></span>
       <a class="button button--small" href="/es/enquire/" aria-current="page">Planea un viaje</a>
     </nav>
@@ -53,31 +58,38 @@
 </section>
 <section class="section section--tight">
   <div class="wrap enquire">
-    <form class="form" id="enquiry" novalidate data-email="info@everflowexperience.com" data-whatsapp="491759505075" data-i18n="{&quot;name&quot;:&quot;Nombre&quot;,&quot;email&quot;:&quot;Correo electrónico&quot;,&quot;phone&quot;:&quot;Teléfono&quot;,&quot;destination&quot;:&quot;Destino&quot;,&quot;stay&quot;:&quot;Dónde hospedarse&quot;,&quot;type&quot;:&quot;Tipo de alojamiento&quot;,&quot;house&quot;:&quot;Casa&quot;,&quot;interest&quot;:&quot;Interés principal&quot;,&quot;group&quot;:&quot;Tamaño del grupo&quot;,&quot;dates&quot;:&quot;Fechas&quot;,&quot;subject&quot;:&quot;Consulta sobre un viaje: &quot;,&quot;invalid&quot;:&quot;Por favor, ingresa tu nombre y una dirección de correo electrónico válida.&quot;,&quot;mail&quot;:&quot;Tu aplicación de correo electrónico debería abrirse con el mensaje ya redactado. Envíalo desde ahí. Si no se abre nada, escribe a {email}.&quot;,&quot;wa&quot;:&quot;WhatsApp debería abrirse con el mensaje ya escrito. Envíalo desde ahí.&quot;}">
+    <form class="form" id="enquiry" novalidate data-email="info@everflowexperience.com" data-whatsapp="491759505075" data-i18n="{&quot;name&quot;:&quot;Nombre&quot;,&quot;email&quot;:&quot;Correo electrónico&quot;,&quot;phone&quot;:&quot;Teléfono&quot;,&quot;destination&quot;:&quot;Destino&quot;,&quot;stay&quot;:&quot;Dónde hospedarse&quot;,&quot;type&quot;:&quot;Tipo de alojamiento&quot;,&quot;house&quot;:&quot;Casa&quot;,&quot;interest&quot;:&quot;Interés principal&quot;,&quot;group&quot;:&quot;Tamaño del grupo&quot;,&quot;dates&quot;:&quot;Fechas&quot;,&quot;subject&quot;:&quot;Consulta sobre un viaje: &quot;,&quot;invalid&quot;:&quot;Por favor, ingresa tu nombre y una dirección de correo electrónico válida.&quot;,&quot;mail&quot;:&quot;Tu aplicación de correo electrónico debería abrirse con el mensaje ya redactado. Envíalo desde ahí. Si no se abre nada, escribe a {email}.&quot;,&quot;wa&quot;:&quot;WhatsApp debería abrirse con el mensaje ya escrito. Envíalo desde ahí.&quot;,&quot;name_error&quot;:&quot;Por favor, ingresa tu nombre.&quot;,&quot;email_error&quot;:&quot;Por favor, ingresa una dirección de correo electrónico válida.&quot;,&quot;page&quot;:&quot;Página&quot;,&quot;copied&quot;:&quot;Mensaje copiado&quot;}">
       <div class="field-row">
-        <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-        <div class="field"><label for="f-email">Correo electrónico</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-name">Nombre <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error"><p class="field-error" id="f-name-error" hidden></p></div>
+        <div class="field"><label for="f-email">Correo electrónico <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-error"><p class="field-error" id="f-email-error" hidden></p></div>
       </div>
-      <div class="field"><label for="f-phone">Número de teléfono o de WhatsApp <span class="optional">(opcional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <p class="small form-legend">* obligatorio</p>
+      <div class="field"><label for="f-phone">Número de teléfono o de WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
       <div class="field-row">
         <div class="field"><label for="f-destination">Destino</label><select id="f-destination" name="destination"><option value="">Todavía no lo sé</option><optgroup label="Suiza"><option value="st-moritz">St. Moritz</option><option value="zermatt">Zermatt</option><option value="laax">Laax</option><option value="gstaad">Gstaad</option><option value="engelberg">Engelberg</option></optgroup><optgroup label="Austria"><option value="lech">Lech am Arlberg</option><option value="kitzbuehel">Kitzbühel</option><option value="seefeld">Seefeld in Tirol</option><option value="innsbruck">Innsbruck</option></optgroup><optgroup label="Francia"><option value="megeve">Megève</option><option value="courchevel">Courchevel</option></optgroup><optgroup label="Italia"><option value="cortina">Cortina d'Ampezzo</option></optgroup><optgroup label="Alemania"><option value="berchtesgaden">Berchtesgaden</option><option value="garmisch-partenkirchen">Garmisch-Partenkirchen</option><option value="munich">Múnich</option></optgroup><optgroup label="Argentina"><option value="las-lenas">Las Leñas</option></optgroup></select></div>
         <div class="field"><label for="f-stay">Dónde hospedarse</label><select id="f-stay" name="stay"><option value="">Sin preferencia</option><optgroup label="Suiza"><option value="rocksresort-laax">rocksresort, Laax</option><option value="kempinski-engelberg">Kempinski Palace Engelberg, Engelberg</option></optgroup><optgroup label="Austria"><option value="pepper-collection">pepper-collection, Lech am Arlberg</option><option value="aurelio-lech">Hotel &amp; Chalet Aurelio, Lech am Arlberg</option><option value="rote-wand">Rote Wand Gourmet Hotel, Lech am Arlberg</option><option value="sacher-seefeld">Alpin Resort Sacher Seefeld, Seefeld in Tirol</option><option value="interalpen-tyrol">Interalpen-Hotel Tyrol, Seefeld in Tirol</option><option value="schlosshotel-kitzbuehel">Schlosshotel Kitzbühel, Kitzbühel</option></optgroup><optgroup label="Francia"><option value="chalets-megeve">Chalets in Megève, Megève</option></optgroup><optgroup label="Alemania"><option value="kempinski-berchtesgaden">Kempinski Hotel Berchtesgaden, Berchtesgaden</option><option value="kempinski-muenchen">Hotel Vier Jahreszeiten Kempinski München, Múnich</option></optgroup><optgroup label="Argentina"><option value="apartments-las-lenas">Edificio Atenas, Las Leñas</option></optgroup></select></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-type">Tipo de alojamiento</label><select id="f-type" name="type"><option value="">Todavía no lo sé</option><option value="hotel">Hotel</option><option value="chalet">Chalet</option><option value="apartment">Departamento</option></select></div>
-        <div class="field"><label for="f-house">Casa <span class="optional">(opcional)</span></label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="field"><label for="f-house">Casa</label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label for="f-interest">¿Qué te gustaría hacer?</label><select id="f-interest" name="interest"><option value="">Todavía no lo sé</option><option value="ski-coaching">Clases de esquí y snowboard</option><option value="heli-and-backcountry">Helicóptero y zonas remotas</option><option value="private-guiding">Guías privados: senderismo y ciclismo</option><option value="culinary-and-wine">Gastronomía y vinos</option><option value="wellness-and-spa">Bienestar y spa</option><option value="summer">Verano en los Alpes</option><option value="private-transport">Transporte privado: jet y helicóptero</option><option value="corporate-and-groups">Retiros corporativos y de grupo</option></select></div>
+        <div class="field"><label for="f-interest">¿Qué te gustaría hacer?</label><select id="f-interest" name="interest"><option value="">Todavía no lo sé</option><option value="ski-coaching">Clases de esquí y snowboard</option><option value="heli-and-backcountry">Heliski y fuera de pista</option><option value="private-guiding">Guías privados: senderismo y ciclismo</option><option value="culinary-and-wine">Gastronomía y vinos</option><option value="wellness-and-spa">Bienestar y spa</option><option value="summer">Verano en los Alpes</option><option value="private-transport">Transporte privado: jet y helicóptero</option><option value="corporate-and-groups">Retiros corporativos y de grupo</option></select></div>
         <div class="field"><label for="f-group">Tamaño del grupo</label><select id="f-group" name="group"><option value="">Elige</option><option>1</option><option>2</option><option>3–4</option><option>5–8</option><option>9 o más</option></select></div>
       </div>
       <div class="field"><label for="f-dates">Fechas o temporada</label><input id="f-dates" name="dates" type="text" placeholder="Por ejemplo: del 4 al 11 de febrero, o en Semana Santa"></div>
-      <div class="field"><label for="f-message">¿Algo más? <span class="optional">(opcional)</span></label><textarea id="f-message" name="message" rows="5"></textarea></div>
+      <div class="field"><label for="f-message">¿Algo más?</label><textarea id="f-message" name="message" rows="5"></textarea></div>
       <div class="actions">
         <button class="button" type="submit">Enviar por correo electrónico</button>
         <button class="button button--ghost" type="button" id="send-whatsapp">Enviar por WhatsApp</button>
       </div>
       <p class="status" id="form-status" role="status" aria-live="polite"></p>
+      <div class="fallback" id="mail-fallback" hidden>
+        <p class="small">Si tu aplicación de correo electrónico no se abrió, copia el mensaje y pégalo en un correo electrónico dirigido a <a href="mailto:info@everflowexperience.com">info@everflowexperience.com</a>.</p>
+        <label class="visually-hidden" for="f-copy">Copiar mensaje</label><textarea id="f-copy" rows="8" readonly></textarea>
+        <button class="button button--small button--ghost" type="button" id="copy-message">Copiar mensaje</button>
+      </div>
+      <noscript><p class="small">Este formulario requiere JavaScript. Escríbenos a <a href="mailto:info@everflowexperience.com">info@everflowexperience.com</a> o por WhatsApp.</p></noscript>
       <p class="small">Utilizamos tus datos únicamente para responder a tu consulta. Consulta nuestra <a href="/datenschutz.html#en">política de privacidad</a>.</p>
     </form>
     <aside class="enquire-aside">
@@ -93,7 +105,7 @@
   </div>
 </section>
 </main>
-<footer class="site-footer" lang="es">
+<footer class="site-footer" data-wa-greeting="Hola, te escribo desde everflowexperience.com ({page})." lang="es">
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="/assets/img/brand/wordmark-white-360.png" srcset="/assets/img/brand/wordmark-white-720.png 2x" width="360" height="173" alt="EverFlow Experience" loading="lazy">

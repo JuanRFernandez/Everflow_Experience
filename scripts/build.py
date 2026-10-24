@@ -127,6 +127,11 @@ def out_path(path):
 
 # ---------------------------------------------------------------- text helpers
 
+def lower_first(s):
+    """'Summer in the Alps' -> 'summer in the Alps': only the first letter changes."""
+    return s[:1].lower() + s[1:]
+
+
 def e(s):
     """Escape text for an HTML text node."""
     return html.escape(str(s), quote=False)
@@ -183,6 +188,26 @@ def image_size(path):
         head = f.read(32)
     if head[:8] == b'\x89PNG\r\n\x1a\n':
         return struct.unpack('>II', head[16:24])
+    if head[:2] == b'\xff\xd8':  # JPEG: walk the segments to the frame header
+        with open(path, 'rb') as f:
+            data = f.read()
+        i = 2
+        while i < len(data) - 9:
+            if data[i] != 0xFF:
+                i += 1
+                continue
+            marker = data[i + 1]
+            if marker == 0xFF:
+                i += 1
+                continue
+            if marker in (0xD8, 0x01) or 0xD0 <= marker <= 0xD7:
+                i += 2
+                continue
+            length = struct.unpack('>H', data[i + 2:i + 4])[0]
+            if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                h, w = struct.unpack('>HH', data[i + 5:i + 9])
+                return w, h
+            i += 2 + length
     if head[:4] == b'RIFF' and head[8:12] == b'WEBP':
         kind = head[12:16]
         if kind == b'VP8 ':
@@ -224,7 +249,9 @@ def img(base, alt, sizes, cls='', eager=False):
 
 def credit_text(credit):
     """The line under a photo: "© Owner"; a courtesy line ("Photo courtesy of the owner") stands without "©"."""
-    return credit if credit.startswith(('©', 'Photo courtesy')) else f'© {credit}'
+    if credit.startswith('Photo courtesy'):
+        return tr(credit)
+    return credit if credit.startswith('©') else f'© {credit}'
 
 
 def caption(credit, image=None, links=True):
@@ -411,7 +438,10 @@ def header(current, en_url):
     links = []
     for href, label in NAV:
         cur = ' aria-current="page"' if current.startswith(localized(href)) else ''
-        links.append(f'<a href="{localized(href)}"{cur}>{ui(label)}</a>')
+        mark = ''
+        if LANG != 'en' and not translated(href):  # the page exists in English only: say so
+            mark = f' <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> {ui("(in English)")}</span>'
+        links.append(f'<a href="{localized(href)}"{cur}>{ui(label)}{mark}</a>')
     langs = []
     for code, lang in LANGS.items():
         target = en_url if code == 'en' or translated(en_url) else '/'
@@ -437,7 +467,7 @@ def footer():
     countries = ''.join(f'<li><a href="{localized("/destinations/#" + c["slug"])}">{e(tr(c["name"]))}</a></li>' for c in COUNTRIES)
     whatsapp = ''.join(f'<li><a href="https://wa.me/{w["number"]}" rel="noopener">WhatsApp {e(w["label"])}</a></li>'
                        for w in wa)
-    return f'''<footer class="site-footer" lang="{LANGS[LANG]["html"]}">
+    return f'''<footer class="site-footer" data-wa-greeting="{a(ui("Hello, I am writing from everflowexperience.com ({page}).", page="{page}"))}" lang="{LANGS[LANG]["html"]}">
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="/assets/img/brand/wordmark-white-360.png" srcset="/assets/img/brand/wordmark-white-720.png 2x" width="360" height="173" alt="EverFlow Experience" loading="lazy">
@@ -464,9 +494,26 @@ def footer():
 </footer>'''
 
 
-def page(path, title, description, body, lang=None, index=True, image='assets/img/og/everflow.jpg', data=None):
+# Pages serves the whole branch: the source files and the brochures are kept out of search results
+ROBOTS_OFF = ('/content/', '/scripts/', '/docs/', '/brand/', '/.claude/', '/assets/stays/', '/CLAUDE.md', '/README.md', '/library.example.json')
+PLACE_ALIAS = {'munich': 'München'}  # a stay named in the place's own language counts as named after it
+OG_LOCALE = {'en': 'en_GB', 'es': 'es_AR', 'pt': 'pt_BR'}
+
+
+def og_image_meta(image, alt):
+    """og:image:width, :height and :alt for the preview picture, when its size can be read."""
+    w, h = image_size(os.path.join(ROOT, image))  # fails loudly: every preview picture is a PNG, WebP or JPEG we wrote
+    out = f'\n<meta property="og:image:width" content="{w}">\n<meta property="og:image:height" content="{h}">'
+    if alt:
+        out += f'\n<meta property="og:image:alt" content="{a(alt)}">'
+    return out
+
+
+def page(path, title, description, body, lang=None, index=True, image='assets/img/og/everflow.jpg', data=None, image_alt=None):
     """One page. `path` is the English output path; in another language it is written under es/ or pt/."""
     en_url = url_of(path)
+    if not image_alt:
+        image_alt = tr(SITE['description'])  # the brand picture, or a picture without its own words
     here = out_path(path)
     url = SITE['url'] + url_of(here)
     robots = '' if index else '\n<meta name="robots" content="noindex, follow">'
@@ -492,7 +539,9 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
 <meta property="og:title" content="{a(title)}">
 <meta property="og:description" content="{a(description)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE["url"]}/{image}">
+<meta property="og:image" content="{SITE["url"]}/{image}">{og_image_meta(image, image_alt)}
+<meta property="og:locale" content="{'de_DE' if lang == 'de' else OG_LOCALE[LANG]}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
 <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -642,7 +691,7 @@ def gallery(base_folder, photos, credit, label, title='', enquire=None):
     small = ' gallery--small' if widest < 1000 else ''  # small originals are shown at their size, not stretched
     ask = f' data-enquire-href="{enquire[0]}" data-enquire-label="{a(enquire[1])}"' if enquire else ''
     return f'''<section class="gallery{small}" data-gallery data-title="{a(title)}"{ask} aria-label="{a(label)}">
-  <ul class="gallery-track" tabindex="0">
+  <ul class="gallery-track" tabindex="0" aria-label="{a(label)}">
     {(chr(10) + '    ').join(items)}
   </ul>
   <div class="gallery-controls" hidden>
@@ -749,13 +798,13 @@ def home():
       <a class="button button--ghost-light" href="{localized("/destinations/")}">{ui("Explore destinations")}</a>
     </div>
   </div>
-  <button class="video-toggle" type="button" aria-pressed="false" data-pause="{a(ui("Pause video"))}" data-play="{a(ui("Play video"))}" hidden>{ui("Pause video")}</button>
+  <button class="video-toggle" type="button" data-pause="{a(ui("Pause video"))}" data-play="{a(ui("Play video"))}" hidden>{ui("Pause video")}</button>
 </section>
 <section class="section" id="destinations">
   <div class="wrap">
     {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len([p for p in PLACES if on_map(p)]), m=len({p['country'] for p in PLACES if on_map(p)})) + (' ' + beyond_alps(link=True) if beyond_alps() else ''), more=(localized("/destinations/"), ui("All destinations")))}
     <div class="gallery gallery--cards" data-gallery aria-label="{a(ui("Featured destinations"))}">
-      <ul class="gallery-track" tabindex="0">
+      <ul class="gallery-track" tabindex="0" aria-label="{a(ui("Featured destinations"))}">
 {row}
       </ul>
       <div class="gallery-controls" hidden>
@@ -857,7 +906,10 @@ def static_map():
         ]
         box, tx, ty, anchor = next((o for o in options if fits(o[0])), options[0])
         taken.append(box)
+        bx1, by1, bx2, by2 = box  # a transparent area behind the dot and the label keeps the link easy to tap
         places.append(f'<a class="map-place" href="{localized("/destinations/" + p["slug"] + "/")}">'
+                      f'<circle class="map-hit" cx="{x:.1f}" cy="{y:.1f}" r="{r + 12}" fill="transparent"/>'
+                      f'<rect class="map-hit" x="{bx1 - 4:.1f}" y="{by1 - 4:.1f}" width="{bx2 - bx1 + 8:.1f}" height="{by2 - by1 + 8:.1f}" fill="transparent"/>'
                       f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}"/>'
                       f'<text x="{tx:.1f}" y="{ty:.1f}" text-anchor="{anchor}">{e(label)}</text></a>')
     return (f'<svg class="map-svg" viewBox="0 0 {MAP_W} {MAP_H}" role="group" aria-label="{a(ui("On the map"))}">'
@@ -899,14 +951,15 @@ def destinations_index():
 <section class="section section--alt" id="map-section">
   <div class="wrap">
     {section_head(ui("On the map"), ui("Every place we host in the Alps.") if off_map else ui("Every place we host."))}
-    <div class="map" id="map" data-pins="{pins_json}">
+    <div class="map" id="map" data-pins="{pins_json}" data-zoom-in="{a(ui("Zoom in"))}" data-zoom-out="{a(ui("Zoom out"))}">
       <div class="map-static">{static_map()}</div>
     </div>
     {beyond_note}
     <div class="map-live">
       <p class="small"><strong>{ui("Interactive map")}.</strong> {t(consent)}</p>
-      <button class="button button--ghost" id="map-load" type="button">{ui("Open the interactive map")}</button>
+      <button class="button button--ghost" id="map-load" type="button" data-loading="{a(ui("Loading…"))}" data-error="{a(ui("The map could not be loaded."))}">{ui("Open the interactive map")}</button>
     </div>
+    <noscript><p class="small">{ui("The interactive map needs JavaScript.")}</p></noscript>
   </div>
 </section>
 {cta_band()}'''
@@ -932,7 +985,7 @@ def place_page(p):
         pictures = f'''<section class="section section--tight">
   <div class="wrap">
     <div class="gallery" data-gallery data-title="{a(name)}" data-close="{a(ui("Close"))}" data-prev-label="{a(ui("Previous photo"))}" data-next-label="{a(ui("Next photo"))}" role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
-      <ul class="gallery-track" tabindex="0">{items}</ul>
+      <ul class="gallery-track" tabindex="0" aria-label="{a(ui("Photos of {name}", name=name))}">{items}</ul>
       <div class="gallery-controls" hidden>
         <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo"))}">←</button>
         <span class="gallery-count" aria-live="polite">01 / {num(len(p["gallery"]))}</span>
@@ -967,9 +1020,9 @@ def place_page(p):
 {pictures}
 <section class="section section--alt">
   <div class="wrap qa">
-    <div class="qa-item"><h2>{ui("Who is it for?")}</h2><p>{t(tr(p["who"]))}</p></div>
-    <div class="qa-item"><h2>{ui("When to go?")}</h2><p>{t(tr(p["when"]))}</p></div>
-    <div class="qa-item"><h2>{ui("How do you get there?")}</h2><p>{t(tr(p["how"]))}</p></div>
+    <div class="qa-item"><h2>{ui("Who {name} is for", name=name)}</h2><p>{t(tr(p["who"]))}</p></div>
+    <div class="qa-item"><h2>{ui("When to go to {name}", name=name)}</h2><p>{t(tr(p["when"]))}</p></div>
+    <div class="qa-item"><h2>{ui("How to get to {name}", name=name)}</h2><p>{t(tr(p["how"]))}</p></div>
   </div>
 </section>
 <section class="section" id="stay">
@@ -982,9 +1035,11 @@ def place_page(p):
 {guides_section([g for g in GUIDES if p["slug"] in g.get("related", [])])}
 {close_html}
 {cta_band(p["slug"])}'''
-    return page(f'destinations/{p["slug"]}/index.html', f'{name} — EverFlow Experience',
-                f'{name}, {cname}: {tr(p["tagline"])}', body,
-                image=variants(p['image']['src'])[-1][2] if p.get('image') else 'assets/img/og/everflow.jpg')
+    title = tr(p['seo_title']) if p.get('seo_title') else ui('Ski trips to {name} — EverFlow Experience', name=name)
+    description = tr(p['seo_description']) if p.get('seo_description') else f'{tr(p["tagline"])} ' + ui('Planned by one host, with the hotels and chalets we know.')
+    return page(f'destinations/{p["slug"]}/index.html', title, description, body,
+                image=variants(p['image']['src'])[-1][2] if p.get('image') else 'assets/img/og/everflow.jpg',
+                image_alt=tr(p['image']['alt']) if p.get('image') else None)
 
 
 def house_block(p, r):
@@ -998,7 +1053,7 @@ def house_block(p, r):
         items = ''.join(f'<li class="gallery-item">{figure(base + ph["name"], ph["alt"], sizes, ph.get("credit", p["credit"]))}</li>'
                         for ph in phs)
         media = f'''<div class="gallery gallery--mini" data-gallery data-title="{a(r["name"])}" data-enquire-href="{href}" data-enquire-label="{a(label)}" role="group" aria-label="{a("Photos of " + r["name"])}">
-    <ul class="gallery-track" tabindex="0">{items}</ul>
+    <ul class="gallery-track" tabindex="0" aria-label="{a("Photos of " + r["name"])}">{items}</ul>
     <div class="gallery-controls" hidden>
       <button type="button" class="gallery-button" data-prev aria-label="Previous photo of {a(r["name"])}">←</button>
       <span class="gallery-count" aria-live="polite">01 / {num(len(phs))}</span>
@@ -1102,11 +1157,11 @@ def partner_page(p):
 <section class="section">
   <div class="wrap split split--text">
     <div>
-      {section_head("In short", "What to know.")}
+      {section_head("In short", f"{p['name']}: what to know.")}
       <ul class="ticks">{facts}</ul>
     </div>
     <div>
-      {section_head("Why we send guests here", "Who it suits.", p["why"], level=2)}
+      {section_head("Why we send guests here", f"{p['name']}: who {'they suit' if p['kind'].split()[0].lower().endswith('s') else 'it suits'}.", p["why"], level=2)}
     </div>
   </div>
 </section>
@@ -1124,8 +1179,22 @@ def partner_page(p):
 {sib_html}
 {cta_band(p["place"], p["slug"])}'''
     image = variants(f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}')[-1][2] if p.get('photos') else 'assets/img/og/everflow.jpg'
-    return page(f'stay/{p["slug"]}/index.html', f'{p["name"]} — EverFlow Experience',
-                f'{p["name"]}, {p["location"]}: {p["card"]}', body, image=image)
+    place = PLACE[p['place']]['name']
+    words = [w for w in re.split(r'[\s,]+', place + ' ' + PLACE_ALIAS.get(p['place'], '')) if len(w) >= 4]
+    named = any(w.lower() in p['name'].lower() for w in words)  # "Chalets in Megève", "Sacher Seefeld", "Kempinski München"
+    kinds = [k.rstrip('s') for k in re.split(r'\W+', p['kind'].lower()) if k and k != 'and']
+    kind_in_name = any(k in p['name'].lower() for k in kinds)  # "Rote Wand Gourmet Hotel"
+    if named:
+        title = f'{p["name"]} — EverFlow Experience'
+    elif kind_in_name:
+        title = f'{p["name"]} in {place} — EverFlow Experience'
+    else:
+        title = f'{p["name"]}: {p["kind"].lower()} in {place} — EverFlow Experience'
+    if len(title) > 70:  # a long name and kind: the brand goes, the words a guest types stay
+        title = title.replace(' — EverFlow Experience', '')
+    description = p['card'] if named else f'{p["name"]}, {p["location"]}: {p["card"]}'
+    return page(f'stay/{p["slug"]}/index.html', title, description, body, image=image,
+                image_alt=tr(p['photos'][0]['alt']) if p.get('photos') else None)
 
 
 def experiences_page():
@@ -1137,7 +1206,7 @@ def experiences_page():
     <p class="feature-meta"><span class="step-num">{num(i)}</span> {e(x["status"])}</p>
     <h2>{e(x["title"])}</h2>
     <p>{t(x["text"])}</p>
-    <a class="arrow-link" href="{enquire_url(interest=x["slug"])}">Plan a trip with {e(x["title"].split(":")[0].lower())}</a>
+    <a class="arrow-link" href="{enquire_url(interest=x["slug"])}">Plan a trip with {e(lower_first(x["title"].split(":")[0]))}</a>
   </div>
 </article>''')
     h = PAGES['home']
@@ -1239,7 +1308,8 @@ def guide_page(g):
 {guides_section([x for x in GUIDES if x is not g], "More guides", "Read on.")}
 {cta_band(interest=g.get("interest"))}'''
     return page(f'guides/{g["slug"]}/index.html', f'{g["name"]} — EverFlow Experience', g['description'], body,
-                image=variants(base)[-1][2])
+                image=variants(base)[-1][2],
+                image_alt=tr(PLACE[im['place']]['image']['alt']) if im.get('place') else im.get('alt'))
 
 
 def enquire_page():
@@ -1268,36 +1338,45 @@ def enquire_page():
             'subject': ui('Trip enquiry: '), 'invalid': ui('Please add your name and a valid e-mail address.'),
             'mail': tr('Your e-mail app should open with the message ready. Send it from there. If nothing opens, write to {email}.'),
             'wa': ui('WhatsApp should open with the message ready. Send it from there.'),
+            'name_error': ui('Please enter your name.'), 'email_error': ui('Please enter a valid e-mail address.'),
+            'page': ui('Page'), 'copied': ui('Message copied'),
         }, ensure_ascii=False, separators=(',', ':'))) + '"'
-    optional = f'<span class="optional">{e(ui("(optional)"))}</span>'
+    req = '<span class="req" aria-hidden="true">*</span>'
     body = f'''{page_head(tr(en["eyebrow"]), tr(en["h1"]), tr(en["lead"]))}
 <section class="section section--tight">
   <div class="wrap enquire">
     <form class="form" id="enquiry" novalidate data-email="{SITE["email"]}" data-whatsapp="{wa[0]["number"]}"{words}>
       <div class="field-row">
-        <div class="field"><label for="f-name">{ui("Name")}</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-        <div class="field"><label for="f-email">{ui("E-mail")}</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-name">{ui("Name")} {req}</label><input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error"><p class="field-error" id="f-name-error" hidden></p></div>
+        <div class="field"><label for="f-email">{ui("E-mail")} {req}</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-error"><p class="field-error" id="f-email-error" hidden></p></div>
       </div>
-      <div class="field"><label for="f-phone">{ui("Phone or WhatsApp")} {optional}</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <p class="small form-legend">{ui("* required")}</p>
+      <div class="field"><label for="f-phone">{ui("Phone or WhatsApp")}</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
       <div class="field-row">
         <div class="field"><label for="f-destination">{ui("Destination")}</label><select id="f-destination" name="destination">{"".join(dest_opts)}</select></div>
         <div class="field"><label for="f-stay">{ui("Where to stay")}</label><select id="f-stay" name="stay">{"".join(stay_opts)}</select></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-type">{ui("Type of stay")}</label><select id="f-type" name="type">{"".join(type_opts)}</select></div>
-        <div class="field"><label for="f-house">{ui("House")} {optional}</label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="field"><label for="f-house">{ui("House")}</label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-interest">{ui("What would you like to do?")}</label><select id="f-interest" name="interest">{"".join(int_opts)}</select></div>
         <div class="field"><label for="f-group">{ui("Group size")}</label><select id="f-group" name="group">{"".join(group)}</select></div>
       </div>
       <div class="field"><label for="f-dates">{ui("Dates or season")}</label><input id="f-dates" name="dates" type="text" placeholder="{a(ui("For example: 4 to 11 February, or Easter"))}"></div>
-      <div class="field"><label for="f-message">{ui("Anything else")} {optional}</label><textarea id="f-message" name="message" rows="5"></textarea></div>
+      <div class="field"><label for="f-message">{ui("Anything else")}</label><textarea id="f-message" name="message" rows="5"></textarea></div>
       <div class="actions">
         <button class="button" type="submit">{ui("Send by e-mail")}</button>
         <button class="button button--ghost" type="button" id="send-whatsapp">{ui("Send on WhatsApp")}</button>
       </div>
       <p class="status" id="form-status" role="status" aria-live="polite"></p>
+      <div class="fallback" id="mail-fallback" hidden>
+        <p class="small">{t(tr("If your e-mail app did not open, copy the message and paste it into an e-mail to {email}.").replace("{email}", f"[{SITE['email']}](mailto:{SITE['email']})"))}</p>
+        <label class="visually-hidden" for="f-copy">{ui("Copy message")}</label><textarea id="f-copy" rows="8" readonly></textarea>
+        <button class="button button--small button--ghost" type="button" id="copy-message">{ui("Copy message")}</button>
+      </div>
+      <noscript><p class="small">{t(tr("This form needs JavaScript. Write to {email} or on WhatsApp.").replace("{email}", f"[{SITE['email']}](mailto:{SITE['email']})"))}</p></noscript>
       <p class="small">{t(tr(en["privacy"]))}</p>
     </form>
     <aside class="enquire-aside">
@@ -1484,7 +1563,8 @@ def render_all():
                 LANG = 'en'
     indexable = [p for p in out if p not in ('404.html', 'impressum.html', 'datenschutz.html')]
     out['sitemap.xml'] = sitemap(sorted(indexable, key=lambda p: (p != 'index.html', p)))
-    out['robots.txt'] = f'User-agent: *\nAllow: /\n\nSitemap: {SITE["url"]}/sitemap.xml\n'
+    out['robots.txt'] = ('User-agent: *\nAllow: /\n' + ''.join(f'Disallow: {x}\n' for x in ROBOTS_OFF)
+                         + f'\nSitemap: {SITE["url"]}/sitemap.xml\n')
     return out
 
 
