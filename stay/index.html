@@ -6,20 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://tile.openstreetmap.org; style-src 'self'; script-src 'self'; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <title>Where to stay — EverFlow Experience</title>
-<meta name="description" content="The hotels and chalets where EverFlow guests stay across the Alps, each presented with the provider&#x27;s own photos and credit.">
+<meta name="description" content="The hotels, chalets and apartments where EverFlow guests stay, with their key facts and the provider&#x27;s own photos and credit.">
 <link rel="canonical" href="https://everflowexperience.com/stay/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EverFlow Experience">
 <meta property="og:title" content="Where to stay — EverFlow Experience">
-<meta property="og:description" content="The hotels and chalets where EverFlow guests stay across the Alps, each presented with the provider&#x27;s own photos and credit.">
+<meta property="og:description" content="The hotels, chalets and apartments where EverFlow guests stay, with their key facts and the provider&#x27;s own photos and credit.">
 <meta property="og:url" content="https://everflowexperience.com/stay/">
 <meta property="og:image" content="https://everflowexperience.com/assets/img/og/everflow.jpg">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
 <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/everflow.css?v=40157c18">
-<script src="/assets/js/everflow.js?v=21434bcf" defer></script>
+<link rel="stylesheet" href="/assets/css/everflow.css?v=6862a23f">
+<script src="/assets/js/everflow.js?v=dade7f03" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -42,386 +42,431 @@
   <div class="wrap">
     
     <p class="eyebrow">Where our guests stay</p>
-    <h1>Hotels and chalets we know.</h1>
+    <h1>Hotels, chalets and apartments we know.</h1>
     <p class="lead">Every address is the provider's own. We match it to your group and your days on the mountain, and arrange the stay as part of one plan.</p>
     
   </div>
 </section>
-<div class="wrap"><p class="jump"><a href="#hotels">Hotels</a> · <a href="#chalets">Chalets</a></p></div>
-<section class="section section--tight" id="hotels">
+<section class="section section--tight" id="stays">
   <div class="wrap">
-    <div class="section-head"><p class="eyebrow">Hotels</p><h2>Hotels we know well.</h2><p class="lead">From Munich's grand hotel to the spa resorts of the Seefeld plateau.</p></div>
-    <div class="grid">
-<article class="card">
+    <div class="stay-filters" data-stay-filters hidden>
+      <div class="chip-group" role="group" aria-label="Type of stay"><button type="button" class="chip-button" data-filter-type="" aria-pressed="true">All</button><button type="button" class="chip-button" data-filter-type="hotel" aria-pressed="false">Hotels</button><button type="button" class="chip-button" data-filter-type="chalet" aria-pressed="false">Chalets</button><button type="button" class="chip-button" data-filter-type="apartment" aria-pressed="false">Apartments</button></div>
+      <div class="field field--inline"><label for="f-place">Destination</label><select id="f-place" data-filter-place><option value="">All destinations</option><optgroup label="Germany"><option value="munich">Munich</option><option value="berchtesgaden">Berchtesgaden</option></optgroup><optgroup label="Austria"><option value="kitzbuehel">Kitzbühel</option><option value="lech">Lech am Arlberg</option><option value="seefeld">Seefeld in Tirol</option></optgroup><optgroup label="Switzerland"><option value="engelberg">Engelberg</option></optgroup><optgroup label="France"><option value="megeve">Megève</option></optgroup></select></div>
+      <p class="stay-count" data-filter-count aria-live="polite" data-one="1 stay" data-many="{n} stays">38 stays</p>
+      <button type="button" class="button button--small button--ghost" data-filter-clear hidden>Clear filters</button>
+    </div>
+    <div class="grid" id="stay-grid">
+<article class="card" data-type="hotel" data-place="munich">
   <div class="card-media"><figure><img src="/assets/img/stays/kempinski-muenchen/lobby-1600.webp" srcset="/assets/img/stays/kempinski-muenchen/lobby-800.webp 800w, /assets/img/stays/kempinski-muenchen/lobby-1600.webp 1000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1000" height="667" alt="The lobby of Hotel Vier Jahreszeiten Kempinski München under its glass dome" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Hotel Vier Jahreszeiten Kempinski München</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Maximilianstraße, Munich, Germany</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/kempinski-muenchen/">Hotel Vier Jahreszeiten Kempinski München</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/kempinski-muenchen/">Hotel Vier Jahreszeiten Kempinski München</a></h2>
+    <ul class="chips"><li class="chip">The Munich Eras</li><li class="chip">Presidential suites</li></ul>
     <p>Munich's grand hotel since 1858, on Maximilianstraße.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=munich&amp;stay=kempinski-muenchen&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Hotel Vier Jahreszeiten Kempinski München</span></a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-type="hotel" data-place="berchtesgaden">
   <div class="card-media"><figure><img src="/assets/img/stays/kempinski-berchtesgaden/indoor-pool-1600.webp" srcset="/assets/img/stays/kempinski-berchtesgaden/indoor-pool-800.webp 800w, /assets/img/stays/kempinski-berchtesgaden/indoor-pool-1600.webp 1000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1000" height="667" alt="The indoor pool" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Kempinski Hotel Berchtesgaden</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Berchtesgaden, Germany</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/kempinski-berchtesgaden/">Kempinski Hotel Berchtesgaden</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/kempinski-berchtesgaden/">Kempinski Hotel Berchtesgaden</a></h2>
+    <ul class="chips"><li class="chip">Ski school in the lobby</li><li class="chip">Activity Team for outings</li><li class="chip">Cross-country trails, 5 min drive</li></ul>
     <p>A thousand metres up, looking out over the Berchtesgaden Alps.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=berchtesgaden&amp;stay=kempinski-berchtesgaden&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Kempinski Hotel Berchtesgaden</span></a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-type="hotel" data-place="lech">
   <div class="card-media"><figure><img src="/assets/img/stays/rote-wand/hotel-summer-2400.webp" srcset="/assets/img/stays/rote-wand/hotel-summer-800.webp 800w, /assets/img/stays/rote-wand/hotel-summer-1600.webp 1600w, /assets/img/stays/rote-wand/hotel-summer-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Rote Wand Gourmet Hotel and the church of Zug in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Rote Wand Gourmet Hotel / Robert Rieger</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Zug, Lech am Arlberg, Austria</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/rote-wand/">Rote Wand Gourmet Hotel</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/rote-wand/">Rote Wand Gourmet Hotel</a></h2>
+    <ul class="chips"><li class="chip">Gondola to Lech Zürs</li><li class="chip">Heated indoor and outdoor pool</li><li class="chip">1,500 m² spa</li></ul>
     <p>A hotel known for its cooking, in Zug just outside Lech.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=rote-wand&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Rote Wand Gourmet Hotel</span></a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-type="hotel" data-place="seefeld">
   <div class="card-media"><figure><img src="/assets/img/stays/sacher-seefeld/pool-winter-2400.webp" srcset="/assets/img/stays/sacher-seefeld/pool-winter-800.webp 800w, /assets/img/stays/sacher-seefeld/pool-winter-1600.webp 1600w, /assets/img/stays/sacher-seefeld/pool-winter-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="The heated outdoor pool of Alpin Resort Sacher Seefeld in winter" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Alpin Resort Sacher Seefeld</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Seefeld in Tirol, Austria</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/sacher-seefeld/">Alpin Resort Sacher Seefeld</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/sacher-seefeld/">Alpin Resort Sacher Seefeld</a></h2>
+    <ul class="chips"><li class="chip">Infinity pool and bathing lake</li><li class="chip">Signature suites with a private sauna</li><li class="chip">81 rooms and suites</li></ul>
     <p>Sacher in the mountains: a resort with a 4,700 m² spa on the Seefeld plateau.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=seefeld&amp;stay=sacher-seefeld&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Alpin Resort Sacher Seefeld</span></a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-141-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-141-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-141-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet 141: the living room, with a view over Megève" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Le Jaillet</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-141">Chalet 141</a></h2>
+    <ul class="card-facts"><li>12–16 guests</li><li>7 bedrooms</li><li>585 m²</li></ul>
+    <ul class="chips"><li class="chip">10 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Hammam</li></ul>
+    <p>At Le Jaillet, overlooking the village, with views of Mont Blanc.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20141&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet 141</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-alexandra-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-alexandra-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-alexandra-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Alexandra: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-alexandra">Chalet Alexandra</a></h2>
+    <ul class="card-facts"><li>8–14 guests</li><li>7 bedrooms</li><li>7 bathrooms</li><li>420 m²</li></ul>
+    <ul class="chips"><li class="chip">2 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>In the heart of Megève's historic pedestrian centre.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Alexandra&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Alexandra</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-allobroges-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-allobroges-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-allobroges-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Allobroges: the living room by the fireplace" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-allobroges">Chalet Allobroges</a></h2>
+    <ul class="card-facts"><li>7–14 guests</li><li>7 bedrooms</li><li>450 m²</li></ul>
+    <ul class="chips"><li class="chip">5 min walk to the slopes</li><li class="chip">Sauna</li><li class="chip">Hot tub</li></ul>
+    <p>A contemporary chalet with its living area around the fireplace, close to the village shops.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Allobroges&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Allobroges</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-altai-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-altai-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-altai-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Altai: the chalet in the snow" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Near the village</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-altai">Chalet Altai</a></h2>
+    <ul class="card-facts"><li>12–16 guests</li></ul>
+    <ul class="chips"><li class="chip">5 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>Two chalets taken together, with views of the Mont d'Arbois and Rochebrune slopes.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Altai&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Altai</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-apollo-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-apollo-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-apollo-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Apollo: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · A quiet area near Megève</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-apollo">Chalet Apollo</a></h2>
+    <ul class="card-facts"><li>9–14 guests</li><li>6 bedrooms</li><li>6 bathrooms</li><li>750 m²</li></ul>
+    <ul class="chips"><li class="chip">Pool</li><li class="chip">Sauna</li><li class="chip">Hot tub</li></ul>
+    <p>A chalet in a quiet area of Demi-Quartier, near Megève, with a private cinema room.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Apollo&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Apollo</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-ariana-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-ariana-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-ariana-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Ariana: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-ariana">Chalet Ariana</a></h2>
+    <ul class="card-facts"><li>7 bedrooms</li></ul>
+    <ul class="chips"><li class="chip">2 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>In a picturesque street in the very centre of the village.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Ariana&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Ariana</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-des-soeurs-2400.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-des-soeurs-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-des-soeurs-1600.webp 1600w, /assets/img/stays/chalets-megeve/house-chalet-des-soeurs-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Des Soeurs: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-des-soeurs">Chalet Des Soeurs</a></h2>
+    <ul class="card-facts"><li>14–16 guests</li><li>7 bedrooms</li><li>410 m²</li></ul>
+    <ul class="chips"><li class="chip">2 min walk to the slopes</li><li class="chip">Pool</li><li class="chip">Sauna</li></ul>
+    <p>In the quiet Clos des Rennes, in the heart of the village, a few metres from the Chamois lifts.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Des%20Soeurs&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Des Soeurs</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Etoile du Nord: a view over Megève" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Megève</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-etoile-du-nord">Chalet Etoile du Nord</a></h2>
+    <ul class="card-facts"><li>6–10 guests</li><li>4 bedrooms</li><li>4 bathrooms</li><li>340 m²</li></ul>
+    <ul class="chips"><li class="chip">10 min walk to the slopes</li><li class="chip">Gym</li></ul>
+    <p>Large bay windows onto the mountains and the village, eight minutes' walk from the centre.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Etoile%20du%20Nord&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Etoile du Nord</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-hermine-2400.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-hermine-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-hermine-1600.webp 1600w, /assets/img/stays/chalets-megeve/house-chalet-hermine-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Hermine: the chalet in winter" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Near the Calvaire</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-hermine">Chalet Hermine</a></h2>
+    <ul class="card-facts"><li>6–14 guests</li><li>6 bedrooms</li><li>6 bathrooms</li><li>280 m²</li></ul>
+    <ul class="chips"><li class="chip">5 min drive to the slopes</li><li class="chip">Sauna</li><li class="chip">Hot tub</li></ul>
+    <p>In a quiet neighbourhood near the Calvaire, with views of Mont d'Arbois.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Hermine&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Hermine</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-le-lodge-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-le-lodge-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-le-lodge-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Le Lodge: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Near the Chamois lifts</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-le-lodge">Chalet Le Lodge</a></h2>
+    <ul class="card-facts"><li>14–18 guests</li><li>8 bedrooms</li><li>8 bathrooms</li><li>770 m²</li></ul>
+    <ul class="chips"><li class="chip">5 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>A stone's throw from the village and the Chamois ski lifts, on five levels served by a lift.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Le%20Lodge&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Le Lodge</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-penelope-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-penelope-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-penelope-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Penelope: the chalet in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Megève</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-penelope">Chalet Penelope</a></h2>
+    <ul class="card-facts"><li>8 guests</li><li>4 bedrooms</li><li>4 bathrooms</li><li>180 m²</li></ul>
+    <ul class="chips"><li class="chip">6 min walk to the slopes</li></ul>
+    <p>Chic and modern, five minutes' walk from the village centre.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Penelope&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Penelope</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-whymper-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-whymper-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-whymper-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Whymper: the chalet in winter" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Near the Chamois lift</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-whymper">Chalet Whymper</a></h2>
+    <ul class="card-facts"><li>10–12 guests</li><li>6 bedrooms</li><li>370 m²</li></ul>
+    <ul class="chips"><li class="chip">3 min walk to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>Five minutes' walk from the village centre, with the Chamois ski lift within walking distance.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Whymper&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Whymper</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="apartment" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-lodge-elan-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-lodge-elan-800.webp 800w, /assets/img/stays/chalets-megeve/house-lodge-elan-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Lodge Elan: the terrace, with a view" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Apartment · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#lodge-elan">Lodge Elan</a></h2>
+    <ul class="card-facts"><li>4–8 guests</li><li>4 bedrooms</li><li>191 m²</li></ul>
+    <ul class="chips"><li class="chip">6 min walk to the slopes</li><li class="chip">Hammam</li><li class="chip">Gym</li></ul>
+    <p>An apartment in the centre of the village, close to restaurants, shops and the Chamois lifts.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Lodge%20Elan&amp;type=apartment">Enquire about this apartment<span class="visually-hidden">: Lodge Elan</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="apartment" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-lodge-manou-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-lodge-manou-800.webp 800w, /assets/img/stays/chalets-megeve/house-lodge-manou-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Lodge Manou: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Apartment · Village centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#lodge-manou">Lodge Manou</a></h2>
+    <ul class="card-facts"><li>6–10 guests</li><li>4 bedrooms</li><li>165 m²</li></ul>
+    <ul class="chips"><li class="chip">3 min walk to the slopes</li><li class="chip">Hammam in the residence</li><li class="chip">Gym in the residence</li></ul>
+    <p>An apartment in the centre with 36 m² of balcony space, a few minutes from the ski lift.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Lodge%20Manou&amp;type=apartment">Enquire about this apartment<span class="visually-hidden">: Lodge Manou</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-sun-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-sun-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-sun-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Sun: the chalet at night" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-sun">Chalet Sun</a></h2>
+    <ul class="card-facts"><li>12–18 guests</li><li>8 bedrooms</li><li>1,100 m²</li></ul>
+    <ul class="chips"><li class="chip">Ski-in/ski-out</li><li class="chip">Indoor pool</li><li class="chip">Hammam</li></ul>
+    <p>At the top of the Calvaire path at Mont d'Arbois, with views of the valley.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Sun&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Sun</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-cham-louka-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-cham-louka-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-cham-louka-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Cham Lou&#x27;Ka: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-cham-louka">Chalet Cham Lou'Ka</a></h2>
+    <ul class="card-facts"><li>10–14 guests</li><li>6 bedrooms</li><li>640 m²</li></ul>
+    <ul class="chips"><li class="chip">3 min drive to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>At Mont d'Arbois, with a master suite that takes up the whole top floor.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Cham%20Lou%27Ka&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Cham Lou'Ka</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-des-sens-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-des-sens-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-des-sens-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet des Sens: the chalet at night" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-des-sens">Chalet des Sens</a></h2>
+    <ul class="card-facts"><li>10–14 guests</li><li>6 bedrooms</li><li>890 m²</li></ul>
+    <ul class="chips"><li class="chip">Ski-in/ski-out</li><li class="chip">Pool</li><li class="chip">Hammam</li></ul>
+    <p>At Mont d'Arbois, where modern design meets the traditional alpine chalet.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20des%20Sens&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet des Sens</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-divinity-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-divinity-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-divinity-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Divinity: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-divinity">Chalet Divinity</a></h2>
+    <ul class="card-facts"><li>5–10 guests</li><li>5 bedrooms</li><li>570 m²</li></ul>
+    <ul class="chips"><li class="chip">Ski-in/ski-out</li><li class="chip">Pool</li><li class="chip">Hammam</li></ul>
+    <p>At Mont d'Arbois, with a view of the Rochebrune range.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Divinity&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Divinity</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-mariva-800.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-mariva-800.webp 640w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="640" height="427" alt="Chalet Mariva: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-mariva">Chalet Mariva</a></h2>
+    <ul class="card-facts"><li>10–14 guests</li><li>6 bedrooms</li><li>480 m²</li></ul>
+    <ul class="chips"><li class="chip">5 min walk to the slopes</li><li class="chip">Pool</li><li class="chip">Hammam</li></ul>
+    <p>Near the Mont d'Arbois golf course, in a green setting with views of Rochebrune.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Mariva&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Mariva</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-olivier-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-olivier-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-olivier-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Olivier: the living room" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Mont d'Arbois</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-olivier">Chalet Olivier</a></h2>
+    <ul class="card-facts"><li>12–14 guests</li><li>6 bedrooms</li><li>6 bathrooms</li></ul>
+    <ul class="chips"><li class="chip">3 min drive to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>A quiet chalet at Mont d'Arbois, with mountain views and a spa.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Olivier&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Olivier</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-black-lodge-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-black-lodge-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-black-lodge-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Black Lodge: the chalet and its hot tub in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Le Villaret</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-black-lodge">Chalet Black Lodge</a></h2>
+    <ul class="card-facts"><li>12–16 guests</li><li>7 bedrooms</li><li>371 m²</li></ul>
+    <ul class="chips"><li class="chip">6 min drive to the slopes</li><li class="chip">Sauna</li><li class="chip">Hammam</li></ul>
+    <p>A calm spot at Le Villaret with mountain views, under five minutes by car from the village.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Black%20Lodge&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Black Lodge</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="megeve">
+  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-infinity-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-infinity-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-infinity-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Infinity: the chalet and its pool in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">Photo courtesy of the owner</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Near Le Jaillet</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-infinity">Chalet Infinity</a></h2>
+    <ul class="card-facts"><li>8–10 guests</li><li>5 bedrooms</li></ul>
+    <ul class="chips"><li class="chip">5 min drive to the slopes</li><li class="chip">Indoor pool</li><li class="chip">Outdoor pool</li></ul>
+    <p>In a small hamlet near Le Jaillet, set back from the main road.</p>
+    <div class="card-foot"><p class="card-meta">Chalets in Megève · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=megeve&amp;stay=chalets-megeve&amp;house=Chalet%20Infinity&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Infinity</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="hotel chalet" data-place="lech">
   <div class="card-media"><figure><img src="/assets/img/stays/aurelio-lech/exterior-winter-2400.webp" srcset="/assets/img/stays/aurelio-lech/exterior-winter-800.webp 800w, /assets/img/stays/aurelio-lech/exterior-winter-1600.webp 1600w, /assets/img/stays/aurelio-lech/exterior-winter-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Hotel Aurelio in winter, with the village of Lech and its church" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Hotel &amp; Chalet Aurelio</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel and chalet · Lech am Arlberg, Austria</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/aurelio-lech/">Hotel &amp; Chalet Aurelio</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/aurelio-lech/">Hotel &amp; Chalet Aurelio</a></h2>
+    <ul class="chips"><li class="chip">Club Chalet for up to 16 guests</li><li class="chip">23 m indoor pool</li><li class="chip">Spa of over 1,000 m²</li></ul>
     <p>A boutique hotel on the Schlegelkopf slope: ski-in, ski-out, a few minutes from the centre of Lech.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=aurelio-lech">Enquire about this stay<span class="visually-hidden">: Hotel &amp; Chalet Aurelio</span></a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-type="chalet" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-mimi-2400.webp" srcset="/assets/img/stays/pepper-collection/house-mimi-800.webp 800w, /assets/img/stays/pepper-collection/house-mimi-1600.webp 1600w, /assets/img/stays/pepper-collection/house-mimi-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Mimi in winter" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Stefano Scata</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Oberlech</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#chalet-mimi">Chalet Mimi</a></h2>
+    <ul class="card-facts"><li>14 guests</li><li>6 bedrooms</li><li>830 m²</li></ul>
+    <ul class="chips"><li class="chip">Ski-in/ski-out</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>A warm, traditional alpine chalet in Oberlech, with wide mountain views.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=Chalet%20Mimi&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Mimi</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-barn-2400.webp" srcset="/assets/img/stays/pepper-collection/house-barn-800.webp 800w, /assets/img/stays/pepper-collection/house-barn-1600.webp 1600w, /assets/img/stays/pepper-collection/house-barn-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="The Barn in winter, with the mountains behind" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Oberlech</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#the-barn">The Barn</a></h2>
+    <ul class="card-facts"><li>14 guests</li><li>7 bedrooms</li><li>7 bathrooms</li><li>about 1,000 m²</li></ul>
+    <ul class="chips"><li class="chip">Ski-in/ski-out</li><li class="chip">Indoor pool</li><li class="chip">Sauna</li></ul>
+    <p>A chalet in Oberlech with a "northern chic meets alpine luxury" interior and panoramic mountain views.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=The%20Barn&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: The Barn</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-falcon-2400.webp" srcset="/assets/img/stays/pepper-collection/house-falcon-800.webp 800w, /assets/img/stays/pepper-collection/house-falcon-1600.webp 1600w, /assets/img/stays/pepper-collection/house-falcon-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="The Falcon in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Lech centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#the-falcon">The Falcon</a></h2>
+    <ul class="card-facts"><li>8 guests</li><li>4 bedrooms</li><li>4 bathrooms</li><li>450 m²</li></ul>
+    <ul class="chips"><li class="chip">Close to the Schlosskopf lift</li><li class="chip">Sauna</li><li class="chip">Hot tub</li></ul>
+    <p>Close to the centre of Lech, with panoramic views over the village.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=The%20Falcon&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: The Falcon</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-arla-2400.webp" srcset="/assets/img/stays/pepper-collection/house-arla-800.webp 800w, /assets/img/stays/pepper-collection/house-arla-1600.webp 1600w, /assets/img/stays/pepper-collection/house-arla-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Arla Luxury Home in winter" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Lech centre</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#arla-luxury-home">Arla Luxury Home</a></h2>
+    <ul class="card-facts"><li>2–10 guests</li><li>5 bedrooms</li></ul>
+    <ul class="chips"><li class="chip">Direct access to the slopes</li><li class="chip">Sauna</li><li class="chip">Gym</li></ul>
+    <p>In the heart of Lech, with views of the Omeshorn; three units to take separately or together.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=Arla%20Luxury%20Home&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Arla Luxury Home</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-toda-2400.webp" srcset="/assets/img/stays/pepper-collection/house-toda-800.webp 800w, /assets/img/stays/pepper-collection/house-toda-1600.webp 1600w, /assets/img/stays/pepper-collection/house-toda-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Toda in summer" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet · Lech</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#chalet-toda">Chalet Toda</a></h2>
+    <ul class="card-facts"><li>6 guests</li><li>3 bedrooms</li><li>2 bathrooms</li><li>245 m²</li></ul>
+    <ul class="chips"><li class="chip">A short walk to the lifts</li><li class="chip">Sauna</li><li class="chip">Pets welcome</li></ul>
+    <p>A traditional alpine chalet in Lech, with an 18th-century Stube.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=Chalet%20Toda&amp;type=chalet">Enquire about this chalet<span class="visually-hidden">: Chalet Toda</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="chalet apartment" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-skyfall-1600.webp" srcset="/assets/img/stays/pepper-collection/house-skyfall-800.webp 800w, /assets/img/stays/pepper-collection/house-skyfall-1600.webp 1598w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1598" height="1065" alt="The living room of the penthouse at Skyfall" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Chalet and apartments · St. Christoph</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#skyfall">Skyfall</a></h2>
+    <ul class="card-facts"><li>about 800 m²</li></ul>
+    <ul class="chips"><li class="chip">Sauna</li><li class="chip">Private lifts between floors</li></ul>
+    <p>A landmark chalet in the hamlet of St. Christoph, with valley views from its elevated position.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=Skyfall">Enquire about this stay<span class="visually-hidden">: Skyfall</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="apartment" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/ula-signature-u16-2400.webp" srcset="/assets/img/stays/pepper-collection/ula-signature-u16-800.webp 800w, /assets/img/stays/pepper-collection/ula-signature-u16-1600.webp 1600w, /assets/img/stays/pepper-collection/ula-signature-u16-2400.webp 2000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2000" height="1333" alt="ULA Signature: rendering of a living room with a fireplace" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© KITZMÜLLER Architektur</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Apartment · Omesberg, Lech</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#ula-signature">ULA Signature</a></h2>
+    <ul class="card-facts"><li>24 guests</li><li>12 bedrooms</li></ul>
+    <ul class="chips"><li class="chip">Indoor pool</li><li class="chip">Sauna</li><li class="chip">Hot tub</li></ul>
+    <p>An apartment house in the quiet Omesberg area, looking out to the Omeshorn; the pictures are renderings.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 8 renderings</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=ULA%20Signature&amp;type=apartment">Enquire about this apartment<span class="visually-hidden">: ULA Signature</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="apartment" data-place="lech">
+  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/ula-easy-stay-e30-2400.webp" srcset="/assets/img/stays/pepper-collection/ula-easy-stay-e30-800.webp 800w, /assets/img/stays/pepper-collection/ula-easy-stay-e30-1600.webp 1600w, /assets/img/stays/pepper-collection/ula-easy-stay-e30-2400.webp 2000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2000" height="1333" alt="ULA Easy Stay: the living room of an apartment" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection</figcaption></figure></div>
+  <div class="card-body">
+    <p class="card-kicker">Apartment · Omesberg, Lech</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/pepper-collection/#ula-easy-stay">ULA Easy Stay</a></h2>
+    <ul class="chips"><li class="chip">About 5 min walk to the lifts</li><li class="chip">Sauna</li></ul>
+    <p>A renovated house of six apartments in the quiet Omesberg area.</p>
+    <div class="card-foot"><p class="card-meta">pepper-collection · 10 photos</p><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=lech&amp;stay=pepper-collection&amp;house=ULA%20Easy%20Stay&amp;type=apartment">Enquire about this apartment<span class="visually-hidden">: ULA Easy Stay</span></a></div>
+  </div>
+</article>
+<article class="card" data-type="hotel" data-place="seefeld">
   <div class="card-media"><figure><img src="/assets/img/stays/interalpen-tyrol/exterior-winter-800.webp" srcset="/assets/img/stays/interalpen-tyrol/exterior-winter-800.webp 750w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="750" height="500" alt="Interalpen-Hotel Tyrol on the snowy plateau, with the mountains behind" class="card-img" loading="lazy" decoding="async"><figcaption class="credit">© Interalpen-Hotel Tyrol</figcaption></figure></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Telfs-Buchen, Seefeld plateau, Austria</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/interalpen-tyrol/">Interalpen-Hotel Tyrol</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/interalpen-tyrol/">Interalpen-Hotel Tyrol</a></h2>
+    <ul class="chips"><li class="chip">Panorama pool</li><li class="chip">Mountain hut, 5 min walk</li><li class="chip">Drive-in reception</li></ul>
     <p>A large hotel at 1,300 m on the Seefeld plateau, with a spa of more than 5,300 m².</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=seefeld&amp;stay=interalpen-tyrol&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Interalpen-Hotel Tyrol</span></a></div>
   </div>
 </article>
-<article class="card">
-  <div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">Hotel</span><span class="card-panel-coords">Kitzbühel</span></div></div>
-  <div class="card-body">
-    <p class="card-kicker">Hotel · Kitzbühel, Austria</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/schlosshotel-kitzbuehel/">Schlosshotel Kitzbühel</a></h3>
-    <p>A five-star hotel just above Kitzbühel, with a 3,000 m² spa and its own shuttle to the lifts.</p>
-  </div>
-</article>
-<article class="card">
+<article class="card" data-type="hotel" data-place="engelberg">
   <div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">Hotel</span><span class="card-panel-coords">Engelberg</span></div></div>
   <div class="card-body">
     <p class="card-kicker">Hotel · Engelberg, Switzerland</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/kempinski-engelberg/">Kempinski Palace Engelberg</a></h3>
+    <h2 class="card-title"><a class="card-link" href="/stay/kempinski-engelberg/">Kempinski Palace Engelberg</a></h2>
+    <ul class="chips"><li class="chip">Shuttle to the cable car, 3 min</li><li class="chip">Ski school contact in the lobby</li><li class="chip">Ski boots dried overnight</li></ul>
     <p>A Kempinski hotel in the monastery village below the Titlis.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=engelberg&amp;stay=kempinski-engelberg&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Kempinski Palace Engelberg</span></a></div>
   </div>
 </article>
-</div>
-  </div>
-</section>
-<section class="section section--alt" id="chalets">
-  <div class="wrap">
-    <div class="section-head"><p class="eyebrow">Chalets</p><h2>A house of your own.</h2><p class="lead">Private chalets and apartments for families and groups, with chefs, butlers and ski instructors on request.</p></div>
-    <div class="collection">
-      <div class="collection-head">
-        <h3>Chalets in Megève</h3>
-        <p>Megève · 22 houses · <a href="/stay/chalets-megeve/">About Chalets in Megève</a></p>
-      </div>
-      <div class="gallery gallery--cards" data-gallery aria-label="The houses of Chalets in Megève">
-        <ul class="gallery-track" tabindex="0">
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-141-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-141-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-141-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet 141: the living room, with a view over Megève" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
+<article class="card" data-type="hotel" data-place="kitzbuehel">
+  <div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">Hotel</span><span class="card-panel-coords">Kitzbühel</span></div></div>
   <div class="card-body">
-    <p class="card-kicker">Le Jaillet</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-141">Chalet 141</a></h3>
-    <p>12–16 guests · 7 bedrooms. Views of the village and Mont Blanc; indoor pool, hammam and gym.</p>
-    <p class="card-meta">10 photos</p>
+    <p class="card-kicker">Hotel · Kitzbühel, Austria</p>
+    <h2 class="card-title"><a class="card-link" href="/stay/schlosshotel-kitzbuehel/">Schlosshotel Kitzbühel</a></h2>
+    <ul class="chips"><li class="chip">Indoor and outdoor pool</li><li class="chip">9-hole golf course</li></ul>
+    <p>A five-star hotel just above Kitzbühel, with a 3,000 m² spa and its own shuttle to the lifts.</p>
+    <div class="card-foot"><a class="button button--small button--ghost card-enquire" href="/enquire/?destination=kitzbuehel&amp;stay=schlosshotel-kitzbuehel&amp;type=hotel">Enquire about this hotel<span class="visually-hidden">: Schlosshotel Kitzbühel</span></a></div>
   </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-alexandra-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-alexandra-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-alexandra-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Alexandra: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-alexandra">Chalet Alexandra</a></h3>
-    <p>8–14 guests · 7 bedrooms. In the village, two minutes' walk from the slopes.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-allobroges-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-allobroges-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-allobroges-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Allobroges: the living room by the fireplace" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-allobroges">Chalet Allobroges</a></h3>
-    <p>7–14 guests · 7 bedrooms. Five minutes' walk from the shops, built around a big fireplace.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-altai-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-altai-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-altai-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Altai: the chalet in the snow" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Near the village</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-altai">Chalet Altai</a></h3>
-    <p>12–16 guests · 7 bedrooms. Two chalets taken together, five minutes' walk from the village, with views of Mont d'Arbois and Rochebrune.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-apollo-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-apollo-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-apollo-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Apollo: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">A quiet area near Megève</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-apollo">Chalet Apollo</a></h3>
-    <p>9–14 guests · 6 bedrooms. Close to the slopes, eight minutes by car from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-ariana-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-ariana-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-ariana-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Ariana: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-ariana">Chalet Ariana</a></h3>
-    <p>10–16 guests · 7 bedrooms. New, in a picturesque street in the heart of the village; indoor pool and hot tub.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-des-soeurs-2400.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-des-soeurs-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-des-soeurs-1600.webp 1600w, /assets/img/stays/chalets-megeve/house-chalet-des-soeurs-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Des Soeurs: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-des-soeurs">Chalet Des Soeurs</a></h3>
-    <p>14–16 guests · 7 bedrooms. In the heart of the village, in the quiet Clos des Rennes.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-etoile-du-nord-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Etoile du Nord: a view over Megève" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Megève</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-etoile-du-nord">Chalet Etoile du Nord</a></h3>
-    <p>6–10 guests · 4 bedrooms. Eight minutes' walk from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-hermine-2400.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-hermine-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-hermine-1600.webp 1600w, /assets/img/stays/chalets-megeve/house-chalet-hermine-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Hermine: the chalet in winter" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Near the Calvaire</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-hermine">Chalet Hermine</a></h3>
-    <p>6–14 guests · 6 bedrooms. A quiet neighbourhood with views of Mont d'Arbois, under ten minutes' walk from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-le-lodge-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-le-lodge-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-le-lodge-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Le Lodge: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Near the Chamois lifts</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-le-lodge">Chalet Le Lodge</a></h3>
-    <p>14–18 guests · 8 bedrooms. A stone's throw from the village and the Chamois ski lifts.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-penelope-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-penelope-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-penelope-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Penelope: the chalet in summer" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Megève</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-penelope">Chalet Penelope</a></h3>
-    <p>8 guests · 4 bedrooms. Five minutes' walk from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-whymper-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-whymper-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-whymper-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Whymper: the chalet in winter" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Near the Chamois lift</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-whymper">Chalet Whymper</a></h3>
-    <p>10–12 guests · 6 bedrooms. Five minutes' walk from the village, and the Chamois lift on foot.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-lodge-elan-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-lodge-elan-800.webp 800w, /assets/img/stays/chalets-megeve/house-lodge-elan-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Lodge Elan: the terrace, with a view" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#lodge-elan">Lodge Elan</a></h3>
-    <p>4–8 guests. An apartment in the centre, close to restaurants, shops and the Chamois lifts.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-lodge-manou-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-lodge-manou-800.webp 800w, /assets/img/stays/chalets-megeve/house-lodge-manou-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Lodge Manou: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Village centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#lodge-manou">Lodge Manou</a></h3>
-    <p>6–10 guests. An apartment in the centre with three bedrooms, a children's dormitory and a large balcony; hammam and fitness room in the residence.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-sun-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-sun-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-sun-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Sun: the chalet at night" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-sun">Chalet Sun</a></h3>
-    <p>12–18 guests · 8 bedrooms. High above the valley at Mont d'Arbois, 100 metres from the slopes.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-cham-louka-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-cham-louka-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-cham-louka-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Cham Lou&#x27;Ka: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-cham-louka">Chalet Cham Lou'Ka</a></h3>
-    <p>10–14 guests · 6 bedrooms. Three minutes by car from the slopes; the master suite has a floor of its own.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-des-sens-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-des-sens-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-des-sens-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet des Sens: the chalet at night" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-des-sens">Chalet des Sens</a></h3>
-    <p>10–14 guests · 6 bedrooms. Ski back to the door; spa, pool, games room and cinema.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-divinity-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-divinity-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-divinity-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Divinity: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-divinity">Chalet Divinity</a></h3>
-    <p>5–10 guests · 5 bedrooms. Ski back to the door.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-mariva-800.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-mariva-800.webp 640w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="640" height="427" alt="Chalet Mariva: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-mariva">Chalet Mariva</a></h3>
-    <p>10–14 guests · 6 bedrooms. Near the Mont d'Arbois golf course, five minutes' walk from the lifts.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-olivier-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-olivier-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-olivier-1600.webp 1500w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1500" height="1000" alt="Chalet Olivier: the living room" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Mont d'Arbois</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-olivier">Chalet Olivier</a></h3>
-    <p>12–14 guests · 6 bedrooms. A quiet setting with mountain views, a few minutes by car from the slopes and the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-black-lodge-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-black-lodge-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-black-lodge-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Black Lodge: the chalet and its hot tub in summer" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Le Villaret</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-black-lodge">Chalet Black Lodge</a></h3>
-    <p>12–16 guests · 7 bedrooms. A calm area with mountain views, five minutes by car from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/chalets-megeve/house-chalet-infinity-1600.webp" srcset="/assets/img/stays/chalets-megeve/house-chalet-infinity-800.webp 800w, /assets/img/stays/chalets-megeve/house-chalet-infinity-1600.webp 1200w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1200" height="800" alt="Chalet Infinity: the chalet and its pool in summer" loading="lazy" decoding="async"><figcaption class="credit">© Photos courtesy of the owner</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Near Le Jaillet</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/chalets-megeve/#chalet-infinity">Chalet Infinity</a></h3>
-    <p>8–10 guests · 5 bedrooms. A small hamlet set back from the road, five minutes by car from the village.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-        </ul>
-        <div class="gallery-controls" hidden>
-          <button type="button" class="gallery-button" data-prev aria-label="Previous house">←</button>
-          <span class="gallery-count" aria-live="polite">01 / 22</span>
-          <button type="button" class="gallery-button" data-next aria-label="Next house">→</button>
-        </div>
-      </div>
+</article>
     </div>
-<div class="collection">
-      <div class="collection-head">
-        <h3>pepper-collection</h3>
-        <p>Lech am Arlberg · 8 houses · <a href="/stay/pepper-collection/">About pepper-collection</a></p>
-      </div>
-      <div class="gallery gallery--cards" data-gallery aria-label="The houses of pepper-collection">
-        <ul class="gallery-track" tabindex="0">
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-mimi-2400.webp" srcset="/assets/img/stays/pepper-collection/house-mimi-800.webp 800w, /assets/img/stays/pepper-collection/house-mimi-1600.webp 1600w, /assets/img/stays/pepper-collection/house-mimi-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Mimi in winter" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Stefano Scata</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Oberlech</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#chalet-mimi">Chalet Mimi</a></h3>
-    <p>Up to 14 guests, with a butler and a private chef. Ski-in and ski-out in winter, right on the hiking trails in summer.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-barn-2400.webp" srcset="/assets/img/stays/pepper-collection/house-barn-800.webp 800w, /assets/img/stays/pepper-collection/house-barn-1600.webp 1600w, /assets/img/stays/pepper-collection/house-barn-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="The Barn in winter, with the mountains behind" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Oberlech</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#the-barn">The Barn</a></h3>
-    <p>1,000 m², with a 24/7 butler and a private chef.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-falcon-2400.webp" srcset="/assets/img/stays/pepper-collection/house-falcon-800.webp 800w, /assets/img/stays/pepper-collection/house-falcon-1600.webp 1600w, /assets/img/stays/pepper-collection/house-falcon-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="The Falcon in summer" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Lech centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#the-falcon">The Falcon</a></h3>
-    <p>450 m² for 8 guests, a stone's throw from the next chairlift and the village centre.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-arla-2400.webp" srcset="/assets/img/stays/pepper-collection/house-arla-800.webp 800w, /assets/img/stays/pepper-collection/house-arla-1600.webp 1600w, /assets/img/stays/pepper-collection/house-arla-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Arla Luxury Home in winter" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Lech centre</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#arla-luxury-home">Arla Luxury Home</a></h3>
-    <p>Directly at the Schlegelkopf slope, for groups of 2 to 10.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-toda-2400.webp" srcset="/assets/img/stays/pepper-collection/house-toda-800.webp 800w, /assets/img/stays/pepper-collection/house-toda-1600.webp 1600w, /assets/img/stays/pepper-collection/house-toda-2400.webp 2400w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2400" height="1600" alt="Chalet Toda in summer" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Lech</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#chalet-toda">Chalet Toda</a></h3>
-    <p>245 m² for up to 6 guests, a few minutes' walk from the village and the Rüfikopfbahn.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/house-skyfall-1600.webp" srcset="/assets/img/stays/pepper-collection/house-skyfall-800.webp 800w, /assets/img/stays/pepper-collection/house-skyfall-1600.webp 1598w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="1598" height="1065" alt="The living room of the penthouse at Skyfall" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection / Patrick Schwienbacher</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">St. Christoph</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#skyfall">Skyfall</a></h3>
-    <p>Four residences from 116 to 275 m² that connect: up to 21 guests together.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/ula-signature-u16-2400.webp" srcset="/assets/img/stays/pepper-collection/ula-signature-u16-800.webp 800w, /assets/img/stays/pepper-collection/ula-signature-u16-1600.webp 1600w, /assets/img/stays/pepper-collection/ula-signature-u16-2400.webp 2000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2000" height="1333" alt="ULA Signature: rendering of a living room with a fireplace" loading="lazy" decoding="async"><figcaption class="credit">© KITZMÜLLER Architektur</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Omesberg, Lech</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#ula-signature">ULA Signature</a></h3>
-    <p>A newly built apartment house in the quiet Omesberg area, five minutes' walk from the centre. The pictures are renderings.</p>
-    <p class="card-meta">8 photos</p>
-  </div>
-</article></li>
-          <li class="gallery-item gallery-item--card"><article class="card">
-  <div class="card-media"><figure><img src="/assets/img/stays/pepper-collection/ula-easy-stay-e30-2400.webp" srcset="/assets/img/stays/pepper-collection/ula-easy-stay-e30-800.webp 800w, /assets/img/stays/pepper-collection/ula-easy-stay-e30-1600.webp 1600w, /assets/img/stays/pepper-collection/ula-easy-stay-e30-2400.webp 2000w" sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" width="2000" height="1333" alt="ULA Easy Stay: the living room of an apartment" loading="lazy" decoding="async"><figcaption class="credit">© pepper-collection</figcaption></figure></div>
-  <div class="card-body">
-    <p class="card-kicker">Omesberg, Lech</p>
-    <h3 class="card-title"><a class="card-link" href="/stay/pepper-collection/#ula-easy-stay">ULA Easy Stay</a></h3>
-    <p>A renovated apartment house in the Omesberg area, a few minutes' walk from the centre.</p>
-    <p class="card-meta">10 photos</p>
-  </div>
-</article></li>
-        </ul>
-        <div class="gallery-controls" hidden>
-          <button type="button" class="gallery-button" data-prev aria-label="Previous house">←</button>
-          <span class="gallery-count" aria-live="polite">01 / 08</span>
-          <button type="button" class="gallery-button" data-next aria-label="Next house">→</button>
-        </div>
-      </div>
-    </div>
+    <div class="panel stay-empty" data-filter-empty hidden><p>Nothing matches these filters yet. <a href="/enquire/">Tell us what you need</a> and we suggest the right stay.</p></div>
   </div>
 </section>
 <section class="section section--ink cta">

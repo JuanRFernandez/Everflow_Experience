@@ -27,6 +27,9 @@ library.local.json
 facts.json
 facts/
 *[Pp]ermission*.csv
+*_EFE_*-Website-Facts_v*.md
+*_EFE_*-Offer-Text_v*.md
+*_EFE_*-Owner-Facts_v*.md
 
 # the hotels skill belongs to the repo, even where a global ignore hides .claude/
 !.claude/
