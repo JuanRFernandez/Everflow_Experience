@@ -149,5 +149,63 @@
         "stays": ["chalets-megeve", "pepper-collection", "aurelio-lech", "interalpen-tyrol", "sacher-seefeld", "rote-wand"]
       }
     ]
+  },
+  {
+    "slug": "first-week-from-south-america",
+    "name": "A first ski week in the Alps, from Argentina and Brazil",
+    "eyebrow": "Guide · From South America",
+    "h1": "A first ski week in the Alps.",
+    "lead": "For guests from Argentina and Brazil: when to come, how to get there, which papers you need, what to bring, how the first days go, and where we would go.",
+    "description": "A first ski week in the Alps for guests from Argentina and Brazil: the season, the non-stop flights from São Paulo and Buenos Aires, visa-free entry, what to bring, coaching in your language, and the places we suggest.",
+    "card": "When to come, how to get there, the papers, what to bring, and where we would go first.",
+    "image": {"place": "zermatt"},
+    "related": ["lech", "st-moritz", "megeve", "zermatt", "las-lenas"],
+    "interest": "ski-coaching",
+    "sections": [
+      {
+        "h2": "When to come.",
+        "text": [
+          "The alpine season runs from December to April. January and February usually have the most reliable snow, and March brings longer, sunnier days. The Argentine and Brazilian summer holidays fall in the alpine high season, and the February weeks are the busiest of the year in the Alps: the good houses go first, so for January or February write to us months ahead. A week in March or early April is easier to arrange and often sunnier.",
+          "If those dates do not fit, there is the southern winter: from June to September we host in [Las Leñas](/destinations/las-lenas/), in the Andes of Mendoza, where our founder grew up skiing."
+        ]
+      },
+      {
+        "h2": "Getting there.",
+        "text": [
+          "There are non-stop flights from São Paulo to Zurich and Frankfurt, and from Buenos Aires to Frankfurt, Madrid and Rome. From Zurich, the Swiss resorts are two to three hours away by train or car; from Frankfurt or Munich, the Austrian and Bavarian ones; from Madrid or Rome, a short connecting flight takes you to Zurich, Geneva, Munich, Innsbruck or Venice. We arrange the transfer from the airport, so the first day starts on the snow.",
+          "An overnight flight lands in the morning. Many of our guests spend that first night in [Munich](/destinations/munich/) and drive up to the mountains rested the next day."
+        ]
+      },
+      {
+        "h2": "The papers.",
+        "text": [
+          "Argentine and Brazilian citizens enter the Schengen area without a visa for stays of up to 90 days in any 180-day period, with a passport valid for at least three months beyond the day you leave. The European Union is introducing ETIAS, an online travel authorisation for visa-free visitors: check its start date before you fly. If the airline or the border asks for a confirmation of your stay, we send you one."
+        ]
+      },
+      {
+        "h2": "What to bring.",
+        "image": {"place": "st-moritz"},
+        "text": [
+          "Less than you think. Skis, boots, poles and a helmet are rented at the resort and fitted to you on the first morning; we arrange them before you arrive. Bring your ski clothes if you have them, since in Buenos Aires and São Paulo they are harder to find than in the Alps, plus sunglasses and sun cream for the altitude and warm layers for the evenings. Travel insurance with winter-sports cover is the one thing not to leave at home: we ask every guest to have it."
+        ]
+      },
+      {
+        "h2": "Your first days.",
+        "text": [
+          "Our coaches teach in Spanish and Portuguese, so nothing is lost on the first morning. A first ski week starts on the gentle slopes near the village, with a private coach for the group or for each skier, and moves on to longer runs as the week goes by; skiers who already know the mountain get a guide and the terrain to match. [Ski and snowboard coaching](/experiences/#ski-coaching).",
+          "The time difference from Argentina and Brazil is only four hours, so the first day on snow can be the day after you land."
+        ]
+      },
+      {
+        "h2": "Where we would go.",
+        "places": [
+          ["lech", "Big, snow-sure terrain without the crowds, and a small village to come back to: a week that shows what the Alps are about."],
+          ["st-moritz", "Sun, grand hotels and the Engadin: a first week that is as much about the setting as about the skiing."],
+          ["megeve", "Gentle, tree-lined slopes and private chalets, about an hour and a quarter from Geneva: our first choice for families."],
+          ["zermatt", "The Matterhorn, high slopes that keep their snow, and skiing over into Italy for lunch."],
+          ["las-lenas", "For the southern winter, from June to September: the Andes of Mendoza, where our founder grew up skiing."]
+        ]
+      }
+    ]
   }
 ]

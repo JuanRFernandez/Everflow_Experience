@@ -6,8 +6,8 @@ structure; this file holds the rules.
 
 Answer Juan in the language he writes (usually Argentine Spanish). Everything in this
 repository is English. The site is English, with German for the legal pages, and the home
-page, the destinations and the enquiry form also exist in Spanish (`/es/`) and Brazilian
-Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
+page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`) and
+Brazilian Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
 
 ## Rules
 

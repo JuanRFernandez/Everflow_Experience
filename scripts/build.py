@@ -9,8 +9,8 @@ The pages it writes are plain HTML, committed and served by GitHub Pages as they
 Never edit a generated page: change content/*.json (texts, places, partners, team) or this
 script (layout), then run it. scripts/check.py runs --check on every pull request.
 
-Languages: the site is English. The home page, the destinations and the enquiry page also exist
-in Spanish (/es/) and Brazilian Portuguese (/pt/). Their texts are in content/i18n/<language>.json,
+Languages: the site is English. The home page, the destinations, the guides and the enquiry page also
+exist in Spanish (/es/) and Brazilian Portuguese (/pt/). Their texts are in content/i18n/<language>.json,
 one entry per English text; a text without a translation is shown in English and reported.
 """
 import hashlib
@@ -108,9 +108,9 @@ def ui(s, **kw):
 
 
 def translated(path):
-    """True for the pages that exist in every language: home, destinations, enquiry."""
+    """True for the pages that exist in every language: home, destinations, guides, enquiry."""
     base = path.split('?')[0].split('#')[0]
-    return base == '/' or base.startswith('/destinations/') or base.startswith('/enquire/')
+    return base == '/' or base.startswith(('/destinations/', '/guides/', '/enquire/'))
 
 
 def localized(path):
@@ -495,7 +495,7 @@ def footer():
     </div>
     <div>
       <p class="footer-title">{ui("Explore")}</p>
-      <ul><li><a href="/stay/">{ui("Where to stay")}</a></li><li><a href="/experiences/">{ui("Experiences")}</a></li><li><a href="/guides/">{ui("Guides")}</a></li><li><a href="/about/">{ui("About")}</a></li><li><a href="{localized("/enquire/")}">{ui("Plan a trip")}</a></li></ul>
+      <ul><li><a href="/stay/">{ui("Where to stay")}</a></li><li><a href="/experiences/">{ui("Experiences")}</a></li><li><a href="{localized("/guides/")}">{ui("Guides")}</a></li><li><a href="/about/">{ui("About")}</a></li><li><a href="{localized("/enquire/")}">{ui("Plan a trip")}</a></li></ul>
     </div>
     <div class="footer-contact">
       <p class="footer-title">{ui("Contact")}</p>
@@ -665,20 +665,20 @@ def guide_media(g, sizes, cls='', eager=False, links=True):
     im = g['image']
     if im.get('place'):
         pi = PLACE[im['place']]['image']
-        return figure(pi['src'], pi['alt'], sizes, pi.get('credit'), cls=cls, eager=eager, image=pi, links=links)
+        return figure(pi['src'], tr(pi['alt']), sizes, pi.get('credit'), cls=cls, eager=eager, image=pi, links=links)
     if im.get('src'):
-        return figure(im['src'], im['alt'], sizes, cls=cls, eager=eager)
+        return figure(im['src'], tr(im['alt']), sizes, cls=cls, eager=eager)
     x = EXPERIENCE[im['experience']]
-    return figure(x['image'], x['alt'], sizes, cls=cls, eager=eager)
+    return figure(x['image'], tr(x['alt']), sizes, cls=cls, eager=eager)
 
 
 def guide_card(g, level=3):
     return f'''<article class="card">
   <div class="card-media">{guide_media(g, "(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw", cls="card-figure", links=False)}</div>
   <div class="card-body">
-    <p class="card-kicker">{e(g["eyebrow"])}</p>
-    <h{level} class="card-title"><a class="card-link" href="/guides/{g["slug"]}/">{e(g["name"])}</a></h{level}>
-    <p>{e(g["card"])}</p>
+    <p class="card-kicker">{e(tr(g["eyebrow"]))}</p>
+    <h{level} class="card-title"><a class="card-link" href="{localized("/guides/" + g["slug"] + "/")}">{e(tr(g["name"]))}</a></h{level}>
+    <p>{e(tr(g["card"]))}</p>
   </div>
 </article>'''
 
@@ -711,12 +711,12 @@ def testimonials_section():
 
 
 def guides_section(guides, eyebrow_text='Guides', h2='Read before you plan.'):
-    """Guide cards on an English page; the guides are in English only."""
-    if LANG != 'en' or not guides:
+    """Guide cards, in the language of the page."""
+    if not guides:
         return ''
     return f'''<section class="section" id="guides">
   <div class="wrap">
-    {section_head(eyebrow_text, h2, more=("/guides/", "All guides"))}
+    {section_head(ui(eyebrow_text), ui(h2), more=(localized("/guides/"), ui("All guides")))}
     {grid([guide_card(g) for g in guides])}
   </div>
 </section>'''
@@ -1308,20 +1308,20 @@ def about_page():
 
 
 def guides_index():
-    body = f'''{page_head("Guides", "Before you plan.", "Short guides to choosing a resort, a place to stay and the right week.")}
+    body = f'''{page_head(ui("Guides"), ui("Before you plan."), ui("Short guides to choosing a resort, a place to stay and the right week."))}
 <section class="section section--tight">
   <div class="wrap">
     {grid([guide_card(g, level=2) for g in GUIDES])}
   </div>
 </section>
 {cta_band()}'''
-    return page('guides/index.html', 'Guides — EverFlow Experience',
-                'Short guides to planning a ski week in the Alps: choosing a resort, a chalet or a hotel, and the right week for a family.',
+    return page('guides/index.html', ui('Guides — EverFlow Experience'),
+                ui('Short guides to planning a ski week in the Alps: choosing a resort, a chalet or a hotel, and the right week for a family.'),
                 body)
 
 
 def guide_page(g):
-    """A guide: running text, a section with cards where it names places or hotels and chalets."""
+    """A guide: running text, a section with cards where it names places or hotels and chalets; in every language."""
     blocks, prose = [], []
 
     def flush():
@@ -1330,14 +1330,14 @@ def guide_page(g):
             prose.clear()
 
     for s in g['sections']:
-        cards = ([place_card(PLACE[slug], text=why) for slug, why in s.get('places', [])] +
+        cards = ([place_card(PLACE[slug], text=tr(why)) for slug, why in s.get('places', [])] +
                  [stay_card(PARTNER[slug]) for slug in s.get('stays', [])])
         if cards:
             flush()
-            lead = ''.join(f'<p class="lead">{t(x)}</p>' for x in s.get('text', []))
+            lead = ''.join(f'<p class="lead">{t(tr(x))}</p>' for x in s.get('text', []))
             blocks.append(f'''<section class="section section--alt">
   <div class="wrap">
-    <div class="section-head"><h2>{e(s["h2"])}</h2>{lead}</div>
+    <div class="section-head"><h2>{e(tr(s["h2"]))}</h2>{lead}</div>
     {grid(cards)}
   </div>
 </section>''')
@@ -1345,19 +1345,19 @@ def guide_page(g):
             fig = ''
             if s.get('image'):
                 pi = PLACE[s['image']['place']]['image']
-                fig = figure(pi['src'], pi['alt'], '(min-width: 48rem) 46rem, 100vw', pi.get('credit'), image=pi)
-            prose.append(f'<h2>{e(s["h2"])}</h2>{fig}' + ''.join(f'<p>{t(x)}</p>' for x in s.get('text', [])))
+                fig = figure(pi['src'], tr(pi['alt']), '(min-width: 48rem) 46rem, 100vw', pi.get('credit'), image=pi)
+            prose.append(f'<h2>{e(tr(s["h2"]))}</h2>{fig}' + ''.join(f'<p>{t(tr(x))}</p>' for x in s.get('text', [])))
     flush()
     im = g['image']
     base = PLACE[im['place']]['image']['src'] if im.get('place') else im.get('src') or EXPERIENCE[im['experience']]['image']
-    body = f'''{page_head(g["eyebrow"], g["h1"], g["lead"], crumbs=[("Guides", "/guides/"), (g["name"], "")])}
+    body = f'''{page_head(tr(g["eyebrow"]), tr(g["h1"]), tr(g["lead"]), crumbs=[(ui("Guides"), localized("/guides/")), (tr(g["name"]), "")])}
 <div class="wrap">{guide_media(g, "(min-width: 75rem) 1180px, 100vw", cls="hero-figure", eager=True)}</div>
 {chr(10).join(blocks)}
 {guides_section([x for x in GUIDES if x is not g], "More guides", "Read on.")}
 {cta_band(interest=g.get("interest"))}'''
-    return page(f'guides/{g["slug"]}/index.html', f'{g["name"]} — EverFlow Experience', g['description'], body,
+    return page(f'guides/{g["slug"]}/index.html', f'{tr(g["name"])} — EverFlow Experience', tr(g['description']), body,
                 image=variants(base)[-1][2],
-                image_alt=tr(PLACE[im['place']]['image']['alt']) if im.get('place') else im.get('alt'))
+                image_alt=tr(PLACE[im['place']]['image']['alt']) if im.get('place') else tr(im.get('alt')))
 
 
 def enquire_page():
@@ -1580,6 +1580,9 @@ def validate():
                 problems.append(f'pages.json testimonials[{i}]: "{key}" is missing (the words, first name, country, trip, season)')
     for g in GUIDES:
         where = f'guide {g["slug"]}'
+        for key in ('name', 'eyebrow', 'h1', 'lead', 'description', 'card'):
+            if not g.get(key):
+                problems.append(f'{where}: "{key}" is missing')
         im = g['image']
         if not (PLACE.get(im.get('place'), {}).get('image') or im.get('experience') in EXPERIENCE or (im.get('src') and im.get('alt'))):
             problems.append(f'{where}: the image names neither a destination with a photo, an experience, nor its own src and alt')
@@ -1602,9 +1605,12 @@ def validate():
 
 def render_translated():
     """The pages that exist in every language, in the language being rendered."""
-    out = {'index.html': home(), 'destinations/index.html': destinations_index(), 'enquire/index.html': enquire_page()}
+    out = {'index.html': home(), 'destinations/index.html': destinations_index(), 'enquire/index.html': enquire_page(),
+           'guides/index.html': guides_index()}
     for p in PLACES:
         out[f'destinations/{p["slug"]}/index.html'] = place_page(p)
+    for g in GUIDES:
+        out[f'guides/{g["slug"]}/index.html'] = guide_page(g)
     return {out_path(k): v for k, v in out.items()}
 
 
@@ -1620,9 +1626,6 @@ def render_all():
                 'impressum.html': legal('impressum'), 'datenschutz.html': legal('datenschutz')})
     for p in PARTNERS:
         out[f'stay/{p["slug"]}/index.html'] = partner_page(p)
-    out['guides/index.html'] = guides_index()
-    for g in GUIDES:
-        out[f'guides/{g["slug"]}/index.html'] = guide_page(g)
     for code in LANGS:
         if code != 'en':
             LANG = code
