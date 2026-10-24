@@ -1,7 +1,7 @@
 # EverFlow Experience — Website
 
 Static website for [everflowexperience.com](https://everflowexperience.com): tailor-made ski and
-mountain trips, based in Munich, hosted across the Alps.
+mountain trips, hosted across the Alps.
 Served with **GitHub Pages** from the `master` branch. No framework, no server: plain HTML, CSS
 and JavaScript, generated from the content files by one small Python script.
 

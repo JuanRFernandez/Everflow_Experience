@@ -1,12 +1,12 @@
 {
   "home": {
     "title": "EverFlow Experience — Tailor-made alpine trips",
-    "eyebrow": "Zugspitze, Germany / 47.42°N, 10.99°E",
+    "eyebrow": "The Alps / 47.42°N, 10.99°E",
     "h1": "From first tracks to fireside.",
-    "lead": "Tailor-made ski and mountain trips, planned by one host. Based in Munich, hosted across the Alps.",
+    "lead": "Tailor-made ski and mountain trips across the Alps, planned by one host.",
     "destinations_eyebrow": "Destinations",
     "destinations_h2": "Where do you want to go?",
-    "destinations_lead": "{n} places in {m} countries, from Bavaria to the Dolomites, and the hotels and chalets we know there.",
+    "destinations_lead": "{n} places in {m} countries across the Alps, and the hotels and chalets we know there.",
     "stay_eyebrow": "Where our guests stay",
     "stay_h2": "Hotels and chalets we know.",
     "stay_lead": "Every address is the provider's own. We match it to your group and your days on the mountain, and arrange the stay as part of one plan.",
@@ -30,7 +30,7 @@
     "eyebrow": "Good to know",
     "h2": "Before we plan the first day.",
     "items": [
-      ["Where do you operate?", "We are based in Munich and host across the Alps: in Germany, Austria, Switzerland, France and Italy. [See all destinations](/destinations/)."],
+      ["Where do you operate?", "Across the Alps: in Switzerland, Austria, France, Italy and Germany. [See all destinations](/destinations/)."],
       ["What can a trip include?", "Private coaching, hotels and chalets, dining, wellness, guiding and transfers. Every part is optional: some guests come for a single lesson, others for a full week we handle from start to finish."],
       ["Do I need a finished plan to get in touch?", "No. Start with whatever you know, a date, a group or an idea of the day, and we come back with the questions that matter and one clear proposal."],
       ["Which languages do you host in?", "English, Spanish and Portuguese, with German-speaking instructors and partners across the Alps."],
@@ -45,13 +45,13 @@
   },
   "about": {
     "title": "About EverFlow Experience",
-    "description": "EverFlow Experience is a boutique alpine travel company founded in 2022 by Juan Rodrigo Fernandez, a former member of the Argentinian Ski Team. Based in Munich, hosted across the Alps.",
+    "description": "EverFlow Experience is a boutique alpine travel company founded in 2022 by Juan Rodrigo Fernandez, a former member of the Argentinian Ski Team. Hosted across the Alps.",
     "eyebrow": "About",
     "h1": "The days you remember are the ones built around you.",
     "story": [
       "EverFlow Experience was founded in 2022 by Juan Rodrigo Fernandez, a former member of the Argentinian Ski Team. What began as a ski school has grown into complete, tailor-made alpine trips.",
       "From private coaching on snow to hotels, chalets, dining, wellness and transfers, every trip is planned around one group at a time, with local knowledge and the mountain culture of each place.",
-      "We are based in Munich and host across the Alps. Our trips are multilingual and fully tailored: race-honed technique, and the kind of hosting that turns a trip into a story people want to tell."
+      "We host across the Alps. Our trips are multilingual and fully tailored: race-honed technique, and the kind of hosting that turns a trip into a story people want to tell."
     ],
     "how_eyebrow": "How we work",
     "how_h2": "Licensed instructors, trusted partners.",
