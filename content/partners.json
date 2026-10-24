@@ -692,7 +692,7 @@
       "Heated indoor and outdoor pool",
       "1,500 m² spa"
     ],
-    "lead": "In Zug, the hamlet just outside Lech am Arlberg. A hotel known for its cooking, with the slopes within easy reach: the Zuger Bergbahn gondola takes you from Zug into the Lech Zürs ski area.",
+    "lead": "In Zug, the hamlet just outside Lech am Arlberg. A hotel known for its cooking, with the slopes within easy reach: the Zugerbergbahn gondola takes you from Zug into the Lech Zürs ski area.",
     "facts": [
       "62 rooms and suites, including family suites",
       "Heated indoor and outdoor pool and a 1,500 m² spa",
@@ -755,12 +755,12 @@
     "place": "megeve",
     "location": "Megève",
     "card": "Twenty-two private chalets and apartments in and around Megève, for 4 to 18 guests.",
-    "lead": "Private chalets and apartments in Megève: in the village, at Mont d'Arbois and around Le Jaillet, for families and groups of up to 18 guests. Geneva Airport is about an hour away.",
+    "lead": "Private chalets and apartments in Megève: in the village, at Mont d'Arbois and around Le Jaillet, for families and groups of up to 18 guests. Geneva Airport is about an hour and a quarter away.",
     "facts": [
       "Twenty-two houses: twenty chalets and two apartments, for 4 to 18 guests",
       "In the village centre, at Mont d'Arbois and around Le Jaillet; some let you ski back to the door",
       "Many with an indoor pool, a spa or hammam, or a cinema room",
-      "Geneva Airport about an hour away by car"
+      "Geneva Airport about an hour and a quarter away by car"
     ],
     "why": "For families and groups who want a house of their own: one long table, one fireplace, and the village or the slopes a few minutes away.",
     "arranges": {
@@ -2160,7 +2160,7 @@
       "Mountain hut, 5 min walk",
       "Drive-in reception"
     ],
-    "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,300 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within an hour's drive.",
+    "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,300 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within easy reach.",
     "facts": [
       "274 rooms, suites and panorama suites",
       "A spa of more than 5,300 m² with a panorama pool",
@@ -2338,7 +2338,7 @@
     "links": [
       {
         "label": "The hotel on kempinski.com",
-        "url": "https://www.kempinski.com/berchtesgaden"
+        "url": "https://www.kempinski.com/en/kempinski-hotel-berchtesgaden"
       }
     ],
     "provider": "EverFlow is your contact before and during your stay. The stay and its activities are provided by Kempinski Hotel Berchtesgaden, under the hotel's terms.",
@@ -2419,6 +2419,71 @@
       {
         "name": "junior-suite",
         "alt": "A Junior Suite with a sitting area"
+      }
+    ]
+  },
+  {
+    "slug": "apartments-las-lenas",
+    "register": "Apartments Las Leñas (Edificio Atenas)",
+    "name": "Edificio Atenas",
+    "kind": "Apartments",
+    "type": "apartment",
+    "place": "las-lenas",
+    "location": "Las Leñas",
+    "card": "Our founder's family apartments in Las Leñas: two floors, four guests, let by EverFlow itself.",
+    "guests": "4",
+    "bedrooms": "1",
+    "bathrooms": "1",
+    "size_m2": "50",
+    "highlights": [
+      "Hot tub and sauna",
+      "Ski room",
+      "Kitchen"
+    ],
+    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas: of the four buildings of its complex, the one nearest the slopes. All are on the ground floor, with no stairs to the door; inside, most have two levels, a double bedroom and the bathroom below and a sofa bed and a cot above, for four guests in 50 m². A hot tub, a sauna and a ski room complete them. We let them ourselves, for the ski season of the southern winter, from June to September.",
+    "facts": [
+      "In the Edificio Atenas, the building of its complex nearest the slopes",
+      "On the ground floor, with no stairs to the door",
+      "Two levels inside: a double bedroom and the bathroom below, a sofa bed and a cot above",
+      "For four guests, in 50 m²",
+      "A hot tub, a sauna and a ski room",
+      "A kitchen with a dining table in the living room",
+      "Let by EverFlow itself: the apartments of our founder's family",
+      "For the ski season, from June to September"
+    ],
+    "why": "For couples, families and friends from Argentina, Brazil and beyond who want a ski week in the Andes with one host, in the apartments of the family of our founder, who grew up skiing here.",
+    "links": [
+      {
+        "label": "laslenas.com",
+        "url": "https://laslenas.com/"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The apartments are the family's own, and EverFlow lets them directly; the terms come with your proposal.",
+    "credit": "Photo courtesy of the owner",
+    "photos": [
+      {
+        "name": "atenas-living",
+        "alt": "Edificio Atenas: the living and dining room under a sloping wooden ceiling, with windows in the roof"
+      },
+      {
+        "name": "atenas-living-2",
+        "alt": "Edificio Atenas: the living room with sofa beds, the dining table and the kitchen"
+      },
+      {
+        "name": "atenas-kitchen",
+        "alt": "Edificio Atenas: the dining table and the kitchen, with a sofa bed along the wall"
+      },
+      {
+        "name": "atenas-sitting",
+        "alt": "Edificio Atenas: the sitting area below the roof windows, with sofa beds and a television"
+      },
+      {
+        "name": "atenas-living-3",
+        "alt": "Edificio Atenas: the living room with the dining table and the roof windows"
+      },
+      {
+        "name": "atenas-bedroom",
+        "alt": "Edificio Atenas: a bedroom with a double bed and built-in wardrobes"
       }
     ]
   }
