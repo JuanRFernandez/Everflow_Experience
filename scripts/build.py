@@ -977,7 +977,7 @@ def destinations_index():
 </section>''')
     pins = []
     for p in [q for q in PLACES if on_map(q)]:  # the live map frames the Alps as the drawn one does
-        stays = [[s['name'], f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
+        stays = [[tro(s['name']), f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
         pins.append({'n': tro(p['name']), 'u': localized(f'/destinations/{p["slug"]}/'), 'lat': p['lat'], 'lon': p['lon'], 's': stays})
     pins_json = a(json.dumps(pins, ensure_ascii=False, separators=(',', ':')))
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
@@ -1394,6 +1394,7 @@ def enquire_page():
             'wa': ui('WhatsApp should open with the message ready. Send it from there.'),
             'name_error': ui('Please enter your name.'), 'email_error': ui('Please enter a valid e-mail address.'),
             'page': ui('Page'), 'copied': ui('Message copied'),
+            'houses': ui('House: {n} houses of this stay to choose from.'), 'no_houses': ui('House: this stay has no separate houses.'),
         }, ensure_ascii=False, separators=(',', ':'))) + '"'
     req = '<span class="req" aria-hidden="true">*</span>'
     body = f'''{page_head(tr(en["eyebrow"]), tr(en["h1"]), tr(en["lead"]))}
@@ -1412,7 +1413,7 @@ def enquire_page():
       </div>
       <div class="field-row">
         <div class="field"><label for="f-type">{ui("Type of stay")}</label><select id="f-type" name="type">{"".join(type_opts)}</select></div>
-        <div class="field"><label for="f-house">{ui("House")}</label><select id="f-house" name="house">{"".join(house_opts)}</select></div>
+        <div class="field field--house" hidden><label for="f-house">{ui("House")}</label><select id="f-house" name="house">{"".join(house_opts)}</select></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-interest">{ui("What would you like to do?")}</label><select id="f-interest" name="interest">{"".join(int_opts)}</select></div>
@@ -1564,7 +1565,13 @@ def validate():
         for i in set(ids):
             if ids.count(i) > 1:
                 problems.append(f'partner {p["slug"]}: two houses share the id {i}')
-    for i, x in enumerate(PAGES.get('testimonials', [])):
+    guests = PAGES.get('testimonials', [])
+    if not isinstance(guests, list):
+        problems.append('pages.json "testimonials" is a list of entries')
+    for i, x in enumerate(guests if isinstance(guests, list) else []):
+        if not isinstance(x, dict):
+            problems.append(f'pages.json testimonials[{i}]: an entry has quote, name, country, trip and season')
+            continue
         for key in ('quote', 'name', 'country', 'trip', 'season'):
             if not isinstance(x.get(key), str) or not x[key].strip():
                 problems.append(f'pages.json testimonials[{i}]: "{key}" is missing (the words, first name, country, trip, season)')

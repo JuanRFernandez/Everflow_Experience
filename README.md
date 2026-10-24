@@ -71,8 +71,9 @@ to add to the card's sentence, not to repeat it. Every value stands in the partn
 in the order of the file, with filters by type and destination that keep their state in the
 address (`/stay/?type=chalet&place=megeve`); every stay has a button that opens the enquiry with
 the stay filled in (`/enquire/?destination=…&stay=…&house=…&type=…`). On the enquiry page the four
-fields are linked: a destination narrows the stays, a stay sets its destination and type, a
-collection lists its houses; without the script every option shows.
+fields are linked: a destination narrows the stays, a stay sets its destination (and, for a hotel,
+shows its type), a type chosen by the visitor narrows stays and houses, a collection lists its
+houses; without the script every option shows.
 
 A guest's words go into `content/pages.json` under `testimonials` (the quote verbatim, first name,
 country, trip and season), only with the guest's written consent, which stays in Drive; the home

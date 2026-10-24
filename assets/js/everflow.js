@@ -199,13 +199,19 @@
       }
       if (house) {
         var n = refill(house, allHouses, function (g, o) { return g.stay === stay.value && hasType(o, type.value); });
-        if (houseField) houseField.hidden = n === 0;  // only "No preference" left: the field goes
+        if (houseField) {
+          var was = !houseField.hidden;
+          houseField.hidden = n === 0;  // only "No preference" left: the field goes
+          houseField.parentNode.classList.toggle('field-row--single', n === 0);  // the Type field takes the row
+          if (source && n > 0 && !was) status.textContent = say('houses', 'House: {n} houses of this stay to choose from.').replace('{n}', n);
+          else if (source && n === 0 && was) status.textContent = say('no_houses', 'House: this stay has no separate houses.');
+        }
       }
     }
     [dest, type, stay].forEach(function (select) {
       if (select) select.addEventListener('change', function () { sync(select.name); });
     });
-    sync(params.get('stay') ? 'stay' : 'destination');  // a stay in the link is the most concrete wish: it corrects a destination that does not match
+    sync(stay && stay.value ? 'stay' : '');  // a stay in the link is the most concrete wish: it corrects a destination that does not match
     function label(name) {
       var el = form.elements[name];
       if (!el || !el.value) return '';
