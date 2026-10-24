@@ -66,14 +66,15 @@ PRICE = re.compile(rf'(?:[€$£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[
 PRICE_JS = re.compile(rf'(?:[€£]|\b{MONEY})\s?\d|\d[\d.,]*(?:\s?[-–])?\s?(?:[€£]|{MONEY}\b)', re.I)  # "$1" is code
 CODE = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.I | re.S)
 TAGS = re.compile(r'<[^>]+>')
-BOOKING = re.compile(r'\bbook(?:s|ed|ing|ings)?\b|\breserv(?:e|es|ed|ing|ation|ations)\b'
-                     r'|\b(?:pre|re|un|over)?(?:pay(?:s|ing|ment|ments|able|er)?|paid)\b|\bpaypal\b'
-                     r'|request has been received', re.I)
+BOOKING = re.compile(r'\b(?:pre|re|un|over)?book(?:s|ed|ing|ings)?\b|\b(?:pre|un)?reserv(?:e|es|ed|ing|ation|ations)\b'
+                     r'|\b(?:pre|re|un|under|over|post)?(?:pay(?:s|ing|ment|ments|able|ables|ers?|ees?|outs?)?|paid)\b'
+                     r'|\bpaypal\b|request has been received', re.I)
 NOT_SAID = re.compile(r'\bcommissions?\b|\bracers?\b', re.I)  # Juan, 19.10.2026: no commissions, no "racers"
-NOT_SAID_ES_PT = re.compile(  # the same in es/ and pt/: the site takes no bookings and no payments
-    r'\breserv\w*|\b(?:pre)?pag(?:a|as|an|am|ás|ado|ados|ada|adas|ando|ar|ará|arán|o|os|ou|ue|uen|uem|amos|amento|amentos'
-    r'|ável|adero)\b|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)
-READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|data-title|data-[\w-]*label)\s*=\s*"([^"]*)"', re.I)
+NOT_SAID_ES_PT = re.compile(  # the same in es/ and pt/: no bookings, no payments (every form of pagar; página,
+    # pagoda, pagano and the English "page" of the markup stay out), no commissions
+    r'\breserv\w*|\b(?:pre|pré-?)?p[aá]g(?!in|od|an[aoi]|es?\b)\w*|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)
+READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|label|data-title|data-[\w-]*label|data-one|data-many'
+                      r'|data-play|data-pause)\s*=\s*"([^"]*)"', re.I)  # attributes whose text a visitor sees or hears
 ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
 REGIONAL = re.compile('bavarian' + r'\s+' + 'alps', re.I)
 NEVER = [codecs.decode(w, 'rot13') for w in ('rqra yhkhel', 'rqrayhkhel', 'ubgry qnf gveby', 'enr cvafba')]
