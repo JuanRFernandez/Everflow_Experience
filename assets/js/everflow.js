@@ -65,16 +65,17 @@
       first = v[0];
       count.textContent = (v[0] === v[1] ? pad(v[0] + 1) : pad(v[0] + 1) + '–' + pad(v[1] + 1)) + ' / ' + pad(items.length);
       var left = track.scrollLeft;
-      prev.disabled = first === 0 && left <= 4;
-      next.disabled = v[1] === items.length - 1 || left + track.clientWidth >= track.scrollWidth - 4;
+      prev.setAttribute('aria-disabled', first === 0 && left <= 4 ? 'true' : 'false');  // not disabled: the focus stays
+      next.setAttribute('aria-disabled', v[1] === items.length - 1 || left + track.clientWidth >= track.scrollWidth - 4 ? 'true' : 'false');
     }
+    function off(button) { return button.getAttribute('aria-disabled') === 'true'; }
     function go(i) {
       aim = Math.max(0, Math.min(items.length - 1, i));
       var max = track.scrollWidth - track.clientWidth;
       track.scrollTo({ left: Math.min(max, items[aim].offsetLeft - track.offsetLeft), behavior: reduceMotion ? 'auto' : 'smooth' });
     }
-    prev.addEventListener('click', function () { go((aim === null ? first : aim) - 1); });
-    next.addEventListener('click', function () { go((aim === null ? first : aim) + 1); });
+    prev.addEventListener('click', function () { if (!off(prev)) go((aim === null ? first : aim) - 1); });
+    next.addEventListener('click', function () { if (!off(next)) go((aim === null ? first : aim) + 1); });
     var ticking = false;
     track.addEventListener('scroll', function () {
       window.clearTimeout(settle);
@@ -92,15 +93,16 @@
     var media = $('.hero-media[data-src]');
     var button = $('.video-toggle');
     if (!media || !button || reduceMotion) return;
-    var saveData = navigator.connection && navigator.connection.saveData;
-    if (saveData || !window.matchMedia('(min-width: 48rem)').matches) return;
+    var net = navigator.connection || {};
+    if (net.saveData || (net.effectiveType && net.effectiveType !== '4g')) return;  // a slow or metered connection: the photo stays
+    if (!window.matchMedia('(min-width: 48rem)').matches) return;
     var video = document.createElement('video');
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
     video.setAttribute('playsinline', '');
     video.setAttribute('aria-hidden', 'true');
-    video.preload = 'auto';
+    video.preload = 'metadata';  // play() fetches the rest, after the page has loaded
     video.src = media.getAttribute('data-src');
     video.addEventListener('canplay', function () {
       var img = $('img', media);
@@ -113,8 +115,19 @@
     var pauseLabel = button.getAttribute('data-pause') || 'Pause video';
     var playLabel = button.getAttribute('data-play') || 'Play video';
     button.addEventListener('click', function () {
-      if (video.paused) { video.play(); button.textContent = pauseLabel; button.setAttribute('aria-pressed', 'false'); }
-      else { video.pause(); button.textContent = playLabel; button.setAttribute('aria-pressed', 'true'); }
+      if (video.paused) { video.play(); button.textContent = pauseLabel; }
+      else { video.pause(); button.textContent = playLabel; }
+    });
+  }
+
+  /* ---------- the WhatsApp links say which page the visitor writes from ---------- */
+  function initWhatsAppLinks() {
+    var footer = $('.site-footer');
+    var greeting = footer && footer.getAttribute('data-wa-greeting');
+    if (!greeting) return;
+    var text = encodeURIComponent(greeting.replace('{page}', location.pathname));
+    $$('a[href^="https://wa.me/"]').forEach(function (link) {
+      if (link.href.indexOf('?') === -1) link.href += '?text=' + text;
     });
   }
 
@@ -152,20 +165,46 @@
       ].filter(function (l) { return l[1]; }).map(function (l) { return l[0] + ': ' + l[1]; });
       var note = label('message');
       if (note) lines.push('', note);
+      lines.push('', say('page', 'Page') + ': ' + location.pathname + ' (' + document.documentElement.lang + ')');  // where the enquiry came from
       return lines.join('\n');
     }
+    function flag(name, bad, text) {  // the error stands by the field, in the page's language
+      var el = form.elements[name], note = $('#f-' + name + '-error');
+      if (!el || !note) return;
+      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      note.textContent = bad ? text : '';
+      note.hidden = !bad;
+    }
     function valid() {
-      if (form.reportValidity()) return true;
+      var name = form.elements.name, email = form.elements.email;
+      var badName = !name.value.trim();
+      var badMail = !email.value.trim() || !email.checkValidity();
+      flag('name', badName, say('name_error', 'Please enter your name.'));
+      flag('email', badMail, say('email_error', 'Please enter a valid e-mail address.'));
+      if (!badName && !badMail) return true;
       status.textContent = say('invalid', 'Please add your name and a valid e-mail address.');
+      (badName ? name : email).focus();
       return false;
     }
+    ['name', 'email'].forEach(function (key) {
+      form.elements[key].addEventListener('input', function () { if (this.getAttribute('aria-invalid') === 'true') flag(key, false, ''); });
+    });
+    var fallback = $('#mail-fallback'), copyBox = $('#f-copy'), copyButton = $('#copy-message');
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (!valid()) return;
       var email = form.getAttribute('data-email');
+      var text = message();
       location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(say('subject', 'Trip enquiry: ') + label('name')) +
-        '&body=' + encodeURIComponent(message());
+        '&body=' + encodeURIComponent(text);
       status.textContent = say('mail', 'Your e-mail app should open with the message ready. Send it from there. If nothing opens, write to {email}.');
+      if (fallback && copyBox) { copyBox.value = text; fallback.hidden = false; }  // for a desktop without a mail app: copy and paste
+    });
+    if (copyButton && copyBox) copyButton.addEventListener('click', function () {
+      copyBox.select();
+      var done = function () { copyButton.textContent = say('copied', 'Message copied'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(copyBox.value).then(done, function () { document.execCommand('copy'); done(); });
+      else { document.execCommand('copy'); done(); }
     });
     var wa = $('#send-whatsapp');
     if (wa) wa.addEventListener('click', function () {
@@ -193,11 +232,11 @@
     if (drawn && drawn.scrollWidth > drawn.clientWidth) drawn.scrollLeft = (drawn.scrollWidth - drawn.clientWidth) / 2;
     button.addEventListener('click', function () {
       button.disabled = true;
-      button.textContent = 'Loading…';
+      button.textContent = button.getAttribute('data-loading') || 'Loading…';
       Promise.all([
         load('link', { rel: 'stylesheet', href: '/assets/vendor/leaflet/leaflet.css' }),
         load('script', { src: '/assets/vendor/leaflet/leaflet.js' })
-      ]).then(function () { buildMap(box); }, function () { button.textContent = 'The map could not be loaded'; });
+      ]).then(function () { buildMap(box); }, function () { button.disabled = false; button.textContent = button.getAttribute('data-error') || 'The map could not be loaded.'; });
     });
   }
   function el(tag, text, href) {
@@ -213,7 +252,8 @@
     var live = $('.map-live');
     if (live) live.hidden = true;
     box.classList.add('is-live');
-    var map = L.map(box, { scrollWheelZoom: false });
+    var map = L.map(box, { scrollWheelZoom: false, zoomControl: false });
+    L.control.zoom({ zoomInTitle: box.getAttribute('data-zoom-in') || 'Zoom in', zoomOutTitle: box.getAttribute('data-zoom-out') || 'Zoom out' }).addTo(map);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors'
@@ -236,6 +276,7 @@
       bounds.push([p.lat, p.lon]);
     });
     map.fitBounds(L.latLngBounds(bounds).pad(0.08));
+    box.focus({ preventScroll: true });  // the button that was pressed is gone: the keyboard stays on the map
   }
 
   /* ---------- photos open large: tap a photo of a gallery; arrows, swipe, Esc ---------- */
@@ -273,8 +314,8 @@
       img.alt = source.alt;
       caption.innerHTML = credit ? credit.innerHTML : '';
       count.textContent = pad(current + 1) + ' / ' + pad(figures.length);
-      prev.disabled = current === 0;
-      next.disabled = current === figures.length - 1;
+      prev.setAttribute('aria-disabled', current === 0 ? 'true' : 'false');  // not disabled: the focus stays in the dialog
+      next.setAttribute('aria-disabled', current === figures.length - 1 ? 'true' : 'false');
     }
     function open(g, i) {
       gallery = g;
@@ -297,13 +338,14 @@
       var back = figures[current] && $('.photo-open', figures[current]);
       if (back) back.focus({ preventScroll: true });
     });
-    prev.addEventListener('click', function () { show(current - 1); });
-    next.addEventListener('click', function () { show(current + 1); });
+    prev.addEventListener('click', function () { if (current > 0) show(current - 1); });
+    next.addEventListener('click', function () { if (current < figures.length - 1) show(current + 1); });
     $('.lightbox-close', box).addEventListener('click', function () { box.close(); });
     box.addEventListener('click', function (ev) { if (ev.target === box || ev.target.classList.contains('lightbox-figure')) box.close(); });
-    box.addEventListener('keydown', function (ev) {
-      if (ev.key === 'ArrowLeft') { ev.preventDefault(); show(current - 1); }
-      if (ev.key === 'ArrowRight') { ev.preventDefault(); show(current + 1); }
+    document.addEventListener('keydown', function (ev) {  // the arrows work wherever the focus is while the view is open
+      if (!box.open) return;
+      if (ev.key === 'ArrowLeft') { ev.preventDefault(); if (current > 0) show(current - 1); }
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); if (current < figures.length - 1) show(current + 1); }
     });
     var startX = null;
     box.addEventListener('touchstart', function (ev) { startX = ev.touches.length === 1 ? ev.touches[0].clientX : null; }, { passive: true });
@@ -395,7 +437,8 @@
     initMenu();
     $$('[data-gallery]').forEach(initGallery);
     initLightbox();
-    initVideo();
+    window.addEventListener('load', initVideo);  // the video waits for the page
+    initWhatsAppLinks();
     initEnquiry();
     initMap();
     initStayFilters();

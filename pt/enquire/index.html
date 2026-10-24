@@ -18,12 +18,14 @@
 <meta property="og:description" content="Conte-nos sobre a viagem: datas, grupo, destino. Nós voltamos com um plano bem definido.">
 <meta property="og:url" content="https://everflowexperience.com/pt/enquire/">
 <meta property="og:image" content="https://everflowexperience.com/assets/img/og/everflow.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
 <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/everflow.css?v=6862a23f">
-<script src="/assets/js/everflow.js?v=dade7f03" defer></script>
+<link rel="stylesheet" href="/assets/css/everflow.css?v=13934b80">
+<script src="/assets/js/everflow.js?v=5af3ae7d" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Ir direto para o conteúdo</a>
@@ -33,9 +35,9 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
       <a href="/pt/destinations/">Destinos</a>
-      <a href="/stay/">Onde se hospedar</a>
-      <a href="/experiences/">Experiências</a>
-      <a href="/about/">Sobre nós</a>
+      <a href="/stay/">Onde se hospedar <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (em inglês)</span></a>
+      <a href="/experiences/">Experiências <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (em inglês)</span></a>
+      <a href="/about/">Sobre nós <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> (em inglês)</span></a>
       <span class="lang-switch"><a href="/enquire/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/es/enquire/" hreflang="es" lang="es" aria-label="Español">ES</a><a href="/pt/enquire/" hreflang="pt-BR" lang="pt-BR" aria-label="Português" aria-current="true">PT</a></span>
       <a class="button button--small" href="/pt/enquire/" aria-current="page">Planeje uma viagem</a>
     </nav>
@@ -53,31 +55,38 @@
 </section>
 <section class="section section--tight">
   <div class="wrap enquire">
-    <form class="form" id="enquiry" novalidate data-email="info@everflowexperience.com" data-whatsapp="491759505075" data-i18n="{&quot;name&quot;:&quot;Nome&quot;,&quot;email&quot;:&quot;E-mail&quot;,&quot;phone&quot;:&quot;Telefone&quot;,&quot;destination&quot;:&quot;Destino&quot;,&quot;stay&quot;:&quot;Onde se hospedar&quot;,&quot;type&quot;:&quot;Tipo de acomodação&quot;,&quot;house&quot;:&quot;Casa&quot;,&quot;interest&quot;:&quot;Interesse principal&quot;,&quot;group&quot;:&quot;Tamanho do grupo&quot;,&quot;dates&quot;:&quot;Datas&quot;,&quot;subject&quot;:&quot;Consulta sobre viagem: &quot;,&quot;invalid&quot;:&quot;Por favor, insira seu nome e um endereço de e-mail válido.&quot;,&quot;mail&quot;:&quot;Seu aplicativo de e-mail deve abrir com a mensagem já pronta. Envie-a a partir daí. Se nada abrir, escreva para {email}.&quot;,&quot;wa&quot;:&quot;O WhatsApp deve abrir com a mensagem já pronta. Envie-a a partir daí.&quot;}">
+    <form class="form" id="enquiry" novalidate data-email="info@everflowexperience.com" data-whatsapp="491759505075" data-i18n="{&quot;name&quot;:&quot;Nome&quot;,&quot;email&quot;:&quot;E-mail&quot;,&quot;phone&quot;:&quot;Telefone&quot;,&quot;destination&quot;:&quot;Destino&quot;,&quot;stay&quot;:&quot;Onde se hospedar&quot;,&quot;type&quot;:&quot;Tipo de acomodação&quot;,&quot;house&quot;:&quot;Casa&quot;,&quot;interest&quot;:&quot;Interesse principal&quot;,&quot;group&quot;:&quot;Tamanho do grupo&quot;,&quot;dates&quot;:&quot;Datas&quot;,&quot;subject&quot;:&quot;Consulta sobre viagem: &quot;,&quot;invalid&quot;:&quot;Por favor, insira seu nome e um endereço de e-mail válido.&quot;,&quot;mail&quot;:&quot;Seu aplicativo de e-mail deve abrir com a mensagem já pronta. Envie-a a partir daí. Se nada abrir, escreva para {email}.&quot;,&quot;wa&quot;:&quot;O WhatsApp deve abrir com a mensagem já pronta. Envie-a a partir daí.&quot;,&quot;name_error&quot;:&quot;Digite seu nome.&quot;,&quot;email_error&quot;:&quot;Insira um endereço de e-mail válido.&quot;,&quot;page&quot;:&quot;Página&quot;,&quot;copied&quot;:&quot;Mensagem copiada&quot;}">
       <div class="field-row">
-        <div class="field"><label for="f-name">Nome</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-        <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-name">Nome <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error"><p class="field-error" id="f-name-error" hidden></p></div>
+        <div class="field"><label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-error"><p class="field-error" id="f-email-error" hidden></p></div>
       </div>
-      <div class="field"><label for="f-phone">Número de telefone ou do WhatsApp <span class="optional">(opcional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <p class="small form-legend">* obrigatório</p>
+      <div class="field"><label for="f-phone">Número de telefone ou do WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
       <div class="field-row">
         <div class="field"><label for="f-destination">Destino</label><select id="f-destination" name="destination"><option value="">Ainda não sei</option><optgroup label="Suíça"><option value="st-moritz">St. Moritz</option><option value="zermatt">Zermatt</option><option value="laax">Laax</option><option value="gstaad">Gstaad</option><option value="engelberg">Engelberg</option></optgroup><optgroup label="Áustria"><option value="lech">Lech am Arlberg</option><option value="kitzbuehel">Kitzbühel</option><option value="seefeld">Seefeld in Tirol</option><option value="innsbruck">Innsbruck</option></optgroup><optgroup label="França"><option value="megeve">Megève</option><option value="courchevel">Courchevel</option></optgroup><optgroup label="Itália"><option value="cortina">Cortina d'Ampezzo</option></optgroup><optgroup label="Alemanha"><option value="berchtesgaden">Berchtesgaden</option><option value="garmisch-partenkirchen">Garmisch-Partenkirchen</option><option value="munich">Munique</option></optgroup></select></div>
         <div class="field"><label for="f-stay">Onde se hospedar</label><select id="f-stay" name="stay"><option value="">Sem preferência</option><optgroup label="Suíça"><option value="rocksresort-laax">rocksresort, Laax</option><option value="kempinski-engelberg">Kempinski Palace Engelberg, Engelberg</option></optgroup><optgroup label="Áustria"><option value="pepper-collection">pepper-collection, Lech am Arlberg</option><option value="aurelio-lech">Hotel &amp; Chalet Aurelio, Lech am Arlberg</option><option value="rote-wand">Rote Wand Gourmet Hotel, Lech am Arlberg</option><option value="sacher-seefeld">Alpin Resort Sacher Seefeld, Seefeld in Tirol</option><option value="interalpen-tyrol">Interalpen-Hotel Tyrol, Seefeld in Tirol</option><option value="schlosshotel-kitzbuehel">Schlosshotel Kitzbühel, Kitzbühel</option></optgroup><optgroup label="França"><option value="chalets-megeve">Chalets in Megève, Megève</option></optgroup><optgroup label="Alemanha"><option value="kempinski-berchtesgaden">Kempinski Hotel Berchtesgaden, Berchtesgaden</option><option value="kempinski-muenchen">Hotel Vier Jahreszeiten Kempinski München, Munique</option></optgroup></select></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-type">Tipo de acomodação</label><select id="f-type" name="type"><option value="">Ainda não sei</option><option value="hotel">Hotel</option><option value="chalet">Chalé</option><option value="apartment">Apartamento</option></select></div>
-        <div class="field"><label for="f-house">Casa <span class="optional">(opcional)</span></label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="field"><label for="f-house">Casa</label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label for="f-interest">O que você gostaria de fazer?</label><select id="f-interest" name="interest"><option value="">Ainda não sei</option><option value="ski-coaching">Aulas de esqui e snowboard</option><option value="heli-and-backcountry">Heli e áreas remotas</option><option value="private-guiding">Passeios guiados particulares: caminhadas e passeios de bicicleta</option><option value="culinary-and-wine">Gastronomia e vinhos</option><option value="wellness-and-spa">Bem-estar e spa</option><option value="summer">Verão nos Alpes</option><option value="private-transport">Transporte particular: jato e helicóptero</option><option value="corporate-and-groups">Retiros corporativos e em grupo</option></select></div>
+        <div class="field"><label for="f-interest">O que você gostaria de fazer?</label><select id="f-interest" name="interest"><option value="">Ainda não sei</option><option value="ski-coaching">Aulas de esqui e snowboard</option><option value="heli-and-backcountry">Heliski e fora de pista</option><option value="private-guiding">Passeios guiados particulares: caminhadas e passeios de bicicleta</option><option value="culinary-and-wine">Gastronomia e vinhos</option><option value="wellness-and-spa">Bem-estar e spa</option><option value="summer">Verão nos Alpes</option><option value="private-transport">Transporte particular: jato e helicóptero</option><option value="corporate-and-groups">Retiros corporativos e em grupo</option></select></div>
         <div class="field"><label for="f-group">Tamanho do grupo</label><select id="f-group" name="group"><option value="">Escolha</option><option>1</option><option>2</option><option>3–4</option><option>5–8</option><option>9 ou mais</option></select></div>
       </div>
       <div class="field"><label for="f-dates">Datas ou época</label><input id="f-dates" name="dates" type="text" placeholder="Por exemplo: de 4 a 11 de fevereiro, ou na Páscoa"></div>
-      <div class="field"><label for="f-message">Mais alguma coisa? <span class="optional">(opcional)</span></label><textarea id="f-message" name="message" rows="5"></textarea></div>
+      <div class="field"><label for="f-message">Mais alguma coisa?</label><textarea id="f-message" name="message" rows="5"></textarea></div>
       <div class="actions">
         <button class="button" type="submit">Enviar por e-mail</button>
         <button class="button button--ghost" type="button" id="send-whatsapp">Enviar pelo WhatsApp</button>
       </div>
       <p class="status" id="form-status" role="status" aria-live="polite"></p>
+      <div class="fallback" id="mail-fallback" hidden>
+        <p class="small">Caso seu aplicativo de e-mail não tenha aberto, copie a mensagem e cole-a em um e-mail para <a href="mailto:info@everflowexperience.com">info@everflowexperience.com</a>.</p>
+        <label class="visually-hidden" for="f-copy">Copiar mensagem</label><textarea id="f-copy" rows="8" readonly></textarea>
+        <button class="button button--small button--ghost" type="button" id="copy-message">Copiar mensagem</button>
+      </div>
+      <noscript><p class="small">Este formulário requer JavaScript. Escreva para <a href="mailto:info@everflowexperience.com">info@everflowexperience.com</a> ou pelo WhatsApp.</p></noscript>
       <p class="small">Utilizamos seus dados apenas para responder à sua consulta. Consulte nossa <a href="/datenschutz.html#en">política de privacidade</a>.</p>
     </form>
     <aside class="enquire-aside">
@@ -93,7 +102,7 @@
   </div>
 </section>
 </main>
-<footer class="site-footer" lang="pt-BR">
+<footer class="site-footer" data-wa-greeting="Olá, estou escrevendo do site everflowexperience.com ({page})." lang="pt-BR">
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="/assets/img/brand/wordmark-white-360.png" srcset="/assets/img/brand/wordmark-white-720.png 2x" width="360" height="173" alt="EverFlow Experience" loading="lazy">

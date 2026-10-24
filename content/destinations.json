@@ -153,12 +153,12 @@
         ],
         [
           "Nearest airport",
-          "Zurich (about 1.5 hours)"
+          "Zurich Airport (about 1.5 hours)"
         ]
       ],
       "who": "Skiers and snowboarders of every level, from children to adults, and freestyle riders who come for the snow parks and the halfpipe.",
       "when": "Winter for skiing, the snow parks, sledging, ice skating and cross-country skiing; summer for biking, hiking, river rafting and the Rhine Gorge.",
-      "how": "About 30 minutes by car from Chur. By train to Chur, then about 30 minutes by PostBus; or from Chur by the Rhaetian Railway through the Rhine Gorge to Ilanz, and on by PostBus. [laax.com](https://www.laax.com/en)"
+      "how": "About 30 minutes by car from Chur. By train to Chur, then about 30 minutes by PostBus; or from Chur by the Rhaetian Railway through the Rhine Gorge to Ilanz, and on by PostBus. More on [laax.com](https://www.laax.com/en)."
     },
     {
       "slug": "gstaad",
@@ -403,7 +403,7 @@
         "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
         "source_url": "https://commons.wikimedia.org/wiki/File:View_of_Meg%C3%A8ve_and_the_Mont_Blanc_massif_from_Le_Christomet,_Meg%C3%A8ve,_2025.jpg"
       },
-      "tagline": "A village of chalets with views of Mont Blanc, about an hour from Geneva.",
+      "tagline": "A village of chalets with views of Mont Blanc, about an hour and a quarter from Geneva.",
       "intro": "Megève was developed as a ski resort in the 1920s by the Rothschild family and has kept the feel of a Savoyard village: stone streets, chalets and wide, tree-lined slopes.",
       "facts": [
         [
@@ -618,7 +618,8 @@
       ],
       "who": "For guests who want a day of museums, beer halls or shopping before heading into the mountains, and for anyone who lands late and wants a good night's sleep before the drive.",
       "when": "All year. In winter a city night fits easily at the start or end of a ski week; the Christmas markets run through Advent.",
-      "how": "Munich Airport has direct flights from across Europe and overseas. From the airport, the city centre is about 40 to 45 minutes by train or car."
+      "how": "Munich Airport has direct flights from across Europe and overseas. From the airport, the city centre is about 40 to 45 minutes by train or car.",
+      "seo_title": "Munich: a city night before or after the Alps — EverFlow Experience"
     }
   ]
 }

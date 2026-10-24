@@ -15,7 +15,7 @@ and JavaScript, generated from the content files by one small Python script.
 │   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place
-│   ├── experiences.json       # the nine experiences
+│   ├── experiences.json       # the eight experiences
 │   ├── guides.json            # the guides (English only): sections, places and hotels they name
 │   ├── team.json              # the team
 │   ├── i18n/es.json, pt.json  # Spanish and Portuguese: each English text → its translation
@@ -89,9 +89,12 @@ A new or changed English text has no translation until it is added: the page sho
 meanwhile, and `scripts/check.py` warns. To add the missing ones:
 
 1. `python scripts/build.py --missing missing.json` lists them (`missing.json` is a scratch file;
-   do not commit it).
-2. Translate them with DeepL (target `ES-419` and `PT-BR`). Names stay as they are (Lech am
-   Arlberg, Seefeld in Tirol, Les 3 Vallées, Ski Arlberg); only Munich becomes Múnich / Munique.
+   **Place names** in Spanish and Portuguese: a city, region, range or lake with a living exonym
+   takes it (Múnich / Munique, Zúrich / Zurique, Ginebra / Genebra, Baviera, el Tirol, Saboya / Saboia,
+   Engadina, los Dolomitas / as Dolomitas, los Andes); a resort, village, lift, ski area or brand keeps
+   its local name (Lech am Arlberg, Zermatt, Megève, Kitzbühel, Garmisch-Partenkirchen, Cortina
+   d'Ampezzo, Ski Arlberg, Les 3 Vallées). St. Moritz and Las Leñas stay as they are in every language.
+   DeepL output is checked against this rule.
    `{name}`-style placeholders, `[links](/…)` and numbers stay unchanged; Spanish writes thousands
    with a point (1.300 m) and decimals with a comma (1,5 horas).
 3. Add them to the two files, then `python scripts/build.py` and `python scripts/check.py`.
