@@ -928,7 +928,7 @@ def place_page(p):
                         for im in p['gallery'])
         pictures = f'''<section class="section section--tight">
   <div class="wrap">
-    <div class="gallery" data-gallery data-title="{a(name)}" role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
+    <div class="gallery" data-gallery data-title="{a(name)}" data-close="{a(ui("Close"))}" data-prev-label="{a(ui("Previous photo"))}" data-next-label="{a(ui("Next photo"))}" role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
       <ul class="gallery-track" tabindex="0">{items}</ul>
       <div class="gallery-controls" hidden>
         <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo"))}">←</button>

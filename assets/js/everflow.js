@@ -281,6 +281,9 @@
       figures = $$('.gallery-item figure', g);
       title.textContent = g.getAttribute('data-title') || '';
       box.setAttribute('aria-label', g.getAttribute('aria-label') || 'Photos');
+      $('.lightbox-close', box).setAttribute('aria-label', g.getAttribute('data-close') || 'Close');  // a translated page names its buttons
+      prev.setAttribute('aria-label', g.getAttribute('data-prev-label') || 'Previous photo');
+      next.setAttribute('aria-label', g.getAttribute('data-next-label') || 'Next photo');
       var href = g.getAttribute('data-enquire-href');  // the stay's enquiry button, under the photo
       ask.hidden = !href;
       box.classList.toggle('has-enquire', !!href);
