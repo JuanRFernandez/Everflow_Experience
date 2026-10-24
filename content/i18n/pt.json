@@ -33,7 +33,7 @@
  "About": "Sobre nós",
  "About 1.5 hours by car from Munich Airport, or by train from Munich in around 1.5 hours. Innsbruck Airport is about an hour away.": "A cerca de 1,5 hora de carro do Aeroporto de Munique ou, de trem, a partir de Munique, em cerca de 1,5 hora. O Aeroporto de Innsbruck fica a cerca de uma hora de distância.",
  "About 1.5 hours by car to Garmisch-Partenkirchen": "Cerca de 1,5 hora de carro até Garmisch-Partenkirchen",
- "About 30 minutes by car from Chur and 1 hour 45 minutes from Zurich. By train to Chur, then through the Rhine Gorge to Ilanz and on by PostBus in about 30 minutes. [laax.com](https://www.laax.com/en)": "A cerca de 30 minutos de carro de Chur e a 1 hora e 45 minutos de Zurique. De trem até Chur, depois pela Garganta do Reno até Ilanz e, de lá, de PostBus em cerca de 30 minutos. [laax.com](https://www.laax.com/en)",
+ "About 30 minutes by car from Chur. By train to Chur, then about 30 minutes by PostBus; or from Chur by the Rhaetian Railway through the Rhine Gorge to Ilanz, and on by PostBus. [laax.com](https://www.laax.com/en)": "A cerca de 30 minutos de carro de Chur. De trem até Chur e, em seguida, cerca de 30 minutos de PostBus; ou de Chur pela Ferrovia Rética, passando pelo Desfiladeiro do Reno até Ilanz, e, de lá, de PostBus. [laax.com](https://www.laax.com/en)",
  "About an hour and a half from Zurich Airport by car or train. Lucerne is under an hour away.": "A cerca de uma hora e meia do Aeroporto de Zurique, de carro ou de trem. Lucerna fica a menos de uma hora de distância.",
  "About an hour and a quarter from Geneva Airport by car. By train to Sallanches, then about 20 minutes by road.": "A cerca de uma hora e um quarto de carro do Aeroporto de Genebra. De trem até Sallanches e, em seguida, cerca de 20 minutos de carro.",
  "About three hours from Zurich by car or train. Private flights land at Engadin Airport in Samedan, a few minutes away.": "A cerca de três horas de Zurique de carro ou de trem. Os voos particulares pousam no Aeroporto de Engadin, em Samedan, a poucos minutos de distância.",
@@ -391,7 +391,7 @@
  "{n} addresses we know": "{n} acomodações que conhecemos",
  "{n} bedrooms": "{n} quartos",
  "{n} guests": "{n} hóspedes",
- "{n} places in {m} countries, from Bavaria to the Dolomites, and the hotels and chalets we know there.": "{n} locais em {m} países, da Bavária às Dolomitas, e os hotéis e chalés que conhecemos por lá.",
+ "{n} places in {m} countries, from Bavaria to the Dolomites, and the hotels and chalets we know there.": "{n} locais em {m} países, da Baviera às Dolomitas, e os hotéis e chalés que conhecemos por lá.",
  "{n} places in {m} countries, from Bavaria to the Dolomites. Each page shows the hotels and chalets we know there.": "{n} locais em {m} países, da Baviera às Dolomitas. Cada página apresenta os hotéis e chalés que conhecemos nessas regiões.",
  "Évasion Mont-Blanc": "Évasion Mont-Blanc"
 }
