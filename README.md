@@ -89,12 +89,13 @@ A new or changed English text has no translation until it is added: the page sho
 meanwhile, and `scripts/check.py` warns. To add the missing ones:
 
 1. `python scripts/build.py --missing missing.json` lists them (`missing.json` is a scratch file;
-   **Place names** in Spanish and Portuguese: a city, region, range or lake with a living exonym
-   takes it (Múnich / Munique, Zúrich / Zurique, Ginebra / Genebra, Baviera, el Tirol, Saboya / Saboia,
-   Engadina, los Dolomitas / as Dolomitas, los Andes); a resort, village, lift, ski area or brand keeps
-   its local name (Lech am Arlberg, Zermatt, Megève, Kitzbühel, Garmisch-Partenkirchen, Cortina
-   d'Ampezzo, Ski Arlberg, Les 3 Vallées). St. Moritz and Las Leñas stay as they are in every language.
-   DeepL output is checked against this rule.
+   do not commit it).
+2. Translate them with DeepL (target `ES-419` and `PT-BR`), then check the output against the rule
+   for place names: a city, region, range or lake with a living exonym takes it (Múnich / Munique,
+   Zúrich / Zurique, Ginebra / Genebra, Baviera, el Tirol, Saboya / Saboia, Engadina, los Dolomitas /
+   as Dolomitas, los Andes); a resort, village, lift, ski area or brand keeps its local name (Lech am
+   Arlberg, Zermatt, Megève, Kitzbühel, Garmisch-Partenkirchen, Cortina d'Ampezzo, Ski Arlberg,
+   Les 3 Vallées). St. Moritz and Las Leñas stay as they are in every language.
    `{name}`-style placeholders, `[links](/…)` and numbers stay unchanged; Spanish writes thousands
    with a point (1.300 m) and decimals with a comma (1,5 horas).
 3. Add them to the two files, then `python scripts/build.py` and `python scripts/check.py`.

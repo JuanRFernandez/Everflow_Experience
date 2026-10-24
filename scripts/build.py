@@ -188,6 +188,26 @@ def image_size(path):
         head = f.read(32)
     if head[:8] == b'\x89PNG\r\n\x1a\n':
         return struct.unpack('>II', head[16:24])
+    if head[:2] == b'\xff\xd8':  # JPEG: walk the segments to the frame header
+        with open(path, 'rb') as f:
+            data = f.read()
+        i = 2
+        while i < len(data) - 9:
+            if data[i] != 0xFF:
+                i += 1
+                continue
+            marker = data[i + 1]
+            if marker == 0xFF:
+                i += 1
+                continue
+            if marker in (0xD8, 0x01) or 0xD0 <= marker <= 0xD7:
+                i += 2
+                continue
+            length = struct.unpack('>H', data[i + 2:i + 4])[0]
+            if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                h, w = struct.unpack('>HH', data[i + 5:i + 9])
+                return w, h
+            i += 2 + length
     if head[:4] == b'RIFF' and head[8:12] == b'WEBP':
         kind = head[12:16]
         if kind == b'VP8 ':
@@ -458,18 +478,15 @@ def footer():
 
 
 # Pages serves the whole branch: the source files and the brochures are kept out of search results
-ROBOTS_OFF = ('/content/', '/scripts/', '/docs/', '/brand/', '/assets/stays/', '/CLAUDE.md', '/README.md', '/library.example.json')
+ROBOTS_OFF = ('/content/', '/scripts/', '/docs/', '/brand/', '/.claude/', '/assets/stays/', '/CLAUDE.md', '/README.md', '/library.example.json')
+PLACE_ALIAS = {'munich': 'München'}  # a stay named in the place's own language counts as named after it
 OG_LOCALE = {'en': 'en_GB', 'es': 'es_AR', 'pt': 'pt_BR'}
 
 
 def og_image_meta(image, alt):
     """og:image:width, :height and :alt for the preview picture, when its size can be read."""
-    out = ''
-    try:
-        w, h = image_size(os.path.join(ROOT, image))
-        out += f'\n<meta property="og:image:width" content="{w}">\n<meta property="og:image:height" content="{h}">'
-    except Exception:
-        pass
+    w, h = image_size(os.path.join(ROOT, image))  # fails loudly: every preview picture is a PNG, WebP or JPEG we wrote
+    out = f'\n<meta property="og:image:width" content="{w}">\n<meta property="og:image:height" content="{h}">'
     if alt:
         out += f'\n<meta property="og:image:alt" content="{a(alt)}">'
     return out
@@ -478,6 +495,8 @@ def og_image_meta(image, alt):
 def page(path, title, description, body, lang=None, index=True, image='assets/img/og/everflow.jpg', data=None, image_alt=None):
     """One page. `path` is the English output path; in another language it is written under es/ or pt/."""
     en_url = url_of(path)
+    if not image_alt:
+        image_alt = tr(SITE['description'])  # the brand picture, or a picture without its own words
     here = out_path(path)
     url = SITE['url'] + url_of(here)
     robots = '' if index else '\n<meta name="robots" content="noindex, follow">'
@@ -504,7 +523,7 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
 <meta property="og:description" content="{a(description)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{SITE["url"]}/{image}">{og_image_meta(image, image_alt)}
-<meta property="og:locale" content="{OG_LOCALE[LANG]}">
+<meta property="og:locale" content="{'de_DE' if lang == 'de' else OG_LOCALE[LANG]}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
@@ -971,8 +990,8 @@ def place_page(p):
   </div>
 </section>
 {cta_band(p["slug"])}'''
-    title = tr(p['seo_title']) if p.get('seo_title') else ui('{name}: tailor-made ski trips — EverFlow Experience', name=name)
-    description = f'{tr(p["tagline"])} ' + ui('Tailor-made trips to {name} with the hotels and chalets we know, planned by one host.', name=name)
+    title = tr(p['seo_title']) if p.get('seo_title') else ui('Ski trips to {name} — EverFlow Experience', name=name)
+    description = tr(p['seo_description']) if p.get('seo_description') else f'{tr(p["tagline"])} ' + ui('Planned by one host, with the hotels and chalets we know.')
     return page(f'destinations/{p["slug"]}/index.html', title, description, body,
                 image=variants(p['image']['src'])[-1][2] if p.get('image') else 'assets/img/og/everflow.jpg',
                 image_alt=tr(p['image']['alt']) if p.get('image') else None)
@@ -1097,7 +1116,7 @@ def partner_page(p):
       <ul class="ticks">{facts}</ul>
     </div>
     <div>
-      {section_head("Why we send guests here", f"Who {p['name']} suits.", p["why"], level=2)}
+      {section_head("Why we send guests here", f"{p['name']}: who {'they suit' if p['kind'].split()[0].lower().endswith('s') else 'it suits'}.", p["why"], level=2)}
     </div>
   </div>
 </section>
@@ -1115,8 +1134,19 @@ def partner_page(p):
 {sib_html}
 {cta_band(p["place"], p["slug"])}'''
     image = variants(f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}')[-1][2] if p.get('photos') else 'assets/img/og/everflow.jpg'
-    named = p['location'].split(',')[0] in p['name'] or PLACE[p['place']]['name'] in p['name']  # "Chalets in Megève"
-    title = f'{p["name"]} — EverFlow Experience' if named else f'{p["name"]}: {p["kind"].lower()} in {PLACE[p["place"]]["name"]} — EverFlow Experience'
+    place = PLACE[p['place']]['name']
+    words = [w for w in re.split(r'[\s,]+', place + ' ' + PLACE_ALIAS.get(p['place'], '')) if len(w) >= 4]
+    named = any(w.lower() in p['name'].lower() for w in words)  # "Chalets in Megève", "Sacher Seefeld", "Kempinski München"
+    kinds = [k.rstrip('s') for k in re.split(r'\W+', p['kind'].lower()) if k and k != 'and']
+    kind_in_name = any(k in p['name'].lower() for k in kinds)  # "Rote Wand Gourmet Hotel"
+    if named:
+        title = f'{p["name"]} — EverFlow Experience'
+    elif kind_in_name:
+        title = f'{p["name"]} in {place} — EverFlow Experience'
+    else:
+        title = f'{p["name"]}: {p["kind"].lower()} in {place} — EverFlow Experience'
+    if len(title) > 70:  # a long name and kind: the brand goes, the words a guest types stay
+        title = title.replace(' — EverFlow Experience', '')
     description = p['card'] if named else f'{p["name"]}, {p["location"]}: {p["card"]}'
     return page(f'stay/{p["slug"]}/index.html', title, description, body, image=image,
                 image_alt=tr(p['photos'][0]['alt']) if p.get('photos') else None)
@@ -1233,7 +1263,8 @@ def guide_page(g):
 {guides_section([x for x in GUIDES if x is not g], "More guides", "Read on.")}
 {cta_band(interest=g.get("interest"))}'''
     return page(f'guides/{g["slug"]}/index.html', f'{g["name"]} — EverFlow Experience', g['description'], body,
-                image=variants(base)[-1][2], image_alt=g.get('image', {}).get('alt'))
+                image=variants(base)[-1][2],
+                image_alt=tr(PLACE[im['place']]['image']['alt']) if im.get('place') else im.get('alt'))
 
 
 def enquire_page():

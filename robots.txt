@@ -4,6 +4,7 @@ Disallow: /content/
 Disallow: /scripts/
 Disallow: /docs/
 Disallow: /brand/
+Disallow: /.claude/
 Disallow: /assets/stays/
 Disallow: /CLAUDE.md
 Disallow: /README.md

@@ -202,7 +202,7 @@
     });
     if (copyButton && copyBox) copyButton.addEventListener('click', function () {
       copyBox.select();
-      var done = function () { copyButton.textContent = say('copied', 'Message copied'); };
+      var done = function () { copyButton.textContent = say('copied', 'Message copied'); status.textContent = say('copied', 'Message copied'); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(copyBox.value).then(done, function () { document.execCommand('copy'); done(); });
       else { document.execCommand('copy'); done(); }
     });

@@ -68,7 +68,6 @@ th{color:var(--ink);font-weight:600}
 .button--ghost-light:hover{background:rgba(255,255,255,.14);color:#fff}
 .button--small{min-height:2.5rem;padding:.5rem 1.1rem;font-size:.875rem}
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
-@media (max-width:47.99rem){.form .actions #send-whatsapp{order:-1}}
 .req{color:var(--accent)}
 .form-legend{margin:-.25rem 0 1rem}
 .field-error{margin:.35rem 0 0;font-size:.875rem;color:#8a2f1f}
@@ -109,6 +108,7 @@ th{color:var(--ink);font-weight:600}
 }
 @media (max-width:63.99rem) and (scripting:none){
   .menu-toggle{display:none}
+  .site-header{position:static}
   .site-nav{display:flex;position:static;box-shadow:none;border:0;padding:0 0 1rem;max-height:none}
 }
 @media (forced-colors:active){
@@ -363,12 +363,13 @@ th{color:var(--ink);font-weight:600}
 .map-countries text{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.42em;fill:#b2a994}
 .map-cities circle{fill:#a39a87}
 .map-cities text{font-family:var(--sans);font-size:11px;font-style:italic;fill:#7c7465}
-.map-place circle{fill:var(--ink);stroke:#f6f2ea;stroke-width:2.5px;transition:fill .15s}
+.map-place circle:not(.map-hit){fill:var(--ink);stroke:#f6f2ea;stroke-width:2.5px;transition:fill .15s}
+.map-place .map-hit{fill:transparent;stroke:none}
 .map-place text{font-family:var(--sans);font-size:14px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:#f6f2ea;stroke-width:4px;stroke-linejoin:round}
-.map-place:hover circle,.map-place:focus-visible circle{fill:var(--accent)}
+.map-place:hover circle:not(.map-hit),.map-place:focus-visible circle:not(.map-hit){fill:var(--accent)}
 .map-place:hover text,.map-place:focus-visible text{fill:var(--accent)}
 .map-place:focus{outline:none}
-.map-place:focus-visible circle{stroke:var(--accent);stroke-width:4px}
+.map-place:focus-visible circle:not(.map-hit){stroke:var(--accent);stroke-width:4px}
 @media (max-width:44.99rem){  /* phones: the map keeps a readable size and scrolls sideways */
   .map-static{overflow-x:auto;overscroll-behavior-x:contain}
   .map-svg{width:45rem;max-width:none}
