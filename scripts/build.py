@@ -735,7 +735,7 @@ def home():
 </section>
 <section class="section" id="destinations">
   <div class="wrap">
-    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), tr(h["destinations_lead"]), more=(localized("/destinations/"), ui("All destinations")))}
+    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len(PLACES), m=len(COUNTRIES)), more=(localized("/destinations/"), ui("All destinations")))}
     <div class="gallery gallery--cards" data-gallery aria-label="{a(ui("Featured destinations"))}">
       <ul class="gallery-track" tabindex="0">
 {row}

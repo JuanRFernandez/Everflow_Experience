@@ -452,6 +452,53 @@
       "how": "By train to Visp, then the mountain railway to Zermatt. Drivers leave the car in Täsch and take the shuttle train for the last few minutes."
     },
     {
+      "slug": "laax",
+      "name": "Laax",
+      "country": "switzerland",
+      "area": "Flims Laax Falera",
+      "lat": 46.8064,
+      "lon": 9.2581,
+      "image": {
+        "src": "assets/img/destinations/laax",
+        "alt": "The village of Laax and its church in winter, below snow-covered mountains",
+        "credit": "Adrian Michael",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Laax_Winter.JPG"
+      },
+      "tagline": "A big ski area with five snow parks and the largest halfpipe in the world.",
+      "intro": "The LAAX ski area reaches from 1,100 m up to 3,018 m on the Vorab Glacier, with 216 km of slopes and 30 lifts, and is reached from Flims, Laax and Falera.",
+      "facts": [
+        [
+          "Region",
+          "Graubünden, Switzerland"
+        ],
+        [
+          "Altitude",
+          "1,100 to 3,018 m (Vorab Glacier)"
+        ],
+        [
+          "Ski area",
+          "216 km of slopes, 30 lifts"
+        ],
+        [
+          "Freestyle",
+          "Five snow parks and the largest halfpipe in the world"
+        ],
+        [
+          "Lift passes",
+          "Arranged by us, ready to collect at the ticket desks in Flims, Laax and Falera"
+        ],
+        [
+          "Nearest airport",
+          "Zurich (about 1.5 hours)"
+        ]
+      ],
+      "who": "Skiers and snowboarders of every level, from children to adults, and freestyle riders who come for the snow parks and the halfpipe.",
+      "when": "Winter for skiing, the snow parks, sledging, ice skating and cross-country skiing; summer for biking, hiking, river rafting and the Rhine Gorge.",
+      "how": "About 30 minutes by car from Chur. By train to Chur, then about 30 minutes by PostBus; or from Chur by the Rhaetian Railway through the Rhine Gorge to Ilanz, and on by PostBus. [laax.com](https://www.laax.com/en)"
+    },
+    {
       "slug": "megeve",
       "name": "Megève",
       "country": "france",
