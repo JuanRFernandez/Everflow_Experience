@@ -2430,21 +2430,31 @@
     "type": "apartment",
     "place": "las-lenas",
     "location": "Las Leñas",
-    "card": "The apartments of our founder's family in Las Leñas, for the southern winter.",
-    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas in Las Leñas, where he grew up skiing. For the ski season of the southern winter, from June to September.",
+    "card": "Our founder's family apartments in Las Leñas: two floors, four guests, let by EverFlow itself.",
+    "guests": "4",
+    "bedrooms": "1",
+    "bathrooms": "1",
+    "highlights": [
+      "Two floors",
+      "Kitchen"
+    ],
+    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas: of the four buildings of its complex, the one nearest the slopes. Most have two floors, with a double bedroom and the bathroom downstairs and a sofa bed and a cot upstairs, for four guests. We let them ourselves, for the ski season of the southern winter, from June to September.",
     "facts": [
-      "In the Edificio Atenas, in Las Leñas",
-      "The apartments of our founder's family",
+      "In the Edificio Atenas, the building of its complex nearest the slopes",
+      "Two floors: a double bedroom and the bathroom downstairs, a sofa bed and a cot upstairs",
+      "For four guests",
+      "A kitchen with a dining table in the living room",
+      "Let by EverFlow itself: the apartments of our founder's family",
       "For the ski season, from June to September"
     ],
-    "why": "For families and friends from Argentina and Brazil who want a ski week in the Andes, in the apartments of our founder's family.",
+    "why": "For couples, families and friends from Argentina, Brazil and beyond who want a ski week in the Andes with one host, in the apartments of the family of our founder, who grew up skiing here.",
     "links": [
       {
         "label": "laslenas.com",
         "url": "https://laslenas.com/"
       }
     ],
-    "provider": "EverFlow is your contact before and during your stay. The apartments belong to the family of our founder, Juan Rodrigo.",
+    "provider": "EverFlow is your contact before and during your stay. The apartments are the family's own, and EverFlow lets them directly; the terms come with your proposal.",
     "credit": "Photo courtesy of the owner",
     "photos": [
       {

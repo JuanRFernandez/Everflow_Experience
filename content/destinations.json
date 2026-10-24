@@ -650,6 +650,14 @@
           "source_url": "https://commons.wikimedia.org/wiki/File:Cordillera_Las_Le%C3%B1as.jpg"
         },
         {
+          "src": "assets/img/destinations/las-lenas-tracks",
+          "alt": "Rocky peaks in the mist above a snowfield with ski tracks and the cable of a chairlift",
+          "credit": "Calamarcito",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Las_Le%C3%B1as_Cordillera.jpg"
+        },
+        {
           "src": "assets/img/destinations/las-lenas-chairlift",
           "alt": "A chairlift at Las Leñas, with the snowy Andes behind",
           "credit": "el_aguila",
@@ -667,7 +675,7 @@
         }
       ],
       "tagline": "Skiing high in the Andes of Mendoza, in the southern winter.",
-      "intro": "Las Leñas lies in the Andes of Mendoza, with its base at 2,240 m and its top at 3,430 m. It is where our founder, Juan Rodrigo, grew up skiing.",
+      "intro": "Las Leñas lies in the Andes of Mendoza, with its base at 2,240 m and its top at 3,430 m. Our founder, Juan Rodrigo, was born in Mendoza and grew up skiing here.",
       "facts": [
         [
           "Region",

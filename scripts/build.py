@@ -290,12 +290,15 @@ def on_map(p):
     return MAP_BOX[0] <= p['lon'] <= MAP_BOX[2] and MAP_BOX[1] <= p['lat'] <= MAP_BOX[3]
 
 
-def beyond_alps():
-    """'Beyond the Alps: Las Leñas (Argentina).' for the places outside the drawn map, or nothing."""
+def beyond_alps(link=False):
+    """'Beyond the Alps: Las Leñas (Argentina).' for the places outside the drawn map, or nothing.
+    With link, each place is a [name](url) link for a lead; without, plain text for a description."""
     beyond = [p for p in PLACES if not on_map(p)]
     if not beyond:
         return ''
-    return ui('Beyond the Alps: {places}.', places=', '.join(f'{tro(p["name"])} ({tr(COUNTRY[p["country"]]["name"])})' for p in beyond))
+    def name(p):
+        return f'[{tro(p["name"])}](/destinations/{p["slug"]}/)' if link else tro(p["name"])
+    return ui('Beyond the Alps: {places}.', places=', '.join(f'{name(p)} ({tr(COUNTRY[p["country"]]["name"])})' for p in beyond))
 
 
 def distance(p, q):
@@ -750,7 +753,7 @@ def home():
 </section>
 <section class="section" id="destinations">
   <div class="wrap">
-    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len([p for p in PLACES if on_map(p)]), m=len({p['country'] for p in PLACES if on_map(p)})) + (' ' + beyond_alps() if beyond_alps() else ''), more=(localized("/destinations/"), ui("All destinations")))}
+    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len([p for p in PLACES if on_map(p)]), m=len({p['country'] for p in PLACES if on_map(p)})) + (' ' + beyond_alps(link=True) if beyond_alps() else ''), more=(localized("/destinations/"), ui("All destinations")))}
     <div class="gallery gallery--cards" data-gallery aria-label="{a(ui("Featured destinations"))}">
       <ul class="gallery-track" tabindex="0">
 {row}
@@ -882,7 +885,7 @@ def destinations_index():
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
     alps = [p for p in PLACES if on_map(p)]
     lead = ui('{n} places in {m} countries across the Alps. Each page shows the hotels and chalets we know there.',
-              n=len(alps), m=len({p['country'] for p in alps})) + (' ' + beyond_alps() if beyond_alps() else '')
+              n=len(alps), m=len({p['country'] for p in alps})) + (' ' + beyond_alps(link=True) if beyond_alps() else '')
     off_map = [p for p in PLACES if not on_map(p)]
     beyond_note = ''
     if off_map:
