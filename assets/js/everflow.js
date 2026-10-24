@@ -140,7 +140,7 @@
     try { words = JSON.parse(form.getAttribute('data-i18n') || '{}'); } catch (err) { words = {}; }
     function say(key, english) { return (words[key] || english).replace('{email}', form.getAttribute('data-email')); }
     var params = new URLSearchParams(location.search);
-    ['destination', 'stay', 'type', 'interest'].forEach(function (key) {
+    ['destination', 'type', 'stay', 'house', 'interest'].forEach(function (key) {  // the link of a card fills the form in
       var value = params.get(key);
       var select = form.elements[key];
       if (!value || !select) return;
@@ -148,8 +148,64 @@
         if (select.options[i].value === value) { select.value = value; break; }
       }
     });
-    var house = params.get('house');  // a text field: the name of the house, as the link gives it
-    if (house && form.elements.house) form.elements.house.value = house.slice(0, 120);
+    /* Destination, stay, type and house are linked: the list the visitor just changed leads, the others follow.
+       The full lists are kept apart; a list is emptied and refilled with the options that fit (an option marked
+       hidden is still shown by iOS). A value that no longer fits goes back to "No preference". */
+    var dest = form.elements.destination, type = form.elements.type, stay = form.elements.stay, house = form.elements.house;
+    var houseField = house && house.closest('.field');
+    var softType = false;  // a type the script took from the chosen stay: shown, but it does not narrow the stays
+    function groups(select) {
+      return $$('optgroup', select).map(function (g) {
+        return { label: g.label, stay: g.getAttribute('data-stay'), options: $$('option', g) };
+      });
+    }
+    var allStays = stay ? groups(stay) : [], allHouses = house ? groups(house) : [];
+    function hasType(option, kind) { return !kind || (option.getAttribute('data-types') || '').split(' ').indexOf(kind) >= 0; }
+    function refill(select, all, fits) {
+      var chosen = select.value, kept = 0;
+      $$('optgroup', select).forEach(function (g) { select.removeChild(g); });
+      all.forEach(function (g) {
+        var options = g.options.filter(function (o) { return fits(g, o); });
+        if (!options.length) return;
+        var el = document.createElement('optgroup');
+        el.label = g.label;
+        options.forEach(function (o) { el.appendChild(o.cloneNode(true)); });
+        select.appendChild(el);
+        kept += options.length;
+      });
+      select.value = chosen;
+      if (select.selectedIndex < 0) select.value = '';
+      return kept;
+    }
+    function sync(source) {
+      if (!dest || !type || !stay) return;
+      if (source === 'type') softType = false;  // the visitor chose the type: it narrows the stays
+      if (source === 'stay') {
+        var picked = stay.value ? stay.options[stay.selectedIndex] : null;
+        if (picked) {
+          dest.value = picked.getAttribute('data-place') || '';
+          var kinds = (picked.getAttribute('data-types') || '').split(' ').filter(Boolean);
+          if (kinds.length === 1) {
+            if (type.value !== kinds[0]) { type.value = kinds[0]; softType = true; }  // a hotel: its type, shown
+          } else if (softType || (type.value && kinds.indexOf(type.value) < 0)) {
+            type.value = ''; softType = false;  // a chalet or an apartment: the guest says which; a type the stay lacks goes
+          }
+        } else if (softType) { type.value = ''; softType = false; }
+      }
+      var place = dest.value, kind = softType ? '' : type.value;
+      if (source !== 'stay') {  // a chosen stay leaves its own list as it is, so the visitor can go on through it (also by arrow keys)
+        refill(stay, allStays, function (g, o) { return (!place || o.getAttribute('data-place') === place) && hasType(o, kind); });
+        if (!stay.value && softType) { type.value = ''; softType = false; }  // the stay that set the type is gone
+      }
+      if (house) {
+        var n = refill(house, allHouses, function (g, o) { return g.stay === stay.value && hasType(o, type.value); });
+        if (houseField) houseField.hidden = n === 0;  // only "No preference" left: the field goes
+      }
+    }
+    [dest, type, stay].forEach(function (select) {
+      if (select) select.addEventListener('change', function () { sync(select.name); });
+    });
+    sync(params.get('stay') ? 'stay' : 'destination');  // a stay in the link is the most concrete wish: it corrects a destination that does not match
     function label(name) {
       var el = form.elements[name];
       if (!el || !el.value) return '';

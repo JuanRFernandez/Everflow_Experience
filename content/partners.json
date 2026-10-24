@@ -2154,16 +2154,16 @@
     "type": "hotel",
     "place": "seefeld",
     "location": "Telfs-Buchen, Seefeld plateau",
-    "card": "A large hotel at 1,300 m on the Seefeld plateau, with a spa of more than 5,300 m².",
+    "card": "A large hotel at 1,300 m on the Seefeld plateau, with a spa of more than 5,400 m².",
     "highlights": [
       "Panorama pool",
       "Mountain hut, 5 min walk",
       "Drive-in reception"
     ],
-    "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,300 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within easy reach.",
+    "lead": "At 1,300 m on the Seefeld high plateau, looking out over the Tyrolean mountains. A large hotel with a spa of more than 5,400 m², its own mountain hut five minutes' walk away, and ski areas from gentle to glacier within easy reach.",
     "facts": [
       "274 rooms, suites and panorama suites",
-      "A spa of more than 5,300 m² with a panorama pool",
+      "A spa of more than 5,400 m² with a panorama pool",
       "The hotel's own mountain hut, five minutes' walk away",
       "245 km of cross-country trails on the plateau; the Seefeld slopes 20 minutes away, the Nordkette 30 and the Sölden glaciers 70"
     ],
@@ -2425,7 +2425,7 @@
   {
     "slug": "apartments-las-lenas",
     "register": "Apartments Las Leñas (Edificio Atenas)",
-    "name": "Edificio Atenas",
+    "name": "Atenas Building",
     "kind": "Apartments",
     "type": "apartment",
     "place": "las-lenas",
@@ -2440,9 +2440,9 @@
       "Ski room",
       "Kitchen"
     ],
-    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas: of the four buildings of its complex, the one nearest the slopes. All are on the ground floor, with no stairs to the door; inside, most have two levels, a double bedroom and the bathroom below and a sofa bed and a cot above, for four guests in 50 m². A hot tub, a sauna and a ski room complete them. We let them ourselves, for the ski season of the southern winter, from June to September.",
+    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Atenas building: of the four buildings of its complex, the one nearest the slopes. All are on the ground floor, with no stairs to the door; inside, most have two levels, a double bedroom and the bathroom below and a sofa bed and a cot above, for four guests in 50 m². A hot tub, a sauna and a ski room complete them. We let them ourselves, for the ski season of the southern winter, from June to September.",
     "facts": [
-      "In the Edificio Atenas, the building of its complex nearest the slopes",
+      "In the Atenas building, the building of its complex nearest the slopes",
       "On the ground floor, with no stairs to the door",
       "Two levels inside: a double bedroom and the bathroom below, a sofa bed and a cot above",
       "For four guests, in 50 m²",
@@ -2463,27 +2463,27 @@
     "photos": [
       {
         "name": "atenas-living",
-        "alt": "Edificio Atenas: the living and dining room under a sloping wooden ceiling, with windows in the roof"
+        "alt": "Atenas Building: the living and dining room under a sloping wooden ceiling, with windows in the roof"
       },
       {
         "name": "atenas-living-2",
-        "alt": "Edificio Atenas: the living room with sofa beds, the dining table and the kitchen"
+        "alt": "Atenas Building: the living room with sofa beds, the dining table and the kitchen"
       },
       {
         "name": "atenas-kitchen",
-        "alt": "Edificio Atenas: the dining table and the kitchen, with a sofa bed along the wall"
+        "alt": "Atenas Building: the dining table and the kitchen, with a sofa bed along the wall"
       },
       {
         "name": "atenas-sitting",
-        "alt": "Edificio Atenas: the sitting area below the roof windows, with sofa beds and a television"
+        "alt": "Atenas Building: the sitting area below the roof windows, with sofa beds and a television"
       },
       {
         "name": "atenas-living-3",
-        "alt": "Edificio Atenas: the living room with the dining table and the roof windows"
+        "alt": "Atenas Building: the living room with the dining table and the roof windows"
       },
       {
         "name": "atenas-bedroom",
-        "alt": "Edificio Atenas: a bedroom with a double bed and built-in wardrobes"
+        "alt": "Atenas Building: a bedroom with a double bed and built-in wardrobes"
       }
     ]
   }

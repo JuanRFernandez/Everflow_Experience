@@ -4,6 +4,7 @@
     "eyebrow": "The Alps / 47.42°N, 10.99°E",
     "h1": "From first tracks to fireside.",
     "lead": "Tailor-made ski and mountain trips across the Alps, planned by one host.",
+    "hero_note": "Hosted by Juan Rodrigo Fernandez, former Argentinian Ski Team. Our team hosts in English, Spanish and Portuguese.",
     "destinations_eyebrow": "Destinations",
     "destinations_h2": "Where do you want to go?",
     "destinations_lead": "{n} places in {m} countries across the Alps, and the hotels and chalets we know there.",
@@ -32,11 +33,19 @@
     "items": [
       ["Where do you operate?", "Across the Alps: in Switzerland, Austria, France, Italy and Germany. And in Las Leñas, in the Argentine Andes, for the southern winter. [See all destinations](/destinations/)."],
       ["What can a trip include?", "Private coaching, hotels and chalets, dining, wellness, guiding and transfers. Every part is optional: some guests come for a single lesson, others for a full week we handle from start to finish."],
+      ["Why plan the stay through you rather than directly with the hotel?", "With many of our hotels we work under our own agreements, so the stay usually costs you the same or less than taking it directly. And you get the rest with it: we know these mountains and the people who run them, we build the week around your group, and we are there when something needs sorting out."],
+      ["What does planning with you cost?", "There is no separate planning fee: your proposal is one plan for the week, stay included. Coaching, guiding and the days we host are part of that proposal."],
+      ["Do you show prices?", "No. Every trip is planned for you, so we send a proposal with the costs once we know your dates, your group and what you want to do. A first proposal within 24 hours of your enquiry."],
+      ["How fast do you answer?", "Within one working day, often straight away. A first proposal within 24 hours."],
       ["Do I need a finished plan to get in touch?", "No. Start with whatever you know, a date, a group or an idea of the day, and we come back with the questions that matter and one clear proposal."],
-      ["Which languages do you host in?", "English, Spanish and Portuguese, with German-speaking instructors and partners across the Alps."],
-      ["Do you show prices?", "No. Every trip is planned for you, so we send a proposal with the costs once we know your dates, your group and what you want to do."]
+      ["How far ahead should I write?", "As early as you can for February and Easter, when the good houses go first; a week outside the holidays can come together at short notice."],
+      ["Who provides the stay itself?", "EverFlow is your contact before and during the trip. The hotel or the owner provides the stay under its own terms; every stay page says who."],
+      ["Do you arrange lift passes, transfers, ski school and equipment?", "Yes, wherever you want them in the plan; in LAAX the lift passes are ready to collect at the ticket desks."],
+      ["Do you take beginners and children?", "Yes: coaching runs from first days to race technique, and [the family guide](/guides/ski-week-with-kids/) shows how a week is built around children."],
+      ["Which languages do you host in?", "English, Spanish and Portuguese, with German-speaking instructors and partners across the Alps."]
     ]
   },
+  "testimonials": [],
   "start": {
     "eyebrow": "Plan a trip",
     "h2": "Want to see what your trip could look like?",
@@ -65,7 +74,7 @@
     "description": "Tell us the trip: dates, group, destination. We come back with one clear plan.",
     "eyebrow": "Plan a trip",
     "h1": "Tell us the trip.",
-    "lead": "Fill in what you know. The form opens your own e-mail app or WhatsApp with the message ready to send; nothing is stored on this website.",
+    "lead": "Fill in what you know. We answer within one working day, often straight away, and you have a first proposal within 24 hours. The form opens your own e-mail app or WhatsApp with the message ready to send; nothing is stored on this website.",
     "privacy": "We use your details only to answer your enquiry. See our [privacy policy](/datenschutz.html#en)."
   }
 }

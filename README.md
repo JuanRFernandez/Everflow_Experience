@@ -12,7 +12,7 @@ and JavaScript, generated from the content files by one small Python script.
 ```
 ├── content/                   # EVERYTHING the site says: edit here
 │   ├── site.json              # name, brand line, contact, legal dates, extra photo credits
-│   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ
+│   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ, the guests' words
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place
 │   ├── experiences.json       # the eight experiences
@@ -38,7 +38,7 @@ and JavaScript, generated from the content files by one small Python script.
 │   │   └── stays/<partner>/   # partner photos, each shown with the partner's credit line
 │   ├── stays/<partner>/       # partner brochures, unmodified, only with written permission
 │   └── video/hero-1080.mp4    # home video, original quality (tablets and larger screens only)
-├── brand/                     # source files of the logo (scripts/photos.py brand)
+├── brand/                     # source files of the logo: the wordmark as PNG and, traced from it, as SVG (scripts/photos.py brand)
 ├── docs/HOTEL_MATERIAL.md     # which partners are shown, on which basis, with which credit
 ├── CLAUDE.md                  # rules for Claude sessions in this repo
 └── .claude/skills/hotels/     # the steps for a hotel question, a partner page, an offer
@@ -70,7 +70,14 @@ to add to the card's sentence, not to repeat it. Every value stands in the partn
 (`library.py verify`); a value that cannot be checked stays out. "Where to stay" lists every stay
 in the order of the file, with filters by type and destination that keep their state in the
 address (`/stay/?type=chalet&place=megeve`); every stay has a button that opens the enquiry with
-the stay filled in (`/enquire/?destination=…&stay=…&house=…&type=…`).
+the stay filled in (`/enquire/?destination=…&stay=…&house=…&type=…`). On the enquiry page the four
+fields are linked: a destination narrows the stays, a stay sets its destination and type, a
+collection lists its houses; without the script every option shows.
+
+A guest's words go into `content/pages.json` under `testimonials` (the quote verbatim, first name,
+country, trip and season), only with the guest's written consent, which stays in Drive; the home
+page and the enquiry page show them once the list has entries. A team member in `content/team.json`
+may have no `photo` yet: the page then shows the name and role alone.
 
 A guide (`content/guides.json`, English only) is running text plus cards of the places and the
 hotels and chalets it names; the destination pages it lists under `related` link to it. A guide
