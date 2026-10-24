@@ -2421,5 +2421,56 @@
         "alt": "A Junior Suite with a sitting area"
       }
     ]
+  },
+  {
+    "slug": "apartments-las-lenas",
+    "register": "Apartments Las Leñas (Edificio Atenas)",
+    "name": "Edificio Atenas",
+    "kind": "Apartments",
+    "type": "apartment",
+    "place": "las-lenas",
+    "location": "Las Leñas",
+    "card": "The apartments of our founder's family in Las Leñas, for the southern winter.",
+    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas in Las Leñas, where he grew up skiing. For the ski season of the southern winter, from June to September.",
+    "facts": [
+      "In the Edificio Atenas, in Las Leñas",
+      "The apartments of our founder's family",
+      "For the ski season, from June to September"
+    ],
+    "why": "For families and friends from Argentina and Brazil who want a ski week in the Andes, in the apartments of our founder's family.",
+    "links": [
+      {
+        "label": "laslenas.com",
+        "url": "https://laslenas.com/"
+      }
+    ],
+    "provider": "EverFlow is your contact before and during your stay. The apartments belong to the family of our founder, Juan Rodrigo.",
+    "credit": "Photo courtesy of the owner",
+    "photos": [
+      {
+        "name": "atenas-living",
+        "alt": "Edificio Atenas: the living and dining room under a sloping wooden ceiling, with windows in the roof"
+      },
+      {
+        "name": "atenas-living-2",
+        "alt": "Edificio Atenas: the living room with sofa beds, the dining table and the kitchen"
+      },
+      {
+        "name": "atenas-kitchen",
+        "alt": "Edificio Atenas: the dining table and the kitchen, with a sofa bed along the wall"
+      },
+      {
+        "name": "atenas-sitting",
+        "alt": "Edificio Atenas: the sitting area below the roof windows, with sofa beds and a television"
+      },
+      {
+        "name": "atenas-living-3",
+        "alt": "Edificio Atenas: the living room with the dining table and the roof windows"
+      },
+      {
+        "name": "atenas-bedroom",
+        "alt": "Edificio Atenas: a bedroom with a double bed and built-in wardrobes"
+      }
+    ]
   }
 ]

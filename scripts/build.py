@@ -285,14 +285,28 @@ def map_xy(lat, lon):
     return (lon - MAP_BOX[0]) * _MAP_K * _MAP_SCALE, (MAP_BOX[3] - lat) * _MAP_SCALE
 
 
+def on_map(p):
+    """True for a place inside the frame of the drawn map of the Alps; Las Leñas, in the Andes, is not."""
+    return MAP_BOX[0] <= p['lon'] <= MAP_BOX[2] and MAP_BOX[1] <= p['lat'] <= MAP_BOX[3]
+
+
+def beyond_alps():
+    """'Beyond the Alps: Las Leñas (Argentina).' for the places outside the drawn map, or nothing."""
+    beyond = [p for p in PLACES if not on_map(p)]
+    if not beyond:
+        return ''
+    return ui('Beyond the Alps: {places}.', places=', '.join(f'{tro(p["name"])} ({tr(COUNTRY[p["country"]]["name"])})' for p in beyond))
+
+
 def distance(p, q):
     la1, lo1, la2, lo2 = map(math.radians, (p['lat'], p['lon'], q['lat'], q['lon']))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
     return 2 * 6371 * math.asin(math.sqrt(h))
 
 
-def nearest(place, n=3):
-    others = [q for q in PLACES if q['slug'] != place['slug']]
+def nearest(place, n=3, within=400):
+    """The places closest to this one, at most `within` km away: none for Las Leñas, on another continent."""
+    others = [q for q in PLACES if q['slug'] != place['slug'] and distance(place, q) <= within]
     return sorted(others, key=lambda q: distance(place, q))[:n]
 
 
@@ -733,7 +747,7 @@ def home():
 </section>
 <section class="section" id="destinations">
   <div class="wrap">
-    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len(PLACES), m=len(COUNTRIES)), more=(localized("/destinations/"), ui("All destinations")))}
+    {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len([p for p in PLACES if on_map(p)]), m=len({p['country'] for p in PLACES if on_map(p)})) + (' ' + beyond_alps() if beyond_alps() else ''), more=(localized("/destinations/"), ui("All destinations")))}
     <div class="gallery gallery--cards" data-gallery aria-label="{a(ui("Featured destinations"))}">
       <ul class="gallery-track" tabindex="0">
 {row}
@@ -801,11 +815,13 @@ def static_map():
     def width(text, fs, spacing=0.0):
         return len(text) * fs * (0.58 + spacing)
 
-    pins = [(p, *map_xy(p['lat'], p['lon'])) for p in PLACES]
+    pins = [(p, *map_xy(p['lat'], p['lon'])) for p in PLACES if on_map(p)]
     for _, x, y in pins:
         taken.append((x - r - 2, y - r - 2, x + r + 2, y + r + 2))
     countries = []
     for c in COUNTRIES:
+        if c['slug'] not in MAP_COUNTRIES:  # a country beyond the Alps is not on the drawn map
+            continue
         lat, lon = MAP_COUNTRIES[c['slug']]
         x, y = map_xy(lat, lon)
         name = tr(c['name']).upper()
@@ -856,13 +872,19 @@ def destinations_index():
   </div>
 </section>''')
     pins = []
-    for p in PLACES:
+    for p in [q for q in PLACES if on_map(q)]:  # the live map frames the Alps as the drawn one does
         stays = [[s['name'], f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
         pins.append({'n': tro(p['name']), 'u': localized(f'/destinations/{p["slug"]}/'), 'lat': p['lat'], 'lon': p['lon'], 's': stays})
     pins_json = a(json.dumps(pins, ensure_ascii=False, separators=(',', ':')))
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
+    alps = [p for p in PLACES if on_map(p)]
     lead = ui('{n} places in {m} countries across the Alps. Each page shows the hotels and chalets we know there.',
-              n=len(PLACES), m=len(COUNTRIES))
+              n=len(alps), m=len({p['country'] for p in alps})) + (' ' + beyond_alps() if beyond_alps() else '')
+    off_map = [p for p in PLACES if not on_map(p)]
+    beyond_note = ''
+    if off_map:
+        links = ', '.join(f'[{tro(p["name"])}](/destinations/{p["slug"]}/)' for p in off_map)
+        beyond_note = f'<p class="small map-beyond">{t(ui("Not on this map: {places}.", places=links))}</p>'
     consent = ui('The map is loaded from OpenStreetMap only when you click below. Your IP address is then sent to the map provider. '
                  'Details in our [privacy policy](/datenschutz.html#map).')
     body = f'''{page_head(ui("Destinations"), ui("Where we host."), lead)}
@@ -870,10 +892,11 @@ def destinations_index():
 {chr(10).join(sections)}
 <section class="section section--alt" id="map-section">
   <div class="wrap">
-    {section_head(ui("On the map"), ui("Every place we host."))}
+    {section_head(ui("On the map"), ui("Every place we host in the Alps.") if off_map else ui("Every place we host."))}
     <div class="map" id="map" data-pins="{pins_json}">
       <div class="map-static">{static_map()}</div>
     </div>
+    {beyond_note}
     <div class="map-live">
       <p class="small"><strong>{ui("Interactive map")}.</strong> {t(consent)}</p>
       <button class="button button--ghost" id="map-load" type="button">{ui("Open the interactive map")}</button>
@@ -883,7 +906,7 @@ def destinations_index():
 {cta_band()}'''
     return page('destinations/index.html', ui('Destinations — EverFlow Experience'),
                 ui('Tailor-made ski and mountain trips in {n} places across the Alps: Switzerland, Austria, France, Italy and Germany.',
-                   n=len(PLACES)),
+                   n=len(alps)) + (' ' + beyond_alps() if beyond_alps() else ''),
                 body)
 
 
@@ -896,6 +919,29 @@ def place_page(p):
     if p.get('image'):
         hero_img = f'''<div class="wrap">{figure(p["image"]["src"], tr(p["image"]["alt"]), "(min-width: 75rem) 1180px, 100vw", p["image"].get("credit"), cls="hero-figure", eager=True, image=p["image"])}</div>'''
     facts = ''.join(f'<div><dt>{e(tr(k))}</dt><dd>{e(tr(v))}</dd></div>' for k, v in p['facts'])
+    pictures = ''
+    if p.get('gallery'):  # more photos of the place, each with its author and licence; a photo opens large
+        items = ''.join(f'<li class="gallery-item">{figure(im["src"], tr(im["alt"]), "(min-width: 64rem) 70vw, 92vw", im.get("credit"), image=im)}</li>'
+                        for im in p['gallery'])
+        pictures = f'''<section class="section section--tight">
+  <div class="wrap">
+    <div class="gallery" data-gallery data-title="{a(name)}" role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
+      <ul class="gallery-track" tabindex="0">{items}</ul>
+      <div class="gallery-controls" hidden>
+        <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo"))}">←</button>
+        <span class="gallery-count" aria-live="polite">01 / {num(len(p["gallery"]))}</span>
+        <button type="button" class="gallery-button" data-next aria-label="{a(ui("Next photo"))}">→</button>
+      </div>
+    </div>
+  </div>
+</section>'''
+    close = nearest(p)
+    close_html = f'''<section class="section section--alt">
+  <div class="wrap">
+    {section_head(ui("Other destinations"), ui("Close by."), more=(localized("/destinations/"), ui("All destinations")))}
+    {grid([place_card(q) for q in close])}
+  </div>
+</section>''' if close else ''
     if stays:
         stay_html = grid([stay_card(s) for s in stays])
     else:
@@ -912,6 +958,7 @@ def place_page(p):
     <dl class="facts">{facts}</dl>
   </div>
 </section>
+{pictures}
 <section class="section section--alt">
   <div class="wrap qa">
     <div class="qa-item"><h2>{ui("Who is it for?")}</h2><p>{t(tr(p["who"]))}</p></div>
@@ -927,12 +974,7 @@ def place_page(p):
   </div>
 </section>
 {guides_section([g for g in GUIDES if p["slug"] in g.get("related", [])])}
-<section class="section section--alt">
-  <div class="wrap">
-    {section_head(ui("Other destinations"), ui("Close by."), more=(localized("/destinations/"), ui("All destinations")))}
-    {grid([place_card(q) for q in nearest(p)])}
-  </div>
-</section>
+{close_html}
 {cta_band(p["slug"])}'''
     return page(f'destinations/{p["slug"]}/index.html', f'{name} — EverFlow Experience',
                 f'{name}, {cname}: {tr(p["tagline"])}', body,
@@ -1293,8 +1335,7 @@ def legal(name):
         line = '; '.join(e(credit_text(c)) for c in shown)
         credits_de.append(f'<li>{e(p["name"])}: {line}</li>')
         credits_en.append(f'<li>{e(p["name"])}: {line}</li>')
-    for p in PLACES:
-        im = p.get('image') or {}
+    for p, im in [(q, x) for q in PLACES for x in [q.get('image') or {}] + q.get('gallery', [])]:
         if not im.get('license'):
             continue
         origin = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
@@ -1345,9 +1386,9 @@ def validate():
     for p in PLACES:
         if p['country'] not in COUNTRY:
             problems.append(f'place {p["slug"]}: unknown country {p["country"]}')
-        im = p.get('image') or {}
-        if im.get('license') and not all(im.get(k) for k in ('credit', 'source_url', 'license_url')):
-            problems.append(f'place {p["slug"]}: a freely licensed photo needs credit (author), source_url and license_url')
+        for im in [p.get('image') or {}] + p.get('gallery', []):
+            if (im.get('license') or im in p.get('gallery', [])) and not all(im.get(k) for k in ('credit', 'license', 'source_url', 'license_url')):
+                problems.append(f'place {p["slug"]}: a freely licensed photo needs credit (author), license, source_url and license_url')
     for p in PARTNERS:
         if p['place'] not in PLACE:
             problems.append(f'partner {p["slug"]}: unknown place {p["place"]}')
