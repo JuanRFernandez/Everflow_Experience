@@ -249,7 +249,7 @@
       '<figure class="lightbox-figure"><img alt=""><figcaption class="credit"></figcaption></figure>' +
       '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">←</button>' +
       '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">→</button>' +
-      '<a class="button button--small button--light lightbox-enquire" hidden></a>';
+      '<a class="button button--small button--light lightbox-enquire" href="/enquire/" hidden></a>';  // a real link even while hidden
     document.body.appendChild(box);
     var img = $('img', box), caption = $('figcaption', box), title = $('.lightbox-title', box), count = $('.lightbox-count', box);
     var prev = $('.lightbox-prev', box), next = $('.lightbox-next', box), ask = $('.lightbox-enquire', box);
