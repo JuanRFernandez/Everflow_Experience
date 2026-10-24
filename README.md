@@ -11,8 +11,13 @@ and JavaScript, generated from the content files by one small Python script.
 
 ```
 ├── content/                   # EVERYTHING the site says: edit here
+<<<<<<< HEAD
 │   ├── site.json              # name, brand line, contact, legal dates, extra photo credits
 │   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ, the guests' words
+=======
+│   ├── site.json              # name, brand line, contact, legal dates, extra photo credits, the Search Console tag
+│   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ
+>>>>>>> origin/master
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place
 │   ├── experiences.json       # the eight experiences

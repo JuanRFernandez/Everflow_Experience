@@ -532,6 +532,9 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
     here = out_path(path)
     url = SITE['url'] + url_of(here)
     robots = '' if index else '\n<meta name="robots" content="noindex, follow">'
+    verification = ''  # Google Search Console reads this tag on the home page (content/site.json)
+    if here == 'index.html' and SITE.get('google_site_verification'):
+        verification = f'\n<meta name="google-site-verification" content="{a(SITE["google_site_verification"])}">'
     if data:  # a schema.org data block is not executed, so the Content-Security-Policy does not apply to it
         robots += '\n<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + '</script>'
     alternates = ''
@@ -544,7 +547,7 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
 <html lang="{lang or LANGS[LANG]["html"]}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">{verification}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <title>{e(title)}</title>
 <meta name="description" content="{a(description)}">{robots}
