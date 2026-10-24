@@ -366,8 +366,11 @@ def enquiry(p, r=None):
     the hotel and its type, or, for a whole collection, the place and the collection."""
     if r is None and p.get('residences'):
         return enquire_url(p['place'], p['slug']), ui('Plan a stay here')
-    kind = stay_types(p, r)[0]
-    return enquire_url(p['place'], p['slug'], house=r['name'] if r is not None else None, kind=kind), ui(ENQUIRE[kind])
+    kinds = stay_types(p, r)
+    house = r['name'] if r is not None else None
+    if len(kinds) > 1:  # a hotel with a chalet, a chalet of apartments: the guest says which in the form
+        return enquire_url(p['place'], p['slug'], house=house), ui('Enquire about this stay')
+    return enquire_url(p['place'], p['slug'], house=house, kind=kinds[0]), ui(ENQUIRE[kinds[0]])
 
 
 def enquire_link(p, r=None):
@@ -1361,8 +1364,12 @@ def validate():
         for x, where in [(p, f'partner {p["slug"]}')] + [(r, f'partner {p["slug"]}, house {r["name"]}') for r in houses]:
             kind = x.get('type')
             kinds = [kind] if isinstance(kind, str) else kind if isinstance(kind, list) else None
-            if (x is not p or not houses) and (not kinds or not set(kinds) <= set(STAY_TYPES)):
+            if (x is not p or not houses) and (not kinds or not all(isinstance(k, str) and k in STAY_TYPES for k in kinds)):
                 problems.append(f'{where}: "type" must be {", ".join(STAY_TYPES)} or a list of them')
+            for key, kind_of, what in (('kind', str, 'a short text'), ('ski_access', str, 'a short text'),
+                                       ('renderings', bool, 'true or false'), ('card', str, 'a sentence'), ('about', str, 'a text')):
+                if key in x and not isinstance(x[key], kind_of):
+                    problems.append(f'{where}: "{key}" is {what}')
             marks = x.get('highlights', [])
             if not isinstance(marks, list) or not all(isinstance(m, str) for m in marks):
                 problems.append(f'{where}: "highlights" is a list of short texts')

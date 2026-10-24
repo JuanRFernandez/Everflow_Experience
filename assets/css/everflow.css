@@ -186,7 +186,7 @@ th{color:var(--ink);font-weight:600}
 .chip-button{min-height:2.75rem;padding:.5rem 1rem;border:1px solid var(--ink);border-radius:var(--radius);background:transparent;color:var(--ink);font:600 .875rem/1.2 var(--sans);cursor:pointer}
 .chip-button:hover{background:var(--cream-2)}
 .chip-button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
-@media (forced-colors:active){.chip-button[aria-pressed="true"]{forced-color-adjust:none;background:Highlight;color:HighlightText;border-color:Highlight}}
+@media (forced-colors:active){.chip-button[aria-pressed="true"]{forced-color-adjust:none;background:Highlight;color:HighlightText;border-color:Highlight;outline-color:Highlight}}
 .field--inline{flex:0 1 18rem;min-width:min(100%,14rem)}
 .stay-count{margin:0;align-self:center;font-weight:600;color:var(--ink)}
 .stay-empty{margin-top:1rem}
