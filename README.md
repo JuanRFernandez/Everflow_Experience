@@ -11,7 +11,7 @@ and JavaScript, generated from the content files by one small Python script.
 
 ```
 ├── content/                   # EVERYTHING the site says: edit here
-│   ├── site.json              # name, brand line, contact, legal dates, extra photo credits
+│   ├── site.json              # name, brand line, contact, legal dates, extra photo credits, the Search Console tag
 │   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place
