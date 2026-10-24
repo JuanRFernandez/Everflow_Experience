@@ -35,10 +35,12 @@ MAX_MB = 60
 
 # A file is never read when its name, or the name of a folder between it and the listed folder,
 # says agreement or contract (in English, German, French, Spanish or Portuguese), form, rate,
-# payment or identity paper. Accents do not count: the name is matched without them (plain()).
+# payment or identity paper. See refused(): accents do not count, and a name written as one word
+# is also read word by word.
 DENY = re.compile(
-    r'agreement|vereinbarung|vertrag|contract|kontrakt|contrat|acuerdo|convenio|(?<![a-z])acordo'
-    r'|(?<![a-z])accords?(?![a-z])|convention[-_ ]?d[eu]'
+    r'agreement|vereinbarung|vertrag|abkommen|contract|kontrakt|contrat|acuerdo|convenio|acordo'
+    r'|accord(?!ing|ance|ion|eon)|convention(?![-_ ]?(?:cent(?:er|re)|hall|bureau|s[-_ ]et))'
+    r'|memorandum|(?<![a-z])mou(?![a-z])'
     r'|vendor|supplier|lieferant|kommission|commission|provision|comisi'
     r'|konditionen|conditions|(?<![a-z])terms(?![a-z])|(?<![a-z])agb(?![a-z])|(?<![a-z])nda(?![a-z])'
     r'|countersigned|(?<![a-z])signed|unterschr|unterzeichn|signiert|firmad'
@@ -46,7 +48,7 @@ DENY = re.compile(
     r'|passeport|passaporte|(?<![a-z])dni(?![a-z])|identity|identidad|identite|(?<![a-z])id[-_ ]?card'
     r'|steuer|authoris|authoriz|vollmacht|formular|formulaire|(?<![a-z])forms?(?![a-z])|booking|buchung|reserv'
     r'|(?<![a-z])rates?(?![a-z])|rate[-_ ]?(?:sheet|card)|(?:net|hotel|room|agency|agent|group|trade|special)[-_ ]?rates?'
-    r'|netto|preis|price|pricing|(?<![a-z])prix(?![a-z])|precio|preco|tarif'
+    r'|netto|preis|price|pricing|(?<![a-z])prix(?![a-z])|(?<![a-z])precios?(?![a-z])|(?<![a-z])precos?(?![a-z])|tarif'
     r'|payment|paiement|zahlung|(?<![a-z])pagos?(?![a-z])|pagamento'
     r'|kreditkarte|credit[-_ ]?card|invoice|rechnung|gewerbe', re.I)
 # A folder of superseded material is not walked at all.
@@ -56,9 +58,14 @@ NOTE = re.compile(r'_EFE_.+-(?:Website-Facts|Offer-Text|Owner-Facts)_v\d+\.md$',
 FOLD = str.maketrans('’‘“”„–—', '\'\'"""--')
 
 
-def plain(name):
-    """A name without its accents, for the name filter: "Formulário" is read as "Formulario"."""
-    return ''.join(c for c in unicodedata.normalize('NFKD', name) if not unicodedata.combining(c))
+CAMEL = re.compile(r'(?<=[a-z])(?=[A-Z])')
+
+
+def refused(name):
+    """True when a name says what the library never reads (DENY). Accents do not count ("Formulário"
+    is "Formulario"), and a name written as one word is also read word by word ("AcordoComercial")."""
+    name = ''.join(c for c in unicodedata.normalize('NFKD', name) if not unicodedata.combining(c))
+    return bool(DENY.search(name) or DENY.search(CAMEL.sub('_', name)))
 
 
 def fail(message):
@@ -131,7 +138,7 @@ def sources(cfg):
                     continue
                 full = os.path.join(path, name)
                 rel = os.path.relpath(full, root).replace(os.sep, '/')
-                if DENY.search(plain(os.path.relpath(full, top))):
+                if refused(os.path.relpath(full, top)):
                     yield rel, full, 'never read: the name says agreement or contract, form, rate, payment or identity paper'
                 elif os.path.getsize(full) > MAX_MB * 1e6:
                     yield rel, full, f'larger than {MAX_MB} MB'
