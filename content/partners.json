@@ -2434,15 +2434,19 @@
     "guests": "4",
     "bedrooms": "1",
     "bathrooms": "1",
+    "size_m2": "50",
     "highlights": [
-      "Two floors",
+      "Hot tub and sauna",
+      "Ski room",
       "Kitchen"
     ],
-    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas: of the four buildings of its complex, the one nearest the slopes. Most have two floors, with a double bedroom and the bathroom downstairs and a sofa bed and a cot upstairs, for four guests. We let them ourselves, for the ski season of the southern winter, from June to September.",
+    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Edificio Atenas: of the four buildings of its complex, the one nearest the slopes. All are on the ground floor, with no stairs to the door; inside, most have two levels, a double bedroom and the bathroom below and a sofa bed and a cot above, for four guests in 50 m². A hot tub, a sauna and a ski room complete them. We let them ourselves, for the ski season of the southern winter, from June to September.",
     "facts": [
       "In the Edificio Atenas, the building of its complex nearest the slopes",
-      "Two floors: a double bedroom and the bathroom downstairs, a sofa bed and a cot upstairs",
-      "For four guests",
+      "On the ground floor, with no stairs to the door",
+      "Two levels inside: a double bedroom and the bathroom below, a sofa bed and a cot above",
+      "For four guests, in 50 m²",
+      "A hot tub, a sauna and a ski room",
       "A kitchen with a dining table in the living room",
       "Let by EverFlow itself: the apartments of our founder's family",
       "For the ski season, from June to September"
