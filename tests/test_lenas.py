@@ -4,6 +4,7 @@ import functools
 import http.server
 import json
 import os
+import re
 import sys
 import threading
 
@@ -11,6 +12,9 @@ from playwright.sync_api import sync_playwright
 
 ROOT = sys.argv[1]
 fails = []
+# Juan, 25.10.2026: the Las Leñas pages stay simple and low profile, nothing about him or his family
+PERSONAL = re.compile(r"founder|fundador|family of our|family's own|familia de nuestro|família do nosso|Juan Rodrigo|grew up skiing|creció esquiando|"
+                      r"cresceu esquiando|born in Mendoza|nació en Mendoza|nasceu em Mendoza|let by EverFlow|lets them|we let them|los alquila|aluga-os", re.I)
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -65,7 +69,7 @@ with sync_playwright() as pw:
     pg.goto(BASE + '/destinations/las-lenas/')
     check(pg.locator('h1').inner_text().strip() == 'Las Leñas', 'the page head says Las Leñas')
     body = pg.inner_text('main')
-    check('grew up skiing' in body and 'born in Mendoza' in body, 'the founder line is on the page: born in Mendoza, grew up skiing')
+    check('2,240 m' in body and not PERSONAL.search(body), 'the page describes the resort, nothing about the founder or his family (Juan, 25.10.2026)')
     pg.goto(BASE + '/')
     check(pg.locator('#destinations .lead a[href="/destinations/las-lenas/"]').count() == 1, 'the home lead links Las Leñas')
     pg.goto(BASE + '/destinations/las-lenas/')
@@ -117,7 +121,8 @@ with sync_playwright() as pw:
     check(pg.locator('h1').inner_text().strip() == 'Atenas Building', 'the stay page head')
     row = pg.eval_on_selector_all('.card-facts li, .facts li', 'els => els.map(e => e.innerText)')
     body = pg.inner_text('main')
-    check('four guests' in body and 'two levels' in body.lower() and '50 m²' in body and 'EverFlow lets them directly' in body, 'the stay page says four guests, two levels, 50 m², let by EverFlow')
+    check('four guests' in body and '50 m²' in body and 'provided by their owner' in body, 'the stay page says four guests, 50 m², provided by their owner')
+    check(not PERSONAL.search(body) and len(row) <= 8, f'the stay page is short and says nothing about the founder or his family ({len(row)} facts)')
     caps = pg.eval_on_selector_all('.gallery .credit', 'els => [...new Set(els.map(e => e.innerText.trim()))]')
     check(caps == ['Photo courtesy of the owner'], f'the photo credit is the courtesy line ({caps})')
     pg.click('.gallery .photo-open >> nth=0')
@@ -125,11 +130,16 @@ with sync_playwright() as pw:
     pg.keyboard.press('Escape')
 
     # ---- Spanish and Portuguese
-    for lang, words, flights in (('es', ['nuestro fundador', 'Juan Rodrigo', 'nació en Mendoza', 'obligatorio llevar cadenas'], 'Vuelos'),
-                                 ('pt', ['nosso fundador', 'Juan Rodrigo', 'nasceu em Mendoza', 'obrigatório levar correntes', 'Ruta 222'], 'Voos')):
+    for lang, words, flights in (('es', ['2.240 m', 'obligatorio llevar cadenas'], 'Vuelos'),
+                                 ('pt', ['2.240 m', 'obrigatório levar correntes', 'Ruta 222'], 'Voos')):
         pg.goto(f'{BASE}/{lang}/destinations/las-lenas/')
         t = pg.inner_text('main').lower()
-        check(all(w.lower() in t for w in words) and flights.lower() in t, f'/{lang}/: the founder line and the flights fact')
+        check(all(w.lower() in t for w in words) and flights.lower() in t and not PERSONAL.search(t), f'/{lang}/: the resort and the flights fact, nothing personal')
+        pg.goto(f'{BASE}/{lang}/destinations/')
+        check(not PERSONAL.search(pg.inner_text('#argentina')), f'/{lang}/destinations/: the Argentina block says nothing personal')
+        pg.goto(f'{BASE}/{lang}/guides/first-week-from-south-america/')
+        check(not PERSONAL.search(pg.inner_text('main')), f'/{lang}/: the guide from South America says nothing personal')
+        pg.goto(f'{BASE}/{lang}/destinations/las-lenas/')
         check(pg.get_attribute('html', 'lang').startswith(lang), f'/{lang}/: the page language')
         pg.click('.gallery .photo-open >> nth=0')
         labels = pg.evaluate('[".lightbox-close", ".lightbox-prev", ".lightbox-next"].map(s => document.querySelector(s).getAttribute("aria-label"))')

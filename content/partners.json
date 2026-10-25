@@ -2430,7 +2430,7 @@
     "type": "apartment",
     "place": "las-lenas",
     "location": "Las Leñas",
-    "card": "Our founder's family apartments in Las Leñas: two floors, four guests, let by EverFlow itself.",
+    "card": "Ground-floor apartments for four guests, near the slopes.",
     "guests": "4",
     "bedrooms": "1",
     "bathrooms": "1",
@@ -2440,24 +2440,21 @@
       "Ski room",
       "Kitchen"
     ],
-    "lead": "The apartments of the family of our founder, Juan Rodrigo, in the Atenas building: of the four buildings of its complex, the one nearest the slopes. All are on the ground floor, with no stairs to the door; inside, most have two levels, a double bedroom and the bathroom below and a sofa bed and a cot above, for four guests in 50 m². A hot tub, a sauna and a ski room complete them. We let them ourselves, for the ski season of the southern winter, from June to September.",
+    "lead": "Apartments for four guests in the Atenas building, near the slopes of Las Leñas, on the ground floor. For the ski season, from June to September.",
     "facts": [
-      "In the Atenas building, the building of its complex nearest the slopes",
-      "On the ground floor, with no stairs to the door",
-      "Two levels inside: a double bedroom and the bathroom below, a sofa bed and a cot above",
+      "Near the slopes, on the ground floor",
       "For four guests, in 50 m²",
       "A hot tub, a sauna and a ski room",
-      "A kitchen with a dining table in the living room",
       "For the ski season, from June to September"
     ],
-    "why": "For couples, families and friends from Argentina, Brazil and beyond who want a ski week in the Andes with one host, in the apartments of the family of our founder, who grew up skiing here.",
+    "why": "Couples, families and friends of up to four who want a ski week in the Andes, close to the slopes.",
     "links": [
       {
         "label": "laslenas.com",
         "url": "https://laslenas.com/"
       }
     ],
-    "provider": "EverFlow is your contact before and during your stay. The apartments are the family's own, and EverFlow lets them directly; the terms come with your proposal.",
+    "provider": "EverFlow is your contact before and during your stay. The apartments are provided by their owner; the terms come with your proposal.",
     "credit": "Photo courtesy of the owner",
     "photos": [
       {
