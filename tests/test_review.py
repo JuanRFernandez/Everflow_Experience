@@ -147,7 +147,8 @@ with sync_playwright() as pw:
     h2s = pg.eval_on_selector_all('.qa-item h2', 'els => els.map(e => e.textContent)')
     check(h2s == ['Para quem é Munique', 'Quando visitar Munique', 'Como chegar a Munique'], f'PT headings name the place ({h2s})')
     r = pg.request.get(BASE + '/robots.txt')
-    check('Disallow: /content/' in r.text() and 'Sitemap:' in r.text(), 'robots.txt keeps the source files out')
+    check('Disallow: /assets/stays/' in r.text() and 'Sitemap:' in r.text() and '/content/' not in r.text(),
+          'robots.txt keeps the brochures out of search results and names the sitemap (the sources are not served any more)')
     check(not errors, f'no script errors ({errors[:2]})')
 
     # ---- without the script: the notes show, the buttons that need it are hidden, the menu is open
