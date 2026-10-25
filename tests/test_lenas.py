@@ -49,6 +49,7 @@ with sync_playwright() as pw:
     check(pg.locator('.map-beyond a[href="/destinations/las-lenas/"]').count() == 1, 'below the map: "Not on this map: Las Leñas"')
     check(pg.locator('#argentina').count() == 1, 'an Argentina block')
     check(pg.locator('#argentina a[href="/destinations/las-lenas/"]').count() >= 1, 'the block links to Las Leñas')
+    check(not PERSONAL.search(pg.inner_text('#argentina')), '/destinations/: the Argentina block says nothing personal')
     order = pg.eval_on_selector_all('section[id]', 'els => els.map(e => e.id)')
     countries = [x for x in order if x in ('switzerland', 'austria', 'france', 'italy', 'germany', 'argentina')]
     check(countries == ['switzerland', 'austria', 'france', 'italy', 'germany', 'argentina'], f'the countries in order: {countries}')
@@ -119,10 +120,18 @@ with sync_playwright() as pw:
     # ---- the stay page
     pg.goto(BASE + '/stay/apartments-las-lenas/')
     check(pg.locator('h1').inner_text().strip() == 'Atenas Building', 'the stay page head')
-    row = pg.eval_on_selector_all('.card-facts li, .facts li', 'els => els.map(e => e.innerText)')
+    row = pg.eval_on_selector_all('main .ticks li', 'els => els.map(e => e.innerText)')
     body = pg.inner_text('main')
     check('four guests' in body and '50 m²' in body and 'provided by their owner' in body, 'the stay page says four guests, 50 m², provided by their owner')
-    check(not PERSONAL.search(body) and len(row) <= 8, f'the stay page is short and says nothing about the founder or his family ({len(row)} facts)')
+    check(0 < len(row) <= 5 and not PERSONAL.search(body), f'the stay page is short and says nothing about the founder or his family ({len(row)} facts)')
+    check('ground floor' not in body.lower() and 'ground-floor' not in body.lower(),
+          'no "ground floor" on its own: most apartments have two levels inside (review of 25.10.2026)')
+    pg.goto(BASE + '/guides/first-week-from-south-america/')
+    check(not PERSONAL.search(pg.inner_text('main')), 'the guide from South America says nothing personal')
+    pg.goto(BASE + '/destinations/las-lenas/')
+    desc = pg.get_attribute('meta[name="description"]', 'content')
+    check('hotels and chalets' not in desc and 'June to September' in desc, f'the Las Leñas description promises no hotels or chalets ({desc})')
+    pg.goto(BASE + '/stay/apartments-las-lenas/')
     caps = pg.eval_on_selector_all('.gallery .credit', 'els => [...new Set(els.map(e => e.innerText.trim()))]')
     check(caps == ['Photo courtesy of the owner'], f'the photo credit is the courtesy line ({caps})')
     pg.click('.gallery .photo-open >> nth=0')

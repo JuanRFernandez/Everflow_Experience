@@ -2430,7 +2430,7 @@
     "type": "apartment",
     "place": "las-lenas",
     "location": "Las Leñas",
-    "card": "Ground-floor apartments for four guests, near the slopes.",
+    "card": "Apartments for four guests, near the slopes.",
     "guests": "4",
     "bedrooms": "1",
     "bathrooms": "1",
@@ -2440,9 +2440,9 @@
       "Ski room",
       "Kitchen"
     ],
-    "lead": "Apartments for four guests in the Atenas building, near the slopes of Las Leñas, on the ground floor. For the ski season, from June to September.",
+    "lead": "Apartments for four guests in the Atenas building, near the slopes of Las Leñas. For the ski season, from June to September.",
     "facts": [
-      "Near the slopes, on the ground floor",
+      "Near the slopes",
       "For four guests, in 50 m²",
       "A hot tub, a sauna and a ski room",
       "For the ski season, from June to September"
