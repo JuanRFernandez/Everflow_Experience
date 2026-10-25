@@ -1,0 +1,60 @@
+name: Site
+
+# Every pull request and every push to master: build the site into _site/, run the checks and the browser tests.
+# A push to master that passes is deployed to GitHub Pages from the built _site/ (Settings → Pages → Source: GitHub Actions).
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          python -m playwright install --with-deps chromium
+      - name: Lint
+        run: ruff check scripts tests
+      - name: Build the site
+        run: python scripts/build.py
+      - name: Checks (links, external loads, tags, words, the public repository)
+        run: python scripts/check.py
+      - name: Browser tests
+        run: python tests/run.py
+        env:
+          BROWSER_CHANNEL: ""
+      - name: Package the site for Pages
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

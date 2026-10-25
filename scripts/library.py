@@ -16,7 +16,7 @@ never enter it (scripts/check.py fails the build if they do).
     python scripts/library.py verify <hotel>.facts.json
     python scripts/library.py permissions      what may go on the site, per hotel
 
-Configuration: library.local.json in the repo root (git-ignored); copy library.example.json.
+Configuration: library.local.json in the repo root (git-ignored); copy scripts/library.example.json there.
 """
 import csv
 import hashlib
@@ -75,7 +75,7 @@ def fail(message):
 
 def config():
     if not os.path.isfile(CONFIG):
-        fail('library.local.json is missing: copy library.example.json and fill in the paths')
+        fail('library.local.json is missing: copy scripts/library.example.json to the repo root as library.local.json and fill in the paths')
     cfg = json.load(open(CONFIG, encoding='utf-8-sig'))
     for key in ('material_root', 'folders', 'library', 'permissions'):
         if key not in cfg:
@@ -267,7 +267,7 @@ def status(cfg):
 def pages_of(cfg, entry):
     text = open(os.path.join(cfg['library'], entry['file']), encoding='utf-8').read()
     parts = re.split(r'\n## page (\d+)\n', text)
-    return {int(n): body for n, body in zip(parts[1::2], parts[2::2])}
+    return {int(n): body for n, body in zip(parts[1::2], parts[2::2], strict=True)}
 
 
 def search(cfg, terms, only=None):

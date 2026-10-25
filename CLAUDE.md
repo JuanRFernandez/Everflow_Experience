@@ -28,12 +28,16 @@ Brazilian Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
 5. **No prices, no booking, no payment on the site.**
 6. **Legal pages stay current.** A change of address, tax status, tool or provider goes into
    `content/legal/` together with a new "Stand" / "Last updated" date in `content/site.json`.
-7. **Never edit a generated page** (`index.html`, `destinations/`, `stay/`, `guides/`, `es/`, `pt/`,
-   `impressum.html` …). Change `content/` or `scripts/build.py`, then run `python scripts/build.py`.
+7. **The pages are built, not written.** `python scripts/build.py` writes the whole site into `_site/`
+   (git-ignored); GitHub Actions builds and deploys it from `master`. Change `content/` or
+   `scripts/build.py`, never a file in `_site/`.
 8. **Spanish and Portuguese follow the English.** A new or changed English text on a page that
    exists in all three languages gets its translation in `content/i18n/es.json` and `pt.json` in
    the same pull request, made with DeepL (ES-419, PT-BR). `scripts/check.py` warns until it has one.
-9. Run `python scripts/check.py` before every commit. It must end with `0 failures`.
+9. Before every commit: `python scripts/build.py`, then `python scripts/check.py` (it must end with
+   `0 failures`), `ruff check scripts tests` and, for a change a visitor can see, `python tests/run.py`
+   (Playwright; `pip install -r requirements-dev.txt`). GitHub Actions runs the same four on every
+   pull request.
 
 ## The hotels
 

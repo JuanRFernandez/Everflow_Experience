@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Site checks, run locally (python scripts/check.py) and in CI on every pull request.
+"""Site checks on the built site in _site/, run locally (python scripts/build.py, then python scripts/check.py)
+and in CI on every pull request.
 
- 1. The pages are what content/*.json gives (python scripts/build.py --check).
+ 1. _site/ is what content/*.json gives (python scripts/build.py --check), and its CNAME is the site's domain.
  2. Every local src/href/srcset/poster/data-src/url() resolves to a file in the repository, and every
     link to an anchor (#x, /page/#x) finds that id on the target page.
  3. Nothing is loaded from a third-party host on page view: no <link>, <script>, <img>, <iframe>,
@@ -42,15 +43,20 @@ os.chdir(ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 import build  # noqa: E402
 
-SKIP_DIRS = {'.git', 'content', 'assets', 'scripts', 'docs', 'node_modules', '.claude', '.github'}
+SITE_DIR = '_site'  # the built site; a page is checked where it is served from
 PAGES = []
-for dp, dirs, files in os.walk('.'):
-    dirs[:] = sorted(d for d in dirs if d not in SKIP_DIRS)
+for dp, dirs, files in os.walk(SITE_DIR):
+    dirs[:] = sorted(dirs)
     for f in sorted(files):
         if f.endswith('.html'):
-            PAGES.append(os.path.relpath(os.path.join(dp, f), '.').replace(os.sep, '/'))
-CSS = sorted(os.path.join(dp, f).replace(os.sep, '/') for dp, _, fs in os.walk('assets') for f in fs if f.endswith('.css'))
-LEGAL = {'impressum.html', 'datenschutz.html'}
+            PAGES.append(os.path.join(dp, f).replace(os.sep, '/'))
+CSS = sorted(os.path.join(dp, f).replace(os.sep, '/') for dp, _, fs in os.walk(f'{SITE_DIR}/assets') for f in fs if f.endswith('.css'))
+LEGAL = {f'{SITE_DIR}/impressum.html', f'{SITE_DIR}/datenschutz.html'}
+
+
+def rel(page):
+    """The address path of a page of _site/: _site/es/index.html -> es/index.html."""
+    return page[len(SITE_DIR) + 1:]
 
 ATTR = re.compile(r'\b(?:src|href|poster|data|data-src)\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>"\']+))', re.I)
 SRCSET = re.compile(r'\bsrcset\s*=\s*"([^"]*)"', re.I)
@@ -88,6 +94,7 @@ INTERNAL = re.compile(  # a Drive folder of the team, a drive-letter path, a Dri
 MAIL = re.compile(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}')
 CONTROL = re.compile('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]')  # no text file holds one; a mangled escape would
 OWN_MAIL = {'info@everflowexperience.com'}  # an address meant to be public is added here, on purpose
+PLACEHOLDER_MAIL = re.compile(r'@example\.(?:org|com|net)$', re.I)  # the reserved domains the tests use for made-up guests
 IMG_MAX = 950 * 1024  # scripts/photos.py keeps 800 px under 180 KB, 1600 px under 480 KB, 2400 px under 900 KB
 
 failures, warnings, referenced = [], [], set()
@@ -113,13 +120,13 @@ COURTESY = courtesy_lines()
 
 
 def resolve(page, ref):
-    """Repository path a reference points to: /x from the root, x from the page's folder; dir/ -> dir/index.html."""
+    """Path in _site/ a reference points to: /x from the site root, x from the page's folder; dir/ -> dir/index.html."""
     if ref.startswith('/'):
-        path = ref.lstrip('/')
+        path = f'{SITE_DIR}/{ref.lstrip("/")}'
     else:
         base = os.path.dirname(page)
         path = os.path.normpath(os.path.join(base, ref)).replace(os.sep, '/')
-    if path == '' or path.endswith('/'):
+    if path.endswith('/'):
         path += 'index.html'
     return path
 
@@ -219,21 +226,29 @@ def image_meta(path):
 # ---------------------------------------------------------------- 1. generated pages are current
 try:
     out = build.render_all()
+    out.update(build.site_files())
 except build.BuildError as err:
     failures.append(f'content/: {err}')
     out = {}
 for path, text in out.items():
-    if not os.path.isfile(path) or open(path, encoding='utf-8', newline='').read() != text:
-        failures.append(f'{path} is not what content/ gives: run python scripts/build.py (never edit a generated page)')
+    full = f'{SITE_DIR}/{path}'
+    if not os.path.isfile(full) or open(full, encoding='utf-8', newline='').read() != text:
+        failures.append(f'{full} is not what content/ gives: run python scripts/build.py')
 for path in build.generated_on_disk():
     if out and path not in out:
-        failures.append(f'{path} was generated before but no longer is: run python scripts/build.py')
+        failures.append(f'{SITE_DIR}/{path} was generated before but no longer is: run python scripts/build.py')
 for code, texts in sorted(build.MISSING.items()):  # the page shows the English text meanwhile
     for s in sorted(texts):
         warnings.append(f'content/i18n/{code}.json: no translation yet for "{s[:70]}"')
 for code in sorted(build.I18N):
     for s in sorted(set(build.I18N[code]) - build.USED.get(code, set())):
         warnings.append(f'content/i18n/{code}.json: "{s[:70]}" is no longer on any page; remove it')
+
+for name in ('CNAME', '.nojekyll'):
+    if not os.path.isfile(f'{SITE_DIR}/{name}'):
+        failures.append(f'{SITE_DIR}/{name} is missing: python scripts/build.py writes it (the domain for GitHub Pages, no Jekyll)')
+if not PAGES:
+    failures.append(f'{SITE_DIR}/ holds no pages: run python scripts/build.py first')
 
 partners = json.load(open('content/partners.json', encoding='utf-8'))
 credits = {p['slug']: {build.credit_text(c) for c in build.partner_credits(p)} for p in partners}
@@ -289,7 +304,7 @@ for page in PAGES:
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and no payments (say plan, arrange, enquire)')
         for m in NOT_SAID.finditer(readable):
             failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
-    if page.startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
+    if rel(page).startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
         for m in NOT_SAID_ES_PT.finditer(html.unescape(CODE.sub(' ', text))):
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
     for m in ALTERNATE.finditer(text):
@@ -311,8 +326,8 @@ for page in PAGES:
             failures.append(f'{page}: link to #{anchor} on {target}, which has no such id')
 
 # Every credit shown under a photo is listed in the Impressum.
-if 'impressum.html' in parsed:
-    imp = html.unescape(open('impressum.html', encoding='utf-8').read())
+if f'{SITE_DIR}/impressum.html' in parsed:
+    imp = html.unescape(open(f'{SITE_DIR}/impressum.html', encoding='utf-8').read())
     for slug, cs in credits.items():
         for c in sorted(cs):
             if c not in imp:
@@ -341,13 +356,13 @@ for dp, _, fs in os.walk('assets/js'):
             failures.append(f'{p}: a text of the script says "{m.group(0)}"; the site takes no bookings and no payments')
         for m in NOT_SAID.finditer(texts):
             failures.append(f'{p}: a text of the script says "{m.group(0)}"; the site does not mention commissions or racers')
-        referenced.update(re.findall(r"'/(assets/vendor/[^']+)'", open(p, encoding='utf-8').read()))
+        referenced.update(f'{SITE_DIR}/{v}' for v in re.findall(r"'/(assets/vendor/[^']+)'", open(p, encoding='utf-8').read()))
 
 for folder in ('assets/img', 'assets/video', 'assets/css', 'assets/js', 'assets/stays'):
     for dp, _, fs in os.walk(folder):
         for f in fs:
             p = os.path.join(dp, f).replace(os.sep, '/')
-            if p not in referenced:
+            if f'{SITE_DIR}/{p}' not in referenced:
                 warnings.append(f'unreferenced asset: {p}')
             if p.startswith('assets/img/') and p.lower().endswith(('.webp', '.jpg', '.jpeg', '.png')):
                 if os.path.getsize(p) > IMG_MAX:
@@ -356,11 +371,11 @@ for folder in ('assets/img', 'assets/video', 'assets/css', 'assets/js', 'assets/
                     failures.append(f'{p}: carries EXIF/XMP metadata; export it with scripts/photos.py')
 
 # ---------------------------------------------------------------- 8. sitemap
-if os.path.isfile('sitemap.xml'):
-    listed = set(re.findall(r'<loc>https://everflowexperience\.com(/[^<]*)</loc>', open('sitemap.xml', encoding='utf-8').read()))
+if os.path.isfile(f'{SITE_DIR}/sitemap.xml'):
+    listed = set(re.findall(r'<loc>https://everflowexperience\.com(/[^<]*)</loc>', open(f'{SITE_DIR}/sitemap.xml', encoding='utf-8').read()))
     for page in PAGES:
         text = open(page, encoding='utf-8').read()
-        url = build.url_of(page)
+        url = build.url_of(rel(page))
         indexable = 'name="robots" content="noindex' not in text
         if indexable and url not in listed:
             failures.append(f'sitemap.xml: {url} is missing')
@@ -390,7 +405,8 @@ for path in tracked:
     for m in INTERNAL.finditer(text):
         failures.append(f'{path}: names an internal path or link ("{m.group(0)}"); this repository is public')
     for address in sorted({m.group(0) for m in MAIL.finditer(text)} - OWN_MAIL):
-        failures.append(f'{path}: holds the e-mail address {address}; only the site\'s own address goes in')
+        if not PLACEHOLDER_MAIL.search(address):
+            failures.append(f'{path}: holds the e-mail address {address}; only the site\'s own address goes in')
     low = text.lower()
     for word in NEVER:
         if word in low:

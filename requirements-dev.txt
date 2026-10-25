@@ -1,0 +1,6 @@
+# Tools for working on the site. The build itself (scripts/build.py, scripts/check.py) needs only Python 3.12.
+#   pip install -r requirements-dev.txt && python -m playwright install chromium
+playwright==1.51.0   # the browser tests in tests/
+ruff==0.17.2         # lint: ruff check scripts tests
+pillow==13.0.0       # scripts/photos.py (photos and the wordmark)
+pypdf==6.21.2        # scripts/library.py (the hotel library, local only)

@@ -23,7 +23,7 @@ uv run --with pypdf python scripts/library.py status
 
 If it lists documents that are new or changed, rebuild before answering:
 `uv run --with pypdf python scripts/library.py build --apply`. If `library.local.json` is
-missing, copy `library.example.json` and ask Juan for the four paths.
+missing, copy `scripts/library.example.json` to the repo root as `library.local.json` and ask Juan for the four paths.
 
 ## A question about a hotel
 
@@ -74,8 +74,8 @@ missing, copy `library.example.json` and ask Juan for the four paths.
    Impressum lists the credit by itself: change `impressum_stand` in `content/site.json`.
 5. No downloads of partner documents unless the register says `brochure: yes`.
 6. `python scripts/build.py`, `python scripts/check.py`, a look at the pages in a browser at
-   full and at phone width (`python -m http.server`), then a pull request. One partner, one
-   pull request. Add the partner to `docs/HOTEL_MATERIAL.md`.
+   full and at phone width (`python -m http.server --directory _site`), then a pull request. One
+   partner, one pull request. Add the partner to `docs/HOTEL_MATERIAL.md`.
 
 ## An offer for a guest
 
