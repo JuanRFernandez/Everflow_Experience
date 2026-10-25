@@ -35,3 +35,13 @@ facts/
 !.claude/
 .claude/*
 !.claude/skills/
+
+# the built site: scripts/build.py writes it, GitHub Actions deploys it
+_site/
+
+# local tooling
+.venv/
+.ruff_cache/
+.pytest_cache/
+uv.lock
+missing*.json

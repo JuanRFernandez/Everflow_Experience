@@ -160,7 +160,27 @@
       });
     }
     var allStays = stay ? groups(stay) : [], allHouses = house ? groups(house) : [];
+    var allTypes = type ? $$('option', type).filter(function (o) { return o.value; }) : [];  // hotel, chalet, apartment
     function hasType(option, kind) { return !kind || (option.getAttribute('data-types') || '').split(' ').indexOf(kind) >= 0; }
+    function typesOf(options) {  // the types the stays in reach have, in the order of the list
+      var found = [];
+      options.forEach(function (o) {
+        (o.getAttribute('data-types') || '').split(' ').forEach(function (k) { if (k && found.indexOf(k) < 0) found.push(k); });
+      });
+      return found;
+    }
+    function refillTypes() {  // "Not sure yet" stays; a type is offered only where a stay of that type is in reach
+      var picked = stay.value ? stay.options[stay.selectedIndex] : null;
+      var place = dest.value;
+      var reach = picked ? typesOf([picked]) : typesOf(allStays.reduce(function (acc, g) { return acc.concat(g.options); }, [])
+        .filter(function (o) { return !place || o.getAttribute('data-place') === place; }));
+      if (!reach.length) reach = allTypes.map(function (o) { return o.value; });  // a destination without a listed stay: we arrange on request
+      var chosen = type.value;
+      allTypes.forEach(function (o) { if (o.parentNode) type.removeChild(o); });
+      allTypes.forEach(function (o) { if (reach.indexOf(o.value) >= 0) type.appendChild(o); });
+      type.value = chosen;
+      if (type.selectedIndex < 0) { type.value = ''; softType = false; }
+    }
     function refill(select, all, fits) {
       var chosen = select.value, kept = 0;
       $$('optgroup', select).forEach(function (g) { select.removeChild(g); });
@@ -191,7 +211,11 @@
             type.value = ''; softType = false;  // a chalet or an apartment: the guest says which; a type the stay lacks goes
           }
         } else if (softType) { type.value = ''; softType = false; }
+      } else if (stay.value) {  // the destination (or the type) leads: a stay that lies elsewhere goes before the types are judged
+        var cur = stay.options[stay.selectedIndex];
+        if (dest.value && cur.getAttribute('data-place') !== dest.value) { stay.value = ''; if (softType) { type.value = ''; softType = false; } }
       }
+      refillTypes();
       var place = dest.value, kind = softType ? '' : type.value;
       if (source !== 'stay') {  // a chosen stay leaves its own list as it is, so the visitor can go on through it (also by arrow keys)
         refill(stay, allStays, function (g, o) { return (!place || o.getAttribute('data-place') === place) && hasType(o, kind); });

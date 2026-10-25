@@ -56,7 +56,7 @@ def fail(message):
 def local_config():
     path = os.path.join(ROOT, 'library.local.json')
     if not os.path.isfile(path):
-        fail('library.local.json is missing: copy library.example.json and fill in the paths')
+        fail('library.local.json is missing: copy scripts/library.example.json to the repo root as library.local.json and fill in the paths')
     return json.load(open(path, encoding='utf-8-sig'))
 
 
