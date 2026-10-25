@@ -381,6 +381,22 @@ def stays():
     return [(p, r) for p in PARTNERS for r in (p.get('residences') or [None])]
 
 
+PLACE_ALIAS = {'munich': 'München'}  # a stay named in the place's own language counts as named after it
+
+
+def named_after_place(p):
+    """True when a stay's name already says its place: "Chalets in Megève", "Sacher Seefeld", "Kempinski München"."""
+    place = PLACE[p['place']]['name']
+    words = [w for w in re.split(r'[\s,]+', place + ' ' + PLACE_ALIAS.get(p['place'], '')) if len(w) >= 4]
+    return any(w.lower() in p['name'].lower() for w in words)
+
+
+def stay_label(p):
+    """A stay in a list: its name, and the place after it only when the name does not say it ("rocksresort, Laax")."""
+    name = tro(p['name'])
+    return name if named_after_place(p) else f'{name}, {tro(PLACE[p["place"]]["name"])}'
+
+
 def number(v):
     """1000 -> 1,000 (1.000 in Spanish and Portuguese); 12–16 and "about 800" keep their form."""
     sep = ',' if LANG == 'en' else '.'
@@ -419,7 +435,7 @@ def enquiry(p, r=None):
 
 def enquire_link(p, r=None):
     href, label = enquiry(p, r)
-    name = r['name'] if r is not None else p['name']
+    name = r['name'] if r is not None else tro(p['name'])
     return (f'<a class="button button--small button--ghost card-enquire" href="{href}">{e(label)}'
             f'<span class="visually-hidden">: {e(name)}</span></a>')
 
@@ -453,7 +469,7 @@ def header(current, en_url):
     links.append(f'<a class="button button--small" href="{localized("/enquire/")}"{cur}>{ui("Plan a trip")}</a>')
     return f'''<header class="site-header" lang="{LANGS[LANG]["html"]}">
   <div class="wrap header-inner">
-    <a class="brand" href="{localized("/")}"><img src="/assets/img/brand/wordmark-ink-360.png" srcset="/assets/img/brand/wordmark-ink-720.png 2x" width="360" height="173" alt="{a(ui("EverFlow Experience, home"))}"></a>
+    <a class="brand" href="{localized("/")}"><img src="/assets/img/brand/wordmark-ink.svg" width="360" height="173" alt="{a(ui("EverFlow Experience, home"))}"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>{ui("Menu")}</button>
     <nav class="site-nav" id="site-nav" aria-label="{a(ui("Main"))}">
       {(chr(10) + '      ').join(links)}
@@ -470,7 +486,7 @@ def footer():
     return f'''<footer class="site-footer" data-wa-greeting="{a(ui("Hello, I am writing from everflowexperience.com ({page}).", page="{page}"))}" lang="{LANGS[LANG]["html"]}">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img src="/assets/img/brand/wordmark-white-360.png" srcset="/assets/img/brand/wordmark-white-720.png 2x" width="360" height="173" alt="EverFlow Experience" loading="lazy">
+      <img src="/assets/img/brand/wordmark-white.svg" width="360" height="173" alt="EverFlow Experience" loading="lazy">
       <p>{e(tr(SITE["line"]))}</p>
     </div>
     <div>
@@ -496,7 +512,6 @@ def footer():
 
 # Pages serves the whole branch: the source files and the brochures are kept out of search results
 ROBOTS_OFF = ('/content/', '/scripts/', '/docs/', '/brand/', '/.claude/', '/assets/stays/', '/CLAUDE.md', '/README.md', '/library.example.json')
-PLACE_ALIAS = {'munich': 'München'}  # a stay named in the place's own language counts as named after it
 OG_LOCALE = {'en': 'en_GB', 'es': 'es_AR', 'pt': 'pt_BR'}
 
 
@@ -618,13 +633,13 @@ def stay_card(p, r=None, level=3):
         kicker = f'{tr(r.get("kind") or TYPE_NAME[kinds[0]])} · {r.get("where") or p["location"]}'
         href, text = f'/stay/{p["slug"]}/#{slugify(r["name"])}', r['card']
         photos = f' · {len(phs)} {"renderings" if r.get("renderings") else "photos"}' if len(phs) > 1 else ''
-        meta = f'<p class="card-meta">{e(p["name"])}{photos}</p>'
+        meta = f'<p class="card-meta">{e(tro(p["name"]))}{photos}</p>'
     else:
         country = tr(COUNTRY[PLACE[p['place']]['country']]['name'])
         kicker = f'{tr(p["kind"])} · {tr(p["location"])}, {country}'
         href, text, meta = f'/stay/{p["slug"]}/', tr(p['card']), ''
     body = [f'<p class="card-kicker">{e(kicker)}</p>',
-            f'<h{level} class="card-title"><a class="card-link" href="{href}">{e(x["name"])}</a></h{level}>',
+            f'<h{level} class="card-title"><a class="card-link" href="{href}">{e(tro(x["name"]))}</a></h{level}>',
             facts_row(x), chips(x, 3), f'<p>{e(text)}</p>',
             f'<div class="card-foot">{meta}{enquire_link(p, r)}</div>']
     return f'''<article class="card" data-type="{" ".join(kinds)}" data-place="{p["place"]}">
@@ -639,7 +654,6 @@ def experience_card(x, level=3):
     return f'''<article class="card">
   <div class="card-media">{img(x["image"], tr(x["alt"]), "(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw", cls="card-img")}</div>
   <div class="card-body">
-    <p class="card-kicker">{e(tr(x["status"]))}</p>
     <h{level} class="card-title"><a class="card-link" href="/experiences/#{x["slug"]}">{e(tr(x["title"]))}</a></h{level}>
     <p>{t(LINK.sub(lambda m: m.group(1), tr(x["text"])))}</p>
   </div>
@@ -667,6 +681,33 @@ def guide_card(g, level=3):
     <p>{e(g["card"])}</p>
   </div>
 </article>'''
+
+
+def portrait(m, sizes):
+    """A team member's photo; nothing, no placeholder, for a member who has none yet (name and role stand alone)."""
+    return img(m['photo'], m['name'], sizes, cls='portrait') if m.get('photo') else ''
+
+
+def guest_quote(x, cls='quote', trip=True):
+    """A guest's words as they wrote them, with first name and country, and the trip and its season."""
+    who = f'{e(x["name"])}, {e(tr(x["country"]))}'
+    if trip:
+        who += f' · {e(tr(x["trip"]))}, {e(tr(x["season"]))}'
+    return f'<figure class="{cls}"><blockquote><p>{e(tr(x["quote"]))}</p></blockquote><figcaption>{who}</figcaption></figure>'
+
+
+def testimonials_section():
+    """What guests said (content/pages.json "testimonials": their words verbatim, first name, country, trip,
+    season; the written consent stays in Drive). Nothing is shown while the list is empty."""
+    items = PAGES.get('testimonials', [])
+    if not items:
+        return ''
+    return f'''<section class="section section--alt" id="guests">
+  <div class="wrap">
+    {section_head(ui("Our guests"), ui("In their words."))}
+    <div class="quotes">{"".join(guest_quote(x) for x in items)}</div>
+  </div>
+</section>'''
 
 
 def guides_section(guides, eyebrow_text='Guides', h2='Read before you plan.'):
@@ -788,6 +829,7 @@ def home():
     row = '\n'.join(f'<li class="gallery-item gallery-item--card">{place_card(p)}</li>' for p in featured[:6])
     exps = [x for x in EXPERIENCES if x.get('featured')]
     juan = TEAM[0]
+    juan_photo = f'<div class="split-media">{portrait(juan, "(min-width: 48rem) 30vw, 60vw")}</div>' if juan.get('photo') else ''
     body = f'''<section class="hero">
   <div class="hero-media" data-src="/assets/video/hero-1080.mp4">
     {img("assets/img/home/zugspitze", tr("The summit station of the Zugspitze, Germany's highest mountain, above the clouds"), "100vw", cls="hero-img", eager=True)}
@@ -796,6 +838,7 @@ def home():
     {eyebrow(tr(h["eyebrow"]))}
     <h1>{e(tr(h["h1"]))}</h1>
     <p class="lead">{e(tr(h["lead"]))}</p>
+    <p class="hero-note">{e(tr(h["hero_note"]))}</p>
     <div class="actions">
       <a class="button button--light" href="{localized("/enquire/")}">{ui("Plan a trip")}</a>
       <a class="button button--ghost-light" href="{localized("/destinations/")}">{ui("Explore destinations")}</a>
@@ -832,13 +875,14 @@ def home():
   </div>
 </section>
 <section class="section" id="team">
-  <div class="wrap split">
-    <div class="split-media">{img(juan["photo"], juan["name"], "(min-width: 48rem) 30vw, 60vw", cls="portrait")}</div>
+  <div class="wrap{" split" if juan_photo else ""}">
+    {juan_photo}
     <div>
       {section_head(tr(h["team_eyebrow"]), tr(h["team_h2"]), tr(h["team_lead"]), more=("/about/", ui("Our story and team")))}
     </div>
   </div>
 </section>
+{testimonials_section()}
 {guides_section(GUIDES)}
 {faq_section(PAGES["faq"]["items"], PAGES["faq"]["eyebrow"], PAGES["faq"]["h2"])}
 {cta_band()}'''
@@ -852,6 +896,8 @@ def organisation():
         'description': SITE['description'], 'email': SITE['email'], 'telephone': '+' + SITE['whatsapp'][0]['number'],
         'foundingDate': '2022', 'address': {'@type': 'PostalAddress', 'addressLocality': 'München', 'addressCountry': 'DE'},
         'areaServed': [c['name'] for c in COUNTRIES], 'sameAs': [f'https://www.instagram.com/{SITE["instagram"]}'],
+        'founder': {'@type': 'Person', 'name': TEAM[0]['name'], 'jobTitle': TEAM[0]['role']},
+        'knowsLanguage': ['en', 'es', 'pt'],
     }
 
 
@@ -934,7 +980,7 @@ def destinations_index():
 </section>''')
     pins = []
     for p in [q for q in PLACES if on_map(q)]:  # the live map frames the Alps as the drawn one does
-        stays = [[s['name'], f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
+        stays = [[tro(s['name']), f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
         pins.append({'n': tro(p['name']), 'u': localized(f'/destinations/{p["slug"]}/'), 'lat': p['lat'], 'lon': p['lon'], 's': stays})
     pins_json = a(json.dumps(pins, ensure_ascii=False, separators=(',', ':')))
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
@@ -1183,8 +1229,7 @@ def partner_page(p):
 {cta_band(p["place"], p["slug"])}'''
     image = variants(f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}')[-1][2] if p.get('photos') else 'assets/img/og/everflow.jpg'
     place = PLACE[p['place']]['name']
-    words = [w for w in re.split(r'[\s,]+', place + ' ' + PLACE_ALIAS.get(p['place'], '')) if len(w) >= 4]
-    named = any(w.lower() in p['name'].lower() for w in words)  # "Chalets in Megève", "Sacher Seefeld", "Kempinski München"
+    named = named_after_place(p)  # "Chalets in Megève", "Sacher Seefeld", "Kempinski München"
     kinds = [k.rstrip('s') for k in re.split(r'\W+', p['kind'].lower()) if k and k != 'and']
     kind_in_name = any(k in p['name'].lower() for k in kinds)  # "Rote Wand Gourmet Hotel"
     if named:
@@ -1206,7 +1251,7 @@ def experiences_page():
         rows.append(f'''<article class="feature" id="{x["slug"]}">
   <div class="feature-media">{img(x["image"], x["alt"], "(min-width: 48rem) 50vw, 100vw")}</div>
   <div class="feature-body">
-    <p class="feature-meta"><span class="step-num">{num(i)}</span> {e(x["status"])}</p>
+    <p class="feature-meta"><span class="step-num">{num(i)}</span></p>
     <h2>{e(x["title"])}</h2>
     <p>{t(x["text"])}</p>
     <a class="arrow-link" href="{enquire_url(interest=x["slug"])}">Plan a trip with {e(lower_first(x["title"].split(":")[0]))}</a>
@@ -1232,8 +1277,8 @@ def about_page():
     juan, rest = TEAM[0], TEAM[1:]
     members = []
     for m in rest:
-        members.append(f'''<article class="member">
-  {img(m["photo"], m["name"], "160px", cls="portrait")}
+        members.append(f'''<article class="member{"" if m.get("photo") else " member--text"}">
+  {portrait(m, "160px")}
   <div><h3>{e(m["name"])}</h3><p class="member-role">{e(m["role"])}</p>{"".join(f"<p>{t(b)}</p>" for b in m["bio"])}</div>
 </article>''')
     body = f'''{page_head(ab["eyebrow"], ab["h1"])}
@@ -1243,8 +1288,8 @@ def about_page():
 <section class="section section--alt" id="team">
   <div class="wrap">
     {section_head(ab["team_eyebrow"], ab["team_h2"])}
-    <article class="member member--lead">
-      {img(juan["photo"], juan["name"], "(min-width: 48rem) 30vw, 70vw", cls="portrait")}
+    <article class="member member--lead{"" if juan.get("photo") else " member--text"}">
+      {portrait(juan, "(min-width: 48rem) 30vw, 70vw")}
       <div><h3>{e(juan["name"])}</h3><p class="member-role">{e(juan["role"])}</p>{"".join(f"<p>{t(b)}</p>" for b in juan["bio"])}</div>
     </article>
     <div class="members">
@@ -1316,6 +1361,9 @@ def guide_page(g):
 
 
 def enquire_page():
+    """The form. Destination, stay, type and house are linked by the script (everflow.js): the stays carry their
+    place and types, the houses their collection and types, and the script shows the options that fit together.
+    Without the script every option shows."""
     en = PAGES['enquire']
     not_sure = ui('Not sure yet')
     dest_opts = [f'<option value="">{e(not_sure)}</option>']
@@ -1326,8 +1374,14 @@ def enquire_page():
     for c in COUNTRIES:
         ps = [p for p in PARTNERS if PLACE[p['place']]['country'] == c['slug']]
         if ps:
-            opts = ''.join(f'<option value="{p["slug"]}">{e(p["name"])}, {e(tro(PLACE[p["place"]]["name"]))}</option>' for p in ps)
+            opts = ''.join(f'<option value="{p["slug"]}" data-place="{p["place"]}" data-types="{" ".join(stay_types(p))}">{e(stay_label(p))}</option>'
+                           for p in ps)
             stay_opts.append(f'<optgroup label="{a(tr(c["name"]))}">{opts}</optgroup>')
+    house_opts = [f'<option value="">{e(ui("No preference"))}</option>']  # the houses of every collection; the script keeps those of the chosen one
+    for p in PARTNERS:
+        if p.get('residences'):
+            opts = ''.join(f'<option value="{a(r["name"])}" data-types="{" ".join(stay_types(p, r))}">{e(r["name"])}</option>' for r in p['residences'])
+            house_opts.append(f'<optgroup label="{a(tro(p["name"]))}" data-stay="{p["slug"]}">{opts}</optgroup>')
     type_opts = [f'<option value="">{e(not_sure)}</option>'] + [f'<option value="{k}">{e(ui(TYPE_NAME[k]))}</option>' for k in STAY_TYPES]
     int_opts = [f'<option value="">{e(not_sure)}</option>'] + [f'<option value="{x["slug"]}">{e(tr(x["title"]))}</option>' for x in EXPERIENCES]
     group = [f'<option value="">{e(ui("Choose"))}</option>'] + [f'<option>{e(ui(g))}</option>' for g in ('1', '2', '3–4', '5–8', '9 or more')]
@@ -1343,6 +1397,7 @@ def enquire_page():
             'wa': ui('WhatsApp should open with the message ready. Send it from there.'),
             'name_error': ui('Please enter your name.'), 'email_error': ui('Please enter a valid e-mail address.'),
             'page': ui('Page'), 'copied': ui('Message copied'),
+            'houses': ui('House: {n} houses of this stay to choose from.'), 'no_houses': ui('House: this stay has no separate houses.'),
         }, ensure_ascii=False, separators=(',', ':'))) + '"'
     req = '<span class="req" aria-hidden="true">*</span>'
     body = f'''{page_head(tr(en["eyebrow"]), tr(en["h1"]), tr(en["lead"]))}
@@ -1361,7 +1416,7 @@ def enquire_page():
       </div>
       <div class="field-row">
         <div class="field"><label for="f-type">{ui("Type of stay")}</label><select id="f-type" name="type">{"".join(type_opts)}</select></div>
-        <div class="field"><label for="f-house">{ui("House")}</label><input id="f-house" name="house" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="field field--house" hidden><label for="f-house">{ui("House")}</label><select id="f-house" name="house">{"".join(house_opts)}</select></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-interest">{ui("What would you like to do?")}</label><select id="f-interest" name="interest">{"".join(int_opts)}</select></div>
@@ -1391,6 +1446,7 @@ def enquire_page():
       </ul>
       <p class="aside-title">{e(tr(PAGES["start"]["lead"]))}</p>
       {steps(PAGES["start"]["steps"], "start-list")}
+      {guest_quote(PAGES["testimonials"][0], cls="quote quote--aside", trip=False) if PAGES.get("testimonials") else ""}
     </aside>
   </div>
 </section>'''
@@ -1512,6 +1568,16 @@ def validate():
         for i in set(ids):
             if ids.count(i) > 1:
                 problems.append(f'partner {p["slug"]}: two houses share the id {i}')
+    guests = PAGES.get('testimonials', [])
+    if not isinstance(guests, list):
+        problems.append('pages.json "testimonials" is a list of entries')
+    for i, x in enumerate(guests if isinstance(guests, list) else []):
+        if not isinstance(x, dict):
+            problems.append(f'pages.json testimonials[{i}]: an entry has quote, name, country, trip and season')
+            continue
+        for key in ('quote', 'name', 'country', 'trip', 'season'):
+            if not isinstance(x.get(key), str) or not x[key].strip():
+                problems.append(f'pages.json testimonials[{i}]: "{key}" is missing (the words, first name, country, trip, season)')
     for g in GUIDES:
         where = f'guide {g["slug"]}'
         im = g['image']

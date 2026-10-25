@@ -86,6 +86,7 @@ TEXT = ('.html', '.css', '.js', '.md', '.json', '.yml', '.yaml', '.txt', '.py', 
 INTERNAL = re.compile(  # a Drive folder of the team, a drive-letter path, a Drive link
     r'\b\d\d_[A-Z][A-Z0-9_&-]{2,}|[A-Za-z]:[\\/](?![\\/ ])|(?i:my[ ]drive|meine[ ]ablage|(?:drive|docs|sheets)\.google\.com)')
 MAIL = re.compile(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}')
+CONTROL = re.compile('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]')  # no text file holds one; a mangled escape would
 OWN_MAIL = {'info@everflowexperience.com'}  # an address meant to be public is added here, on purpose
 IMG_MAX = 950 * 1024  # scripts/photos.py keeps 800 px under 180 KB, 1600 px under 480 KB, 2400 px under 900 KB
 
@@ -384,6 +385,8 @@ for path in tracked:
     if not path.lower().endswith(TEXT) or path.startswith('assets/vendor/') or not os.path.isfile(path):
         continue
     text = open(path, encoding='utf-8', errors='replace').read()
+    if CONTROL.search(text):
+        failures.append(f'{path}: holds a control character (a mangled escape such as \\201C for a curly quote?)')
     for m in INTERNAL.finditer(text):
         failures.append(f'{path}: names an internal path or link ("{m.group(0)}"); this repository is public')
     for address in sorted({m.group(0) for m in MAIL.finditer(text)} - OWN_MAIL):

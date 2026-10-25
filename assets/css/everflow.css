@@ -113,6 +113,9 @@ th{color:var(--ink);font-weight:600}
 }
 @media (forced-colors:active){
   .menu-icon,.menu-icon::before,.menu-icon::after{background:CanvasText}
+  .brand img,.footer-brand img{forced-color-adjust:none;padding:.25rem;border-radius:var(--radius)}  /* the wordmark keeps a plate of its own colour: visible on any theme */
+  .brand img{background:#f4f0e8}
+  .footer-brand img{background:#17140f}
 }
 .lang-mark{font-size:.625rem;letter-spacing:.08em;vertical-align:super;color:var(--ink-2);font-weight:600}
 /* language switch: EN · ES · PT */
@@ -149,6 +152,12 @@ th{color:var(--ink);font-weight:600}
 .hero h1{color:#fff;max-width:14ch}
 .hero .eyebrow{color:#efe7d2}
 .hero .lead{color:#f4efe4;max-width:34rem}
+.hero-note{margin:-.4rem 0 1.4rem;font-size:.9375rem;line-height:1.5;color:#f4efe4;max-width:34rem}
+@media (max-width:48rem){  /* phones: the note sits over the bright part of the photo; a darker foot keeps it readable */
+  .hero-media::after{background:linear-gradient(90deg,rgba(23,20,15,.55) 0%,rgba(23,20,15,.15) 60%,rgba(23,20,15,0) 100%),linear-gradient(180deg,rgba(23,20,15,.1) 0%,rgba(23,20,15,.3) 40%,rgba(23,20,15,.84) 100%)}
+}
+@media (max-width:22.5rem){.hero-note{font-size:.875rem}}
+@media (max-height:40rem){.hero-content{padding-block-start:4rem}}  /* short screens: the buttons stay nearer the fold */
 .video-toggle{position:absolute;right:1.25rem;bottom:1.25rem;z-index:2;background:rgba(23,20,15,.55);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:var(--radius);padding:.45rem .8rem;font:600 .8125rem/1 var(--sans);cursor:pointer}
 @media (max-width:30rem){
   .hero .actions .button{flex:1 1 100%}
@@ -303,6 +312,17 @@ th{color:var(--ink);font-weight:600}
 .faq-item[open] summary::after{content:"−";content:"−" / ""}
 .faq-item p{margin:0 0 1.2rem;max-width:42rem}
 
+/* ---------- guests' words ---------- */
+.quotes{display:grid;gap:var(--gap)}
+@media (min-width:48rem){.quotes{grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}}
+.quote{display:flex;flex-direction:column;gap:.75rem;margin:0;padding:clamp(1.25rem,1rem + 1.5vw,2rem);background:var(--white);border:1px solid var(--line);border-radius:var(--radius)}
+.quote blockquote{margin:0;font:400 var(--step-1)/1.5 var(--serif);color:var(--ink)}
+.quote blockquote p{margin:0}
+.quote blockquote p::before{content:"“"}
+.quote blockquote p::after{content:"”"}
+.quote figcaption{font-size:var(--step--1);color:var(--ink-2)}
+.quote--aside{margin-top:1.5rem}
+
 /* ---------- call to action ---------- */
 .cta-inner{display:grid;gap:2rem;align-items:end}
 @media (min-width:48rem){.cta-inner{grid-template-columns:1.4fr 1fr}}
@@ -327,7 +347,8 @@ th{color:var(--ink);font-weight:600}
 .member p{font-size:.9688rem}
 .member--lead{grid-template-columns:1fr;margin-bottom:clamp(2rem,1.5rem + 2vw,3.5rem)}
 .member--lead .portrait{max-width:20rem}
-@media (min-width:48rem){.member--lead{grid-template-columns:minmax(0,18rem) 1fr;gap:2.5rem}}
+.member--text{grid-template-columns:1fr}  /* a member without a photo yet */
+@media (min-width:48rem){.member--lead:not(.member--text){grid-template-columns:minmax(0,18rem) 1fr;gap:2.5rem}}
 .members{display:grid;gap:2rem}
 @media (min-width:56rem){.members{grid-template-columns:repeat(2,1fr);gap:2.5rem 3rem}}
 .badge img{width:min(15rem,100%)}
@@ -345,7 +366,8 @@ th{color:var(--ink);font-weight:600}
 @media (min-width:56rem){.enquire{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}
 .form{display:grid;gap:1rem}
 .field-row{display:grid;gap:1rem}
-@media (min-width:40rem){.field-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:40rem){.field-row{grid-template-columns:repeat(2,minmax(0,1fr))}.field-row--single{grid-template-columns:1fr}}  /* the script hides the House list when the stay has no houses, and marks the row: no empty column */
+@media (scripting:none){.field--house[hidden]{display:grid !important}}  /* without the script every house shows */
 .field{display:grid;gap:.35rem}
 .field label{font-weight:600;color:var(--ink);font-size:.9375rem}
 .optional{font-weight:400;color:var(--ink-2)}

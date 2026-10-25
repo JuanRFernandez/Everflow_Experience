@@ -24,6 +24,7 @@ import glob
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import zipfile
@@ -199,17 +200,23 @@ def run(base, entry):
 
 
 def brand():
-    """Crop the white wordmark to its letters and write an ink and a white version."""
+    """The wordmark in ink and in white for the pages (SVG files coloured from brand/everflow-wordmark.svg, the vector
+    wordmark with one <g fill> around its letters), and the icons, cut from the top line of the PNG."""
+    vector = os.path.join(ROOT, 'brand/everflow-wordmark.svg')
+    if not os.path.isfile(vector):
+        fail('brand/everflow-wordmark.svg is missing: the pages link the SVG wordmark written from it')
+    with open(vector, encoding='utf-8') as f:
+        svg = f.read()
+    if svg.count('<g fill="') != 1:
+        fail('brand/everflow-wordmark.svg: expected one <g fill="…"> around the letters')
+    for name, colour in (('ink', '#17140f'), ('white', '#ffffff')):
+        out = re.sub(r'<g fill="[^"]*"', f'<g fill="{colour}"', svg, count=1)
+        target = os.path.join(ROOT, f'assets/img/brand/wordmark-{name}.svg')
+        with open(target, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(out)
+        print('wrote', os.path.relpath(target, ROOT).replace(os.sep, '/'), f'{len(out.encode("utf-8")) // 1024} KB')
     src = Image.open(os.path.join(ROOT, 'brand/everflow-wordmark.png')).convert('RGBA')
     letters = src.crop(src.getchannel('A').point(lambda a: 255 if a > 24 else 0).getbbox())
-    for name, colour in (('ink', (23, 20, 15)), ('white', (255, 255, 255))):
-        solid = Image.new('RGBA', letters.size, colour + (255,))
-        solid.putalpha(letters.getchannel('A'))
-        for width in (360, 720):
-            im = solid.resize((width, round(letters.height * width / letters.width)), Image.LANCZOS)
-            target = os.path.join(ROOT, f'assets/img/brand/wordmark-{name}-{width}.png')
-            im.save(target, optimize=True)
-            print('wrote', os.path.relpath(target, ROOT).replace(os.sep, '/'), im.size)
     # Icon: "EVER FLOW" (without the EXPERIENCE line) in cream on ink, square.
     alpha = letters.getchannel('A')
     top = alpha.crop((0, 0, letters.width, round(letters.height * 0.84)))
