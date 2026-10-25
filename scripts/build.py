@@ -1350,14 +1350,14 @@ def guide_page(g):
     flush()
     im = g['image']
     base = PLACE[im['place']]['image']['src'] if im.get('place') else im.get('src') or EXPERIENCE[im['experience']]['image']
+    alt = PLACE[im['place']]['image']['alt'] if im.get('place') else im.get('alt') or EXPERIENCE[im['experience']]['alt']
     body = f'''{page_head(tr(g["eyebrow"]), tr(g["h1"]), tr(g["lead"]), crumbs=[(ui("Guides"), localized("/guides/")), (tr(g["name"]), "")])}
 <div class="wrap">{guide_media(g, "(min-width: 75rem) 1180px, 100vw", cls="hero-figure", eager=True)}</div>
 {chr(10).join(blocks)}
 {guides_section([x for x in GUIDES if x is not g], "More guides", "Read on.")}
 {cta_band(interest=g.get("interest"))}'''
-    return page(f'guides/{g["slug"]}/index.html', f'{tr(g["name"])} — EverFlow Experience', tr(g['description']), body,
-                image=variants(base)[-1][2],
-                image_alt=tr(PLACE[im['place']]['image']['alt']) if im.get('place') else tr(im.get('alt')))
+    return page(f'guides/{g["slug"]}/index.html', f'{tr(g.get("seo_title") or g["name"])} — EverFlow Experience', tr(g['description']), body,
+                image=variants(base)[-1][2], image_alt=tr(alt))
 
 
 def enquire_page():
