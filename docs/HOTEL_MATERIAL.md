@@ -23,7 +23,7 @@ the material.
 | Schlosshotel Kitzbühel | `/stay/schlosshotel-kitzbuehel/`: text only, facts from the hotel's website | Shown on Juan's decision of 19.10.2026 | — | — |
 | rocksresort | `/stay/rocksresort-laax/`: text only, facts from rocksresort.com and laax.com, linked from the page; the new destination `/destinations/laax/` | In writing from the partner, 23.10.2026: the pictures it provides for its partners, shown with its credit line; none received yet | `Weisse Arena Gruppe` | — |
 | Chalets in Megève | `/stay/chalets-megeve/`: 22 houses with ten photos each (every photo of the house saved in Drive) | In writing from the partner, 29.09.2026 (its properties on our website), and Juan's decision of 19.10.2026: shown as EverFlow's chalets, without the partner's name. The credit as a courtesy line without "©", on Juan's decision of 24.10.2026 | `Photo courtesy of the owner` | `assets/img/stays/chalets-megeve/` |
-| Atenas Building (Edificio Atenas), Las Leñas | `/stay/apartments-las-lenas/`: six photos of the apartments; the new destination `/destinations/las-lenas/` (its photos from Wikimedia Commons, credited on the page and in the Impressum) | Juan's decision of 23.10.2026: the apartments of his family | `Photo courtesy of the owner` | `assets/img/stays/apartments-las-lenas/` |
+| Atenas Building (Edificio Atenas), Las Leñas | `/stay/apartments-las-lenas/`: six photos of the apartments; the new destination `/destinations/las-lenas/` (its photos from Wikimedia Commons, credited on the page and in the Impressum) | Juan's decision of 23.10.2026 | `Photo courtesy of the owner` | `assets/img/stays/apartments-las-lenas/` |
 
 ## Adding a partner
 

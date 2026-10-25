@@ -4,6 +4,7 @@ import functools
 import http.server
 import json
 import os
+import re
 import sys
 import threading
 
@@ -11,6 +12,9 @@ from playwright.sync_api import sync_playwright
 
 ROOT = sys.argv[1]
 fails = []
+# Juan, 25.10.2026: the Las Leñas pages stay simple and low profile, nothing about him or his family
+PERSONAL = re.compile(r"founder|fundador|family of our|family's own|familia de nuestro|família do nosso|Juan Rodrigo|grew up skiing|creció esquiando|"
+                      r"cresceu esquiando|born in Mendoza|nació en Mendoza|nasceu em Mendoza|let by EverFlow|lets them|we let them|los alquila|aluga-os", re.I)
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -45,6 +49,7 @@ with sync_playwright() as pw:
     check(pg.locator('.map-beyond a[href="/destinations/las-lenas/"]').count() == 1, 'below the map: "Not on this map: Las Leñas"')
     check(pg.locator('#argentina').count() == 1, 'an Argentina block')
     check(pg.locator('#argentina a[href="/destinations/las-lenas/"]').count() >= 1, 'the block links to Las Leñas')
+    check(not PERSONAL.search(pg.inner_text('#argentina')), '/destinations/: the Argentina block says nothing personal')
     order = pg.eval_on_selector_all('section[id]', 'els => els.map(e => e.id)')
     countries = [x for x in order if x in ('switzerland', 'austria', 'france', 'italy', 'germany', 'argentina')]
     check(countries == ['switzerland', 'austria', 'france', 'italy', 'germany', 'argentina'], f'the countries in order: {countries}')
@@ -65,7 +70,7 @@ with sync_playwright() as pw:
     pg.goto(BASE + '/destinations/las-lenas/')
     check(pg.locator('h1').inner_text().strip() == 'Las Leñas', 'the page head says Las Leñas')
     body = pg.inner_text('main')
-    check('grew up skiing' in body and 'born in Mendoza' in body, 'the founder line is on the page: born in Mendoza, grew up skiing')
+    check('2,240 m' in body and not PERSONAL.search(body), 'the page describes the resort, nothing about the founder or his family (Juan, 25.10.2026)')
     pg.goto(BASE + '/')
     check(pg.locator('#destinations .lead a[href="/destinations/las-lenas/"]').count() == 1, 'the home lead links Las Leñas')
     pg.goto(BASE + '/destinations/las-lenas/')
@@ -115,9 +120,18 @@ with sync_playwright() as pw:
     # ---- the stay page
     pg.goto(BASE + '/stay/apartments-las-lenas/')
     check(pg.locator('h1').inner_text().strip() == 'Atenas Building', 'the stay page head')
-    row = pg.eval_on_selector_all('.card-facts li, .facts li', 'els => els.map(e => e.innerText)')
+    row = pg.eval_on_selector_all('main .ticks li', 'els => els.map(e => e.innerText)')
     body = pg.inner_text('main')
-    check('four guests' in body and 'two levels' in body.lower() and '50 m²' in body and 'EverFlow lets them directly' in body, 'the stay page says four guests, two levels, 50 m², let by EverFlow')
+    check('four guests' in body and '50 m²' in body and 'provided by their owner' in body, 'the stay page says four guests, 50 m², provided by their owner')
+    check(0 < len(row) <= 5 and not PERSONAL.search(body), f'the stay page is short and says nothing about the founder or his family ({len(row)} facts)')
+    check('ground floor' not in body.lower() and 'ground-floor' not in body.lower(),
+          'no "ground floor" on its own: most apartments have two levels inside (review of 25.10.2026)')
+    pg.goto(BASE + '/guides/first-week-from-south-america/')
+    check(not PERSONAL.search(pg.inner_text('main')), 'the guide from South America says nothing personal')
+    pg.goto(BASE + '/destinations/las-lenas/')
+    desc = pg.get_attribute('meta[name="description"]', 'content')
+    check('hotels and chalets' not in desc and 'June to September' in desc, f'the Las Leñas description promises no hotels or chalets ({desc})')
+    pg.goto(BASE + '/stay/apartments-las-lenas/')
     caps = pg.eval_on_selector_all('.gallery .credit', 'els => [...new Set(els.map(e => e.innerText.trim()))]')
     check(caps == ['Photo courtesy of the owner'], f'the photo credit is the courtesy line ({caps})')
     pg.click('.gallery .photo-open >> nth=0')
@@ -125,11 +139,16 @@ with sync_playwright() as pw:
     pg.keyboard.press('Escape')
 
     # ---- Spanish and Portuguese
-    for lang, words, flights in (('es', ['nuestro fundador', 'Juan Rodrigo', 'nació en Mendoza', 'obligatorio llevar cadenas'], 'Vuelos'),
-                                 ('pt', ['nosso fundador', 'Juan Rodrigo', 'nasceu em Mendoza', 'obrigatório levar correntes', 'Ruta 222'], 'Voos')):
+    for lang, words, flights in (('es', ['2.240 m', 'obligatorio llevar cadenas'], 'Vuelos'),
+                                 ('pt', ['2.240 m', 'obrigatório levar correntes', 'Ruta 222'], 'Voos')):
         pg.goto(f'{BASE}/{lang}/destinations/las-lenas/')
         t = pg.inner_text('main').lower()
-        check(all(w.lower() in t for w in words) and flights.lower() in t, f'/{lang}/: the founder line and the flights fact')
+        check(all(w.lower() in t for w in words) and flights.lower() in t and not PERSONAL.search(t), f'/{lang}/: the resort and the flights fact, nothing personal')
+        pg.goto(f'{BASE}/{lang}/destinations/')
+        check(not PERSONAL.search(pg.inner_text('#argentina')), f'/{lang}/destinations/: the Argentina block says nothing personal')
+        pg.goto(f'{BASE}/{lang}/guides/first-week-from-south-america/')
+        check(not PERSONAL.search(pg.inner_text('main')), f'/{lang}/: the guide from South America says nothing personal')
+        pg.goto(f'{BASE}/{lang}/destinations/las-lenas/')
         check(pg.get_attribute('html', 'lang').startswith(lang), f'/{lang}/: the page language')
         pg.click('.gallery .photo-open >> nth=0')
         labels = pg.evaluate('[".lightbox-close", ".lightbox-prev", ".lightbox-next"].map(s => document.querySelector(s).getAttribute("aria-label"))')
