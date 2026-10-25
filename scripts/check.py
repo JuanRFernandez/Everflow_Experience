@@ -16,8 +16,10 @@ and in CI on every pull request.
     every credit is in the Impressum.
  6. Words: no price anywhere; no book/booking, reserve/reservation, pay/paid/payment/payable,
     commission or "racers" outside the legal pages (in the text, in alt/title/aria-label/placeholder/
-    description attributes and in the script's texts), and no reserva, no form of pagar/pagamento and
-    no comisión/comissão on the Spanish and Portuguese pages; no regional brand line; German quotes
+    description attributes and in the script's texts), no reserva, no form of pagar/pagamento and
+    no comisión/comissão on the Spanish and Portuguese pages, no buchen/Buchung (compounds and
+    buchbar, umbuchen included), reservieren, bezahlen/Zahlung, Kaution, Stornierung or Provision on
+    the German pages; no regional brand line; German quotes
     close with “; names that must never appear on the site do not.
  7. This repository is public: nothing of the hotel library is in it (local configuration, extracted
     text, facts files, our notes on a partner's website or offer, the permission register, internal
@@ -79,6 +81,13 @@ NOT_SAID = re.compile(r'\bcommissions?\b|\bracers?\b', re.I)  # Juan, 19.10.2026
 NOT_SAID_ES_PT = re.compile(  # the same in es/ and pt/: no bookings, no payments (every form of pagar; página,
     # pagoda, pagano and the English "page" of the markup stay out), no commissions
     r'\breserv\w*|\b(?:pre|pré-?)?p[aá]g(?!in|od|an[aoi]|es?\b)\w*|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)
+NOT_SAID_DE = re.compile(  # the same in de/: no buchen/Buchung, also in compounds (Buchungsanfrage, Hotelbuchung,
+    # ausgebucht, Frühbucher), no reservieren/Reservation, no bezahlen/Zahlung (Anzahlung, Vorauszahlung), no Kaution,
+    # no Stornierung, no Provision ("Telfs-Buchen" is a place; "Zahlen" alone also means figures, so only the payment
+    # forms are caught; Erzählung and Aufzählung are written with ä)
+    r'(?<!Telfs-)\b(?:vor|um|zu|dazu|hinzu|nach|mit|über)?buch(?:en|t|te|ten)\b|buchbar|buchung|gebucht|bucher|reservier'
+    r'|reservation|bezahl|zahlung'
+    r'|\bgezahlt\b|\bzahlbar\b|kaution|stornier|\bstorno|provision|\bkommission', re.I)
 READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|label|data-title|data-[\w-]*label|data-one|data-many'
                       r'|data-play|data-pause)\s*=\s*"([^"]*)"', re.I)  # attributes whose text a visitor sees or hears
 ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
@@ -110,7 +119,7 @@ def courtesy_lines():
         credits = [p.get('credit')] + [ph.get('credit') for ph in p.get('photos', [])]
         credits += [ph.get('credit') for r in p.get('residences', []) for ph in r.get('photos', [])]
         lines.update(c for c in credits if c and c.startswith('Photo courtesy'))
-    for lang in ('es', 'pt'):
+    for lang in ('es', 'pt', 'de'):
         words = json.load(open(os.path.join(root, 'content', 'i18n', f'{lang}.json'), encoding='utf-8'))
         lines.update(words[c] for c in list(lines) if c in words)
     return lines
@@ -247,6 +256,13 @@ for code in sorted(build.I18N):
 for name in ('CNAME', '.nojekyll'):
     if not os.path.isfile(f'{SITE_DIR}/{name}'):
         failures.append(f'{SITE_DIR}/{name} is missing: python scripts/build.py writes it (the domain for GitHub Pages, no Jekyll)')
+if os.path.isfile(f'{SITE_DIR}/llms.txt'):  # the summary for AI assistants follows the site's rules too
+    summary = open(f'{SITE_DIR}/llms.txt', encoding='utf-8').read()
+    for m in list(PRICE.finditer(summary)) + list(BOOKING.finditer(summary)) + list(NOT_SAID.finditer(summary)):
+        failures.append(f'{SITE_DIR}/llms.txt says "{m.group(0)}"; no prices, bookings, payments or commissions')
+    for link in re.findall(r'\]\(https://everflowexperience\.com(/[^)]*)\)', summary):
+        if not os.path.isfile(resolve(f'{SITE_DIR}/index.html', link)):
+            failures.append(f'{SITE_DIR}/llms.txt links {link}, which has no page')
 if not PAGES:
     failures.append(f'{SITE_DIR}/ holds no pages: run python scripts/build.py first')
 
@@ -306,6 +322,9 @@ for page in PAGES:
             failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
     if rel(page).startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
         for m in NOT_SAID_ES_PT.finditer(html.unescape(CODE.sub(' ', text))):
+            failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
+    if rel(page).startswith('de/'):
+        for m in NOT_SAID_DE.finditer(html.unescape(CODE.sub(' ', text))):
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
     for m in ALTERNATE.finditer(text):
         if resolve('index.html', m.group(1)) not in PAGES:

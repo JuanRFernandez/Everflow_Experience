@@ -76,7 +76,7 @@ except build.BuildError as err:
 build.PAGES['testimonials'] = []
 build.validate()
 data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', build.home(), re.S).group(1))
-check(data.get('founder', {}).get('name') == 'Juan Rodrigo Fernandez' and data.get('knowsLanguage') == ['en', 'es', 'pt'], 'JSON-LD names the founder and the languages')
+check(data.get('founder', {}).get('name') == 'Juan Rodrigo Fernandez' and data.get('knowsLanguage') == ['en', 'es', 'pt', 'de'], 'JSON-LD names the founder and the four languages')
 
 for lang in ('es', 'pt'):
     for name in ('index.html', 'destinations/lech/index.html', 'destinations/las-lenas/index.html'):
@@ -272,7 +272,7 @@ with sync_playwright() as pw:
     pg.goto(BASE + '/guides/chalet-or-hotel/')
     check('5,400 m²' in pg.inner_text('main'), 'the guide says 5,400 m² too')
     pg.goto(BASE + '/')
-    check(pg.locator('.faq-item').count() == 12, f'home: 12 questions ({pg.locator(".faq-item").count()})')
+    check(pg.locator('.faq-item').count() == 13, f'home: 13 questions ({pg.locator(".faq-item").count()})')
     qs = pg.eval_on_selector_all('.faq-item summary', 'els => els.map(e => e.textContent)')
     check('How fast do you answer?' in qs and 'Why plan the stay through you rather than directly with the hotel?' in qs, 'the new questions are there')
     check('A first proposal within 24 hours' in pg.locator('#faq').evaluate('e => e.textContent'), 'the FAQ promises a first proposal within 24 hours')
@@ -324,7 +324,7 @@ with sync_playwright() as pw:
         hidden = pg.eval_on_selector('#stay .card-enquire .visually-hidden', 'e => e.textContent')
         check(atenas.split(',')[0] in hidden, f'/{lang}/: the button names the building in the page\'s language ({hidden.strip()})')
         pg.goto(f'{BASE}/{lang}/')
-        check(pg.locator('.faq-item').count() == 12 and pg.locator('.hero-note').count() == 1, f'/{lang}/: 12 questions and the hero note')
+        check(pg.locator('.faq-item').count() == 13 and pg.locator('.hero-note').count() == 1, f'/{lang}/: 13 questions and the hero note')
         check('A pedido' not in pg.inner_text('main') and 'Ya disponible' not in pg.inner_text('main') and 'Já disponível' not in pg.inner_text('main'), f'/{lang}/: no status on the experiences')
         pg.goto(f'{BASE}/{lang}/destinations/seefeld/')
         check('5.400 m²' in pg.inner_text('main'), f'/{lang}/: Interalpen 5.400 m² on the Seefeld page')

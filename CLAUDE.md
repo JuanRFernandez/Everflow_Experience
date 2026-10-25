@@ -6,8 +6,8 @@ structure; this file holds the rules.
 
 Answer Juan in the language he writes (usually Argentine Spanish). Everything in this
 repository is English. The site is English, with German for the legal pages, and the home
-page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`) and
-Brazilian Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
+page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`),
+Brazilian Portuguese (`/pt/`) and German (`/de/`), from `content/i18n/` (README → Languages).
 
 ## Rules
 
@@ -31,9 +31,10 @@ Brazilian Portuguese (`/pt/`), from `content/i18n/` (README → Languages).
 7. **The pages are built, not written.** `python scripts/build.py` writes the whole site into `_site/`
    (git-ignored); GitHub Actions builds and deploys it from `master`. Change `content/` or
    `scripts/build.py`, never a file in `_site/`.
-8. **Spanish and Portuguese follow the English.** A new or changed English text on a page that
-   exists in all three languages gets its translation in `content/i18n/es.json` and `pt.json` in
-   the same pull request, made with DeepL (ES-419, PT-BR). `scripts/check.py` warns until it has one.
+8. **Spanish, Portuguese and German follow the English.** A new or changed English text on a page
+   that exists in all four languages gets its translation in `content/i18n/es.json`, `pt.json` and
+   `de.json` in the same pull request, made with DeepL (ES-419, PT-BR, DE; German addresses the
+   reader with "Sie"). `scripts/check.py` warns until it has one.
 9. Before every commit: `python scripts/build.py`, then `python scripts/check.py` (it must end with
    `0 failures`), `ruff check scripts tests` and, for a change a visitor can see, `python tests/run.py`
    (Playwright; `pip install -r requirements-dev.txt`). GitHub Actions runs the same four on every

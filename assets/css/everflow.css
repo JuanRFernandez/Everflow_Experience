@@ -118,13 +118,24 @@ th{color:var(--ink);font-weight:600}
   .footer-brand img{background:#17140f}
 }
 .lang-mark{font-size:.625rem;letter-spacing:.08em;vertical-align:super;color:var(--ink-2);font-weight:600}
-/* language switch: EN · ES · PT */
-.lang-switch{display:inline-flex;align-items:center;gap:.7rem}
-.site-nav .lang-switch a{padding:.2rem 0;border-bottom:1px solid transparent;font-size:.8125rem;letter-spacing:.06em;color:var(--ink-2)}
-.site-nav .lang-switch a:hover,.site-nav .lang-switch a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}
-@media (max-width:63.99rem){
-  .lang-switch{gap:1.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
-  .site-nav .lang-switch a{font-size:.9375rem;border-bottom:1px solid transparent}
+/* the language menu: a globe and the current language; a click opens English, Español, Português, Deutsch */
+.lang-menu{position:relative}
+.lang-menu summary{display:inline-flex;align-items:center;gap:.35rem;min-height:2.5rem;padding:.2rem .25rem;list-style:none;cursor:pointer;color:var(--ink);font:600 .8125rem/1 var(--sans);letter-spacing:.06em}
+.lang-menu summary::-webkit-details-marker{display:none}
+.lang-menu summary::after{content:"";width:.38rem;height:.38rem;margin-left:.15rem;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.lang-menu[open] summary::after{transform:translateY(1px) rotate(-135deg)}
+.lang-menu summary:hover{color:var(--accent-dark)}
+.lang-globe{fill:none;stroke:currentColor;stroke-width:1.2}
+.lang-list{position:absolute;right:0;top:calc(100% + .35rem);z-index:60;min-width:10.5rem;margin:0;padding:.35rem 0;list-style:none;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 24px rgba(23,20,15,.12)}
+.site-nav .lang-list a{display:block;padding:.6rem 1.1rem;border:0;font-size:.9375rem;color:var(--ink)}
+.site-nav .lang-list a:hover{background:var(--cream)}
+.site-nav .lang-list a[aria-current]{color:var(--accent-dark)}
+.site-nav .lang-list a[aria-current]::after{content:" ✓";content:" ✓" / ""}
+@media (max-width:63.99rem){  /* in the phone menu the list opens in place */
+  .lang-menu{padding:.5rem 0;border-bottom:1px solid var(--line)}
+  .lang-menu summary{font-size:var(--step-0)}
+  .lang-list{position:static;min-width:0;padding:0 0 .4rem;border:0;box-shadow:none;background:transparent}
+  .site-nav .lang-list a{padding:.7rem 0 .7rem 1.6rem;border-bottom:0}
 }
 
 /* ---------- sections ---------- */
@@ -311,6 +322,13 @@ th{color:var(--ink);font-weight:600}
 .faq-item summary::after{content:"+";content:"+" / "";font-family:var(--sans);color:var(--accent)}
 .faq-item[open] summary::after{content:"−";content:"−" / ""}
 .faq-item p{margin:0 0 1.2rem;max-width:42rem}
+
+/* ---------- a callout on the home page: for guests from Brazil and Argentina ---------- */
+.callout{display:grid;gap:clamp(1.25rem,1rem + 2vw,3rem);padding:clamp(1.5rem,1rem + 2vw,3rem);background:var(--white);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius)}
+@media (min-width:56rem){.callout{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:center}}
+.callout .section-head{margin-bottom:0}
+.callout .actions{align-items:center;gap:1rem 1.5rem}
+.callout .ticks{margin:0}
 
 /* ---------- guests' words ---------- */
 .quotes{display:grid;gap:var(--gap)}

@@ -44,7 +44,7 @@ def check(cond, what):
 SITE = os.path.join(ROOT, '_site')
 sitemap = open(os.path.join(SITE, 'sitemap.xml'), encoding='utf-8').read()
 for slug in SLUGS + ['']:
-    for prefix in ('', 'es/', 'pt/'):
+    for prefix in ('', 'es/', 'pt/', 'de/'):
         rel = f'{prefix}guides/{slug}/index.html' if slug else f'{prefix}guides/index.html'
         url = '/' + rel[:-len('index.html')]
         exists = os.path.isfile(os.path.join(SITE, rel))
@@ -55,10 +55,11 @@ for slug in SLUGS + ['']:
         check(f'<loc>https://everflowexperience.com{url}</loc>' in sitemap, f'{url} is in the sitemap')
         alts = re.findall(r'<link rel="alternate" hreflang="([^"]+)" href="https://everflowexperience\.com([^"]+)"', text)
         want = {('en', url.replace(f'/{prefix}', '/', 1) if prefix else url)}
-        check(len(alts) == 4 and {h for h, _ in alts} == {'en', 'es', 'pt-BR', 'x-default'}, f'{rel}: hreflang for en, es, pt-BR and x-default ({[h for h, _ in alts]})')
+        check(len(alts) == 5 and {h for h, _ in alts} == {'en', 'es', 'pt-BR', 'de', 'x-default'}, f'{rel}: hreflang for en, es, pt-BR, de and x-default ({[h for h, _ in alts]})')
         if prefix:
-            check(not NOT_SAID.search(text.split('<main')[1]), f'{rel}: no reserva, pago or comisión')
-            check(f'<html lang="{"es" if prefix == "es/" else "pt-BR"}">' in text, f'{rel}: the page language')
+            if prefix != 'de/':
+                check(not NOT_SAID.search(text.split('<main')[1]), f'{rel}: no reserva, pago or comisión')
+            check(f'<html lang="{ {"es/": "es", "pt/": "pt-BR", "de/": "de"}[prefix]}">' in text, f'{rel}: the page language')
             check('/guides/' in text and f'href="/{prefix}guides/"' in text, f'{rel}: links to the guides in its language')
 check(len(SLUGS) == 4 and 'first-week-from-south-america' in SLUGS, f'four guides, the new one among them ({SLUGS})')
 
@@ -110,8 +111,8 @@ with sync_playwright() as pw:
         place_links = pg.eval_on_selector_all('main .card a.card-link[href*="/destinations/"]', 'els => els.map(e => e.getAttribute("href"))')
         check(place_links and all(x.startswith(f'/{lang}/destinations/') for x in place_links), f'/{lang}/: the place cards link to /{lang}/destinations/')
         check(pg.get_attribute('.cta .button', 'href') == f'/{lang}/enquire/?interest=ski-coaching', f'/{lang}/: the band leads to the enquiry in {lang}')
-        switch = pg.eval_on_selector_all('.lang-switch a', 'els => els.map(e => e.getAttribute("href"))')
-        check(switch == ['/guides/first-week-from-south-america/', '/es/guides/first-week-from-south-america/', '/pt/guides/first-week-from-south-america/'], f'/{lang}/: the language switch keeps the guide ({switch})')
+        switch = pg.eval_on_selector_all('.lang-menu a', 'els => els.map(e => e.getAttribute("href"))')
+        check(switch == ['/guides/first-week-from-south-america/', '/es/guides/first-week-from-south-america/', '/pt/guides/first-week-from-south-america/', '/de/guides/first-week-from-south-america/'], f'/{lang}/: the language menu keeps the guide ({switch})')
         pg.goto(f'{BASE}/{lang}/guides/')
         check(pg.locator('.card').count() == 4, f'/{lang}/guides/: four guide cards')
         check(pg.locator('h1').inner_text().strip() in ('Antes de planear.', 'Antes de planejar.'), f'/{lang}/guides/: the heading ({pg.locator("h1").inner_text()})')
@@ -127,7 +128,7 @@ with sync_playwright() as pw:
         marks = pg.eval_on_selector_all('.site-nav a .lang-mark', 'els => els.map(e => e.closest("a").getAttribute("href"))')
         check(sorted(marks) == ['/about/', '/experiences/', '/stay/'], f'/{lang}/: EN marks unchanged ({marks})')
     pg.goto(BASE + '/guides/ski-week-with-kids/')
-    check(pg.get_attribute('.breadcrumb a', 'href') == '/guides/' and pg.locator('.lang-switch a[href="/es/guides/ski-week-with-kids/"]').count() == 1, 'EN guide: breadcrumb and switch')
+    check(pg.get_attribute('.breadcrumb a', 'href') == '/guides/' and pg.locator('.lang-menu a[href="/es/guides/ski-week-with-kids/"]').count() == 1, 'EN guide: breadcrumb and switch')
     check(not errors, f'no script errors ({errors[:2]})')
     check(not outside, f'no request outside the site ({outside[:3]})')
 

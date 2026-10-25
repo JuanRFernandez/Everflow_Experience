@@ -30,10 +30,36 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
     toggle.addEventListener('click', function () { set(toggle.getAttribute('aria-expanded') !== 'true'); });
+    header.addEventListener('focusout', function (ev) {  // the keyboard left the menu: it closes, so it covers nothing
+      if (header.classList.contains('is-open') && ev.relatedTarget && !header.contains(ev.relatedTarget)) set(false);
+    });
     document.addEventListener('keydown', function (ev) {
-      if (ev.key === 'Escape' && header.classList.contains('is-open')) { set(false); toggle.focus(); }
+      if (ev.key !== 'Escape' || !header.classList.contains('is-open')) return;
+      var inside = header.contains(document.activeElement);
+      set(false);
+      if (inside) toggle.focus();  // never pulls the focus out of a form field
     });
     $$('#site-nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  }
+
+  /* ---------- the language menu: a <details>; it also closes on Escape, on a click elsewhere and when the focus
+     leaves it, so the open list never covers what the keyboard reaches next ---------- */
+  function initLangMenu() {
+    var menu = $('.lang-menu');
+    if (!menu) return;
+    document.addEventListener('click', function (ev) {  // a click elsewhere, or a language chosen: on the legal pages
+      // English and Deutsch jump within the same page, so the list would otherwise stay open over the text
+      if (menu.open && (!menu.contains(ev.target) || ev.target.closest('.lang-list a'))) menu.open = false;
+    });
+    menu.addEventListener('focusout', function (ev) {
+      if (menu.open && ev.relatedTarget && !menu.contains(ev.relatedTarget)) menu.open = false;
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Escape' || !menu.open) return;
+      var inside = menu.contains(document.activeElement);
+      menu.open = false;
+      if (inside) $('summary', menu).focus();  // never pulls the focus out of a form field
+    });
   }
 
   /* ---------- galleries: counter "01 / 06" (or "01–03 / 06" when three fit) and previous / next ---------- */
@@ -524,6 +550,7 @@
 
   function ready() {
     initMenu();
+    initLangMenu();
     $$('[data-gallery]').forEach(initGallery);
     initLightbox();
     window.addEventListener('load', initVideo);  // the video waits for the page

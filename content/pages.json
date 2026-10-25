@@ -14,6 +14,17 @@
     "experiences_eyebrow": "Experiences",
     "experiences_h2": "Built around your days.",
     "experiences_lead": "Coaching, guiding, food, spa and transfers, arranged together. Every part is optional.",
+    "south_america": {
+      "eyebrow": "From Brazil and Argentina",
+      "h2": "A ski week in the Alps, in your language.",
+      "lead": "We coach and host in Portuguese and Spanish, plan the week around the South American holidays, and know the non-stop flights from São Paulo and Buenos Aires.",
+      "points": [
+        "Coaching and hosting in Portuguese and Spanish",
+        "Non-stop flights to Europe from São Paulo and Buenos Aires",
+        "Las Leñas, in the Andes, for the southern winter"
+      ],
+      "guide": "first-week-from-south-america"
+    },
     "team_eyebrow": "Who hosts you",
     "team_h2": "A small team that knows the mountains.",
     "team_lead": "EverFlow was founded in 2022 by Juan Rodrigo Fernandez, a former member of the Argentinian Ski Team. We host in English, Spanish and Portuguese, with German-speaking instructors and partners."
@@ -33,6 +44,7 @@
     "items": [
       ["Where do you operate?", "Across the Alps: in Switzerland, Austria, France, Italy and Germany. And in Las Leñas, in the Argentine Andes, for the southern winter. [See all destinations](/destinations/)."],
       ["What can a trip include?", "Private coaching, hotels and chalets, dining, wellness, guiding and transfers. Every part is optional: some guests come for a single lesson, others for a full week we handle from start to finish."],
+      ["Do you have ski instructors who speak Portuguese?", "Yes. Our team coaches and hosts in Portuguese and Spanish as well as in English, and [the guide for guests from Brazil and Argentina](/guides/first-week-from-south-america/) shows how a first week in the Alps comes together. Tell us in the enquiry which language you prefer."],
       ["Why plan the stay through you rather than directly with the hotel?", "With many of our hotels we work under our own agreements, so the stay usually costs you the same or less than taking it directly at the hotel's list price. And you get the rest with it: we know these mountains and the people who run them, we build the week around your group, and we are there when something needs sorting out."],
       ["What does planning with you cost?", "There is no separate planning fee: your proposal is one plan for the week, stay included. Coaching, guiding and the days we host are part of that proposal."],
       ["Do you show prices?", "No. Every trip is planned for you, so we send a proposal with the costs once we know your dates, your group and what you want to do. A first proposal within 24 hours of your enquiry."],
