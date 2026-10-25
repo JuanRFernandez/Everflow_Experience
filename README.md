@@ -16,7 +16,7 @@ and JavaScript, generated from the content files by one small Python script.
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place
 │   ├── experiences.json       # the eight experiences
-│   ├── guides.json            # the guides (English only): sections, places and hotels they name
+│   ├── guides.json            # the guides: sections, places and hotels they name
 │   ├── team.json              # the team
 │   ├── i18n/es.json, pt.json  # Spanish and Portuguese: each English text → its translation
 │   └── legal/                 # Impressum and Datenschutz texts (German / English)
@@ -80,17 +80,19 @@ country, trip and season), only with the guest's written consent, which stays in
 page and the enquiry page show them once the list has entries. A team member in `content/team.json`
 may have no `photo` yet: the page then shows the name and role alone.
 
-A guide (`content/guides.json`, English only) is running text plus cards of the places and the
-hotels and chalets it names; the destination pages it lists under `related` link to it. A guide
-states what the destination and partner pages already state, or plain general knowledge: a new
-fact about a hotel goes on its partner page first, checked against the hotel's material.
+A guide (`content/guides.json`) is running text plus cards of the places and the hotels and
+chalets it names; the destination pages it lists under `related` link to it. A guide states what
+the destination and partner pages already state, or plain general knowledge: a new fact about a
+hotel goes on its partner page first, checked against the hotel's material. Every guide needs
+`name`, `eyebrow`, `h1`, `lead`, `description` and `card`, and exists in Spanish and Portuguese
+like the home page (its texts in `content/i18n/`).
 
 ## Languages
 
-The home page, the destinations and the enquiry form also exist in Spanish (`/es/`, Latin
-American Spanish) and Portuguese (`/pt/`, Brazilian), for the guests and agencies who write from
-Argentina and Brazil. The other pages (where to stay, experiences, about, the partner pages, the
-legal pages) are English only; their language switch leads to the Spanish or Portuguese home page.
+The home page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`,
+Latin American Spanish) and Portuguese (`/pt/`, Brazilian), for the guests and agencies who write
+from Argentina and Brazil. The other pages (where to stay, experiences, about, the partner pages,
+the legal pages) are English only; their language switch leads to the Spanish or Portuguese home page.
 
 `content/i18n/es.json` and `pt.json` map each English text of those pages to its translation.
 A new or changed English text has no translation until it is added: the page shows it in English
