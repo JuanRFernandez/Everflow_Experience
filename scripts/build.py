@@ -1244,6 +1244,17 @@ def partner_page(p):
       {brochure}
     </div>'''
     links = ''.join(f'<li><a href="{a(link["url"])}" rel="noopener">{e(link["label"])}</a></li>' for link in p.get('links', []))
+    seasons_html = ''  # what the partner offers or arranges through the year: winter, summer, a rainy day
+    if p.get('seasons'):
+        cols = ''.join(f'<div class="panel"><h3>{e(s["title"])}</h3><ul class="ticks">{"".join(f"<li>{t(i)}</li>" for i in s["items"])}</ul></div>'
+                       for s in p['seasons'])
+        head = p.get('seasons_head', ['Through the year', 'Winter, summer and a rainy day.'])
+        seasons_html = f'''<section class="section section--alt" id="through-the-year">
+  <div class="wrap">
+    {section_head(head[0], head[1], p.get('seasons_lead'))}
+    <div class="grid">{cols}</div>
+  </div>
+</section>'''
     res_html = ''
     if p.get('residences'):
         res = p.get('residences_head', ['The residences', 'Choose the house.'])
@@ -1278,6 +1289,7 @@ def partner_page(p):
     </div>
   </div>
 </section>
+{seasons_html}
 <section class="section section--tight">
   <div class="wrap split split--text">
     {arr_html}
