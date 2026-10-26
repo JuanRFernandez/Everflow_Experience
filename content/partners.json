@@ -2253,7 +2253,7 @@
       {
         "name": "facade-snow",
         "alt": "A rocksresort building in deep snow, with snow-laden firs and the mountains behind",
-        "credit": "LAAX"
+        "credit": "LAAX | Nicholas Iliano"
       },
       {
         "name": "gondola",
@@ -2273,11 +2273,21 @@
       {
         "name": "living-kitchen",
         "alt": "The living room of an apartment with its kitchen, and a window onto the resort in winter",
-        "credit": "LAAX"
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "family-living",
+        "alt": "A family playing cards and doing a puzzle in the living room of an apartment",
+        "credit": "LAAX | Nicholas Iliano"
       },
       {
         "name": "dining",
         "alt": "The dining table of an apartment, by a window onto the snowy forest and the resort",
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "family-dining",
+        "alt": "A family at the dining table of an apartment, by the large window, with a bedroom beyond",
         "credit": "LAAX | Nicholas Iliano"
       },
       {
@@ -2288,7 +2298,7 @@
       {
         "name": "bedroom-evening",
         "alt": "A bedroom with oak walls, bedside lamps and a window onto the rocksresort",
-        "credit": "LAAX"
+        "credit": "LAAX | Andrew Westbrook"
       },
       {
         "name": "bunk-beds",
