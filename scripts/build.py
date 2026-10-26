@@ -11,8 +11,9 @@ content/*.json (texts, places, partners, team) or this script (layout), then run
 python -m http.server --directory _site.
 
 Languages: the site is English. The home page, the destinations, the guides and the enquiry page also
-exist in Spanish (/es/) and Brazilian Portuguese (/pt/). Their texts are in content/i18n/<language>.json,
-one entry per English text; a text without a translation is shown in English and reported.
+exist in Spanish (/es/), Brazilian Portuguese (/pt/) and German (/de/). Their texts are in
+content/i18n/<language>.json, one entry per English text; a text without a translation is shown in
+English and reported.
 """
 import hashlib
 import html
@@ -67,6 +68,7 @@ LANGS = {
     'en': {'html': 'en', 'prefix': '', 'short': 'EN', 'label': 'English'},
     'es': {'html': 'es', 'prefix': '/es', 'short': 'ES', 'label': 'Español'},
     'pt': {'html': 'pt-BR', 'prefix': '/pt', 'short': 'PT', 'label': 'Português'},
+    'de': {'html': 'de', 'prefix': '/de', 'short': 'DE', 'label': 'Deutsch'},  # German last (Juan, 25.10.2026)
 }
 
 
@@ -461,12 +463,19 @@ def header(current, en_url):
             mark = f' <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> {ui("(in English)")}</span>'
         links.append(f'<a href="{localized(href)}"{cur}>{ui(label)}{mark}</a>')
     langs = []
-    for code, lang in LANGS.items():
-        target = en_url if code == 'en' or translated(en_url) else '/'
+    for code, lang in LANGS.items():  # the same page in each language, or that language's home where it exists in English only
+        if en_url in ('/impressum.html', '/datenschutz.html') and code in ('en', 'de'):
+            href = f'{en_url}#{code}'  # the legal pages hold their German and English text on one page
+        else:
+            href = lang['prefix'] + (en_url if code == 'en' or translated(en_url) else '/')
         cur = ' aria-current="true"' if code == LANG else ''
-        langs.append(f'<a href="{lang["prefix"]}{target}" hreflang="{lang["html"]}" lang="{lang["html"]}"'
-                     f' aria-label="{a(lang["label"])}"{cur}>{lang["short"]}</a>')
-    links.append('<span class="lang-switch">' + ''.join(langs) + '</span>')
+        langs.append(f'<li><a href="{href}" hreflang="{lang["html"]}" lang="{lang["html"]}"{cur}>{lang["label"]}</a></li>')
+    globe = ('<svg class="lang-globe" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">'
+             '<circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c1.9 2 2.7 4.2 2.7 6.5S9.9 12.5 8 14.5M8 1.5C6.1 3.5 5.3 5.7 5.3 8S6.1 12.5 8 14.5"/></svg>')
+    # the visible code (EN, ES, PT, DE) starts the menu's name, so a speech-input user can say what they see
+    links.append(f'<details class="lang-menu"><summary>{globe}<span class="lang-current">{LANGS[LANG]["short"]}</span>'
+                 f'<span class="visually-hidden">, {ui("Language")}: {LANGS[LANG]["label"]}</span></summary>'
+                 f'<ul class="lang-list">{"".join(langs)}</ul></details>')
     cur = ' aria-current="page"' if current.startswith(localized('/enquire/')) else ''
     links.append(f'<a class="button button--small" href="{localized("/enquire/")}"{cur}>{ui("Plan a trip")}</a>')
     return f'''<header class="site-header" lang="{LANGS[LANG]["html"]}">
@@ -505,7 +514,7 @@ def footer():
     </div>
     <div>
       <p class="footer-title">{ui("Legal")}</p>
-      <ul><li><a href="/impressum.html">{ui("Impressum / Imprint")}</a></li><li><a href="/datenschutz.html">{ui("Datenschutz / Privacy")}</a></li></ul>
+      <ul><li><a href="/impressum.html">{ui("Impressum / Imprint")}</a></li><li><a href="/datenschutz.html{"#de" if LANG == "de" else ""}">{ui("Datenschutz / Privacy")}</a></li></ul>
     </div>
   </div>
   <div class="wrap footer-bottom"><p>{e(SITE["copyright"])}</p></div>
@@ -513,7 +522,7 @@ def footer():
 
 
 ROBOTS_OFF = ('/assets/stays/',)  # the brochures are served for the partner pages but kept out of search results
-OG_LOCALE = {'en': 'en_GB', 'es': 'es_AR', 'pt': 'pt_BR'}
+OG_LOCALE = {'en': 'en_GB', 'es': 'es_AR', 'pt': 'pt_BR', 'de': 'de_DE'}
 
 
 def og_image_meta(image, alt):
@@ -831,6 +840,8 @@ def home():
     exps = [x for x in EXPERIENCES if x.get('featured')]
     juan = TEAM[0]
     juan_photo = f'<div class="split-media">{portrait(juan, "(min-width: 48rem) 30vw, 60vw")}</div>' if juan.get('photo') else ''
+    sa = south_america_section()
+    sa_first, sa_later = (sa, '') if LANG in ('es', 'pt') else ('', sa)  # the guests it speaks to see it first
     body = f'''<section class="hero">
   <div class="hero-media" data-src="/assets/video/hero-1080.mp4">
     {img("assets/img/home/zugspitze", tr("The summit station of the Zugspitze, Germany's highest mountain, above the clouds"), "100vw", cls="hero-img", eager=True)}
@@ -847,6 +858,7 @@ def home():
   </div>
   <button class="video-toggle" type="button" data-pause="{a(ui("Pause video"))}" data-play="{a(ui("Play video"))}" hidden>{ui("Pause video")}</button>
 </section>
+{sa_first}
 <section class="section" id="destinations">
   <div class="wrap">
     {section_head(tr(h["destinations_eyebrow"]), tr(h["destinations_h2"]), ui(h["destinations_lead"], n=len([p for p in PLACES if on_map(p)]), m=len({p['country'] for p in PLACES if on_map(p)})) + (' ' + beyond_alps(link=True) if beyond_alps() else ''), more=(localized("/destinations/"), ui("All destinations")))}
@@ -863,6 +875,7 @@ def home():
   </div>
 </section>
 {how_section()}
+{sa_later}
 <section class="section" id="stay">
   <div class="wrap">
     {section_head(tr(h["stay_eyebrow"]), tr(h["stay_h2"]), tr(h["stay_lead"]), more=("/stay/", ui("All hotels and chalets")))}
@@ -887,19 +900,69 @@ def home():
 {guides_section(GUIDES)}
 {faq_section(PAGES["faq"]["items"], PAGES["faq"]["eyebrow"], PAGES["faq"]["h2"])}
 {cta_band()}'''
-    return page('index.html', tr(h['title']), tr(SITE['description']), body, data=organisation() if LANG == 'en' else None)
+    return page('index.html', tr(h['title']), tr(SITE['description']), body, data=organisation())
+
+
+def south_america_section():
+    """For guests from Brazil and Argentina: coaching in their language, the flights, Las Leñas, and the guide written
+    for them. On the Spanish and Portuguese home pages it comes right after the hero."""
+    sa = PAGES['home']['south_america']
+    guide = next(g for g in GUIDES if g['slug'] == sa['guide'])
+    points = ''.join(f'<li>{e(tr(x))}</li>' for x in sa['points'])
+    return f'''<section class="section section--tight" id="from-south-america">
+  <div class="wrap">
+    <div class="callout">
+      <div>
+        {section_head(tr(sa["eyebrow"]), tr(sa["h2"]), tr(sa["lead"]))}
+        <div class="actions">
+          <a class="button" href="{localized("/enquire/")}">{ui("Plan a trip")}</a>
+          <a class="arrow-link" href="{localized("/guides/" + guide["slug"] + "/")}">{e(tr(guide["name"]))}</a>
+        </div>
+      </div>
+      <ul class="ticks">{points}</ul>
+    </div>
+  </div>
+</section>'''
 
 
 def organisation():
     return {
         '@context': 'https://schema.org', '@type': 'TravelAgency', 'name': SITE['name'], 'url': SITE['url'] + '/',
         'logo': SITE['url'] + '/assets/img/brand/icon-180.png', 'image': SITE['url'] + '/assets/img/og/everflow.jpg',
-        'description': SITE['description'], 'email': SITE['email'], 'telephone': '+' + SITE['whatsapp'][0]['number'],
+        'description': tr(SITE['description']), 'email': SITE['email'], 'telephone': '+' + SITE['whatsapp'][0]['number'],
         'foundingDate': '2022', 'address': {'@type': 'PostalAddress', 'addressLocality': 'München', 'addressCountry': 'DE'},
         'areaServed': [c['name'] for c in COUNTRIES], 'sameAs': [f'https://www.instagram.com/{SITE["instagram"]}'],
         'founder': {'@type': 'Person', 'name': TEAM[0]['name'], 'jobTitle': TEAM[0]['role']},
-        'knowsLanguage': ['en', 'es', 'pt'],
+        'knowsLanguage': ['en', 'es', 'pt', 'de'],
     }
+
+
+def llms_txt():
+    """A plain summary of the site for AI assistants (the llms.txt convention): what EverFlow does, in which languages,
+    where, and the main pages. Built from the content like every page, so it never says more than the site."""
+    url = SITE['url']
+    h = PAGES['home']
+    sa = h['south_america']
+    lines = [f'# {SITE["name"]}', '',
+             f'> {SITE["description"]} {EXPERIENCE["ski-coaching"]["text"].split(". ", 1)[1]}', '',
+             f'The home page, the destinations, the guides and the enquiry form are in English ({url}/), Spanish ({url}/es/), '
+             f'Portuguese ({url}/pt/) and German ({url}/de/); the other pages are in English. '
+             f'{h["hero_note"]} Enquiries: {url}/enquire/ or {SITE["email"]}; WhatsApp {SITE["whatsapp"][0]["label"]}.', '',
+             f'## {sa["eyebrow"]}', '', f'{sa["lead"]}', '']
+    lines += [f'- {x}' for x in sa['points']]
+    guide = next(g for g in GUIDES if g['slug'] == sa['guide'])
+    lines += [f'- [{guide["name"]}]({url}/guides/{guide["slug"]}/) (also in Portuguese: {url}/pt/guides/{guide["slug"]}/ '
+              f'and in Spanish: {url}/es/guides/{guide["slug"]}/)', '',
+              '## Destinations', '']
+    lines += [f'- [{p["name"]}]({url}/destinations/{p["slug"]}/): {p["tagline"]}' for p in PLACES]
+    lines += ['', '## Where to stay', '', f'- [Hotels, chalets and apartments we know]({url}/stay/)']
+    lines += [f'- [{p["name"]}]({url}/stay/{p["slug"]}/): {p["card"]}' for p in PARTNERS]
+    lines += ['', '## Guides', '']
+    lines += [f'- [{g["name"]}]({url}/guides/{g["slug"]}/): {g["card"]}' for g in GUIDES]
+    lines += ['', '## Good to know', '']
+    lines += [f'- {q} {LINK.sub(lambda m: m.group(1), ans)}' for q, ans in PAGES['faq']['items']]
+    lines += ['', '## About', '', f'- [About {SITE["name"]} and the team]({url}/about/)', '']
+    return '\n'.join(lines)
 
 
 MAP_COUNTRIES = {'germany': (48.42, 9.4), 'austria': (47.02, 13.3), 'switzerland': (47.17, 7.55), 'france': (45.12, 6.3),
@@ -1638,6 +1701,7 @@ def render_all():
     out['sitemap.xml'] = sitemap(sorted(indexable, key=lambda p: (p != 'index.html', p)))
     out['robots.txt'] = ('User-agent: *\nAllow: /\n' + ''.join(f'Disallow: {x}\n' for x in ROBOTS_OFF)
                          + f'\nSitemap: {SITE["url"]}/sitemap.xml\n')
+    out['llms.txt'] = llms_txt()
     return out
 
 

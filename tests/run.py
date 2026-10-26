@@ -15,7 +15,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-SUITES = ['enquiry', 'guides', 'stay', 'review', 'lenas']
+SUITES = ['enquiry', 'guides', 'stay', 'review', 'lenas', 'languages']
 
 
 def main(argv):

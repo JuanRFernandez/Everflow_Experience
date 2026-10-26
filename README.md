@@ -21,7 +21,7 @@ the sources, `_site/` is the build.
 │   ├── experiences.json       # the eight experiences
 │   ├── guides.json            # the guides: sections, places and hotels they name
 │   ├── team.json              # the team
-│   ├── i18n/es.json, pt.json  # Spanish and Portuguese: each English text → its translation
+│   ├── i18n/es.json, pt.json, de.json  # Spanish, Portuguese, German: each English text → its translation
 │   └── legal/                 # Impressum and Datenschutz texts (German / English)
 ├── assets/
 │   ├── css/everflow.css       # the one stylesheet (tokens in :root)
@@ -108,28 +108,39 @@ exists in Spanish and Portuguese like the home page (its texts in `content/i18n/
 
 The home page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`,
 Latin American Spanish) and Portuguese (`/pt/`, Brazilian), for the guests and agencies who write
-from Argentina and Brazil. The other pages (where to stay, experiences, about, the partner pages,
-the legal pages) are English only; their language switch leads to the Spanish or Portuguese home page.
+from Argentina and Brazil, and in German (`/de/`). The other pages (where to stay, experiences,
+about, the partner pages) are English only, and the legal pages German and English. The language
+menu in the header (a globe: English, Español, Português, Deutsch) leads to the same page in each
+language, or to that language's home page where the page exists in English only.
 
-`content/i18n/es.json` and `pt.json` map each English text of those pages to its translation.
+The home page has a section for guests from Brazil and Argentina (coaching in Portuguese and
+Spanish, the flights, Las Leñas, the guide written for them); on the Spanish and Portuguese home
+pages it comes right after the hero. `_site/llms.txt` sums the site up for AI assistants, built
+from the content like the pages.
+
+`content/i18n/es.json`, `pt.json` and `de.json` map each English text of those pages to its translation.
 A new or changed English text has no translation until it is added: the page shows it in English
 meanwhile, and `scripts/check.py` warns. To add the missing ones:
 
 1. `python scripts/build.py --missing missing.json` lists them (`missing.json` is a scratch file;
    do not commit it).
-2. Translate them with DeepL (target `ES-419` and `PT-BR`), then check the output against the rule
+2. Translate them with DeepL (target `ES-419`, `PT-BR` and `DE`; German addresses the reader with
+   "Sie"), then check the output against the rule
    for place names: a city, region, range or lake with a living exonym takes it (Múnich / Munique,
    Zúrich / Zurique, Ginebra / Genebra, Baviera, el Tirol, Saboya / Saboia, Engadina, los Dolomitas /
    as Dolomitas, los Andes); a resort, village, lift, ski area or brand keeps its local name (Lech am
    Arlberg, Zermatt, Megève, Kitzbühel, Garmisch-Partenkirchen, Cortina d'Ampezzo, Ski Arlberg,
    Les 3 Vallées). St. Moritz and Las Leñas stay as they are in every language.
-   `{name}`-style placeholders, `[links](/…)` and numbers stay unchanged; Spanish writes thousands
-   with a point (1.300 m) and decimals with a comma (1,5 horas).
-3. Add them to the two files, then `python scripts/build.py` and `python scripts/check.py`.
+   German takes München, Zürich, Genf, Mailand, Venedig, Tirol, Savoyen, Engadin, die Dolomiten.
+   `{name}`-style placeholders, `[links](/…)` and numbers stay unchanged; Spanish, Portuguese and
+   German write thousands with a point (1.300 m) and decimals with a comma (1,5 horas).
+3. Add them to the files, then `python scripts/build.py` and `python scripts/check.py`.
 
-A translation that no page uses any more is a warning too: remove it. The Spanish and Portuguese
-pages follow the same wording rules as the English ones: `scripts/check.py` fails on
-reserva/reservar, pago/pagamento and comisión/comissão there.
+A translation that no page uses any more is a warning too: remove it. The Spanish, Portuguese and
+German pages follow the same wording rules as the English ones: `scripts/check.py` fails on
+reserva/reservar, pago/pagamento and comisión/comissão there, and on buchen/Buchung (also in
+compounds and related forms such as Buchungsanfrage, ausgebucht, buchbar or umbuchen), reservieren,
+bezahlen/Zahlung, Kaution, Stornierung and Provision on the German pages.
 
 ## Rules the site follows
 
