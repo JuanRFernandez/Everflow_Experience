@@ -3,7 +3,7 @@
 three widths (800, 1600 and 2400 px, never wider than the original) so that every screen loads
 the size it needs, at a quality that keeps the photo sharp.
 
-    uv run --with pillow python scripts/photos.py site <source> <assets/img/... base> [--widths 800,1600,2400] [--aspect 3:2] [--focus 0.5,0.4]
+    uv run --with pillow python scripts/photos.py site <source> <assets/img/... base> [--widths 800,1600,2400] [--aspect 3:2] [--focus 0.5,0.4] [--partner <slug>]
     uv run --with pillow python scripts/photos.py stay <partner-slug> <name> <source> [--aspect 3:2] [--focus x,y]
     uv run --with pillow python scripts/photos.py rebuild [<assets/img/... prefix>]
     uv run --with pillow python scripts/photos.py brand
@@ -15,9 +15,10 @@ photo is logged with its source and crop in photo-sources.json in the library fo
 the repository), and `rebuild` processes them all again from the originals, for instance after
 a change of the sizes or the quality below.
 
-`stay` processes a partner's photo only when the permission register says `site: yes` and
-`photos: yes` for that partner (the register name is `register` in content/partners.json).
-The credit line comes from content/partners.json and is shown under every photo.
+`stay`, and `site --partner <slug>` for a photo a partner gave us for a destination page, process the
+photo only when the permission register says `site: yes` and `photos: yes` for that partner (the
+register name is `register` in content/partners.json). The credit line comes from content/partners.json
+or content/destinations.json and is shown under every photo.
 """
 import csv
 import glob
@@ -36,6 +37,7 @@ except ImportError:
     sys.exit(2)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+Image.MAX_IMAGE_PIXELS = 400_000_000  # the partners' originals reach 200 megapixels; the decompression-bomb guard stays on
 WIDTHS = (800, 1600, 2400)
 QUALITIES = (84, 80, 76, 72)            # tried in this order until the file fits its limit
 
@@ -136,12 +138,14 @@ def save_webp(img, target, width):
 
 def process(source, base, widths, aspect=None, focus=(0.5, 0.5)):
     img = crop(to_srgb(open_source(source)), aspect, focus)
+    stem = os.path.basename(base)
     for old in glob.glob(os.path.join(ROOT, f'{base}-*.webp')):
-        os.remove(old)
+        if re.fullmatch(re.escape(stem) + r'-\d+\.webp', os.path.basename(old)):  # the base's own sizes, not laax-snowpark-*
+            os.remove(old)
     out = []
     for i, width in enumerate(widths):
-        if i and img.width <= widths[i - 1] * 1.2:
-            break  # the original is hardly wider than the previous file: a larger one would add nothing
+        if i and img.width <= widths[i - 1] * 1.1:
+            break  # the original is hardly wider than the previous file: a larger one would add nothing (1920 px originals get one)
         target = os.path.join(ROOT, f'{base}-{width}.webp')
         size, nbytes, q = save_webp(img, target, width)
         out.append(f'{os.path.relpath(target, ROOT)}  {size[0]}x{size[1]}  q{q}  {nbytes // 1024} KB')
@@ -193,7 +197,7 @@ def allowed(slug):
 
 
 def run(base, entry):
-    if entry['kind'] == 'stay':
+    if entry.get('partner'):  # a partner's photo, on its own page or on a destination's: only with the register's leave
         allowed(entry['partner'])
     process(entry['source'], base, entry['widths'], entry.get('aspect'), tuple(entry.get('focus', (0.5, 0.5))))
     remember(base, entry)
@@ -251,7 +255,10 @@ def main(argv):
     widths = [int(w) for w in opts['widths'].split(',')] if 'widths' in opts else list(WIDTHS)
     if argv[0] == 'site':
         source, base = args
-        run(base, {'kind': 'site', 'source': source, 'widths': widths, 'aspect': aspect, 'focus': focus})
+        entry = {'kind': 'site', 'source': source, 'widths': widths, 'aspect': aspect, 'focus': focus}
+        if 'partner' in opts:  # a photo a partner gave us for a destination page
+            entry['partner'] = opts['partner']
+        run(base, entry)
     elif argv[0] == 'stay':
         slug, name, source = args
         run(f'assets/img/stays/{slug}/{name}', {'kind': 'stay', 'partner': slug, 'source': source, 'widths': widths,

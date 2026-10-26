@@ -2243,8 +2243,74 @@
       }
     ],
     "provider": "EverFlow is your contact before and during your stay. The apartments are provided by rocksresort and the lift passes by LAAX, each under its own terms.",
-    "credit": "Weisse Arena Gruppe",
-    "photos": []
+    "credit": "LAAX",
+    "photos": [
+      {
+        "name": "exterior",
+        "alt": "A stone-clad rocksresort building below a snow-covered peak",
+        "credit": "LAAX | Nicole Rötheli"
+      },
+      {
+        "name": "facade-snow",
+        "alt": "A rocksresort building in deep snow, with snow-laden firs and the mountains behind",
+        "credit": "LAAX"
+      },
+      {
+        "name": "gondola",
+        "alt": "A LAAX gondola cabin above the rocksresort and the snow-covered forest",
+        "credit": "LAAX | Daniel Loosli"
+      },
+      {
+        "name": "living-room",
+        "alt": "A living room with a sofa and a large window onto snow-covered firs",
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "kitchen",
+        "alt": "The oak kitchen of an apartment, with a bedroom beyond",
+        "credit": "LAAX | Guy Garchard"
+      },
+      {
+        "name": "living-kitchen",
+        "alt": "The living room of an apartment with its kitchen, and a window onto the resort in winter",
+        "credit": "LAAX"
+      },
+      {
+        "name": "dining",
+        "alt": "The dining table of an apartment, by a window onto the snowy forest and the resort",
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "bedroom",
+        "alt": "A bedroom with an oak-panelled wall and a window onto the snow",
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "bedroom-evening",
+        "alt": "A bedroom with oak walls, bedside lamps and a window onto the rocksresort",
+        "credit": "LAAX"
+      },
+      {
+        "name": "bunk-beds",
+        "alt": "A bedroom with bunk beds and a window onto the resort",
+        "credit": "LAAX | Guy Garchard"
+      },
+      {
+        "name": "bathroom",
+        "alt": "A bathroom in grey stone and oak, with a washbasin and a shower",
+        "credit": "LAAX | Guy Garchard"
+      },
+      {
+        "name": "window-view",
+        "alt": "The view from an apartment window onto a snowy slope, a lift tower and a rocksresort building",
+        "credit": "LAAX | Nicholas Iliano"
+      },
+      {
+        "name": "dusk",
+        "alt": "The rocksresort at dusk among snow-covered firs, beside the valley station of the LAAX gondola",
+        "credit": "LAAX | Nicole Rötheli"
+      }
+    ]
   },
   {
     "slug": "kempinski-engelberg",

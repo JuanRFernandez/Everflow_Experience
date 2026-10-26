@@ -8,12 +8,13 @@ and in CI on every pull request.
  3. Nothing is loaded from a third-party host on page view: no <link>, <script>, <img>, <iframe>,
     <video>, <audio>, <source>, <object> or <embed> with an external URL, and no CSS @import /
     url(http...). Fonts and Leaflet are self-hosted; map tiles load only after "Open the interactive map".
- 4. HTML tags are balanced; every page has one <main> and one <h1>; generated pages carry no inline
-    style, script or event handler (the Content-Security-Policy forbids them); every form field has
-    a label; every <img> has alt, width and height.
- 5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner sits in a <figure>
-    whose caption is one of the partner's credit lines ("© Owner", or "Photo courtesy of the owner");
-    every credit is in the Impressum.
+ 4. HTML tags are balanced; every page has one <main> and one <h1>, and its canonical address is its
+    own; generated pages carry no inline style, script or event handler (the Content-Security-Policy
+    forbids them); every form field has a label; every <img> has alt, width and height.
+ 5. Images: at most 950 KB, no EXIF or XMP metadata; every photo of a partner, on its own page or given
+    for a destination, sits in a <figure> whose caption is one of the partner's credit lines ("© Owner",
+    or "Photo courtesy of the owner"; for a destination's photo, the credit content/destinations.json
+    names); every credit is in the Impressum.
  6. Words: no price anywhere; no book/booking, reserve/reservation, pay/paid/payment/payable,
     commission or "racers" outside the legal pages (in the text, in alt/title/aria-label/placeholder/
     description attributes and in the script's texts), no reserva, no form of pagar/pagamento and
@@ -91,6 +92,8 @@ NOT_SAID_DE = re.compile(  # the same in de/: no buchen/Buchung, also in compoun
 READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|label|data-title|data-[\w-]*label|data-one|data-many'
                       r'|data-play|data-pause)\s*=\s*"([^"]*)"', re.I)  # attributes whose text a visitor sees or hears
 ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
+CANONICAL = re.compile(r'<link rel="canonical" href="https://everflowexperience\.com(/[^"]*)"')
+SIZE = re.compile(r'-\d+\.webp$')  # the width suffix of a photo file: laax-800.webp -> laax
 REGIONAL = re.compile('bavarian' + r'\s+' + 'alps', re.I)
 NEVER = [codecs.decode(w, 'rot13') for w in ('rqra yhkhel', 'rqrayhkhel', 'ubgry qnf gveby', 'enr cvafba')]
 DE_QUOTE = re.compile(r'„[^“"]{0,200}"')
@@ -185,11 +188,12 @@ class Page(html.parser.HTMLParser):
             self.figure.append({'stay': False, 'caption': ''})
         if tag == 'img':
             self.imgs.append(d)
-            if (d.get('src') or '').startswith('/assets/img/stays/'):
+            src = d.get('src') or ''
+            if src.startswith('/assets/img/stays/') or SIZE.sub('', src) in GIVEN:  # a partner's photo: its credit under it
                 if self.figure:
-                    self.figure[-1]['stay'] = d['src']
+                    self.figure[-1]['stay'] = src
                 else:
-                    self.loose.append(d['src'])
+                    self.loose.append(src)
         if tag == 'figcaption' and self.figure:
             self.figure[-1]['in_caption'] = True
         if tag not in self.VOID:
@@ -268,6 +272,12 @@ if not PAGES:
 
 partners = json.load(open('content/partners.json', encoding='utf-8'))
 credits = {p['slug']: {build.credit_text(c) for c in build.partner_credits(p)} for p in partners}
+GIVEN = {}  # a destination's photos given by a partner: the photo's base path -> (the partner, the credit it must show)
+for place in build.PLACES:
+    for im in [place.get('image') or {}] + place.get('gallery', []):
+        if im.get('partner'):
+            GIVEN['/' + im['src']] = (im['partner'], build.credit_text(im['credit']))
+            credits.setdefault(im['partner'], set()).add(build.credit_text(im['credit']))
 
 # ---------------------------------------------------------------- 2-6. every page
 parsed = {}
@@ -305,10 +315,13 @@ for page in PAGES:
     for src in p.loose:
         failures.append(f'{page}: photo {src} is shown without a <figure> and its credit')
     for fig in p.stay_figures:
-        slug = fig['stay'].split('/')[4]
         caption = fig['caption'].strip()
+        given = GIVEN.get(SIZE.sub('', fig['stay']))
+        slug = given[0] if given else fig['stay'].split('/')[4]
         if not (caption.startswith('©') or caption in COURTESY):
             failures.append(f'{page}: photo {fig["stay"]} has no credit under it ("© Owner" or "Photo courtesy of …")')
+        elif given and caption != given[1]:
+            failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", not "{given[1]}" as content/destinations.json says')
         elif slug in credits and caption not in credits[slug] and caption not in COURTESY:
             failures.append(f'{page}: photo {fig["stay"]} is credited "{caption}", which is not a credit line of {slug} in content/partners.json')
     visible = html.unescape(TAGS.sub(' ', CODE.sub(' ', text)))
@@ -329,6 +342,9 @@ for page in PAGES:
     for m in ALTERNATE.finditer(text):
         if resolve('index.html', m.group(1)) not in PAGES:
             failures.append(f'{page}: names {m.group(1)} as a language version, but there is no such page')
+    canonical = CANONICAL.search(text)
+    if canonical and resolve('index.html', canonical.group(1)) != page:
+        failures.append(f'{page}: its canonical address is {canonical.group(1)}, another page (built from the wrong source?)')
     for m in DE_QUOTE.finditer(visible):
         failures.append(f'{page}: German quote closed with a straight quote: {m.group(0)[:40]}')
 

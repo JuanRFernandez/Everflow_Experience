@@ -75,6 +75,10 @@ logged with its original in the library folder (outside the repo): `photos.py re
 all, for instance after a change of quality.
 A partner's photo: `uv run --with pillow python scripts/photos.py stay <partner> <name> <original>`;
 it refuses when the permission register does not allow photos of that partner.
+A destination's photo is freely licensed (`credit`, `license`, `source_url`, `license_url` in
+`content/destinations.json`) or given by a partner whose register line allows photos: then it is
+made with `photos.py site <original> assets/img/destinations/<name> --partner <slug>` (which asks the
+register), names the partner (`"partner": "<slug>"`) and carries the partner's `credit`, with no licence.
 The wordmark: `uv run --with pillow python scripts/photos.py brand` colours `brand/everflow-wordmark.svg`
 for the header and the footer and cuts the icons from the PNG.
 
@@ -150,8 +154,8 @@ bezahlen/Zahlung, Kaution, Stornierung and Provision on the German pages.
   interactive map"; the map shown first is drawn from Natural Earth data and served from this repo. No cookies, no tracking, no cookie banner.
 - **Partner photos carry their owner's credit.** Every photo of a hotel or chalet sits in a
   figure with its credit line under it ("© <owner>", or a courtesy line such as "Photo courtesy
-  of the owner"), and every credit line is listed in the Impressum. `scripts/check.py` fails
-  otherwise.
+  of the owner"), and every credit line is listed in the Impressum, also for a destination's
+  photos a partner gave us. `scripts/check.py` fails otherwise.
 - **No prices, no booking or payment on the site.** The enquiry form opens the visitor's own
   e-mail or WhatsApp with the message ready; nothing is stored. `scripts/check.py` fails on a
   price, or on booking, reservation or payment wording (in the text, in labels and alt texts,

@@ -1543,8 +1543,11 @@ def legal(name):
         line = '; '.join(e(credit_text(c)) for c in shown)
         credits_de.append(f'<li>{e(p["name"])}: {line}</li>')
         credits_en.append(f'<li>{e(p["name"])}: {line}</li>')
+    given = {}  # a destination's photos given by a partner ("© LAAX | …"): listed by place, as a partner's are
     for p, im in [(q, x) for q in PLACES for x in [q.get('image') or {}] + q.get('gallery', [])]:
         if not im.get('license'):
+            if im.get('partner'):
+                given.setdefault(p['name'], []).append(credit_text(im['credit']))
             continue
         origin = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
         lic = f'<a href="{a(im["license_url"])}" rel="noopener">{e(im["license"])}</a>'
@@ -1552,6 +1555,10 @@ def legal(name):
         same_en = '; the adapted version is available under the same licence' if 'SA' in im['license'] else ''
         credits_de.append(f'<li>{e(p["name"])}: Foto von {e(im["credit"])}, {origin}, Lizenz {lic}; Ausschnitt und Größe angepasst{same_de}.</li>')
         credits_en.append(f'<li>{e(p["name"])}: photo by {e(im["credit"])}, {origin}, licence {lic}; cropped and resized{same_en}.</li>')
+    for place_name, shown in given.items():
+        line = '; '.join(e(c) for c in dict.fromkeys(shown))
+        credits_de.append(f'<li>{e(place_name)}: {line}</li>')
+        credits_en.append(f'<li>{e(place_name)}: {line}</li>')
     for c in SITE['credits_de']:
         credits_de.append(f'<li>{e(c)}</li>')
     slots = {
@@ -1595,7 +1602,11 @@ def validate():
         if p['country'] not in COUNTRY:
             problems.append(f'place {p["slug"]}: unknown country {p["country"]}')
         for im in [p.get('image') or {}] + p.get('gallery', []):
-            if (im.get('license') or im in p.get('gallery', [])) and not all(im.get(k) for k in ('credit', 'license', 'source_url', 'license_url')):
+            if im.get('partner'):  # a photo a partner gave us for the site, shown with the partner's credit line
+                if im['partner'] not in PARTNER or not im.get('credit') or im.get('license'):
+                    problems.append(f'place {p["slug"]}: a partner\'s photo needs "partner" (a slug in content/partners.json) '
+                                    'and "credit", and no licence')
+            elif (im.get('credit') or im.get('license') or im in p.get('gallery', [])) and not all(im.get(k) for k in ('credit', 'license', 'source_url', 'license_url')):
                 problems.append(f'place {p["slug"]}: a freely licensed photo needs credit (author), license, source_url and license_url')
     for p in PARTNERS:
         if p['place'] not in PLACE:

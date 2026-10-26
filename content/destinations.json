@@ -127,12 +127,30 @@
       "lon": 9.2581,
       "image": {
         "src": "assets/img/destinations/laax",
-        "alt": "The village of Laax and its church in winter, below snow-covered mountains",
-        "credit": "Adrian Michael",
-        "license": "CC BY-SA 3.0",
-        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Laax_Winter.JPG"
+        "alt": "A LAAX gondola cabin above the snowy slopes at sunset, with the peaks of the Alps behind",
+        "credit": "LAAX | Mathias Wittwer",
+        "partner": "rocksresort-laax"
       },
+      "gallery": [
+        {
+          "src": "assets/img/destinations/laax-freestyle",
+          "alt": "A skier in the air above a big jump at sunset",
+          "credit": "LAAX | Philipp Ruggli",
+          "partner": "rocksresort-laax"
+        },
+        {
+          "src": "assets/img/destinations/laax-snowboard",
+          "alt": "A snowboarder high above a jump in the snow park, with snowy peaks behind",
+          "credit": "LAAX | Philipp Ruggli",
+          "partner": "rocksresort-laax"
+        },
+        {
+          "src": "assets/img/destinations/laax-snowpark",
+          "alt": "Jumps and rails of a snow park on the mountain, with the valley and the Alps behind",
+          "credit": "LAAX | Mathias Wittwer",
+          "partner": "rocksresort-laax"
+        }
+      ],
       "tagline": "A big ski area with five snow parks and the largest halfpipe in the world.",
       "intro": "The LAAX ski area reaches from 1,100 m up to 3,018 m on the Vorab Glacier, with 216 km of slopes and 30 lifts, and is reached from Flims, Laax and Falera.",
       "facts": [
