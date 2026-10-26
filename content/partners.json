@@ -2330,20 +2330,26 @@
     "type": "hotel",
     "place": "engelberg",
     "location": "Engelberg",
-    "card": "A Kempinski hotel in the monastery village below the Titlis.",
+    "card": "A Kempinski luxury hotel at the foot of the Titlis, with a Kids Club and an 880 m² spa and pool area.",
     "ski_access": "Shuttle to the cable car, 3 min",
     "highlights": [
       "Ski school contact in the lobby",
-      "Ski boots dried overnight"
+      "Babysitting on request"
     ],
-    "lead": "A Kempinski hotel in Engelberg, the monastery village below the Titlis. Set up for ski days: a contact of the ski school in the lobby, a locker in the ski cellar for every room, and boots dried for the next morning.",
+    "lead": "A luxury hotel with Kempinski five-star service in Engelberg, the monastery village at the foot of the Titlis, with the train station 60 m from the door. Set up for families and ski days: the Kempinski Kids Club and a kids' pool, babysitting on request, a contact of the ski school in the lobby, a locker in the ski cellar for every room, and the hotel's ski shuttle to the cable car.",
     "facts": [
+      "A luxury hotel with Kempinski five-star service, at the foot of Mount Titlis",
+      "129 rooms and suites from 24 to 129 m², 112 of them with a balcony; among them five Junior Suites, four Belle Epoque Suites, the Park Suite and the Titlis Suite",
+      "The Kempinski Kids Club, a kids' pool with splash time for children, and babysitting on request",
+      "An 880 m² spa and pool area: an infinity pool facing the mountains, a jacuzzi, saunas and a steam bath",
+      "The Cattani Restaurant and The Palace Bar, both with a terrace, the Wintergarden and a cigar lounge; in-room dining around the clock",
       "A contact of the ski school in the hotel lobby; private ski and snowboard instructors arranged in the hotel",
       "Every room has its own locker in the ski cellar, and boots are dried for the next day",
-      "A concierge team to help with outings around Engelberg and Lucerne",
+      "The train station 60 m away; the Titlis cable car 800 m, 10 minutes on foot or three minutes with the hotel's ski shuttle; Lucerne 36 km, Zurich Airport 101 km",
+      "A concierge around the clock, who arranges tables at restaurants in the village and around, with transfers",
       "Sister hotel: Frutt Mountain Resort, to extend the stay"
     ],
-    "why": "For skiers who want an easy trip from Zurich or Lucerne and a hotel that takes care of the ski day.",
+    "why": "For families and skiers who want an easy trip from Zurich or Lucerne, a hotel that takes care of the ski day, and a Kids Club for the younger ones.",
     "links": [
       {
         "label": "The hotel on kempinski.com",
@@ -2352,7 +2358,103 @@
     ],
     "provider": "EverFlow is your contact before and during your stay. The stay itself is provided by Kempinski Palace Engelberg, under the hotel's terms.",
     "credit": "Kempinski Palace Engelberg",
-    "photos": []
+    "photos": [
+      {
+        "name": "exterior-dusk",
+        "alt": "Kempinski Palace Engelberg lit up at dusk, in the snowy village below the mountains"
+      },
+      {
+        "name": "kids-club",
+        "alt": "Two children painting at a red table in the Kids Club, with a window onto the snowy mountains"
+      },
+      {
+        "name": "family-room-teepee",
+        "alt": "A room with a children's teepee and toy sheep by the window"
+      },
+      {
+        "name": "premier-room",
+        "alt": "A Premier Room with a large white bed and a glass door onto the balcony, facing a snow-capped peak"
+      },
+      {
+        "name": "premier-room-balcony",
+        "alt": "The balcony of a Premier Room, with two armchairs facing the snow-covered peaks"
+      },
+      {
+        "name": "belle-epoque-room",
+        "alt": "A Belle Epoque Room with a large bed, a sofa and arched balcony doors onto the snowy village"
+      },
+      {
+        "name": "belle-epoque-suite",
+        "alt": "A telescope and an armchair in a Belle Epoque Suite, by an open balcony door facing the snowy peaks"
+      },
+      {
+        "name": "titlis-suite-view",
+        "alt": "The arched balcony of the Titlis Suite, with armchairs, a telescope and a view up the snowy valley"
+      },
+      {
+        "name": "spa-pool",
+        "alt": "A guest in a bathrobe by the spa pool, behind a glass front with the snowy mountains reflected in the water"
+      },
+      {
+        "name": "cattani",
+        "alt": "The Cattani Restaurant by day, with leather booths and tall windows onto the snowy park and a mountain peak"
+      },
+      {
+        "name": "wintergarden",
+        "alt": "A table set for tea, with cake stands, in the Wintergarden, by tall windows onto the snowy park"
+      },
+      {
+        "name": "palace-bar",
+        "alt": "The Palace Bar's lounge with a log fire, leather armchairs and arched windows onto the snowy park"
+      },
+      {
+        "name": "exterior-summer",
+        "alt": "Kempinski Palace Engelberg in summer, with the Swiss flag, the green park and a snowy ridge behind"
+      },
+      {
+        "name": "junior-suite",
+        "alt": "A Junior Suite with a large bed, a sofa corner and a wooden bookcase with a TV between them"
+      },
+      {
+        "name": "park-suite",
+        "alt": "The living room of the Park Suite, with armchairs, a dining table, a telescope and balcony doors onto green trees"
+      },
+      {
+        "name": "spa-jacuzzi",
+        "alt": "The spa's jacuzzi and pool under a glass roof, with loungers and hanging chairs, above the green village"
+      }
+    ],
+    "seasons_head": [
+      "Through the year",
+      "Winter, summer and a rainy day."
+    ],
+    "seasons_lead": "What the hotel offers or arranges through its concierge, from its own activity guides.",
+    "seasons": [
+      {
+        "title": "In winter",
+        "items": [
+          "Private ski and snowboard instructors arranged in the hotel, and lessons for children with the hotel's ski school partner",
+          "The hotel's ski shuttle from the ski cellar to the cable car, three minutes, and back after a day on the slopes",
+          "Private tours with the concierge: snowshoeing, a winter wonderland tour, fondue in the snow, a helicopter flight, and making your own Swiss souvenirs"
+        ]
+      },
+      {
+        "title": "In summer",
+        "items": [
+          "Bike tours arranged by the hotel, with a wine-and-cheese break in an alpine cheese dairy, and a package from Engelberg to Lucerne with boat trips and a pick-up",
+          "Kayaking and rowing on Lake Trübsee in July and August, with guided tours through the concierge",
+          "An easy 2.8 km lake run from the front of the hotel to the Eugenisee and back"
+        ]
+      },
+      {
+        "title": "On a rainy day",
+        "items": [
+          "The hotel's spa and pool, with a splash hour for children",
+          "In Engelberg: the sports park with tennis, ice skating and curling, a covered horse-drawn carriage ride, the monastery and its cheese dairy, the cinema, and the Titlis glacier grotto",
+          "Further afield: the Museum of Transport with its IMAX cinema in Lucerne, 35 minutes away, the Glacier Garden in Lucerne, 40 minutes, and the Alpamare water park, 1 hour 20 minutes"
+        ]
+      }
+    ]
   },
   {
     "slug": "schlosshotel-kitzbuehel",
