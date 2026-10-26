@@ -66,7 +66,9 @@ missing, copy `scripts/library.example.json` to the repo root as `library.local.
    out, and so does one the documents contradict; Juan hears about both.
 4. Photos only when the register says `photos: yes`:
    `uv run --with pillow python scripts/photos.py stay <partner> <name> "<original under the material folder>"`
-   (a photo inside a zip: `"<zip>::<member>"`). Four to eight photos: outside, a room, food or
+   (a photo inside a zip: `"<zip>::<member>"`). A photo the partner gives for a destination page:
+   `photos.py site "<original>" assets/img/destinations/<name> --partner <partner>`, then `"partner"`
+   and its `credit` on the photo in `content/destinations.json`. Four to eight photos: outside, a room, food or
    spa, the surroundings. The script refuses what the register does not allow and writes WebP
    files without metadata, in up to three sizes, into `assets/img/stays/<partner>/` and logs the
    original in the library folder; every photo is shown with its credit line ("© <credit>",
