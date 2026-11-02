@@ -83,15 +83,29 @@ with sync_playwright() as pw:
     check(pg.evaluate('document.activeElement.id') == 'f-name', 'Escape in a form field leaves the focus there')
     pg.goto(BASE + '/destinations/lech/')
     check([x[1] for x in menu(pg)] == ['/destinations/lech/', '/es/destinations/lech/', '/pt/destinations/lech/', '/de/destinations/lech/'], 'on a destination it keeps the page')
-    pg.goto(BASE + '/stay/')
-    check([x[1] for x in menu(pg)] == ['/stay/', '/es/', '/pt/', '/de/'], 'on an English-only page it leads to the other homes')
+    for path in ('/stay/', '/stay/kempinski-engelberg/', '/experiences/', '/about/'):  # English-only until 2.11.2026
+        pg.goto(BASE + path)
+        check([x[1] for x in menu(pg)] == [path, '/es' + path, '/pt' + path, '/de' + path], f'on {path} it keeps the page in every language')
+    pg.goto(BASE + '/404.html')
+    check([x[1] for x in menu(pg)] == ['/404.html', '/es/', '/pt/', '/de/'], 'on the page for a wrong address it leads to the homes')
     for legal in ('/datenschutz.html', '/impressum.html'):
         pg.goto(BASE + legal)
         hrefs = [x[1] for x in menu(pg)]
-        check(hrefs == [legal + '#en', '/es/', '/pt/', legal + '#de'], f'{legal}: English and Deutsch lead to the text on the same page ({hrefs})')
+        check(hrefs == [legal + '#en', '/es' + legal, '/pt' + legal, '/de' + legal + '#de'],
+              f'{legal}: English and Deutsch lead to their text, Spanish and Portuguese to the page in their frame ({hrefs})')
         pg.click('.lang-menu summary')
         pg.click('.lang-list a[hreflang="de"]')
-        check(pg.evaluate('location.hash') == '#de' and not pg.is_visible('.lang-list'), f'{legal}: Deutsch jumps to the German text and the list closes')
+        check(pg.evaluate('location.pathname + location.hash') == '/de' + legal + '#de', f'{legal}: Deutsch opens the German text with the German menu')
+        pg.click('.lang-menu summary')
+        pg.click('.lang-list a[hreflang="de"]')  # the same page now: the jump closes the list
+        check(pg.evaluate('location.pathname + location.hash') == '/de' + legal + '#de' and not pg.is_visible('.lang-list'),
+              f'/de{legal}: Deutsch jumps to the German text on the same page, and the list closes')
+        pg.goto(BASE + '/es' + legal)
+        check(pg.inner_text('.site-nav a[href="/es/stay/"]').strip() == 'Dónde hospedarse' and pg.locator('#de').count() == 1 and pg.locator('#en').count() == 1,
+              f'/es{legal}: the Spanish menu around the German and English text')
+        first = 'de' if 'impressum' in legal else 'en'
+        check(pg.get_attribute('html', 'lang') == 'es' and pg.get_attribute('main > div', 'lang') == first,
+              f'/es{legal}: the page is Spanish, the legal text says it starts in {first}')
 
     # ---- German
     pg.goto(BASE + '/de/')
@@ -99,8 +113,8 @@ with sync_playwright() as pw:
     check(pg.inner_text('.lang-current').strip() == 'DE' and [x[2] for x in menu(pg)] == [False, False, False, True], 'Deutsch is current on /de/')
     nav = pg.eval_on_selector_all('.site-nav > a:not(.button)', 'els => els.map(e => e.textContent.trim())')
     check(nav[0] == 'Reiseziele' and 'Über uns' in nav[3], f'the German menu ({nav})')
-    marks = pg.eval_on_selector_all('.site-nav a .lang-mark', 'els => els.map(e => e.closest("a").getAttribute("href"))')
-    check(sorted(marks) == ['/about/', '/experiences/', '/stay/'], f'the English-only pages are marked EN ({marks})')
+    hrefs = pg.eval_on_selector_all('.site-nav > a:not(.button)', 'els => els.map(e => e.getAttribute("href"))')
+    check(hrefs == ['/de/destinations/', '/de/stay/', '/de/experiences/', '/de/about/'], f'the German menu leads to the German pages ({hrefs})')
     check(pg.locator('.faq-item').count() == 13, 'the German FAQ has 13 questions')
     check(pg.inner_text('.hero-note').startswith('Ihr Gastgeber: Juan Rodrigo Fernandez'), f'the German hero note ({pg.inner_text(".hero-note")[:60]})')
     check(pg.title() == 'Maßgeschneiderte Skireisen in den Alpen — EverFlow Experience', f'the German title ({pg.title()})')
@@ -108,10 +122,10 @@ with sync_playwright() as pw:
     check(not re.search(r'\b(?:du|dich|dir|dein(?:e[mnrs]?)?|euch|eu(?:er|re[mnrs]?))\b', main, re.I), 'the German home addresses the reader with "Sie"')
     footer = pg.inner_text('.site-footer')
     check('Argentinien' in footer and 'Argentina' not in footer, 'the German footer says "Argentinien"')
-    check(pg.get_attribute('.site-footer a[href^="/datenschutz.html"]', 'href') == '/datenschutz.html#de', 'the German footer opens the German privacy policy')
+    check(pg.get_attribute('.site-footer a[href*="datenschutz.html"]', 'href') == '/de/datenschutz.html#de', 'the German footer opens the German privacy policy')
     pg.goto(BASE + '/de/destinations/')
     check(pg.locator('h1').inner_text().strip() == 'Wo wir Gäste betreuen.', f'/de/destinations/ heading ({pg.locator("h1").inner_text()})')
-    check(pg.locator('main a[href="/datenschutz.html#karte"]').count() == 1, 'the German map note leads to the German map section of the privacy policy')
+    check(pg.locator('main a[href="/de/datenschutz.html#karte"]').count() == 1, 'the German map note leads to the German map section of the privacy policy')
     pg.goto(BASE + '/de/guides/')
     check(pg.locator('.card').count() == 4 and pg.locator('.page-head .eyebrow').evaluate('e => e.textContent').strip() == 'Ratgeber', '/de/guides/: four guides, "Ratgeber"')
     pg.goto(BASE + '/de/enquire/?destination=megeve&stay=chalets-megeve&house=Chalet%20141&type=chalet')
@@ -125,7 +139,7 @@ with sync_playwright() as pw:
     text = unquote(parse_qs(urlparse(url).query).get('text', [''])[0])
     check('Haus: Chalet 141' in text and 'Reiseziel: Megève' in text and 'Seite: /de/enquire/ (de)' in text, f'the WhatsApp message is in German ({text[:120]!r})')
     check('Art der Unterkunft: Chalet' in text, 'the German message names the type of stay "Art der Unterkunft"')
-    check(pg.locator('#enquiry a[href="/datenschutz.html#de"]').count() == 1, 'the German form leads to the German privacy policy')
+    check(pg.locator('#enquiry a[href="/de/datenschutz.html#de"]').count() == 1, 'the German form leads to the German privacy policy')
     pg.goto(BASE + '/de/destinations/las-lenas/')
     check('Atenas-Gebäude' in pg.inner_text('#stay'), 'the building is "Atenas-Gebäude" on the German page')
 
@@ -154,6 +168,50 @@ with sync_playwright() as pw:
     pg.goto(BASE + '/experiences/')
     check('Private coaching in English, Spanish, Portuguese and German' in pg.inner_text('#ski-coaching'), 'the coaching names its languages')
 
+    # ---- every page in every language (2.11.2026): a visitor who chose a language stays in it
+    english = {'/stay/': 'Hotels, chalets and apartments we know.', '/experiences/': None, '/about/': None}
+    for lang in ('es', 'pt', 'de'):
+        drift = []
+        for dp, _, fs in os.walk(os.path.join(ROOT, '_site', lang)):
+            for f in fs:
+                if not f.endswith('.html'):
+                    continue
+                page = open(os.path.join(dp, f), encoding='utf-8').read()
+                page = re.sub(r'<ul class="lang-list">.*?</ul>', '', page, flags=re.S)  # the menu leads to the other languages
+                for href in re.findall(r'<a [^>]*href="(?:https://everflowexperience\.com)?(/[^"]*)"', page):  # the site's own address too
+                    if not href.startswith((f'/{lang}/', '/assets/')):
+                        drift.append((os.path.relpath(os.path.join(dp, f), os.path.join(ROOT, '_site')), href))
+        check(not drift, f'/{lang}/: every link of every page leads to a page in the same language ({len(drift)}: {drift[:3]})')
+        pg.goto(f'{BASE}/{lang}/stay/')
+        h1 = pg.inner_text('h1').strip()
+        check(pg.get_attribute('html', 'lang').startswith(lang) and h1 and h1 != english['/stay/'], f'/{lang}/stay/: in its language ({h1})')
+        cards = pg.eval_on_selector_all('#stay-grid a.card-link', 'els => els.map(e => e.getAttribute("href"))')
+        check(len(cards) > 30 and all(c.startswith(f'/{lang}/stay/') for c in cards), f'/{lang}/stay/: {len(cards)} stays, each leading to its page in {lang}')
+        count = pg.inner_text('[data-filter-count]').strip()
+        check(not count.endswith(' stays'), f'/{lang}/stay/: the count in {lang} ({count})')
+        pg.select_option('#f-place', 'megeve')
+        pg.click('[data-filter-type="hotel"]')  # Megève has chalets and apartments, no hotel
+        href = pg.get_attribute('[data-filter-empty] a', 'href')
+        check(pg.is_visible('[data-filter-empty]') and href == f'/{lang}/enquire/?destination=megeve&type=hotel',
+              f'/{lang}/stay/: "nothing matches" leads to the enquiry in {lang}, filled in ({href})')
+        pg.goto(f'{BASE}/{lang}/stay/kempinski-engelberg/')
+        crumbs = pg.eval_on_selector_all('.breadcrumb a', 'els => els.map(e => e.getAttribute("href"))')
+        check(crumbs == [f'/{lang}/stay/', f'/{lang}/destinations/engelberg/'], f'/{lang}/stay/kempinski-engelberg/: the breadcrumb stays in {lang} ({crumbs})')
+        check([x[1] for x in menu(pg)] == ['/stay/kempinski-engelberg/', '/es/stay/kempinski-engelberg/', '/pt/stay/kempinski-engelberg/', '/de/stay/kempinski-engelberg/'],
+              f'/{lang}/stay/kempinski-engelberg/: the language menu keeps the hotel')
+        heads = pg.eval_on_selector_all('main h2', 'els => els.map(e => e.textContent.trim())')
+        check('Good to know.' not in heads and not any(h.endswith(': what to know.') for h in heads), f'/{lang}/stay/kempinski-engelberg/: the headings in {lang} ({heads[:4]})')
+        pg.goto(f'{BASE}/{lang}/stay/chalets-megeve/')
+        pg.click('.gallery--mini .gallery-item figure img >> nth=0')
+        label = pg.get_attribute('.lightbox-close', 'aria-label')
+        check(label and label != 'Close', f'/{lang}/stay/chalets-megeve/: the large view names its buttons in {lang} ({label})')
+        pg.keyboard.press('Escape')
+        for path in ('/experiences/', '/about/'):
+            pg.goto(f'{BASE}/{lang}{path}')
+            check(pg.get_attribute('html', 'lang').startswith(lang), f'/{lang}{path}: lang="{pg.get_attribute("html", "lang")}"')
+            if lang == 'de':
+                check(not re.search(r'\b(?:du|dich|dir|dein(?:e[mnrs]?)?|euch|eu(?:er|re[mnrs]?))\b', pg.inner_text('main'), re.I), f'/de{path}: "Sie"')
+
     # ---- structured data and the summary for AI assistants
     for lang in ('', 'es/', 'pt/', 'de/'):
         pg.goto(f'{BASE}/{lang}')
@@ -165,8 +223,8 @@ with sync_playwright() as pw:
     check(r.ok and body.startswith('# EverFlow Experience') and 'Portuguese' in body and '/guides/first-week-from-south-america/' in body,
           'llms.txt is served and names the Portuguese coaching and the guide')
     check('/de/' in body and 'Do you have ski instructors who speak Portuguese?' in body, 'llms.txt names the German site and the Portuguese question')
-    check('the other pages are in English' in body and '/es/guides/first-week-from-south-america/' in body and 'Non-stop flights to Europe' in body,
-          'llms.txt says which pages exist in four languages, links the Spanish guide and says the flights go to Europe')
+    check('Every page is in English' in body and 'the legal pages are in German and English' in body and '/es/guides/first-week-from-south-america/' in body
+          and 'Non-stop flights to Europe' in body, 'llms.txt says every page is in four languages, links the Spanish guide and says the flights go to Europe')
     check(not errors, f'no script errors ({errors[:2]})')
     check(not outside, f'no request outside the site ({outside[:3]})')
 

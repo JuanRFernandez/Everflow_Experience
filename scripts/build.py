@@ -111,10 +111,14 @@ def ui(s, **kw):
     return tr(s).format(**kw) if kw else tr(s)
 
 
+SECTIONS = ('/destinations/', '/stay/', '/experiences/', '/guides/', '/about/', '/enquire/')
+LEGAL_PAGES = ('/impressum.html', '/datenschutz.html')  # their text is German and English; around it, the page's language
+
+
 def translated(path):
-    """True for the pages that exist in every language: home, destinations, guides, enquiry."""
+    """True for the pages that exist in every language: all but the page for a wrong address."""
     base = path.split('?')[0].split('#')[0]
-    return base == '/' or base.startswith(('/destinations/', '/guides/', '/enquire/'))
+    return base == '/' or base.startswith(SECTIONS) or base in LEGAL_PAGES
 
 
 def localized(path):
@@ -251,10 +255,11 @@ def img(base, alt, sizes, cls='', eager=False):
             f' alt="{a(alt)}"{klass}{load}>')
 
 
-def credit_text(credit):
-    """The line under a photo: "© Owner"; a courtesy line ("Photo courtesy of the owner") stands without "©"."""
+def credit_text(credit, translate=True):
+    """The line under a photo: "© Owner"; a courtesy line ("Photo courtesy of the owner") stands without "©", in the
+    page's language (the legal pages list it as it is, in every language)."""
     if credit.startswith('Photo courtesy'):
-        return tr(credit)
+        return tr(credit) if translate else credit
     return credit if credit.startswith('©') else f'© {credit}'
 
 
@@ -401,6 +406,16 @@ def stay_label(p):
     return name if named_after_place(p) else f'{name}, {tro(PLACE[p["place"]]["name"])}'
 
 
+def house_where(p, r):
+    """Where one house of a collection stands: its own place ("Oberlech", "Near the village"), else the collection's."""
+    return tr(r.get('where') or p['location'])
+
+
+def lower_kind(s):
+    """A kind of stay or a title inside a sentence: 'Chalets' -> 'chalets'; German keeps its capital nouns."""
+    return s if LANG == 'de' else lower_first(s)
+
+
 def number(v):
     """1000 -> 1,000 (1.000 in Spanish and Portuguese); 12–16 and "about 800" keep their form."""
     sep = ',' if LANG == 'en' else '.'
@@ -458,16 +473,12 @@ def header(current, en_url):
     links = []
     for href, label in NAV:
         cur = ' aria-current="page"' if current.startswith(localized(href)) else ''
-        mark = ''
-        if LANG != 'en' and not translated(href):  # the page exists in English only: say so
-            mark = f' <span class="lang-mark" aria-hidden="true">EN</span><span class="visually-hidden"> {ui("(in English)")}</span>'
-        links.append(f'<a href="{localized(href)}"{cur}>{ui(label)}{mark}</a>')
+        links.append(f'<a href="{localized(href)}"{cur}>{ui(label)}</a>')
     langs = []
-    for code, lang in LANGS.items():  # the same page in each language, or that language's home where it exists in English only
-        if en_url in ('/impressum.html', '/datenschutz.html') and code in ('en', 'de'):
-            href = f'{en_url}#{code}'  # the legal pages hold their German and English text on one page
-        else:
-            href = lang['prefix'] + (en_url if code == 'en' or translated(en_url) else '/')
+    for code, lang in LANGS.items():  # the same page in each language; from the page for a wrong address, each home
+        href = lang['prefix'] + (en_url if code == 'en' or translated(en_url) else '/')
+        if en_url in LEGAL_PAGES and code in ('en', 'de'):
+            href += f'#{code}'  # the legal pages hold their German and English text: English and Deutsch lead to it
         cur = ' aria-current="true"' if code == LANG else ''
         langs.append(f'<li><a href="{href}" hreflang="{lang["html"]}" lang="{lang["html"]}"{cur}>{lang["label"]}</a></li>')
     globe = ('<svg class="lang-globe" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">'
@@ -506,7 +517,7 @@ def footer():
     </div>
     <div>
       <p class="footer-title">{ui("Explore")}</p>
-      <ul><li><a href="/stay/">{ui("Where to stay")}</a></li><li><a href="/experiences/">{ui("Experiences")}</a></li><li><a href="{localized("/guides/")}">{ui("Guides")}</a></li><li><a href="/about/">{ui("About")}</a></li><li><a href="{localized("/enquire/")}">{ui("Plan a trip")}</a></li></ul>
+      <ul><li><a href="{localized("/stay/")}">{ui("Where to stay")}</a></li><li><a href="{localized("/experiences/")}">{ui("Experiences")}</a></li><li><a href="{localized("/guides/")}">{ui("Guides")}</a></li><li><a href="{localized("/about/")}">{ui("About")}</a></li><li><a href="{localized("/enquire/")}">{ui("Plan a trip")}</a></li></ul>
     </div>
     <div class="footer-contact">
       <p class="footer-title">{ui("Contact")}</p>
@@ -514,7 +525,7 @@ def footer():
     </div>
     <div>
       <p class="footer-title">{ui("Legal")}</p>
-      <ul><li><a href="/impressum.html">{ui("Impressum / Imprint")}</a></li><li><a href="/datenschutz.html{"#de" if LANG == "de" else ""}">{ui("Datenschutz / Privacy")}</a></li></ul>
+      <ul><li><a href="{localized("/impressum.html")}">{ui("Impressum / Imprint")}</a></li><li><a href="{localized("/datenschutz.html")}{"#de" if LANG == "de" else ""}">{ui("Datenschutz / Privacy")}</a></li></ul>
     </div>
   </div>
   <div class="wrap footer-bottom"><p>{e(SITE["copyright"])}</p></div>
@@ -534,7 +545,7 @@ def og_image_meta(image, alt):
     return out
 
 
-def page(path, title, description, body, lang=None, index=True, image='assets/img/og/everflow.jpg', data=None, image_alt=None):
+def page(path, title, description, body, index=True, image='assets/img/og/everflow.jpg', data=None, image_alt=None):
     """One page. `path` is the English output path; in another language it is written under es/ or pt/."""
     en_url = url_of(path)
     if not image_alt:
@@ -554,7 +565,7 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
         alternates += f'\n<link rel="alternate" hreflang="x-default" href="{SITE["url"]}{en_url}">'
     return f'''<!DOCTYPE html>
 {MARK}
-<html lang="{lang or LANGS[LANG]["html"]}">
+<html lang="{LANGS[LANG]["html"]}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">{verification}
@@ -568,7 +579,7 @@ def page(path, title, description, body, lang=None, index=True, image='assets/im
 <meta property="og:description" content="{a(description)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{SITE["url"]}/{image}">{og_image_meta(image, image_alt)}
-<meta property="og:locale" content="{'de_DE' if lang == 'de' else OG_LOCALE[LANG]}">
+<meta property="og:locale" content="{OG_LOCALE[LANG]}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/brand/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/brand/icon-180.png">
@@ -640,16 +651,18 @@ def stay_card(p, r=None, level=3):
         media = (f'<div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(tr(p["kind"]))}</span>'
                  f'<span class="card-panel-coords">{e(tr(x.get("where") or p["location"]))}</span></div>')
     if r is not None:
-        kicker = f'{tr(r.get("kind") or TYPE_NAME[kinds[0]])} · {r.get("where") or p["location"]}'
-        href, text = f'/stay/{p["slug"]}/#{slugify(r["name"])}', r['card']
-        photos = f' · {len(phs)} {"renderings" if r.get("renderings") else "photos"}' if len(phs) > 1 else ''
+        kicker = f'{tr(r.get("kind") or TYPE_NAME[kinds[0]])} · {house_where(p, r)}'
+        href, text = localized(f'/stay/{p["slug"]}/#{slugify(r["name"])}'), tr(r['card'])
+        photos = ''
+        if len(phs) > 1:
+            photos = ' · ' + ui('{n} renderings' if r.get('renderings') else '{n} photos', n=len(phs))
         meta = f'<p class="card-meta">{e(tro(p["name"]))}{photos}</p>'
     else:
         country = tr(COUNTRY[PLACE[p['place']]['country']]['name'])
         kicker = f'{tr(p["kind"])} · {tr(p["location"])}, {country}'
-        href, text, meta = f'/stay/{p["slug"]}/', tr(p['card']), ''
+        href, text, meta = localized(f'/stay/{p["slug"]}/'), tr(p['card']), ''
     body = [f'<p class="card-kicker">{e(kicker)}</p>',
-            f'<h{level} class="card-title"><a class="card-link" href="{href}">{e(tro(x["name"]))}</a></h{level}>',
+            f'<h{level} class="card-title"><a class="card-link" href="{href}">{e(tro(p["name"]) if r is None else r["name"])}</a></h{level}>',
             facts_row(x), chips(x, 3), f'<p>{e(text)}</p>',
             f'<div class="card-foot">{meta}{enquire_link(p, r)}</div>']
     return f'''<article class="card" data-type="{" ".join(kinds)}" data-place="{p["place"]}">
@@ -664,7 +677,7 @@ def experience_card(x, level=3):
     return f'''<article class="card">
   <div class="card-media">{img(x["image"], tr(x["alt"]), "(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw", cls="card-img")}</div>
   <div class="card-body">
-    <h{level} class="card-title"><a class="card-link" href="/experiences/#{x["slug"]}">{e(tr(x["title"]))}</a></h{level}>
+    <h{level} class="card-title"><a class="card-link" href="{localized("/experiences/#" + x["slug"])}">{e(tr(x["title"]))}</a></h{level}>
     <p>{t(LINK.sub(lambda m: m.group(1), tr(x["text"])))}</p>
   </div>
 </article>'''
@@ -740,20 +753,26 @@ def gallery(base_folder, photos, credit, label, title='', enquire=None):
     """A row of photos with their credits; `enquire` (address, label) puts the enquiry button in the full-screen view."""
     items = []
     for i, ph in enumerate(photos):
-        items.append(f'<li class="gallery-item">{figure(base_folder + ph["name"], ph["alt"], "(min-width: 64rem) 70vw, 92vw", ph.get("credit", credit), eager=(i == 0))}</li>')
+        items.append(f'<li class="gallery-item">{figure(base_folder + ph["name"], tr(ph["alt"]), "(min-width: 64rem) 70vw, 92vw", ph.get("credit", credit), eager=(i == 0))}</li>')
     widest = max(variants(base_folder + ph['name'])[-1][0] for ph in photos)
     small = ' gallery--small' if widest < 1000 else ''  # small originals are shown at their size, not stretched
     ask = f' data-enquire-href="{enquire[0]}" data-enquire-label="{a(enquire[1])}"' if enquire else ''
-    return f'''<section class="gallery{small}" data-gallery data-title="{a(title)}"{ask} aria-label="{a(label)}">
+    return f'''<section class="gallery{small}" data-gallery data-title="{a(title)}"{ask}{lightbox_labels()} aria-label="{a(label)}">
   <ul class="gallery-track" tabindex="0" aria-label="{a(label)}">
     {(chr(10) + '    ').join(items)}
   </ul>
   <div class="gallery-controls" hidden>
-    <button type="button" class="gallery-button" data-prev aria-label="Previous photo">←</button>
+    <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo"))}">←</button>
     <span class="gallery-count" aria-live="polite">01 / {num(len(photos))}</span>
-    <button type="button" class="gallery-button" data-next aria-label="Next photo">→</button>
+    <button type="button" class="gallery-button" data-next aria-label="{a(ui("Next photo"))}">→</button>
   </div>
 </section>'''
+
+
+def lightbox_labels():
+    """The names of the buttons of the large view of a gallery, in the page's language (everflow.js reads them)."""
+    return (f' data-close="{a(ui("Close"))}" data-prev-label="{a(ui("Previous photo"))}"'
+            f' data-next-label="{a(ui("Next photo"))}"')
 
 
 def steps(items, cls='steps'):
@@ -878,13 +897,13 @@ def home():
 {sa_later}
 <section class="section" id="stay">
   <div class="wrap">
-    {section_head(tr(h["stay_eyebrow"]), tr(h["stay_h2"]), tr(h["stay_lead"]), more=("/stay/", ui("All hotels and chalets")))}
+    {section_head(tr(h["stay_eyebrow"]), tr(h["stay_h2"]), tr(h["stay_lead"]), more=(localized("/stay/"), ui("All hotels and chalets")))}
     {grid([stay_card(p) for p in [q for q in PARTNERS if q.get('photos')][:6]])}
   </div>
 </section>
 <section class="section section--alt" id="experiences">
   <div class="wrap">
-    {section_head(tr(h["experiences_eyebrow"]), tr(h["experiences_h2"]), tr(h["experiences_lead"]), more=("/experiences/", ui("All experiences")))}
+    {section_head(tr(h["experiences_eyebrow"]), tr(h["experiences_h2"]), tr(h["experiences_lead"]), more=(localized("/experiences/"), ui("All experiences")))}
     {grid([experience_card(x) for x in exps])}
   </div>
 </section>
@@ -892,7 +911,7 @@ def home():
   <div class="wrap{" split" if juan_photo else ""}">
     {juan_photo}
     <div>
-      {section_head(tr(h["team_eyebrow"]), tr(h["team_h2"]), tr(h["team_lead"]), more=("/about/", ui("Our story and team")))}
+      {section_head(tr(h["team_eyebrow"]), tr(h["team_h2"]), tr(h["team_lead"]), more=(localized("/about/"), ui("Our story and team")))}
     </div>
   </div>
 </section>
@@ -945,8 +964,8 @@ def llms_txt():
     sa = h['south_america']
     lines = [f'# {SITE["name"]}', '',
              f'> {SITE["description"]} {EXPERIENCE["ski-coaching"]["text"].split(". ", 1)[1]}', '',
-             f'The home page, the destinations, the guides and the enquiry form are in English ({url}/), Spanish ({url}/es/), '
-             f'Portuguese ({url}/pt/) and German ({url}/de/); the other pages are in English. '
+             f'Every page is in English ({url}/), Spanish ({url}/es/), Portuguese ({url}/pt/) and German ({url}/de/), '
+             f'the hotels, chalets and apartments included; the legal pages are in German and English. '
              f'{h["hero_note"]} Enquiries: {url}/enquire/ or {SITE["email"]}; WhatsApp {SITE["whatsapp"][0]["label"]}.', '',
              f'## {sa["eyebrow"]}', '', f'{sa["lead"]}', '']
     lines += [f'- {x}' for x in sa['points']]
@@ -1044,7 +1063,7 @@ def destinations_index():
 </section>''')
     pins = []
     for p in [q for q in PLACES if on_map(q)]:  # the live map frames the Alps as the drawn one does
-        stays = [[tro(s['name']), f'/stay/{s["slug"]}/'] for s in partners_in(p['slug'])]
+        stays = [[tro(s['name']), localized(f'/stay/{s["slug"]}/')] for s in partners_in(p['slug'])]
         pins.append({'n': tro(p['name']), 'u': localized(f'/destinations/{p["slug"]}/'), 'lat': p['lat'], 'lon': p['lon'], 's': stays})
     pins_json = a(json.dumps(pins, ensure_ascii=False, separators=(',', ':')))
     jump = ' · '.join(f'<a href="#{c["slug"]}">{e(tr(c["name"]))}</a>' for c in COUNTRIES)
@@ -1097,7 +1116,7 @@ def place_page(p):
                         for im in p['gallery'])
         pictures = f'''<section class="section section--tight">
   <div class="wrap">
-    <div class="gallery" data-gallery data-title="{a(name)}" data-close="{a(ui("Close"))}" data-prev-label="{a(ui("Previous photo"))}" data-next-label="{a(ui("Next photo"))}" role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
+    <div class="gallery" data-gallery data-title="{a(name)}"{lightbox_labels()} role="group" aria-label="{a(ui("Photos of {name}", name=name))}">
       <ul class="gallery-track" tabindex="0" aria-label="{a(ui("Photos of {name}", name=name))}">{items}</ul>
       <div class="gallery-controls" hidden>
         <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo"))}">←</button>
@@ -1141,7 +1160,7 @@ def place_page(p):
 <section class="section" id="stay">
   <div class="wrap">
     {section_head(ui("Where to stay"), ui("Where to stay in {name}.", name=name),
-                  more=(f'/stay/?place={p["slug"]}', ui('All stays in {name}', name=name)) if stays else None)}
+                  more=(localized(f'/stay/?place={p["slug"]}'), ui('All stays in {name}', name=name)) if stays else None)}
     {stay_html}
   </div>
 </section>
@@ -1163,23 +1182,24 @@ def house_block(p, r):
     sizes = '(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw'
     href, label = enquiry(p, r)
     if len(phs) > 1:
-        items = ''.join(f'<li class="gallery-item">{figure(base + ph["name"], ph["alt"], sizes, ph.get("credit", p["credit"]))}</li>'
+        items = ''.join(f'<li class="gallery-item">{figure(base + ph["name"], tr(ph["alt"]), sizes, ph.get("credit", p["credit"]))}</li>'
                         for ph in phs)
-        media = f'''<div class="gallery gallery--mini" data-gallery data-title="{a(r["name"])}" data-enquire-href="{href}" data-enquire-label="{a(label)}" role="group" aria-label="{a("Photos of " + r["name"])}">
-    <ul class="gallery-track" tabindex="0" aria-label="{a("Photos of " + r["name"])}">{items}</ul>
+        photos_of = ui('Photos of {name}', name=r['name'])
+        media = f'''<div class="gallery gallery--mini" data-gallery data-title="{a(r["name"])}" data-enquire-href="{href}" data-enquire-label="{a(label)}"{lightbox_labels()} role="group" aria-label="{a(photos_of)}">
+    <ul class="gallery-track" tabindex="0" aria-label="{a(photos_of)}">{items}</ul>
     <div class="gallery-controls" hidden>
-      <button type="button" class="gallery-button" data-prev aria-label="Previous photo of {a(r["name"])}">←</button>
+      <button type="button" class="gallery-button" data-prev aria-label="{a(ui("Previous photo of {name}", name=r["name"]))}">←</button>
       <span class="gallery-count" aria-live="polite">01 / {num(len(phs))}</span>
-      <button type="button" class="gallery-button" data-next aria-label="Next photo of {a(r["name"])}">→</button>
+      <button type="button" class="gallery-button" data-next aria-label="{a(ui("Next photo of {name}", name=r["name"]))}">→</button>
     </div>
   </div>'''
     elif phs:
-        media = f'<div class="card-media">{figure(base + phs[0]["name"], phs[0]["alt"], sizes, phs[0].get("credit", p["credit"]))}</div>'
+        media = f'<div class="card-media">{figure(base + phs[0]["name"], tr(phs[0]["alt"]), sizes, phs[0].get("credit", p["credit"]))}</div>'
     else:
-        media = (f'<div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(p["kind"])}</span>'
-                 f'<span class="card-panel-coords">{e(r.get("where", ""))}</span></div></div>')
-    body = [f'<p class="card-kicker">{e(r.get("kind") or TYPE_NAME[stay_types(p, r)[0]])} · {e(r.get("where", p["location"]))}</p>',
-            f'<h3 class="card-title">{e(r["name"])}</h3>', facts_row(r), chips(r, 5), f'<p>{t(r.get("about") or r["card"])}</p>',
+        media = (f'<div class="card-media"><div class="card-panel" aria-hidden="true"><span class="card-panel-country">{e(tr(p["kind"]))}</span>'
+                 f'<span class="card-panel-coords">{e(tr(r.get("where", "")))}</span></div></div>')
+    body = [f'<p class="card-kicker">{e(tr(r.get("kind") or TYPE_NAME[stay_types(p, r)[0]]))} · {e(house_where(p, r))}</p>',
+            f'<h3 class="card-title">{e(r["name"])}</h3>', facts_row(r), chips(r, 5), f'<p>{t(tr(r.get("about") or r["card"]))}</p>',
             f'<div class="card-foot">{enquire_link(p, r)}</div>']
     return f'''<article class="card card--static" id="{slugify(r["name"])}">
   {media}
@@ -1194,73 +1214,78 @@ def stay_index():
     on its own. The filters (type, destination) come with the script and keep their state in the address
     (/stay/?type=chalet&place=megeve); without the script every stay shows."""
     cards = [stay_card(p, r, level=2) for p, r in stays()]
-    buttons = ''.join(f'<button type="button" class="chip-button" data-filter-type="{k}" aria-pressed="{"false" if k else "true"}">{label}</button>'
+    buttons = ''.join(f'<button type="button" class="chip-button" data-filter-type="{k}" aria-pressed="{"false" if k else "true"}">{e(ui(label))}</button>'
                       for k, label in [('', 'All')] + [(k, TYPE_PLURAL[k]) for k in STAY_TYPES])
     here = {p['place'] for p in PARTNERS}
     groups = []
     for c in COUNTRIES:
-        opts = ''.join(f'<option value="{q["slug"]}">{e(q["name"])}</option>' for q in places_in(c['slug']) if q['slug'] in here)
+        opts = ''.join(f'<option value="{q["slug"]}">{e(tro(q["name"]))}</option>' for q in places_in(c['slug']) if q['slug'] in here)
         if opts:
-            groups.append(f'<optgroup label="{a(c["name"])}">{opts}</optgroup>')
-    body = f'''{page_head("Where our guests stay", "Hotels, chalets and apartments we know.", PAGES["home"]["stay_lead"])}
+            groups.append(f'<optgroup label="{a(tr(c["name"]))}">{opts}</optgroup>')
+    empty = ui('Nothing matches these filters yet. [Tell us what you need](/enquire/) and we suggest the right stay.')
+    body = f'''{page_head(ui("Where our guests stay"), ui("Hotels, chalets and apartments we know."), tr(PAGES["home"]["stay_lead"]))}
 <section class="section section--tight" id="stays">
   <div class="wrap">
     <div class="stay-filters" data-stay-filters hidden>
-      <div class="chip-group" role="group" aria-label="Type of stay">{buttons}</div>
-      <div class="field field--inline"><label for="f-place">Destination</label><select id="f-place" data-filter-place><option value="">All destinations</option>{"".join(groups)}</select></div>
-      <p class="stay-count" data-filter-count aria-live="polite" data-one="1 stay" data-many="{{n}} stays">{len(cards)} stays</p>
-      <button type="button" class="button button--small button--ghost" data-filter-clear hidden>Clear filters</button>
+      <div class="chip-group" role="group" aria-label="{a(ui("Type of stay"))}">{buttons}</div>
+      <div class="field field--inline"><label for="f-place">{ui("Destination")}</label><select id="f-place" data-filter-place><option value="">{e(ui("All destinations"))}</option>{"".join(groups)}</select></div>
+      <p class="stay-count" data-filter-count aria-live="polite" data-one="{a(ui("1 stay"))}" data-many="{a(ui("{n} stays"))}">{e(ui("{n} stays", n=len(cards)))}</p>
+      <button type="button" class="button button--small button--ghost" data-filter-clear hidden>{ui("Clear filters")}</button>
     </div>
     <div class="grid" id="stay-grid">
 {chr(10).join(cards)}
     </div>
-    <div class="panel stay-empty" data-filter-empty hidden><p>Nothing matches these filters yet. <a href="/enquire/">Tell us what you need</a> and we suggest the right stay.</p></div>
+    <div class="panel stay-empty" data-filter-empty hidden><p>{t(empty)}</p></div>
   </div>
 </section>
 {cta_band()}'''
-    return page('stay/index.html', 'Where to stay — EverFlow Experience',
-                'The hotels, chalets and apartments where EverFlow guests stay, with their key facts and the provider\'s own photos and credit.',
+    return page('stay/index.html', ui('Where to stay — EverFlow Experience'),
+                ui("The hotels, chalets and apartments where EverFlow guests stay, with their key facts and the provider's own photos and credit."),
                 body)
 
 
 def partner_page(p):
     place = PLACE[p['place']]
     country = COUNTRY[place['country']]
+    name, place_name = tro(p['name']), tro(place['name'])
     ask = enquiry(p)
-    gal = gallery(f'assets/img/stays/{p["slug"]}/', p['photos'], p['credit'], f'Photos of {p["name"]}', p['name'], ask) if p.get('photos') else ''
-    facts = ''.join(f'<li>{t(f)}</li>' for f in p['facts'])
+    gal = (gallery(f'assets/img/stays/{p["slug"]}/', p['photos'], p['credit'], ui('Photos of {name}', name=name), name, ask)
+           if p.get('photos') else '')
+    facts = ''.join(f'<li>{t(tr(f))}</li>' for f in p['facts'])
     arr = p.get('arranges')
     arr_html = ''
     if arr:
         brochure = ''
         if p.get('brochure'):
             mb = os.path.getsize(os.path.join(ROOT, p['brochure']['file'])) / 1e6
-            brochure = f'<p><a class="arrow-link" href="/{p["brochure"]["file"]}">{e(p["brochure"]["label"])} (PDF, {mb:.0f} MB)</a></p>'
-        small = f'<p class="small">{t(arr["small"])}</p>' if arr.get('small') else ''
+            brochure = f'<p><a class="arrow-link" href="/{p["brochure"]["file"]}">{e(tr(p["brochure"]["label"]))} (PDF, {mb:.0f} MB)</a></p>'
+        small = f'<p class="small">{t(tr(arr["small"]))}</p>' if arr.get('small') else ''
         arr_html = f'''<div class="panel">
-      <h2>{e(arr["title"])}</h2>
-      <p>{t(arr["text"])}</p>
+      <h2>{e(tr(arr["title"]))}</h2>
+      <p>{t(tr(arr["text"]))}</p>
       {small}
       {brochure}
     </div>'''
-    links = ''.join(f'<li><a href="{a(link["url"])}" rel="noopener">{e(link["label"])}</a></li>' for link in p.get('links', []))
+    links = ''.join(f'<li><a href="{a(link["url"])}" rel="noopener">{e(tr(link["label"]))}</a></li>' for link in p.get('links', []))
     seasons_html = ''  # what the partner offers or arranges through the year: winter, summer, a rainy day
     if p.get('seasons'):
-        cols = ''.join(f'<div class="panel"><h3>{e(s["title"])}</h3><ul class="ticks">{"".join(f"<li>{t(i)}</li>" for i in s["items"])}</ul></div>'
+        cols = ''.join(f'<div class="panel"><h3>{e(tr(s["title"]))}</h3><ul class="ticks">{"".join(f"<li>{t(tr(i))}</li>" for i in s["items"])}</ul></div>'
                        for s in p['seasons'])
         head = p.get('seasons_head', ['Through the year', 'Winter, summer and a rainy day.'])
+        lead = tr(p['seasons_lead']) if p.get('seasons_lead') else None
         seasons_html = f'''<section class="section section--alt" id="through-the-year">
   <div class="wrap">
-    {section_head(head[0], head[1], p.get('seasons_lead'))}
+    {section_head(tr(head[0]), tr(head[1]), lead)}
     <div class="grid">{cols}</div>
   </div>
 </section>'''
     res_html = ''
     if p.get('residences'):
         res = p.get('residences_head', ['The residences', 'Choose the house.'])
+        lead = tr(p['residences_lead']) if p.get('residences_lead') else None
         res_html = f'''<section class="section section--alt" id="residences">
   <div class="wrap">
-    {section_head(res[0], res[1], p.get('residences_lead'))}
+    {section_head(tr(res[0]), tr(res[1]), lead)}
     {grid([house_block(p, r) for r in p['residences']])}
   </div>
 </section>'''
@@ -1269,23 +1294,25 @@ def partner_page(p):
     if siblings:
         sib_html = f'''<section class="section section--alt">
   <div class="wrap">
-    {section_head("Also in " + place["name"], "Other addresses close by.")}
+    {section_head(ui("Also in {name}", name=place_name), ui("Other addresses close by."))}
     {grid([stay_card(s) for s in siblings])}
   </div>
 </section>'''
+    place_url = localized(f'/destinations/{place["slug"]}/')
     actions = (f'<a class="button" href="{ask[0]}">{e(ask[1])}</a>'
-               f'<a class="button button--ghost" href="/destinations/{place["slug"]}/">About {e(place["name"])}</a>')
-    body = f'''{page_head(f"{country['name']} / {p['location']}", p["name"], p["lead"], actions,
-                          [("Where to stay", "/stay/"), (place["name"], f"/destinations/{place['slug']}/"), (p["name"], "")])}
+               f'<a class="button button--ghost" href="{place_url}">{e(ui("About {name}", name=place_name))}</a>')
+    suits = '{name}: who they suit.' if p['kind'].split()[0].lower().endswith('s') else '{name}: who it suits.'
+    body = f'''{page_head(f"{tr(country['name'])} / {tr(p['location'])}", name, tr(p["lead"]), actions,
+                          [(ui("Where to stay"), localized("/stay/")), (place_name, place_url), (name, "")])}
 {f'<div class="wrap">{gal}</div>' if gal else ''}
 <section class="section">
   <div class="wrap split split--text">
     <div>
-      {section_head("In short", f"{p['name']}: what to know.")}
+      {section_head(ui("In short"), ui("{name}: what to know.", name=name))}
       <ul class="ticks">{facts}</ul>
     </div>
     <div>
-      {section_head("Why we send guests here", f"{p['name']}: who {'they suit' if p['kind'].split()[0].lower().endswith('s') else 'it suits'}.", p["why"], level=2)}
+      {section_head(ui("Why we send guests here"), ui(suits, name=name), tr(p["why"]), level=2)}
     </div>
   </div>
 </section>
@@ -1294,8 +1321,8 @@ def partner_page(p):
   <div class="wrap split split--text">
     {arr_html}
     <div class="panel panel--plain">
-      <h2>Good to know.</h2>
-      <p class="small">{e(p["provider"])}</p>
+      <h2>{ui("Good to know.")}</h2>
+      <p class="small">{e(tr(p["provider"]))}</p>
       <ul class="link-list">{links}</ul>
     </div>
   </div>
@@ -1304,19 +1331,18 @@ def partner_page(p):
 {sib_html}
 {cta_band(p["place"], p["slug"])}'''
     image = variants(f'assets/img/stays/{p["slug"]}/{p["photos"][0]["name"]}')[-1][2] if p.get('photos') else 'assets/img/og/everflow.jpg'
-    place = PLACE[p['place']]['name']
     named = named_after_place(p)  # "Chalets in Megève", "Sacher Seefeld", "Kempinski München"
     kinds = [k.rstrip('s') for k in re.split(r'\W+', p['kind'].lower()) if k and k != 'and']
     kind_in_name = any(k in p['name'].lower() for k in kinds)  # "Rote Wand Gourmet Hotel"
     if named:
-        title = f'{p["name"]} — EverFlow Experience'
+        title = f'{name} — EverFlow Experience'
     elif kind_in_name:
-        title = f'{p["name"]} in {place} — EverFlow Experience'
+        title = ui('{name} in {place} — EverFlow Experience', name=name, place=place_name)
     else:
-        title = f'{p["name"]}: {p["kind"].lower()} in {place} — EverFlow Experience'
+        title = ui('{name}: {kind} in {place} — EverFlow Experience', name=name, kind=lower_kind(tr(p['kind'])), place=place_name)
     if len(title) > 70:  # a long name and kind: the brand goes, the words a guest types stay
         title = title.replace(' — EverFlow Experience', '')
-    description = p['card'] if named else f'{p["name"]}, {p["location"]}: {p["card"]}'
+    description = tr(p['card']) if named else f'{name}, {tr(p["location"])}: {tr(p["card"])}'
     return page(f'stay/{p["slug"]}/index.html', title, description, body, image=image,
                 image_alt=tr(p['photos'][0]['alt']) if p.get('photos') else None)
 
@@ -1324,17 +1350,18 @@ def partner_page(p):
 def experiences_page():
     rows = []
     for i, x in enumerate(EXPERIENCES, 1):
+        title = tr(x['title'])
         rows.append(f'''<article class="feature" id="{x["slug"]}">
-  <div class="feature-media">{img(x["image"], x["alt"], "(min-width: 48rem) 50vw, 100vw")}</div>
+  <div class="feature-media">{img(x["image"], tr(x["alt"]), "(min-width: 48rem) 50vw, 100vw")}</div>
   <div class="feature-body">
     <p class="feature-meta"><span class="step-num">{num(i)}</span></p>
-    <h2>{e(x["title"])}</h2>
-    <p>{t(x["text"])}</p>
-    <a class="arrow-link" href="{enquire_url(interest=x["slug"])}">Plan a trip with {e(lower_first(x["title"].split(":")[0]))}</a>
+    <h2>{e(title)}</h2>
+    <p>{t(tr(x["text"]))}</p>
+    <a class="arrow-link" href="{enquire_url(interest=x["slug"])}">{e(ui("Plan a trip with {what}", what=lower_kind(title.split(":")[0])))}</a>
   </div>
 </article>''')
     h = PAGES['home']
-    body = f'''{page_head(h["experiences_eyebrow"], h["experiences_h2"], h["experiences_lead"])}
+    body = f'''{page_head(tr(h["experiences_eyebrow"]), tr(h["experiences_h2"]), tr(h["experiences_lead"]))}
 <section class="section section--tight">
   <div class="wrap features">
 {chr(10).join(rows)}
@@ -1342,31 +1369,31 @@ def experiences_page():
 </section>
 {how_section()}
 {cta_band()}'''
-    return page('experiences/index.html', 'Experiences — EverFlow Experience',
-                'Ski and snowboard coaching, heli and backcountry, guiding, food, spa and transfers, arranged in one tailor-made plan.',
+    return page('experiences/index.html', ui('Experiences — EverFlow Experience'),
+                ui('Ski and snowboard coaching, heli and backcountry, guiding, food, spa and transfers, arranged in one tailor-made plan.'),
                 body)
 
 
 def about_page():
     ab = PAGES['about']
-    story = ''.join(f'<p>{t(s)}</p>' for s in ab['story'])
+    story = ''.join(f'<p>{t(tr(s))}</p>' for s in ab['story'])
     juan, rest = TEAM[0], TEAM[1:]
     members = []
     for m in rest:
         members.append(f'''<article class="member{"" if m.get("photo") else " member--text"}">
   {portrait(m, "160px")}
-  <div><h3>{e(m["name"])}</h3><p class="member-role">{e(m["role"])}</p>{"".join(f"<p>{t(b)}</p>" for b in m["bio"])}</div>
+  <div><h3>{e(m["name"])}</h3><p class="member-role">{e(tr(m["role"]))}</p>{"".join(f"<p>{t(tr(b))}</p>" for b in m["bio"])}</div>
 </article>''')
-    body = f'''{page_head(ab["eyebrow"], ab["h1"])}
+    body = f'''{page_head(tr(ab["eyebrow"]), tr(ab["h1"]))}
 <section class="section section--tight" id="story">
   <div class="wrap narrow prose">{story}</div>
 </section>
 <section class="section section--alt" id="team">
   <div class="wrap">
-    {section_head(ab["team_eyebrow"], ab["team_h2"])}
+    {section_head(tr(ab["team_eyebrow"]), tr(ab["team_h2"]))}
     <article class="member member--lead{"" if juan.get("photo") else " member--text"}">
       {portrait(juan, "(min-width: 48rem) 30vw, 70vw")}
-      <div><h3>{e(juan["name"])}</h3><p class="member-role">{e(juan["role"])}</p>{"".join(f"<p>{t(b)}</p>" for b in juan["bio"])}</div>
+      <div><h3>{e(juan["name"])}</h3><p class="member-role">{e(tr(juan["role"]))}</p>{"".join(f"<p>{t(tr(b))}</p>" for b in juan["bio"])}</div>
     </article>
     <div class="members">
 {chr(10).join(members)}
@@ -1375,12 +1402,12 @@ def about_page():
 </section>
 <section class="section" id="credentials">
   <div class="wrap split split--text">
-    <div>{section_head(ab["how_eyebrow"], ab["how_h2"], ab["how_text"])}</div>
-    <div class="badge">{img("assets/img/badges/profi-ski", ab["credential_alt"], "240px")}</div>
+    <div>{section_head(tr(ab["how_eyebrow"]), tr(ab["how_h2"]), tr(ab["how_text"]))}</div>
+    <div class="badge">{img("assets/img/badges/profi-ski", tr(ab["credential_alt"]), "240px")}</div>
   </div>
 </section>
 {cta_band()}'''
-    return page('about/index.html', ab['title'], ab['description'], body)
+    return page('about/index.html', tr(ab['title']), tr(ab['description']), body)
 
 
 def guides_index():
@@ -1552,14 +1579,14 @@ def legal(name):
         shown = partner_credits(p)
         if not shown:
             continue
-        line = '; '.join(e(credit_text(c)) for c in shown)
+        line = '; '.join(e(credit_text(c, translate=False)) for c in shown)
         credits_de.append(f'<li>{e(p["name"])}: {line}</li>')
         credits_en.append(f'<li>{e(p["name"])}: {line}</li>')
     given = {}  # a destination's photos given by a partner ("© LAAX | …"): listed by place, as a partner's are
     for p, im in [(q, x) for q in PLACES for x in [q.get('image') or {}] + q.get('gallery', [])]:
         if not im.get('license'):
             if im.get('partner'):
-                given.setdefault(p['name'], []).append(credit_text(im['credit']))
+                given.setdefault(p['name'], []).append(credit_text(im['credit'], translate=False))
             continue
         origin = f'<a href="{a(im["source_url"])}" rel="noopener">{e(im.get("source_name", "Wikimedia Commons"))}</a>'
         lic = f'<a href="{a(im["license_url"])}" rel="noopener">{e(im["license"])}</a>'
@@ -1585,13 +1612,20 @@ def legal(name):
     if unknown:
         raise BuildError(f'content/legal/{name}.html: unknown slot(s) {sorted(unknown)}')
     body = re.sub(r'\{\{(\w+)\}\}', lambda m: slots[m.group(1)], src).rstrip('\n')
+    # the links to the site in the text lead to it in the page's language: the other legal page, the home page
+    body = re.sub(r'href="(/(?:impressum|datenschutz)\.html)', lambda m: f'href="{localized(m.group(1))}', body)
+    if LANG != 'en':
+        body = body.replace(f'href="{SITE["url"]}"', f'href="{SITE["url"]}{localized("/")}"')
+    # the text is German and English in every language; the page around it (menu, footer, title) is in the page's
+    # language, so the text says its own: German first in the Impressum, English first in the privacy policy
+    body = f'<div lang="{"de" if name == "impressum" else "en"}">\n{body}\n</div>'
     if name == 'impressum':
-        return page('impressum.html', 'Impressum / Imprint — EverFlow Experience',
-                    'Impressum (Anbieterkennzeichnung nach § 5 DDG) von EverFlow Experience, München. Imprint / legal notice.',
-                    body, lang='de', index=False)
-    return page('datenschutz.html', 'Datenschutzerklärung / Privacy Policy — EverFlow Experience',
-                'Privacy policy (Datenschutzerklärung) of EverFlow Experience, Munich: what personal data we process, why, how long, and your rights under the GDPR.',
-                body, lang='en', index=False)
+        return page('impressum.html', ui('Impressum / Imprint — EverFlow Experience'),
+                    ui('Impressum (Anbieterkennzeichnung nach § 5 DDG) von EverFlow Experience, München. Imprint / legal notice.'),
+                    body, index=False)
+    return page('datenschutz.html', ui('Datenschutzerklärung / Privacy Policy — EverFlow Experience'),
+                ui('Privacy policy (Datenschutzerklärung) of EverFlow Experience, Munich: what personal data we process, why, how long, and your rights under the GDPR.'),
+                body, index=False)
 
 
 def sitemap(paths):
@@ -1692,10 +1726,14 @@ def validate():
 
 def render_translated():
     """The pages that exist in every language, in the language being rendered."""
-    out = {'index.html': home(), 'destinations/index.html': destinations_index(), 'enquire/index.html': enquire_page(),
-           'guides/index.html': guides_index()}
+    out = {'index.html': home(), 'destinations/index.html': destinations_index(), 'stay/index.html': stay_index(),
+           'experiences/index.html': experiences_page(), 'guides/index.html': guides_index(),
+           'about/index.html': about_page(), 'enquire/index.html': enquire_page(),
+           'impressum.html': legal('impressum'), 'datenschutz.html': legal('datenschutz')}
     for p in PLACES:
         out[f'destinations/{p["slug"]}/index.html'] = place_page(p)
+    for p in PARTNERS:
+        out[f'stay/{p["slug"]}/index.html'] = partner_page(p)
     for g in GUIDES:
         out[f'guides/{g["slug"]}/index.html'] = guide_page(g)
     return {out_path(k): v for k, v in out.items()}
@@ -1708,11 +1746,7 @@ def render_all():
     USED.clear()
     LANG = 'en'
     out = render_translated()
-    out.update({'stay/index.html': stay_index(), 'experiences/index.html': experiences_page(),
-                'about/index.html': about_page(), '404.html': not_found(),
-                'impressum.html': legal('impressum'), 'datenschutz.html': legal('datenschutz')})
-    for p in PARTNERS:
-        out[f'stay/{p["slug"]}/index.html'] = partner_page(p)
+    out['404.html'] = not_found()
     for code in LANGS:
         if code != 'en':
             LANG = code
@@ -1720,7 +1754,7 @@ def render_all():
                 out.update(render_translated())
             finally:
                 LANG = 'en'
-    indexable = [p for p in out if p not in ('404.html', 'impressum.html', 'datenschutz.html')]
+    indexable = [p for p in out if p.rsplit('/', 1)[-1] not in ('404.html', 'impressum.html', 'datenschutz.html')]
     out['sitemap.xml'] = sitemap(sorted(indexable, key=lambda p: (p != 'index.html', p)))
     out['robots.txt'] = ('User-agent: *\nAllow: /\n' + ''.join(f'Disallow: {x}\n' for x in ROBOTS_OFF)
                          + f'\nSitemap: {SITE["url"]}/sitemap.xml\n')

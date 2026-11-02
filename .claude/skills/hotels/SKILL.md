@@ -75,7 +75,11 @@ missing, copy `scripts/library.example.json` to the repo root as `library.local.
    or a courtesy line such as "Photo courtesy of the owner", which stands without "©"). The
    Impressum lists the credit by itself: change `impressum_stand` in `content/site.json`.
 5. No downloads of partner documents unless the register says `brochure: yes`.
-6. `python scripts/build.py`, `python scripts/check.py`, a look at the pages in a browser at
+6. The page exists in Spanish, Portuguese and German too (`/es/stay/<partner>/`, ...): its new
+   texts, the photos' alt texts included, get their translations in `content/i18n/es.json`,
+   `pt.json` and `de.json` in the same pull request (CLAUDE.md rule 8; README → Languages).
+   `python scripts/build.py --missing missing.json` lists them.
+7. `python scripts/build.py`, `python scripts/check.py`, a look at the pages in a browser at
    full and at phone width (`python -m http.server --directory _site`), then a pull request. One
    partner, one pull request. Add the partner to `docs/HOTEL_MATERIAL.md`.
 

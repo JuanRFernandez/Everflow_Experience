@@ -497,6 +497,7 @@
     var clear = $('[data-filter-clear]', box);
     var empty = $('[data-filter-empty]');
     var emptyLink = empty && $('a', empty);
+    var enquire = emptyLink ? emptyLink.getAttribute('href').split('?')[0] : '';  // the enquiry in the page's language
     var types = buttons.map(function (b) { return b.getAttribute('data-filter-type'); });
     var places = $$('option', select).map(function (o) { return o.value; });
     var state = { type: '', place: '' };
@@ -530,7 +531,7 @@
         var q = new URLSearchParams();
         if (state.place) q.set('destination', state.place);
         if (state.type) q.set('type', state.type);
-        emptyLink.href = '/enquire/' + (q.toString() ? '?' + q.toString() : '');
+        emptyLink.href = enquire + (q.toString() ? '?' + q.toString() : '');
       }
     }
     buttons.forEach(function (b) {

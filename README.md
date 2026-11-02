@@ -110,19 +110,21 @@ exists in Spanish and Portuguese like the home page (its texts in `content/i18n/
 
 ## Languages
 
-The home page, the destinations, the guides and the enquiry form also exist in Spanish (`/es/`,
-Latin American Spanish) and Portuguese (`/pt/`, Brazilian), for the guests and agencies who write
-from Argentina and Brazil, and in German (`/de/`). The other pages (where to stay, experiences,
-about, the partner pages) are English only, and the legal pages German and English. The language
-menu in the header (a globe: English, Español, Português, Deutsch) leads to the same page in each
-language, or to that language's home page where the page exists in English only.
+Every page also exists in Spanish (`/es/`, Latin American Spanish) and Portuguese (`/pt/`,
+Brazilian), for the guests and agencies who write from Argentina and Brazil, and in German (`/de/`):
+the home page, the destinations, where to stay with every partner page, the experiences, the guides,
+about and the enquiry form. The legal pages hold their German and English text in every language;
+only the header and footer around it change. The language menu in the header (a globe: English,
+Español, Português, Deutsch) leads to the same page in each language; only the page for a wrong
+address (`404.html`, one for the whole site) is English, and its menu leads to each home page. A
+link on a page in one language never leads to a page in another (`tests/test_languages.py`).
 
 The home page has a section for guests from Brazil and Argentina (coaching in Portuguese and
 Spanish, the flights, Las Leñas, the guide written for them); on the Spanish and Portuguese home
 pages it comes right after the hero. `_site/llms.txt` sums the site up for AI assistants, built
 from the content like the pages.
 
-`content/i18n/es.json`, `pt.json` and `de.json` map each English text of those pages to its translation.
+`content/i18n/es.json`, `pt.json` and `de.json` map each English text of the pages to its translation.
 A new or changed English text has no translation until it is added: the page shows it in English
 meanwhile, and `scripts/check.py` warns. To add the missing ones:
 
