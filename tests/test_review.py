@@ -119,11 +119,11 @@ with sync_playwright() as pw:
     hrefs = pg.eval_on_selector_all('a[href^="https://wa.me/"]', 'els => els.map(e => e.href)')
     check(hrefs and all('text=' in h for h in hrefs) and all('%2Fdestinations%2Flech%2F' in h for h in hrefs), f'WhatsApp links name the page ({len(hrefs)} links)')
 
-    # ---- the Spanish menu marks the pages that exist in English only
+    # ---- the Spanish menu leads to the Spanish pages, all of them (until 2.11.2026 three were English only, marked EN)
     pg.goto(BASE + '/es/')
-    marks = pg.eval_on_selector_all('.site-nav a .lang-mark', 'els => els.map(e => e.closest("a").getAttribute("href"))')
-    check(sorted(marks) == ['/about/', '/experiences/', '/stay/'], f'ES menu: EN marks on the English-only pages ({marks})')
-    check(pg.locator('.site-nav a[href="/es/destinations/"] .lang-mark').count() == 0, 'ES menu: no mark on a translated page')
+    hrefs = pg.eval_on_selector_all('.site-nav > a:not(.button)', 'els => els.map(e => e.getAttribute("href"))')
+    check(hrefs == ['/es/destinations/', '/es/stay/', '/es/experiences/', '/es/about/'], f'ES menu: every page in Spanish ({hrefs})')
+    check(pg.locator('.site-nav .lang-mark').count() == 0, 'ES menu: no page marked as English only')
 
     # ---- map: texts in Spanish, focus on the map after loading
     outside = []

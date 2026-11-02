@@ -125,8 +125,9 @@ with sync_playwright() as pw:
               f'/{lang}/destinations/lech/: the guides section in {lang}')
         pg.goto(f'{BASE}/{lang}/')
         check(pg.locator('#guides .card').count() == 4, f'/{lang}/: four guide cards on the home')
-        marks = pg.eval_on_selector_all('.site-nav a .lang-mark', 'els => els.map(e => e.closest("a").getAttribute("href"))')
-        check(sorted(marks) == ['/about/', '/experiences/', '/stay/'], f'/{lang}/: EN marks unchanged ({marks})')
+        hrefs = pg.eval_on_selector_all('.site-nav > a:not(.button)', 'els => els.map(e => e.getAttribute("href"))')
+        check(hrefs == [f'/{lang}/destinations/', f'/{lang}/stay/', f'/{lang}/experiences/', f'/{lang}/about/'],
+              f'/{lang}/: the menu leads to the pages in {lang} ({hrefs})')
     pg.goto(BASE + '/guides/ski-week-with-kids/')
     check(pg.get_attribute('.breadcrumb a', 'href') == '/guides/' and pg.locator('.lang-menu a[href="/es/guides/ski-week-with-kids/"]').count() == 1, 'EN guide: breadcrumb and switch')
     check(not errors, f'no script errors ({errors[:2]})')

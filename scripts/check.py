@@ -54,7 +54,7 @@ for dp, dirs, files in os.walk(SITE_DIR):
         if f.endswith('.html'):
             PAGES.append(os.path.join(dp, f).replace(os.sep, '/'))
 CSS = sorted(os.path.join(dp, f).replace(os.sep, '/') for dp, _, fs in os.walk(f'{SITE_DIR}/assets') for f in fs if f.endswith('.css'))
-LEGAL = {f'{SITE_DIR}/impressum.html', f'{SITE_DIR}/datenschutz.html'}
+LEGAL = {f'{SITE_DIR}/{lang}{name}' for lang in ('', 'es/', 'pt/', 'de/') for name in ('impressum.html', 'datenschutz.html')}
 
 
 def rel(page):
@@ -333,10 +333,10 @@ for page in PAGES:
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and no payments (say plan, arrange, enquire)')
         for m in NOT_SAID.finditer(readable):
             failures.append(f'{page}: says "{m.group(0)}"; the site does not mention commissions or racers')
-    if rel(page).startswith(('es/', 'pt/')):  # attributes count: the enquiry form's messages are in one
+    if rel(page).startswith(('es/', 'pt/')) and page not in LEGAL:  # attributes count: the enquiry form's messages are in one
         for m in NOT_SAID_ES_PT.finditer(html.unescape(CODE.sub(' ', text))):
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
-    if rel(page).startswith('de/'):
+    if rel(page).startswith('de/') and page not in LEGAL:
         for m in NOT_SAID_DE.finditer(html.unescape(CODE.sub(' ', text))):
             failures.append(f'{page}: says "{m.group(0)}"; the site takes no bookings and does not mention commissions')
     for m in ALTERNATE.finditer(text):
