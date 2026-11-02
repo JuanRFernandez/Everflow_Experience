@@ -14,7 +14,7 @@ the sources, `_site/` is the build.
 
 ```
 ├── content/                   # EVERYTHING the site says: edit here
-│   ├── site.json              # name, brand line, contact, legal dates, extra photo credits, the Search Console tag
+│   ├── site.json              # name, brand line, contact, IATA TIDS code, legal dates, extra photo credits, the Search Console tag
 │   ├── pages.json             # texts of home, about, enquiry, how it works, FAQ, the guests' words
 │   ├── destinations.json      # countries and places (facts, who / when / how)
 │   ├── partners.json          # hotels, chalets, apartments: texts, key facts, photos, credit line, place

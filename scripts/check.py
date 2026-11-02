@@ -21,7 +21,8 @@ and in CI on every pull request.
     no comisión/comissão on the Spanish and Portuguese pages, no buchen/Buchung (compounds and
     buchbar, umbuchen included), reservieren, bezahlen/Zahlung, Kaution, Stornierung or Provision on
     the German pages; no regional brand line; German quotes
-    close with “; names that must never appear on the site do not.
+    close with “; names that must never appear on the site do not; nothing calls EverFlow "IATA
+    accredited", in any language and on no page (it has an IATA TIDS code, which is not an accreditation).
  7. This repository is public: nothing of the hotel library is in it (local configuration, extracted
     text, facts files, our notes on a partner's website or offer, the permission register, internal
     hotel documents), and no text file holds a Drive path, a local path, a Drive link or an e-mail
@@ -89,6 +90,9 @@ NOT_SAID_DE = re.compile(  # the same in de/: no buchen/Buchung, also in compoun
     r'(?<!Telfs-)\b(?:vor|um|zu|dazu|hinzu|nach|mit|über)?buch(?:en|t|te|ten)\b|buchbar|buchung|gebucht|bucher|reservier'
     r'|reservation|bezahl|zahlung'
     r'|\bgezahlt\b|\bzahlbar\b|kaution|stornier|\bstorno|provision|\bkommission', re.I)
+ACCREDITED = re.compile(  # IATA's TIDS terms: a TIDS code is no accreditation ("keine IATA-Akkreditierung" may stand)
+    r'\bIATA[-\s]+(?:accredited|akkreditiert\w*|acreditad[oa]s?)\b|\baccredited\s+(?:by|with)\s+(?:the\s+)?IATA\b'
+    r'|\bvon\s+der\s+IATA\s+akkreditiert|\bacreditad[oa]s?\s+(?:por|pela|pelo|ante)\s+(?:la\s+|a\s+|o\s+)?IATA\b', re.I)
 READABLE = re.compile(r'\b(?:alt|title|aria-label|placeholder|content|label|data-title|data-[\w-]*label|data-one|data-many'
                       r'|data-play|data-pause)\s*=\s*"([^"]*)"', re.I)  # attributes whose text a visitor sees or hears
 ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="https://everflowexperience\.com(/[^"]*)"')
@@ -264,6 +268,8 @@ if os.path.isfile(f'{SITE_DIR}/llms.txt'):  # the summary for AI assistants foll
     summary = open(f'{SITE_DIR}/llms.txt', encoding='utf-8').read()
     for m in list(PRICE.finditer(summary)) + list(BOOKING.finditer(summary)) + list(NOT_SAID.finditer(summary)):
         failures.append(f'{SITE_DIR}/llms.txt says "{m.group(0)}"; no prices, bookings, payments or commissions')
+    for m in ACCREDITED.finditer(summary):
+        failures.append(f'{SITE_DIR}/llms.txt says "{m.group(0)}"; EverFlow has an IATA TIDS code, not an IATA accreditation')
     for link in re.findall(r'\]\(https://everflowexperience\.com(/[^)]*)\)', summary):
         if not os.path.isfile(resolve(f'{SITE_DIR}/index.html', link)):
             failures.append(f'{SITE_DIR}/llms.txt links {link}, which has no page')
@@ -327,6 +333,8 @@ for page in PAGES:
     visible = html.unescape(TAGS.sub(' ', CODE.sub(' ', text)))
     for m in PRICE.finditer(html.unescape(CODE.sub(' ', text))):  # attributes count: alt, title, meta
         failures.append(f'{page}: shows a price ("{m.group(0).strip()}"); prices never go on the site')
+    for m in ACCREDITED.finditer(html.unescape(TAGS.sub(' ', text))):  # the legal pages too, and the structured data
+        failures.append(f'{page}: says "{m.group(0)}"; EverFlow has an IATA TIDS code, not an IATA accreditation')
     if page not in LEGAL:
         readable = visible + ' ' + ' '.join(html.unescape(m.group(1)) for m in READABLE.finditer(CODE.sub(' ', text)))
         for m in BOOKING.finditer(readable):
