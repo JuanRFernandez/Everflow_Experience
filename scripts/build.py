@@ -517,7 +517,7 @@ def footer():
       <ul><li><a href="/impressum.html">{ui("Impressum / Imprint")}</a></li><li><a href="/datenschutz.html{"#de" if LANG == "de" else ""}">{ui("Datenschutz / Privacy")}</a></li></ul>
     </div>
   </div>
-  <div class="wrap footer-bottom"><p>{e(SITE["copyright"])}</p></div>
+  <div class="wrap footer-bottom"><p>{e(SITE["copyright"])} · IATA TIDS {e(SITE["tids"])}</p></div>
 </footer>'''
 
 
@@ -934,6 +934,7 @@ def organisation():
         'areaServed': [c['name'] for c in COUNTRIES], 'sameAs': [f'https://www.instagram.com/{SITE["instagram"]}'],
         'founder': {'@type': 'Person', 'name': TEAM[0]['name'], 'jobTitle': TEAM[0]['role']},
         'knowsLanguage': ['en', 'es', 'pt', 'de'],
+        'identifier': {'@type': 'PropertyValue', 'propertyID': 'IATA TIDS', 'value': SITE['tids']},
     }
 
 
@@ -961,7 +962,8 @@ def llms_txt():
     lines += [f'- [{g["name"]}]({url}/guides/{g["slug"]}/): {g["card"]}' for g in GUIDES]
     lines += ['', '## Good to know', '']
     lines += [f'- {q} {LINK.sub(lambda m: m.group(1), ans)}' for q, ans in PAGES['faq']['items']]
-    lines += ['', '## About', '', f'- [About {SITE["name"]} and the team]({url}/about/)', '']
+    lines += ['', '## About', '', f'- [About {SITE["name"]} and the team]({url}/about/)',
+              f'- IATA TIDS code {SITE["tids"]} (registered TIDS sales intermediary).', '']
     return '\n'.join(lines)
 
 
@@ -1577,6 +1579,7 @@ def legal(name):
         'credits_de': '<ul>' + ''.join(credits_de) + '</ul>',
         'credits_en': '<ul>' + ''.join(credits_en) + '</ul>',
         'impressum_stand': e(SITE['impressum_stand']),
+        'tids': e(SITE['tids']),
         'datenschutz_stand_en': e(SITE['datenschutz_stand']['en']),
         'datenschutz_stand_de': e(SITE['datenschutz_stand']['de']),
     }
