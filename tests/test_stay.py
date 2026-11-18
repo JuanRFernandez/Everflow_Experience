@@ -1,6 +1,7 @@
 """Browser tests for "Where to stay": filters, enquiry links, lightbox button, widths. python tests/test_stay.py <repo root>"""
 import functools
 import http.server
+import json
 import os
 import sys
 import threading
@@ -107,6 +108,17 @@ with sync_playwright() as pw:
     pg.keyboard.press('Enter')
     focused = pg.evaluate('document.activeElement.getAttribute("data-filter-type")')
     check(focused == '' and visible_cards(pg) == total, 'keyboard: "Clear filters" shows all and the focus goes to "All"')
+
+    # ---- Courchevel: every house of the collection is a stay there, and the destination shows the collection
+    partners = json.load(open(os.path.join(ROOT, 'content', 'partners.json'), encoding='utf-8'))
+    houses = len(next(p for p in partners if p['slug'] == 'chalets-courchevel')['residences'])
+    pg.goto(BASE + '/stay/?place=courchevel')
+    n = visible_cards(pg)
+    check(n == houses, f'Courchevel shows {n} stays, the {houses} houses content/partners.json lists')
+    pg.goto(BASE + '/destinations/courchevel/')
+    titles = pg.locator('#stay .card-title').all_inner_texts()
+    check(titles == ['Chalets in Courchevel'], f'the Courchevel page shows the collection\'s card ({titles})')
+    check(pg.locator('#stay .note').count() == 0, 'and no longer the "on request" note')
 
     # the button lies above the card's link
     pg.goto(BASE + '/stay/?place=megeve')

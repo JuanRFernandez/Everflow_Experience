@@ -2204,6 +2204,588 @@
     ]
   },
   {
+    "slug": "chalets-courchevel",
+    "register": "Chalets Courchevel",
+    "name": "Chalets in Courchevel",
+    "kind": "Chalets and apartments",
+    "place": "courchevel",
+    "location": "Courchevel",
+    "card": "Nine private chalets and apartments in Courchevel, for 3 to 16 guests.",
+    "lead": "Six chalets, a penthouse and two apartments in Courchevel, most of them in Courchevel 1850, all within 220 m of the slopes, for families and groups of 3 to 16 guests. Geneva Airport is about 2 hours 20 minutes away by car.",
+    "facts": [
+      "Nine houses: six chalets, a penthouse and two apartments, for 3 to 16 guests",
+      "All within 220 m of the slopes; Chalet B and the penthouse are ski-in/ski-out",
+      "A hammam in every chalet and a pool in several of them; the apartments are in a residence with an indoor pool",
+      "Geneva Airport about 2 hours 20 minutes away by car"
+    ],
+    "why": "For families and groups who want a whole house close to the slopes: chalets for up to 16 guests, each with its own hammam, or a new apartment 50 m from the slopes, in a residence with an indoor pool.",
+    "arranges": {
+      "title": "Service in the house.",
+      "text": "What comes with each house differs: in some chalets and in the penthouse a chef, a butler and a driver; in every house the linen and daily cleaning.",
+      "small": ""
+    },
+    "links": [],
+    "provider": "EverFlow is your contact before and during your stay. Each chalet or apartment is provided by its owner through our partner agency; the terms of the house come with your proposal.",
+    "credit": "Photo courtesy of the owner",
+    "photos": [
+      {
+        "name": "chalet-b-01",
+        "alt": "Chalet B in the snow, with a ski slope behind it"
+      },
+      {
+        "name": "penthouse-atmosphere-03",
+        "alt": "A balcony overlooking the village and the ski slopes"
+      },
+      {
+        "name": "chalet-elixir-01",
+        "alt": "A living room with a fireplace and a view of the mountains"
+      },
+      {
+        "name": "chalet-b-08",
+        "alt": "An indoor pool with a striped ceiling"
+      },
+      {
+        "name": "chalet-ima-04",
+        "alt": "A Nordic bath on a terrace among snow-covered fir trees"
+      },
+      {
+        "name": "chalet-barolo-03",
+        "alt": "A dining room with a long table and a view of snow-covered mountains"
+      }
+    ],
+    "residences_head": [
+      "The houses",
+      "Chalets and apartments."
+    ],
+    "residences_lead": "Every house is different. Swipe through its photos or tap one to see it full screen, then tell us your dates and your group, and we suggest the right one.",
+    "residences": [
+      {
+        "name": "Chalet B",
+        "type": "chalet",
+        "where": "Courchevel 1850",
+        "guests": "7–14",
+        "bedrooms": 7,
+        "size_m2": 850,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Indoor pool",
+          "Sauna",
+          "Hammam",
+          "Gym"
+        ],
+        "card": "A fully renovated chalet that leads straight onto the slopes from its ski room, eight minutes' walk from the centre.",
+        "about": "Chalet B has been fully renovated and leads straight onto the slopes from its ski room. The living room has a billiard table, a fireplace and large windows onto the mountains, and the spa level has an indoor pool, a sauna, a hammam and a massage room. A lift serves every floor.",
+        "photos": [
+          {
+            "name": "chalet-b-01",
+            "alt": "Chalet B in the snow, with a ski slope and a chairlift behind it"
+          },
+          {
+            "name": "chalet-b-02",
+            "alt": "Chalet B: the living room and the dining area, with a central fireplace and a view of the mountains"
+          },
+          {
+            "name": "chalet-b-03",
+            "alt": "Chalet B: the dining table in front of tall windows onto the mountains"
+          },
+          {
+            "name": "chalet-b-04",
+            "alt": "Chalet B: a bedroom with a double bed and a balcony beyond the window"
+          },
+          {
+            "name": "chalet-b-05",
+            "alt": "Chalet B: a bedroom with glass doors to a balcony and snow-covered fir trees outside"
+          },
+          {
+            "name": "chalet-b-06",
+            "alt": "Chalet B: a bedroom with a glass door to a terrace"
+          },
+          {
+            "name": "chalet-b-07",
+            "alt": "Chalet B: a bathroom with a walk-in shower and a freestanding bathtub"
+          },
+          {
+            "name": "chalet-b-08",
+            "alt": "Chalet B: the indoor pool, with loungers and mirrors along the walls"
+          },
+          {
+            "name": "chalet-b-09",
+            "alt": "Chalet B: the massage room"
+          },
+          {
+            "name": "chalet-b-10",
+            "alt": "Chalet B seen from above, beside a ski slope with a chairlift"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Elixir",
+        "type": "chalet",
+        "where": "Courchevel 1850",
+        "guests": "10–14",
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "size_m2": 717,
+        "ski_access": "220 m to the slopes",
+        "highlights": [
+          "Pool",
+          "Sauna",
+          "Hammam",
+          "Cinema room"
+        ],
+        "card": "A chalet on five levels, 220 m from the Front de Neige lift and 150 m from the centre, with a pool and a home cinema.",
+        "about": "Chalet Elixir is 220 m from the Front de Neige lift and 150 m from the centre. It has 717 m² on five levels with a lift inside, and six bedrooms with their own bathrooms for ten adults and four children, one of them a children's room with four beds. On the lowest level are a pool, a sauna, a hammam, a hot tub, a gym, a massage room, a home cinema and a wine cellar.",
+        "photos": [
+          {
+            "name": "chalet-elixir-01",
+            "alt": "Chalet Elixir: the living room, with a fireplace and a view of the mountains"
+          },
+          {
+            "name": "chalet-elixir-02",
+            "alt": "Chalet Elixir: the dining room, with a long table"
+          },
+          {
+            "name": "chalet-elixir-03",
+            "alt": "Chalet Elixir: a bedroom under a sloping wooden ceiling, with a glass door to a balcony"
+          },
+          {
+            "name": "chalet-elixir-04",
+            "alt": "Chalet Elixir: a bedroom with a mural of snow-covered mountains"
+          },
+          {
+            "name": "chalet-elixir-05",
+            "alt": "Chalet Elixir: the children's room, with four beds in two bunks"
+          },
+          {
+            "name": "chalet-elixir-06",
+            "alt": "Chalet Elixir: a bathroom with a bathtub and two basins"
+          },
+          {
+            "name": "chalet-elixir-07",
+            "alt": "Chalet Elixir: the pool, with the hot tub on a raised step and the gym behind a glass wall"
+          },
+          {
+            "name": "chalet-elixir-08",
+            "alt": "Chalet Elixir: the pool and loungers, with the sauna and the hammam behind glass"
+          },
+          {
+            "name": "chalet-elixir-09",
+            "alt": "Chalet Elixir: the home cinema"
+          },
+          {
+            "name": "chalet-elixir-10",
+            "alt": "Chalet Elixir: the hot tub in front of a mountain mural, with the bar and the wine cellar behind it"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Ima",
+        "type": "chalet",
+        "where": "Courchevel 1850",
+        "guests": "10–15",
+        "bedrooms": 7,
+        "size_m2": 450,
+        "highlights": [
+          "Nordic bath",
+          "Hammam",
+          "Massage room",
+          "Games room"
+        ],
+        "card": "A modern wooden chalet close to the slopes, in a quiet setting, with a Nordic bath and a games room.",
+        "about": "Chalet Ima is a modern chalet built with a lot of wood, close to the slopes in a quiet setting. It has a Nordic bath, a hammam and a massage room, and a games room with table football and arcade games; two of the bedrooms have bunk beds. The chalet is suitable for children.",
+        "photos": [
+          {
+            "name": "chalet-ima-01",
+            "alt": "Chalet Ima: the living room, with a fireplace and exposed wooden beams"
+          },
+          {
+            "name": "chalet-ima-02",
+            "alt": "Chalet Ima: the living room, with a round table by the window and the wooden staircase"
+          },
+          {
+            "name": "chalet-ima-03",
+            "alt": "Chalet Ima: the dining room, with a long wooden table and a leather bench"
+          },
+          {
+            "name": "chalet-ima-04",
+            "alt": "Chalet Ima: the terrace and the Nordic bath, among snow-covered fir trees"
+          },
+          {
+            "name": "chalet-ima-05",
+            "alt": "Chalet Ima: a bedroom under the roof beams, with a desk"
+          },
+          {
+            "name": "chalet-ima-06",
+            "alt": "Chalet Ima: a bedroom with log walls and a picture of a bear"
+          },
+          {
+            "name": "chalet-ima-07",
+            "alt": "Chalet Ima: a bedroom with wooden bunk beds"
+          },
+          {
+            "name": "chalet-ima-08",
+            "alt": "Chalet Ima: a bathroom with a washbasin on a wooden vanity"
+          },
+          {
+            "name": "chalet-ima-09",
+            "alt": "Chalet Ima: a corner of the games room, with a red gondola cabin as a seat"
+          },
+          {
+            "name": "chalet-ima-10",
+            "alt": "Chalet Ima: a landing with log walls and an armchair covered in teddy bears"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Bordeaux",
+        "type": "chalet",
+        "where": "Near the La Croisette lifts",
+        "guests": "6–8",
+        "bedrooms": 5,
+        "size_m2": 250,
+        "ski_access": "150 m to the slopes",
+        "highlights": [
+          "Hot tub",
+          "Hammam",
+          "Massage room"
+        ],
+        "card": "A new chalet on four levels with a lift, near the La Croisette lifts, with wide views of the slopes.",
+        "about": "Chalet Bordeaux is a new chalet on four levels with a lift, near the La Croisette lifts, which lead into the whole ski area of the Courchevel valley. Large windows look onto the slopes and the mountains. It has a professional kitchen, a TV lounge with a fireplace, and a wellness area with a hot tub, a hammam and a massage room.",
+        "photos": [
+          {
+            "name": "chalet-bordeaux-01",
+            "alt": "Chalet Bordeaux in winter, built of stone and wood, with a ski slope behind it"
+          },
+          {
+            "name": "chalet-bordeaux-02",
+            "alt": "Chalet Bordeaux: the lounge, with a round fireplace in the middle"
+          },
+          {
+            "name": "chalet-bordeaux-03",
+            "alt": "Chalet Bordeaux: the dining table by large windows onto snow-covered mountains"
+          },
+          {
+            "name": "chalet-bordeaux-04",
+            "alt": "Chalet Bordeaux: the kitchen, with a bar counter"
+          },
+          {
+            "name": "chalet-bordeaux-05",
+            "alt": "Chalet Bordeaux: a bedroom with a double bed"
+          },
+          {
+            "name": "chalet-bordeaux-06",
+            "alt": "Chalet Bordeaux: a bedroom with a window onto the mountains"
+          },
+          {
+            "name": "chalet-bordeaux-07",
+            "alt": "Chalet Bordeaux: a bathroom with a bathtub, a walk-in shower and two basins"
+          },
+          {
+            "name": "chalet-bordeaux-08",
+            "alt": "Chalet Bordeaux: the hot tub, in a room with mosaic tiles"
+          },
+          {
+            "name": "chalet-bordeaux-09",
+            "alt": "Chalet Bordeaux: the hammam"
+          },
+          {
+            "name": "chalet-bordeaux-10",
+            "alt": "Chalet Bordeaux: the massage room"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Barolo",
+        "type": "chalet",
+        "where": "Courchevel 1850",
+        "guests": "6–12",
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "size_m2": 300,
+        "ski_access": "30 m to the slopes",
+        "highlights": [
+          "Hammam",
+          "Massage room"
+        ],
+        "card": "Close to the La Croisette lifts and the centre, with six en-suite double bedrooms and mountain views.",
+        "about": "Chalet Barolo is close to the La Croisette lifts, which lead into all of Les 3 Vallées, and to the centre of Courchevel 1850. It has six en-suite double bedrooms, a living room with a fireplace and mountain views, a dining room for twelve and a wellness area with a hammam and a massage room.",
+        "photos": [
+          {
+            "name": "chalet-barolo-01",
+            "alt": "Chalet Barolo in winter, with snow on its roof and balconies"
+          },
+          {
+            "name": "chalet-barolo-02",
+            "alt": "Chalet Barolo: the living room, with a leather corner sofa and tall windows"
+          },
+          {
+            "name": "chalet-barolo-03",
+            "alt": "Chalet Barolo: the dining room, with a long table and a view of snow-covered mountains"
+          },
+          {
+            "name": "chalet-barolo-04",
+            "alt": "Chalet Barolo: the kitchen, with a stone-clad bar"
+          },
+          {
+            "name": "chalet-barolo-05",
+            "alt": "Chalet Barolo: a bedroom with wood-panelled walls"
+          },
+          {
+            "name": "chalet-barolo-06",
+            "alt": "Chalet Barolo: a bedroom, with its shower room through the doorway"
+          },
+          {
+            "name": "chalet-barolo-07",
+            "alt": "Chalet Barolo: a bathroom with a bathtub, a shower and a view of the mountains"
+          },
+          {
+            "name": "chalet-barolo-08",
+            "alt": "Chalet Barolo: the wellness area"
+          },
+          {
+            "name": "chalet-barolo-09",
+            "alt": "Chalet Barolo: the hammam"
+          },
+          {
+            "name": "chalet-barolo-10",
+            "alt": "Chalet Barolo: the massage room"
+          }
+        ]
+      },
+      {
+        "name": "Penthouse Atmosphère",
+        "type": "apartment",
+        "where": "Courchevel 1850",
+        "guests": "7–15",
+        "bedrooms": 7,
+        "size_m2": 680,
+        "ski_access": "Ski-in/ski-out",
+        "highlights": [
+          "Sauna",
+          "Hot tub",
+          "Indoor pool in the residence",
+          "Gym in the residence"
+        ],
+        "card": "A new penthouse on three levels, on the sixth floor of a residence on the slopes, with its own sauna and hot tub.",
+        "about": "A new penthouse on the slopes of Courchevel 1850: on the sixth floor of a residence, spread over three levels. It has a fireplace, balconies, and its own sauna, hot tub and massage room. The residence has an indoor pool, a sauna, a hammam and a room for fitness and yoga.",
+        "photos": [
+          {
+            "name": "penthouse-atmosphere-01",
+            "alt": "Penthouse Atmosphère: the living room, with a fireplace and windows onto snowy mountains"
+          },
+          {
+            "name": "penthouse-atmosphere-02",
+            "alt": "Penthouse Atmosphère: the dining room, with a long marble table"
+          },
+          {
+            "name": "penthouse-atmosphere-03",
+            "alt": "Penthouse Atmosphère: a balcony overlooking the village and the ski slopes"
+          },
+          {
+            "name": "penthouse-atmosphere-04",
+            "alt": "Penthouse Atmosphère: a bedroom with large windows onto the forest and the mountains"
+          },
+          {
+            "name": "penthouse-atmosphere-05",
+            "alt": "Penthouse Atmosphère: a bedroom with a glass door to a balcony over the slopes"
+          },
+          {
+            "name": "penthouse-atmosphere-06",
+            "alt": "Penthouse Atmosphère: a bedroom with a glass door to a balcony and a view of the mountains"
+          },
+          {
+            "name": "penthouse-atmosphere-07",
+            "alt": "Penthouse Atmosphère: a bathroom with a freestanding bathtub by a window onto the mountains"
+          },
+          {
+            "name": "penthouse-atmosphere-08",
+            "alt": "Penthouse Atmosphère: its own hot tub, set into the floor beside a daybed"
+          },
+          {
+            "name": "penthouse-atmosphere-09",
+            "alt": "Penthouse Atmosphère: a sauna"
+          },
+          {
+            "name": "penthouse-atmosphere-10",
+            "alt": "Penthouse Atmosphère: the residence's indoor pool"
+          }
+        ]
+      },
+      {
+        "name": "Appartement Atmosphère 902",
+        "type": "apartment",
+        "where": "Courchevel 1850",
+        "guests": "4–8",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "size_m2": 189,
+        "ski_access": "50 m to the slopes",
+        "highlights": [
+          "Indoor pool in the residence",
+          "Sauna in the residence",
+          "Hammam in the residence",
+          "Gym in the residence"
+        ],
+        "card": "A new apartment with four suites, 50 m from the slopes, in a residence with a 22 m indoor pool.",
+        "about": "A new apartment 50 m from the slopes of Les 3 Vallées, near the centre of Courchevel 1850. The living room and most of the bedrooms open onto a private terrace. The residence has a ski room with direct access to the slopes, a 22 m indoor pool, a sauna, a hammam, a fitness and yoga room and a games room.",
+        "photos": [
+          {
+            "name": "appartement-atmosphere-902-01",
+            "alt": "Appartement Atmosphère 902: the living room, with a view of the village and a ski slope"
+          },
+          {
+            "name": "appartement-atmosphere-902-02",
+            "alt": "Appartement Atmosphère 902: the living area, with the dining table and the kitchen bar behind"
+          },
+          {
+            "name": "appartement-atmosphere-902-03",
+            "alt": "Appartement Atmosphère 902: the kitchen, with a window onto the mountains"
+          },
+          {
+            "name": "appartement-atmosphere-902-04",
+            "alt": "Appartement Atmosphère 902: the terrace, with a view over the village to the slopes"
+          },
+          {
+            "name": "appartement-atmosphere-902-05",
+            "alt": "Appartement Atmosphère 902: a bedroom with a large window over a ski slope"
+          },
+          {
+            "name": "appartement-atmosphere-902-06",
+            "alt": "Appartement Atmosphère 902: a bedroom with a glass door to the terrace"
+          },
+          {
+            "name": "appartement-atmosphere-902-07",
+            "alt": "Appartement Atmosphère 902: a bedroom with bookshelves and a glass door to the terrace"
+          },
+          {
+            "name": "appartement-atmosphere-902-08",
+            "alt": "Appartement Atmosphère 902: the residence, beside a ski slope"
+          },
+          {
+            "name": "appartement-atmosphere-902-09",
+            "alt": "Appartement Atmosphère 902: the residence's indoor pool"
+          }
+        ]
+      },
+      {
+        "name": "Appartement Atmosphère 901",
+        "type": "apartment",
+        "where": "Atmosphère 1850 residence",
+        "guests": "3–6",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "size_m2": 140,
+        "ski_access": "50 m to the slopes",
+        "highlights": [
+          "Indoor pool in the residence",
+          "Sauna in the residence",
+          "Hammam in the residence",
+          "Gym in the residence"
+        ],
+        "card": "Three en-suite bedrooms that open onto a south-west-facing terrace, 100 m from the centre.",
+        "about": "Appartement Atmosphère 901 is in Atmosphère 1850, a new residence of 18 apartments and a penthouse, 50 m from the slopes of Les 3 Vallées and 100 m from the centre. Every room opens onto the private terrace, which faces south-west. The residence has an indoor pool, a sauna, a hammam, a fitness room, three massage rooms and a ski shop.",
+        "photos": [
+          {
+            "name": "appartement-atmosphere-901-01",
+            "alt": "Appartement Atmosphère 901: the living room, with windows onto a ski slope and the mountains"
+          },
+          {
+            "name": "appartement-atmosphere-901-02",
+            "alt": "Appartement Atmosphère 901: the living room, with a glass door to the terrace"
+          },
+          {
+            "name": "appartement-atmosphere-901-03",
+            "alt": "Appartement Atmosphère 901: the terrace, overlooking the slopes and the village"
+          },
+          {
+            "name": "appartement-atmosphere-901-04",
+            "alt": "Appartement Atmosphère 901: the dining area, by windows onto the snow and the mountains"
+          },
+          {
+            "name": "appartement-atmosphere-901-05",
+            "alt": "Appartement Atmosphère 901: the kitchen"
+          },
+          {
+            "name": "appartement-atmosphere-901-06",
+            "alt": "Appartement Atmosphère 901: a bedroom with a large window onto the mountains"
+          },
+          {
+            "name": "appartement-atmosphere-901-07",
+            "alt": "Appartement Atmosphère 901: a bedroom, with its bathroom through the open door"
+          },
+          {
+            "name": "appartement-atmosphere-901-08",
+            "alt": "Appartement Atmosphère 901: a bedroom with a glass door to the terrace"
+          },
+          {
+            "name": "appartement-atmosphere-901-09",
+            "alt": "Appartement Atmosphère 901: the residence's indoor pool"
+          }
+        ]
+      },
+      {
+        "name": "Chalet Pow Pow",
+        "type": "chalet",
+        "where": "Courchevel 1850",
+        "guests": "10–16",
+        "bedrooms": 7,
+        "bathrooms": 7,
+        "size_m2": 650,
+        "ski_access": "150 m to the slopes",
+        "highlights": [
+          "Pool",
+          "Hot tub",
+          "Hammam",
+          "Cinema room"
+        ],
+        "card": "A light, Scandinavian-style chalet for families and groups, with a children's room with four beds.",
+        "about": "Chalet Pow Pow is decorated in a light, Scandinavian style, 150 m from a ski lift. It has seven en-suite bedrooms, one of them a children's room with four beds, and a living room with a fireplace and large windows. On the lowest level are a pool, a hot tub, a hammam, a gym, a massage room and a games room with billiards and table football, and the chalet has a home cinema.",
+        "photos": [
+          {
+            "name": "chalet-pow-pow-01",
+            "alt": "Chalet Pow Pow in winter, with balconies on two floors among snow-covered fir trees"
+          },
+          {
+            "name": "chalet-pow-pow-02",
+            "alt": "Chalet Pow Pow: the living room, with a fireplace and large windows onto the mountains"
+          },
+          {
+            "name": "chalet-pow-pow-03",
+            "alt": "Chalet Pow Pow: the dining table in front of large windows onto snowy mountains"
+          },
+          {
+            "name": "chalet-pow-pow-04",
+            "alt": "Chalet Pow Pow: the kitchen, with a long counter and bar stools"
+          },
+          {
+            "name": "chalet-pow-pow-05",
+            "alt": "Chalet Pow Pow: a bedroom with a picture of a deer above the bed"
+          },
+          {
+            "name": "chalet-pow-pow-06",
+            "alt": "Chalet Pow Pow: a bedroom with yellow curtains and a glass door to a balcony"
+          },
+          {
+            "name": "chalet-pow-pow-07",
+            "alt": "Chalet Pow Pow: a bathroom with a freestanding bath, a walk-in shower and two basins"
+          },
+          {
+            "name": "chalet-pow-pow-08",
+            "alt": "Chalet Pow Pow: the indoor hot tub, with the pool behind it"
+          },
+          {
+            "name": "chalet-pow-pow-09",
+            "alt": "Chalet Pow Pow: the pool"
+          },
+          {
+            "name": "chalet-pow-pow-10",
+            "alt": "Chalet Pow Pow: the massage room"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "slug": "rocksresort-laax",
     "register": "rocksresort LAAX",
     "name": "rocksresort",
