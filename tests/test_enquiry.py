@@ -20,6 +20,7 @@ import build  # noqa: E402
 PARTNERS = build.PARTNERS
 HOTELS = [p['slug'] for p in PARTNERS if 'hotel' in build.stay_types(p)]
 HOUSES = [r['name'] for p in PARTNERS for r in p.get('residences', [])]
+COLLECTIONS = [p['slug'] for p in PARTNERS if p.get('residences')]  # each one a group of houses in the House list
 NOT_SAID = re.compile(r'\breserv\w*|\b(?:pre|pré-?)?p[aá]g(?!in|od|an[aoi]|es?\b)\w*|\bcomisi(?:ón|ones)\b|\bcomiss(?:ão|ões)\b', re.I)  # as scripts/check.py
 
 
@@ -334,8 +335,9 @@ with sync_playwright() as pw:
     nojs = browser.new_context(java_script_enabled=False, viewport={'width': 1280, 'height': 900})
     p2 = nojs.new_page()
     p2.goto(BASE + '/enquire/')
-    check(p2.is_visible('#f-house') and len(opts(p2, '#f-house')) == len(HOUSES) and p2.locator('#f-house optgroup').count() == 2,
-          f'no script: the House list shows all {len(HOUSES)} houses in two groups')
+    check(p2.is_visible('#f-house') and len(opts(p2, '#f-house')) == len(HOUSES)
+          and p2.locator('#f-house optgroup').count() == len(COLLECTIONS),
+          f'no script: the House list shows all {len(HOUSES)} houses in {len(COLLECTIONS)} groups')
     check(len(opts(p2, '#f-stay')) == len(PARTNERS), 'no script: every stay shows')
     nojs.close()
 
